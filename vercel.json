@@ -3,7 +3,7 @@
   "name": "ysl-campaign",
   "builds": [
     {
-      "src": "index.html",
+      "src": "*.html",
       "use": "@vercel/static"
     }
   ],
