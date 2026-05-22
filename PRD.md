@@ -115,20 +115,23 @@ System should return:
 
 Users can search by aesthetic intent, not only by product name.
 
-Supported style tags:
+Supported user-facing style tags:
 
-- Minimal
-- Elegant
-- Classic
-- Cool
-- Bold
-- Statement
-- Evening
-- Understated luxury
+| User-facing Style | Internal YSL Style Code | User Meaning | Product Direction |
+| --- | --- | --- | --- |
+| Classic Minimal | Iconic Minimal | A safe, refined, low-risk gift with a clean Saint Laurent signature. | Cassandre, Le 5 a 7, Sac de Jour, small leather goods, black or neutral bags |
+| Black & Cool | Dark Leather Edge | A more attitude-driven gift with a black, leather, sharp, confident feeling. | Leather pieces, boots, sunglasses, black accessories, evening-ready pieces |
+| Polished Elegance | Sharp Tailoring / Power Elegance | A mature and polished style for dinner dates, anniversaries, and elevated dressing. | Tuxedo-inspired jackets, blazers, refined shoes, elegant bags, structured accessories |
+
+Rationale:
+
+- The front-end UI should use simple consumer language, not fashion-industry wording.
+- Internal YSL style codes can still guide recommendation logic and pitch storytelling.
+- Three tags are enough for the demo because they are easier to understand, easier to present, and still cover Saint Laurent's core visual world.
 
 Example:
 
-User selects `Minimal` + `Gift for Her`.
+User selects `Classic Minimal` + `Gift for Her`.
 
 Expected output:
 
@@ -155,7 +158,7 @@ Optional filters:
 - Recipient: Her / Him / Neutral
 - Age range: 20s / 30s / 40s
 - Budget: Under RMB 3,000 / RMB 3,000-8,000 / RMB 8,000+
-- Style: Minimal / Classic / Statement / Cool
+- Style: Classic Minimal / Black & Cool / Polished Elegance
 
 Expected output:
 
@@ -480,20 +483,23 @@ Demo SKU 数据库应覆盖以下商品品类。
 
 用户不仅可以按商品名称搜索，也可以通过审美意图和风格关键词查找商品。
 
-支持的风格标签：
+支持的用户前台风格标签：
 
-- 简约
-- 优雅
-- 经典
-- 酷感
-- 大胆
-- 高辨识度
-- 晚宴
-- 低调奢华
+| 用户看到的风格 | 内部 YSL 风格代码 | 用户理解 | 商品方向 |
+| --- | --- | --- | --- |
+| 经典极简 | Iconic Minimal | 安全、精致、不容易出错，适合作为低调有质感的礼物。 | Cassandre、Le 5 a 7、Sac de Jour、小皮具、黑色或中性色包袋 |
+| 黑色酷感 | Dark Leather Edge | 更有态度，带有黑色、皮革、利落和自信的感觉。 | 皮革单品、靴子、墨镜、黑色配饰、适合夜晚场景的单品 |
+| 利落优雅 | Sharp Tailoring / Power Elegance | 更成熟、精致，适合约会晚餐、纪念日和正式穿搭场景。 | 西装外套、tuxedo 灵感剪裁、精致鞋履、优雅包袋、结构感配饰 |
+
+分析依据：
+
+- 前台 UI 应使用用户能马上理解的词汇，而不是时装行业内部语言。
+- 内部 YSL 风格代码仍可用于推荐逻辑、商品归类和 Pitch 讲述。
+- 三个标签足够支撑 Demo，因为它们更容易理解和演示，同时仍覆盖 Saint Laurent 的核心视觉世界。
 
 示例：
 
-用户选择 `简约` + `送给她`。
+用户选择 `经典极简` + `送给她`。
 
 预期输出：
 
@@ -520,7 +526,7 @@ Demo SKU 数据库应覆盖以下商品品类。
 - 送礼对象：她 / 他 / 中性
 - 年龄段：20+ / 30+ / 40+
 - 预算：3000 元以下 / 3000-8000 元 / 8000 元以上
-- 风格：简约 / 经典 / 高辨识度 / 酷感
+- 风格：经典极简 / 黑色酷感 / 利落优雅
 
 预期输出：
 
