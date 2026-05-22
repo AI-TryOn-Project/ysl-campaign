@@ -1,6 +1,6 @@
 # Saint Laurent Valentine Gift Campaign Demo PRD
 
-Version: v0.6 bilingual, separated by language
+Version: v0.7 bilingual, separated by language
 Owner: fAIshion Demo Team
 Target Event: Kering China Innovation Day 2026
 Primary Page: `valentine.html`
@@ -84,11 +84,18 @@ Fragrance should not be the core category for this demo. If included, it should 
 
 The demo should use only three user-facing style tags. These are intentionally simple consumer terms, while the internal YSL style codes remain available for recommendation logic and pitch explanation.
 
-| User-facing Style | Internal YSL Style Code | User Meaning | Product Direction |
-| --- | --- | --- | --- |
-| Classic Minimal | Iconic Minimal | A safe, refined, low-risk gift with a clean Saint Laurent signature. | Cassandre, Le 5 a 7, Sac de Jour, small leather goods, black or neutral bags |
-| Black & Cool | Dark Leather Edge | A more attitude-driven gift with a black, leather, sharp, confident feeling. | Leather pieces, boots, sunglasses, black accessories, evening-ready pieces |
-| Polished Elegance | Sharp Tailoring / Power Elegance | A mature and polished style for dinner dates, anniversaries, and elevated dressing. | Tuxedo-inspired jackets, blazers, refined shoes, elegant bags, structured accessories |
+- **Classic Minimal**
+  - Internal YSL style code: Iconic Minimal
+  - User meaning: A safe, refined, low-risk gift with a clean Saint Laurent signature.
+  - Product direction: Cassandre, Le 5 a 7, Sac de Jour, small leather goods, black or neutral bags.
+- **Black & Cool**
+  - Internal YSL style code: Dark Leather Edge
+  - User meaning: A more attitude-driven gift with a black, leather, sharp, confident feeling.
+  - Product direction: Leather pieces, boots, sunglasses, black accessories, evening-ready pieces.
+- **Polished Elegance**
+  - Internal YSL style code: Sharp Tailoring / Power Elegance
+  - User meaning: A mature and polished style for dinner dates, anniversaries, and elevated dressing.
+  - Product direction: Tuxedo-inspired jackets, blazers, refined shoes, elegant bags, structured accessories.
 
 ## 6. Core Requirements
 
@@ -127,11 +134,9 @@ Users can search by aesthetic intent, not only by product name.
 
 Supported user-facing style tags:
 
-| User-facing Style | Internal YSL Style Code | User Meaning | Product Direction |
-| --- | --- | --- | --- |
-| Classic Minimal | Iconic Minimal | A safe, refined, low-risk gift with a clean Saint Laurent signature. | Cassandre, Le 5 a 7, Sac de Jour, small leather goods, black or neutral bags |
-| Black & Cool | Dark Leather Edge | A more attitude-driven gift with a black, leather, sharp, confident feeling. | Leather pieces, boots, sunglasses, black accessories, evening-ready pieces |
-| Polished Elegance | Sharp Tailoring / Power Elegance | A mature and polished style for dinner dates, anniversaries, and elevated dressing. | Tuxedo-inspired jackets, blazers, refined shoes, elegant bags, structured accessories |
+- Classic Minimal
+- Black & Cool
+- Polished Elegance
 
 Rationale:
 
@@ -187,31 +192,43 @@ Expected output:
 6. User opens a product detail card.
 7. User adds one or more products to wishlist or shopping bag.
 
+### BC-Inspired Interaction UX
+
+The flow should reference Brunello Cucinelli AI at the interaction-pattern level only. It should not copy BC's visual identity, product imagery, tone, typography, or color palette.
+
+BC-inspired UX behaviors to keep:
+
+- Prompt-first AI assistant entry.
+- Guided choices after the first user intent, instead of a blank chatbot-only experience.
+- Progressive clarification for recipient, budget, style, and occasion.
+- Product cards that connect each recommendation to a visible reason.
+- Refinement loop, so the user can adjust style, recipient, budget, or occasion after seeing results.
+- Clear transition from recommendation to product detail, wishlist, and shopping bag.
+
 ### User Flow Diagram
 
 ```mermaid
 flowchart TD
-  A["Enter Saint Laurent Valentine Gift Campaign"] --> B["AI Gift Finder"]
-  B --> C1["Search by Need"]
-  B --> C2["Search by Style"]
-  B --> C3["Shop by Occasion"]
+  A["Enter YSL Valentine Campaign"] --> B["AI Gift Finder<br/>BC-style prompt entry"]
+  B --> C["Guided entry choices<br/>Need / Style / Occasion"]
+  C --> D1["Search by Need<br/>natural-language prompt"]
+  C --> D2["Search by Style<br/>3 style chips"]
+  C --> D3["Shop by Occasion<br/>gift scenarios"]
 
-  C1 --> D1["User describes recipient, budget, occasion, style"]
-  C2 --> D2["User selects Classic Minimal, Black & Cool, or Polished Elegance"]
-  C3 --> D3["User selects Gift for Her, Gift for Him, Date Night, Anniversary, Self Gift, or Budget Gift"]
-
-  D1 --> E["Intent and filter extraction"]
+  D1 --> E["Guided clarification<br/>recipient / budget / style / occasion"]
   D2 --> E
   D3 --> E
 
-  E --> F["Match YSL product assets and demo SKU data"]
-  F --> G["Generate ranked recommendations"]
-  G --> H["Recommendation cards with product image, price, tags, and reason"]
-  H --> I["Product detail"]
-  I --> J1["Add to Wishlist"]
-  I --> J2["Add to Bag"]
-  J1 --> K["Sales-oriented gift discovery completed"]
-  J2 --> K
+  E --> F["YSL product matching<br/>official assets + demo SKU data"]
+  F --> G["Recommendation cards<br/>image / price / style / reason"]
+  G --> H{"User action"}
+  H --> I["Refine intent<br/>adjust style / budget / occasion"]
+  I --> E
+  H --> J["Open product detail"]
+  J --> K1["Add to Wishlist"]
+  J --> K2["Add to Bag"]
+  K1 --> L["Sales-oriented gift discovery completed"]
+  K2 --> L
 ```
 
 ## 8. Page Structure
@@ -489,11 +506,18 @@ Demo SKU 数据库应覆盖以下商品品类。
 
 Demo 前台只使用三个用户可理解的风格标签。这三个词应是用户能马上理解的消费语言；内部 YSL 风格代码仍可用于推荐逻辑、商品归类和 Pitch 讲述。
 
-| 用户看到的风格 | 内部 YSL 风格代码 | 用户理解 | 商品方向 |
-| --- | --- | --- | --- |
-| 经典极简 | Iconic Minimal | 安全、精致、不容易出错，适合作为低调有质感的礼物。 | Cassandre、Le 5 a 7、Sac de Jour、小皮具、黑色或中性色包袋 |
-| 黑色酷感 | Dark Leather Edge | 更有态度，带有黑色、皮革、利落和自信的感觉。 | 皮革单品、靴子、墨镜、黑色配饰、适合夜晚场景的单品 |
-| 利落优雅 | Sharp Tailoring / Power Elegance | 更成熟、精致，适合约会晚餐、纪念日和正式穿搭场景。 | 西装外套、tuxedo 灵感剪裁、精致鞋履、优雅包袋、结构感配饰 |
+- **经典极简**
+  - 内部 YSL 风格代码：Iconic Minimal
+  - 用户理解：安全、精致、不容易出错，适合作为低调有质感的礼物。
+  - 商品方向：Cassandre、Le 5 a 7、Sac de Jour、小皮具、黑色或中性色包袋。
+- **黑色酷感**
+  - 内部 YSL 风格代码：Dark Leather Edge
+  - 用户理解：更有态度，带有黑色、皮革、利落和自信的感觉。
+  - 商品方向：皮革单品、靴子、墨镜、黑色配饰、适合夜晚场景的单品。
+- **利落优雅**
+  - 内部 YSL 风格代码：Sharp Tailoring / Power Elegance
+  - 用户理解：更成熟、精致，适合约会晚餐、纪念日和正式穿搭场景。
+  - 商品方向：西装外套、tuxedo 灵感剪裁、精致鞋履、优雅包袋、结构感配饰。
 
 ## 6. 核心需求
 
@@ -532,11 +556,9 @@ Demo 前台只使用三个用户可理解的风格标签。这三个词应是用
 
 支持的用户前台风格标签：
 
-| 用户看到的风格 | 内部 YSL 风格代码 | 用户理解 | 商品方向 |
-| --- | --- | --- | --- |
-| 经典极简 | Iconic Minimal | 安全、精致、不容易出错，适合作为低调有质感的礼物。 | Cassandre、Le 5 a 7、Sac de Jour、小皮具、黑色或中性色包袋 |
-| 黑色酷感 | Dark Leather Edge | 更有态度，带有黑色、皮革、利落和自信的感觉。 | 皮革单品、靴子、墨镜、黑色配饰、适合夜晚场景的单品 |
-| 利落优雅 | Sharp Tailoring / Power Elegance | 更成熟、精致，适合约会晚餐、纪念日和正式穿搭场景。 | 西装外套、tuxedo 灵感剪裁、精致鞋履、优雅包袋、结构感配饰 |
+- 经典极简
+- 黑色酷感
+- 利落优雅
 
 分析依据：
 
@@ -592,31 +614,43 @@ Demo 前台只使用三个用户可理解的风格标签。这三个词应是用
 6. 用户打开商品详情卡片。
 7. 用户将一个或多个商品加入收藏或购物袋。
 
+### 参考 BC 的交互 UX
+
+流程图应参考 Brunello Cucinelli AI 的交互模式，但只参考交互方式，不复制 BC 的品牌视觉、商品图、语气、字体或色彩。
+
+需要保留的 BC 交互特点：
+
+- 以 prompt-first 的 AI 助手入口开始。
+- 用户表达初始意图后，用引导式选项继续推进，而不是只有空白聊天框。
+- 逐步澄清送礼对象、预算、风格和场景。
+- 推荐商品卡片要给出清晰推荐理由。
+- 保留 refinement loop，让用户看到结果后可以继续调整风格、预算、对象或场景。
+- 从推荐结果顺滑进入商品详情、收藏和购物袋。
+
 ### 用户流程图
 
 ```mermaid
 flowchart TD
-  A["进入 Saint Laurent 情人节礼品 Campaign"] --> B["AI Gift Finder"]
-  B --> C1["按需求搜索"]
-  B --> C2["按风格搜索"]
-  B --> C3["按场景推荐"]
+  A["进入 YSL 情人节 Campaign"] --> B["AI Gift Finder<br/>参考 BC 的 prompt 入口"]
+  B --> C["引导式入口选择<br/>需求 / 风格 / 场景"]
+  C --> D1["按需求搜索<br/>自然语言输入"]
+  C --> D2["按风格搜索<br/>三个风格标签"]
+  C --> D3["按场景推荐<br/>送礼场景"]
 
-  C1 --> D1["用户描述送礼对象、预算、场景、风格"]
-  C2 --> D2["用户选择经典极简、黑色酷感或利落优雅"]
-  C3 --> D3["用户选择送给她、送给他、约会晚宴、纪念日、犒赏自己或预算礼物"]
-
-  D1 --> E["意图与筛选条件识别"]
+  D1 --> E["逐步澄清<br/>对象 / 预算 / 风格 / 场景"]
   D2 --> E
   D3 --> E
 
-  E --> F["匹配 YSL 官网素材与 Demo SKU 数据"]
-  F --> G["生成排序后的推荐结果"]
-  G --> H["推荐卡片：商品图、价格、标签、推荐理由"]
-  H --> I["商品详情"]
-  I --> J1["加入收藏"]
-  I --> J2["加入购物袋"]
-  J1 --> K["完成销售导向礼品发现路径"]
-  J2 --> K
+  E --> F["匹配 YSL 商品<br/>官网素材 + Demo SKU 数据"]
+  F --> G["推荐卡片<br/>商品图 / 价格 / 风格 / 理由"]
+  G --> H{"用户下一步"}
+  H --> I["继续细化需求<br/>调整风格 / 预算 / 场景"]
+  I --> E
+  H --> J["打开商品详情"]
+  J --> K1["加入收藏"]
+  J --> K2["加入购物袋"]
+  K1 --> L["完成销售导向礼品发现路径"]
+  K2 --> L
 ```
 
 ## 8. 页面结构
