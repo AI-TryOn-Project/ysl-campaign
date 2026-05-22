@@ -1,6 +1,6 @@
 # Saint Laurent Valentine Gift Campaign Demo PRD
 
-Version: v0.5 bilingual, separated by language
+Version: v0.6 bilingual, separated by language
 Owner: fAIshion Demo Team
 Target Event: Kering China Innovation Day 2026
 Primary Page: `valentine.html`
@@ -80,6 +80,16 @@ The demo SKU database should include products across the following categories.
 
 Fragrance should not be the core category for this demo. If included, it should be treated only as an optional add-on and not the main gift flow.
 
+### Three User-Facing Demo Styles
+
+The demo should use only three user-facing style tags. These are intentionally simple consumer terms, while the internal YSL style codes remain available for recommendation logic and pitch explanation.
+
+| User-facing Style | Internal YSL Style Code | User Meaning | Product Direction |
+| --- | --- | --- | --- |
+| Classic Minimal | Iconic Minimal | A safe, refined, low-risk gift with a clean Saint Laurent signature. | Cassandre, Le 5 a 7, Sac de Jour, small leather goods, black or neutral bags |
+| Black & Cool | Dark Leather Edge | A more attitude-driven gift with a black, leather, sharp, confident feeling. | Leather pieces, boots, sunglasses, black accessories, evening-ready pieces |
+| Polished Elegance | Sharp Tailoring / Power Elegance | A mature and polished style for dinner dates, anniversaries, and elevated dressing. | Tuxedo-inspired jackets, blazers, refined shoes, elegant bags, structured accessories |
+
 ## 6. Core Requirements
 
 ### A. Basic Search Recommendation
@@ -88,8 +98,8 @@ Users can describe what they need in natural language.
 
 Example inputs:
 
-- "Help me choose a Valentine gift for my girlfriend, budget around 5000 RMB, minimal style."
-- "I need a gift for my boyfriend, something understated and classic."
+- "Help me choose a Valentine gift for my girlfriend, budget around 5000 RMB, Classic Minimal style."
+- "I need a gift for my boyfriend, something Black & Cool but still understated."
 - "Recommend a Saint Laurent piece for a Valentine dinner date."
 
 System should extract:
@@ -262,7 +272,7 @@ Recommended data fields:
   category: "Bags",
   price: 22500,
   image: "...",
-  tags: ["minimal", "classic", "gift-for-her", "evening"],
+  tags: ["classic-minimal", "iconic-minimal", "gift-for-her", "evening"],
   occasions: ["valentine", "anniversary", "date-night"],
   recipients: ["her", "neutral"],
   reason: "A compact Saint Laurent signature bag that feels personal, polished, and easy to wear beyond Valentine's Day."
@@ -475,6 +485,16 @@ Demo SKU 数据库应覆盖以下商品品类。
 
 香水不作为本次 Demo 的核心品类。如需保留，可作为附加推荐出现，但不应成为主礼品路径。
 
+### 三个用户可理解的 Demo 风格
+
+Demo 前台只使用三个用户可理解的风格标签。这三个词应是用户能马上理解的消费语言；内部 YSL 风格代码仍可用于推荐逻辑、商品归类和 Pitch 讲述。
+
+| 用户看到的风格 | 内部 YSL 风格代码 | 用户理解 | 商品方向 |
+| --- | --- | --- | --- |
+| 经典极简 | Iconic Minimal | 安全、精致、不容易出错，适合作为低调有质感的礼物。 | Cassandre、Le 5 a 7、Sac de Jour、小皮具、黑色或中性色包袋 |
+| 黑色酷感 | Dark Leather Edge | 更有态度，带有黑色、皮革、利落和自信的感觉。 | 皮革单品、靴子、墨镜、黑色配饰、适合夜晚场景的单品 |
+| 利落优雅 | Sharp Tailoring / Power Elegance | 更成熟、精致，适合约会晚餐、纪念日和正式穿搭场景。 | 西装外套、tuxedo 灵感剪裁、精致鞋履、优雅包袋、结构感配饰 |
+
 ## 6. 核心需求
 
 ### A. 基础搜索推荐
@@ -483,8 +503,8 @@ Demo SKU 数据库应覆盖以下商品品类。
 
 示例输入：
 
-- “帮我选一个送女朋友的情人节礼物，预算 5000 元左右，风格简约。”
-- “我想给男朋友选一件低调经典的礼物。”
+- “帮我选一个送女朋友的情人节礼物，预算 5000 元左右，风格经典极简。”
+- “我想给男朋友选一件黑色酷感但低调的礼物。”
 - “推荐一个适合情人节晚餐约会的 Saint Laurent 单品。”
 
 系统需要识别：
@@ -657,7 +677,7 @@ flowchart TD
   category: "Bags",
   price: 22500,
   image: "...",
-  tags: ["minimal", "classic", "gift-for-her", "evening"],
+  tags: ["classic-minimal", "iconic-minimal", "gift-for-her", "evening"],
   occasions: ["valentine", "anniversary", "date-night"],
   recipients: ["her", "neutral"],
   reason: "A compact Saint Laurent signature bag that feels personal, polished, and easy to wear beyond Valentine's Day."
