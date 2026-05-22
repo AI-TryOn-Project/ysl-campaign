@@ -1,6 +1,6 @@
 # Saint Laurent Valentine Gift Campaign Demo PRD
 
-Version: v0.7 bilingual, separated by language
+Version: v0.8 bilingual, separated by language
 Owner: fAIshion Demo Team
 Target Event: Kering China Innovation Day 2026
 Primary Page: `valentine.html`
@@ -194,7 +194,9 @@ Expected output:
 
 ### BC-Inspired Interaction UX
 
-The flow should reference Brunello Cucinelli AI at the interaction-pattern level only. It should not copy BC's visual identity, product imagery, tone, typography, or color palette.
+The flow should reference Brunello Cucinelli AI at the interaction-pattern level only. BC is not the Valentine gifting story, not the campaign theme, and not the sales objective. It should not be copied as a narrative model.
+
+Use BC as a UX and motion reference for AI-guided navigation. The YSL demo must tell its own Valentine gifting story: sales-oriented gift discovery, Saint Laurent products, and clear wishlist or shopping-bag conversion.
 
 BC-inspired UX behaviors to keep:
 
@@ -203,7 +205,20 @@ BC-inspired UX behaviors to keep:
 - Progressive clarification for recipient, budget, style, and occasion.
 - Product cards that connect each recommendation to a visible reason.
 - Refinement loop, so the user can adjust style, recipient, budget, or occasion after seeing results.
+- Subtle transition and reveal motion inspired by guided product exploration.
 - Clear transition from recommendation to product detail, wishlist, and shopping bag.
+
+Do not copy from BC:
+
+- BC's story, theme, or website-navigation objective.
+- BC's brand identity, product imagery, tone, typography, or color palette.
+- A slow lifestyle exploration flow that delays product recommendation.
+
+YSL campaign principle:
+
+```text
+Reference BC's UX pattern and motion rhythm. Build YSL's own Valentine gifting story and commerce path.
+```
 
 ### User Flow Diagram
 
@@ -367,9 +382,11 @@ Reference points:
 - AI assistant entry point and discovery workflow
 - Prompt-driven product exploration
 - Guided recommendation path from user intent to product results
+- Subtle guided-interaction motion and reveal rhythm
 
 Do not copy:
 
+- Brunello Cucinelli story, campaign purpose, or website-navigation objective
 - Brunello Cucinelli brand identity
 - Brunello Cucinelli typography, palette, imagery, product style, or brand tone
 
@@ -389,7 +406,7 @@ Reference points:
 Implementation principle:
 
 ```text
-BC defines the interaction logic. YSL defines the brand expression.
+BC informs the UX pattern and motion rhythm. YSL defines the Valentine gifting story, product logic, and brand expression.
 ```
 
 ### Saint Laurent Official Product Assets
@@ -616,7 +633,9 @@ Demo 前台只使用三个用户可理解的风格标签。这三个词应是用
 
 ### 参考 BC 的交互 UX
 
-流程图应参考 Brunello Cucinelli AI 的交互模式，但只参考交互方式，不复制 BC 的品牌视觉、商品图、语气、字体或色彩。
+流程图应参考 Brunello Cucinelli AI 的交互模式，但只参考交互方式。BC 不是情人节送礼故事，不是本次 Campaign 主题，也不是销售目标，因此不能把 BC 当成叙事模板照搬。
+
+这里参考的是 BC 的 AI 导航、动效节奏和引导式交互。YSL Demo 必须讲自己的情人节礼品故事：以销售转化为目标，突出 Saint Laurent 商品，并清楚走向收藏或购物袋。
 
 需要保留的 BC 交互特点：
 
@@ -625,7 +644,20 @@ Demo 前台只使用三个用户可理解的风格标签。这三个词应是用
 - 逐步澄清送礼对象、预算、风格和场景。
 - 推荐商品卡片要给出清晰推荐理由。
 - 保留 refinement loop，让用户看到结果后可以继续调整风格、预算、对象或场景。
+- 参考引导式商品探索中的轻量转场和内容 reveal 动效。
 - 从推荐结果顺滑进入商品详情、收藏和购物袋。
+
+不复制 BC：
+
+- 不复制 BC 的故事、主题或官网导航目标。
+- 不复制 BC 的品牌视觉、商品图、语气、字体或色彩。
+- 不复制会拖慢商品推荐的慢生活方式探索路径。
+
+YSL Campaign 原则：
+
+```text
+参考 BC 的 UX 模式和动效节奏；YSL 自己定义情人节礼品故事和电商转化路径。
+```
 
 ### 用户流程图
 
@@ -789,9 +821,11 @@ Brunello Cucinelli AI 仅作为 UI/UX 工作流参考。
 - AI 助手入口和商品发现流程
 - 通过 prompt 探索商品的交互方式
 - 从用户意图到商品结果的引导式推荐路径
+- 引导式商品探索中的轻量动效和内容 reveal 节奏
 
 不复制：
 
+- Brunello Cucinelli 的故事、Campaign 目的或官网导航目标
 - Brunello Cucinelli 品牌视觉
 - Brunello Cucinelli 字体、色彩、图片、商品风格或品牌语气
 
@@ -811,7 +845,7 @@ Saint Laurent 中国官网作为主要品牌、视觉和电商参考。
 实施原则：
 
 ```text
-BC 定义交互逻辑；YSL 定义品牌表达。
+BC 提供 UX 模式和动效节奏参考；YSL 定义情人节礼品故事、商品逻辑和品牌表达。
 ```
 
 ### Saint Laurent 官网商品素材
