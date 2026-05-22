@@ -1,304 +1,229 @@
 # Saint Laurent Valentine Gift Campaign Demo PRD
 
-Version / 版本: v0.3 bilingual  
-Owner / 负责人: fAIshion Demo Team  
-Target Event / 目标活动: Kering China Innovation Day 2026  
-Primary Page / 主要页面: `valentine.html`
+Version: v0.4 bilingual, separated by language
+Owner: fAIshion Demo Team
+Target Event: Kering China Innovation Day 2026
+Primary Page: `valentine.html`
+Language Structure: English first, Chinese second
 
 ---
 
-## 1. Background / 项目背景
+# English PRD
 
-EN: Kering has transferred makeup and beauty line operations to L'Oreal. Therefore, this demo should not design makeup, skincare, or beauty gift flows.
+## 1. Background
 
-中文：Kering 已将彩妆和美妆线运营转移至 L'Oreal。因此，本次 Demo 不设计 makeup、skincare 或 beauty gift 相关流程。
+Kering has transferred makeup and beauty line operations to L'Oreal. Therefore, this demo should not design makeup, skincare, or beauty gift flows.
 
-EN: The Valentine campaign demo should focus on Saint Laurent fashion commerce categories:
+The Valentine campaign demo should focus on Saint Laurent fashion commerce categories:
 
-中文：本次情人节 Campaign Demo 应聚焦 Saint Laurent 时尚电商品类：
+- Bags
+- Accessories
+- Ready-to-wear
+- Shoes
 
-- Bags / 包袋
-- Accessories / 配饰
-- Ready-to-wear / 成衣
-- Shoes / 鞋履
+The campaign goal is sales-oriented: help users discover Valentine gifts, understand why a product fits their need, and move toward wishlist or shopping bag actions.
 
-EN: The campaign goal is sales-oriented: help users discover Valentine gifts, understand why a product fits their need, and move toward wishlist or shopping bag actions.
+## 2. Product Goal
 
-中文：本次 Campaign 的目标是销售转化导向：帮助用户发现适合作为情人节礼物的商品，理解推荐理由，并完成收藏或加入购物袋等购买前动作。
-
----
-
-## 2. Product Goal / 产品目标
-
-EN: Build an interactive live demo that lets Kering brand teams experience a complete AI gift-shopping journey:
-
-中文：构建一个可现场操作的交互式 Live Demo，让 Kering 品牌团队体验完整的 AI 礼品导购路径：
+Build an interactive live demo that lets Kering brand teams experience a complete AI gift-shopping journey:
 
 ```text
 User need or scenario -> AI understanding -> Saint Laurent product recommendations -> Product detail -> Wishlist or shopping bag
-用户需求或场景 -> AI 理解 -> Saint Laurent 商品推荐 -> 商品详情 -> 收藏或加入购物袋
 ```
 
-EN: The demo should prove that fAIshion can support a luxury holiday campaign by turning brand-owned product data into guided shopping recommendations.
+The demo should prove that fAIshion can support a luxury holiday campaign by turning brand-owned product data into guided shopping recommendations.
 
-中文：Demo 需要证明 fAIshion 可以将品牌商品数据转化为节日 Campaign 中可落地的导购推荐体验，帮助奢侈品牌提升商品发现和销售转化。
+## 3. Target Users
 
----
+### End Consumer
 
-## 3. Target Users / 目标用户
+Users shopping for Valentine gifts for a partner, friend, or themselves.
 
-### End Consumer / 终端消费者
+### Brand and Retail Team
 
-EN: Users shopping for Valentine gifts for a partner, friend, or themselves.
+Kering brand stakeholders evaluating whether the solution can support luxury fashion campaign conversion, clienteling, and product discovery.
 
-中文：为伴侣、朋友或自己选购情人节礼物的消费者。
+## 4. Scope
 
-### Brand / Retail Team / 品牌与零售团队
+### In Scope
 
-EN: Kering brand stakeholders evaluating whether the solution can support luxury fashion campaign conversion, clienteling, and product discovery.
+- Valentine gift recommendation journey
+- Natural-language product search
+- Style-based product discovery
+- Scenario-based product recommendation
+- Product cards with image, category, price, style tags, and recommendation reason
+- Wishlist and shopping bag interactions
+- Demo SKU database with 6-8 products
+- Luxury-minimal UI aligned with Saint Laurent tone
 
-中文：评估该方案是否能支持奢侈品节日 Campaign 转化、客户经营和商品发现的 Kering 品牌相关团队。
+### Out of Scope
 
----
+- Makeup
+- Skincare
+- Beauty gift sets
+- Full checkout
+- Payment
+- User login
+- Real inventory sync
+- Real AI API integration for the first demo version
 
-## 4. Scope / 项目范围
+## 5. Product Categories
 
-### In Scope / 本期范围
+The demo SKU database should include products across the following categories.
 
-- EN: Valentine gift recommendation journey  
-  中文：情人节礼品推荐路径
-- EN: Natural-language product search  
-  中文：自然语言商品搜索
-- EN: Style-based product discovery  
-  中文：基于风格的商品发现
-- EN: Scenario-based product recommendation  
-  中文：基于场景的商品推荐
-- EN: Product cards with image, category, price, style tags, and recommendation reason  
-  中文：包含图片、品类、价格、风格标签和推荐理由的商品卡片
-- EN: Wishlist and shopping bag interactions  
-  中文：收藏和购物袋交互
-- EN: Demo SKU database with 6-8 products  
-  中文：包含 6-8 个商品的 Demo SKU 数据库
-- EN: Luxury-minimal UI aligned with Saint Laurent tone  
-  中文：符合 Saint Laurent 调性的极简奢侈品 UI
-
-### Out of Scope / 不在本期范围
-
-- Makeup / 彩妆
-- Skincare / 护肤
-- Beauty gift sets / 美妆礼盒
-- Full checkout / 完整结账流程
-- Payment / 支付
-- User login / 用户登录
-- Real inventory sync / 实时库存同步
-- Real AI API integration for the first demo version / 第一版 Demo 暂不接入真实 AI API
-
----
-
-## 5. Product Categories / 商品品类
-
-EN: The demo SKU database should include products across the following categories.
-
-中文：Demo SKU 数据库应覆盖以下商品品类。
-
-| Category / 品类 | Example Products / 示例商品 |
+| Category | Example Products |
 | --- | --- |
-| Bags / 包袋 | Tote, shoulder bag, mini bag, clutch / 托特包、肩背包、迷你包、手拿包 |
-| Accessories / 配饰 | Sunglasses, belt, jewelry, small leather goods / 墨镜、皮带、首饰、小皮具 |
-| Ready-to-wear / 成衣 | Jacket, blazer, dress, coat / 夹克、西装外套、连衣裙、大衣 |
-| Shoes / 鞋履 | Heels, boots, loafers, sandals / 高跟鞋、靴子、乐福鞋、凉鞋 |
+| Bags | Tote, shoulder bag, mini bag, clutch |
+| Accessories | Sunglasses, belt, jewelry, small leather goods |
+| Ready-to-wear | Jacket, blazer, dress, coat |
+| Shoes | Heels, boots, loafers, sandals |
 
-EN: Fragrance should not be the core category for this demo. If included, it should be treated only as an optional add-on and not the main gift flow.
+Fragrance should not be the core category for this demo. If included, it should be treated only as an optional add-on and not the main gift flow.
 
-中文：香水不作为本次 Demo 的核心品类。如需保留，可作为附加推荐出现，但不应成为主礼品路径。
+## 6. Core Requirements
 
----
+### A. Basic Search Recommendation
 
-## 6. Core Requirements / 核心需求
+Users can describe what they need in natural language.
 
-### A. Basic Search Recommendation / 基础搜索推荐
+Example inputs:
 
-EN: Users can describe what they need in natural language.
+- "Help me choose a Valentine gift for my girlfriend, budget around 5000 RMB, minimal style."
+- "I need a gift for my boyfriend, something understated and classic."
+- "Recommend a Saint Laurent piece for a Valentine dinner date."
 
-中文：用户可以用自然语言描述自己的送礼需求。
+System should extract:
 
-Example inputs / 示例输入：
+- Recipient
+- Budget
+- Occasion
+- Style preference
+- Product category preference, if mentioned
 
-- EN: "Help me choose a Valentine gift for my girlfriend, budget around 5000 RMB, minimal style."  
-  中文：“帮我选一个送女朋友的情人节礼物，预算 5000 元左右，风格简约。”
-- EN: "I need a gift for my boyfriend, something understated and classic."  
-  中文：“我想给男朋友选一件低调经典的礼物。”
-- EN: "Recommend a Saint Laurent piece for a Valentine dinner date."  
-  中文：“推荐一个适合情人节晚餐约会的 Saint Laurent 单品。”
+System should return:
 
-System should extract / 系统需要识别：
+- 3-5 recommended products
+- Product image
+- Product name
+- Category
+- Price
+- Style tags
+- Recommendation reason
+- CTA: Add to Wishlist / Add to Bag
 
-- Recipient / 送礼对象
-- Budget / 预算
-- Occasion / 场景
-- Style preference / 风格偏好
-- Product category preference, if mentioned / 用户提到的商品品类偏好
+### B. Style Search Engine
 
-System should return / 系统需要返回：
+Users can search by aesthetic intent, not only by product name.
 
-- 3-5 recommended products / 3-5 个推荐商品
-- Product image / 商品图片
-- Product name / 商品名称
-- Category / 商品品类
-- Price / 价格
-- Style tags / 风格标签
-- Recommendation reason / 推荐理由
-- CTA: Add to Wishlist / Add to Bag  
-  CTA：加入收藏 / 加入购物袋
+Supported style tags:
 
-### B. Style Search Engine / 风格搜索引擎
+- Minimal
+- Elegant
+- Classic
+- Cool
+- Bold
+- Statement
+- Evening
+- Understated luxury
 
-EN: Users can search by aesthetic intent, not only by product name.
+Example:
 
-中文：用户不仅可以按商品名称搜索，也可以通过审美意图和风格关键词查找商品。
+User selects `Minimal` + `Gift for Her`.
 
-Supported style tags / 支持的风格标签：
+Expected output:
 
-- Minimal / 简约
-- Elegant / 优雅
-- Classic / 经典
-- Cool / 酷感
-- Bold / 大胆
-- Statement / 高辨识度
-- Evening / 晚宴
-- Understated luxury / 低调奢华
+- Black or neutral bag
+- Refined accessory
+- Elegant shoe or ready-to-wear piece
+- Recommendation copy explaining why each item matches the style
 
-Example / 示例：
+### C. Scenario Product Recommendation
 
-EN: User selects `Minimal` + `Gift for Her`.
+Users can browse recommendations by Valentine-related scenarios.
 
-中文：用户选择 `简约` + `送给她`。
+Required scenarios:
 
-Expected output / 预期输出：
+- Valentine Gift for Her
+- Valentine Gift for Him
+- Date Night Outfit
+- Anniversary Gift
+- Self Gift
+- Luxury Gift Under Budget
 
-- EN: Black or neutral bag  
-  中文：黑色或中性色包袋
-- EN: Refined accessory  
-  中文：精致配饰
-- EN: Elegant shoe or ready-to-wear piece  
-  中文：优雅鞋履或成衣单品
-- EN: Recommendation copy explaining why each item matches the style  
-  中文：解释每个商品为何符合该风格的推荐文案
+Optional filters:
 
-### C. Scenario Product Recommendation / 场景推荐单品
+- Recipient: Her / Him / Neutral
+- Age range: 20s / 30s / 40s
+- Budget: Under RMB 3,000 / RMB 3,000-8,000 / RMB 8,000+
+- Style: Minimal / Classic / Statement / Cool
 
-EN: Users can browse recommendations by Valentine-related scenarios.
+Expected output:
 
-中文：用户可以基于情人节相关场景浏览商品推荐。
+- 1 hero product
+- 2-4 supporting products
+- Clear sales-oriented recommendation reason
+- Wishlist and shopping bag actions
 
-Required scenarios / 必备场景：
+## 7. User Journey
 
-- Valentine Gift for Her / 情人节礼物：送给她
-- Valentine Gift for Him / 情人节礼物：送给他
-- Date Night Outfit / 约会晚宴穿搭
-- Anniversary Gift / 纪念日礼物
-- Self Gift / 犒赏自己
-- Luxury Gift Under Budget / 预算内奢侈礼物
+1. User lands on the Valentine Gift Campaign page.
+2. User sees the AI Gift Finder as the primary interaction.
+3. User chooses one of three paths: Search by Need, Search by Style, or Shop by Occasion.
+4. System collects or infers recipient, occasion, budget, and style.
+5. System recommends products from bags, accessories, ready-to-wear, and shoes.
+6. User opens a product detail card.
+7. User adds one or more products to wishlist or shopping bag.
 
-Optional filters / 可选筛选条件：
+## 8. Page Structure
 
-- Recipient: Her / Him / Neutral  
-  送礼对象：她 / 他 / 中性
-- Age range: 20s / 30s / 40s  
-  年龄段：20+ / 30+ / 40+
-- Budget: Under RMB 3,000 / RMB 3,000-8,000 / RMB 8,000+  
-  预算：3000 元以下 / 3000-8000 元 / 8000 元以上
-- Style: Minimal / Classic / Statement / Cool  
-  风格：简约 / 经典 / 高辨识度 / 酷感
+### Hero / First Screen
 
-Expected output / 预期输出：
+- Campaign title: Saint Laurent Valentine Gift Edit
+- AI Gift Finder search bar
+- Three entry points: Search by Need, Search by Style, Shop by Occasion
+- Visual should be product-led, not video-only.
 
-- 1 hero product / 1 个主推商品
-- 2-4 supporting products / 2-4 个辅助推荐商品
-- Clear sales-oriented recommendation reason / 明确的销售导向推荐理由
-- Wishlist and shopping bag actions / 收藏和购物袋操作
+### Gift Categories
 
----
+Show four category entry points:
 
-## 7. User Journey / 用户路径
+- Bags
+- Accessories
+- Ready-to-wear
+- Shoes
 
-1. EN: User lands on the Valentine Gift Campaign page.  
-   中文：用户进入情人节礼品 Campaign 页面。
-2. EN: User sees the AI Gift Finder as the primary interaction.  
-   中文：用户第一眼看到 AI Gift Finder 作为核心交互入口。
-3. EN: User chooses one of three paths: Search by Need, Search by Style, or Shop by Occasion.  
-   中文：用户选择三种路径之一：按需求搜索、按风格搜索、按场景推荐。
-4. EN: System collects or infers recipient, occasion, budget, and style.  
-   中文：系统收集或推断送礼对象、场景、预算和风格。
-5. EN: System recommends products from bags, accessories, ready-to-wear, and shoes.  
-   中文：系统从包袋、配饰、成衣和鞋履中推荐商品。
-6. EN: User opens a product detail card.  
-   中文：用户打开商品详情卡片。
-7. EN: User adds one or more products to wishlist or shopping bag.  
-   中文：用户将一个或多个商品加入收藏或购物袋。
+### AI Recommendation Results
 
----
+Display product cards generated from the selected flow or user input.
 
-## 8. Page Structure / 页面结构
+Each card includes:
 
-### Hero / First Screen / 首屏
+- Product image
+- Product name
+- Category
+- Price
+- Style tags
+- Recommendation reason
+- Add to Wishlist
+- Add to Bag
 
-- EN: Campaign title: Saint Laurent Valentine Gift Edit  
-  中文：Campaign 标题：Saint Laurent Valentine Gift Edit
-- EN: AI Gift Finder search bar  
-  中文：AI Gift Finder 搜索框
-- EN: Three entry points: Search by Need, Search by Style, Shop by Occasion  
-  中文：三个入口：按需求搜索、按风格搜索、按场景推荐
-- EN: Visual should be product-led, not video-only.  
-  中文：视觉应以商品和 Campaign 为主，而不是只展示视频。
+### Product Detail
 
-### Gift Categories / 礼品品类区
+Includes:
 
-Show four category entry points / 展示四个品类入口：
+- Large product image
+- Product name
+- Price
+- Materials
+- Styling recommendation
+- Gift recommendation reason
+- CTA actions
 
-- Bags / 包袋
-- Accessories / 配饰
-- Ready-to-wear / 成衣
-- Shoes / 鞋履
+## 9. Recommendation Logic for Demo V0.1
 
-### AI Recommendation Results / AI 推荐结果区
+The first demo does not require a live AI model. It can use deterministic matching rules for stability and speed.
 
-EN: Display product cards generated from the selected flow or user input.
-
-中文：展示根据用户选择路径或输入内容生成的商品推荐卡片。
-
-Each card includes / 每张卡片包含：
-
-- Product image / 商品图片
-- Product name / 商品名称
-- Category / 品类
-- Price / 价格
-- Style tags / 风格标签
-- Recommendation reason / 推荐理由
-- Add to Wishlist / 加入收藏
-- Add to Bag / 加入购物袋
-
-### Product Detail / 商品详情
-
-Includes / 包含：
-
-- Large product image / 商品大图
-- Product name / 商品名称
-- Price / 价格
-- Materials / 材质
-- Styling recommendation / 搭配建议
-- Gift recommendation reason / 礼品推荐理由
-- CTA actions / 行动按钮
-
----
-
-## 9. Recommendation Logic for Demo V0.1 / Demo V0.1 推荐逻辑
-
-EN: The first demo does not require a live AI model. It can use deterministic matching rules for stability and speed.
-
-中文：第一版 Demo 不需要接入真实 AI 模型。为了保证现场稳定性和速度，可先使用规则匹配推荐逻辑。
-
-Recommended data fields / 推荐数据字段：
+Recommended data fields:
 
 ```js
 {
@@ -314,190 +239,499 @@ Recommended data fields / 推荐数据字段：
 }
 ```
 
-Matching rules / 匹配规则：
+Matching rules:
 
-1. EN: Match occasion first.  
-   中文：优先匹配场景。
-2. EN: Then match recipient.  
-   中文：其次匹配送礼对象。
-3. EN: Then match budget.  
-   中文：再匹配预算。
-4. EN: Then match style tags.  
-   中文：最后匹配风格标签。
-5. EN: If no exact result exists, return the closest category match with explanation.  
-   中文：如果没有完全匹配结果，返回最接近的品类匹配，并说明推荐原因。
+1. Match occasion first.
+2. Then match recipient.
+3. Then match budget.
+4. Then match style tags.
+5. If no exact result exists, return the closest category match with explanation.
 
----
+## 10. UX and Visual Direction
 
-## 10. UX / Visual Direction / 体验与视觉方向
+Design principles:
 
-Design principles / 设计原则：
+- Luxury minimal
+- Black, white, neutral beige, restrained gold accents
+- Product-first composition
+- Clear sales actions
+- Fast, booth-ready interaction
 
-- Luxury minimal / 奢侈品极简感
-- Black, white, neutral beige, restrained gold accents / 黑、白、中性米色、克制金色点缀
-- Product-first composition / 商品优先的页面构图
-- Clear sales actions / 清晰的销售转化动作
-- Fast, booth-ready interaction / 适合展台现场的快速交互
+Avoid:
 
-Avoid / 避免：
+- Rose icon as primary UI
+- Heavy red or pink Valentine graphics
+- Makeup or beauty gift framing
+- Long paragraphs inside the interface
+- Video-only demo experience
 
-- Rose icon as primary UI / 用玫瑰图标作为主要 UI
-- Heavy red or pink Valentine graphics / 过重的红色或粉色情人节视觉
-- Makeup or beauty gift framing / 彩妆、美妆礼品叙事
-- Long paragraphs inside the interface / 页面内出现大段文字
-- Video-only demo experience / 只有视频、无法互动的 Demo 体验
+The experience should feel like a Saint Laurent digital sales associate, not a generic chatbot.
 
-EN: The experience should feel like a Saint Laurent digital sales associate, not a generic chatbot.
+## 11. Demo Success Criteria
 
-中文：整体体验应像一位 Saint Laurent 数字销售顾问，而不是普通客服机器人。
+- A first-time user can complete a recommendation path without guidance.
+- All three paths, A/B/C, are usable.
+- Recommendations only include bags, accessories, ready-to-wear, and shoes.
+- User can add recommended products to wishlist or shopping bag.
+- The page is fast enough for booth usage.
+- The visual design feels luxury, minimal, and Saint Laurent-aligned.
+- The demo clearly shows end-to-end logic for Kering reviewers.
 
----
+## 12. First Build Checklist
 
-## 11. Demo Success Criteria / Demo 验收标准
+- Replace rose-based chat button with minimal AI Gift Finder entry.
+- Rewrite hero section around Valentine Gift Edit and sales discovery.
+- Add three primary paths: need, style, occasion.
+- Create 6-8 product records across allowed categories.
+- Replace generic chatbot responses with product recommendation outputs.
+- Add recommendation result section.
+- Ensure wishlist and shopping bag work from recommendation cards.
+- Remove makeup, skincare, beauty gift, and rose-led campaign language.
+- Test desktop and mobile usability.
 
-- EN: A first-time user can complete a recommendation path without guidance.  
-  中文：首次使用者无需讲解即可完成一次推荐路径。
-- EN: All three paths, A/B/C, are usable.  
-  中文：A/B/C 三条路径均可操作。
-- EN: Recommendations only include bags, accessories, ready-to-wear, and shoes.  
-  中文：推荐结果只包含包袋、配饰、成衣和鞋履。
-- EN: User can add recommended products to wishlist or shopping bag.  
-  中文：用户可以将推荐商品加入收藏或购物袋。
-- EN: The page is fast enough for booth usage.  
-  中文：页面响应速度足够支持展台现场使用。
-- EN: The visual design feels luxury, minimal, and Saint Laurent-aligned.  
-  中文：视觉设计符合奢侈品、极简和 Saint Laurent 调性。
-- EN: The demo clearly shows end-to-end logic for Kering reviewers.  
-  中文：Demo 能清楚展示给 Kering 评审完整的端到端逻辑。
+## 13. Milestones
 
----
-
-## 12. First Build Checklist / 第一版开发清单
-
-- EN: Replace rose-based chat button with minimal AI Gift Finder entry.  
-  中文：将玫瑰聊天按钮替换为极简 AI Gift Finder 入口。
-- EN: Rewrite hero section around Valentine Gift Edit and sales discovery.  
-  中文：重写首屏，围绕 Valentine Gift Edit 和销售型商品发现展开。
-- EN: Add three primary paths: need, style, occasion.  
-  中文：增加三条主路径：需求、风格、场景。
-- EN: Create 6-8 product records across allowed categories.  
-  中文：创建 6-8 个覆盖允许品类的商品数据。
-- EN: Replace generic chatbot responses with product recommendation outputs.  
-  中文：将普通聊天回复替换为商品推荐结果。
-- EN: Add recommendation result section.  
-  中文：增加推荐结果展示区域。
-- EN: Ensure wishlist and shopping bag work from recommendation cards.  
-  中文：确保推荐卡片上的收藏和购物袋操作可用。
-- EN: Remove makeup, skincare, beauty gift, and rose-led campaign language.  
-  中文：移除 makeup、skincare、beauty gift 以及以玫瑰为核心的 Campaign 文案。
-- EN: Test desktop and mobile usability.  
-  中文：测试桌面端和移动端可用性。
-
----
-
-## 13. Milestones / 时间节点
-
-| Date / 日期 | Deliverable / 交付物 |
+| Date | Deliverable |
 | --- | --- |
-| June 5, 2026 / 2026 年 6 月 5 日 | First rehearsal: basic live demo path and draft pitch / 第一轮彩排：基础 Live Demo 路径和 Pitch 初稿 |
-| June 16, 2026 / 2026 年 6 月 16 日 | Complete demo and final pitch deck / 完整 Demo 和最终 Pitch Deck |
-| July 3, 2026 / 2026 年 7 月 3 日 | Booth-ready interactive demo / 可用于展台现场体验的交互 Demo |
+| June 5, 2026 | First rehearsal: basic live demo path and draft pitch |
+| June 16, 2026 | Complete demo and final pitch deck |
+| July 3, 2026 | Booth-ready interactive demo |
 
----
+## 14. Design References and Product Assets
 
-## 14. Design References / 设计参考
+### Brunello Cucinelli AI Reference
 
-### Brunello Cucinelli AI Reference / Brunello Cucinelli AI 参考
+Reference folder: `references/brunello-cucinelli-ai/`
 
-Reference folder / 参考目录: `references/brunello-cucinelli-ai/`
+Use Brunello Cucinelli AI as the UI/UX workflow reference only.
 
-EN: Use Brunello Cucinelli AI as the UI/UX workflow reference only.
+Reference points:
 
-中文：Brunello Cucinelli AI 仅作为 UI/UX 工作流参考。
+- AI assistant entry point and discovery workflow
+- Prompt-driven product exploration
+- Guided recommendation path from user intent to product results
 
-Reference points / 参考重点：
+Do not copy:
 
-- EN: AI assistant entry point and discovery workflow  
-  中文：AI 助手入口和商品发现流程
-- EN: Prompt-driven product exploration  
-  中文：通过 prompt 探索商品的交互方式
-- EN: Guided recommendation path from user intent to product results  
-  中文：从用户意图到商品结果的引导式推荐路径
+- Brunello Cucinelli brand identity
+- Brunello Cucinelli typography, palette, imagery, product style, or brand tone
 
-Do not copy / 不复制：
+### Saint Laurent China Reference
 
-- EN: Brunello Cucinelli brand identity  
-  中文：Brunello Cucinelli 品牌视觉
-- EN: Brunello Cucinelli typography, palette, imagery, product style, or brand tone  
-  中文：Brunello Cucinelli 字体、色彩、图片、商品风格或品牌语气
+Reference folder: `references/saint-laurent-cn/`
 
-### Saint Laurent China Reference / Saint Laurent 中国官网参考
+Use Saint Laurent China official website as the primary brand, visual, and commerce reference.
 
-Reference folder / 参考目录: `references/saint-laurent-cn/`
+Reference points:
 
-EN: Use Saint Laurent China official website as the primary brand, visual, and commerce reference.
+- Typography, header, footer, navigation, spacing, and layout rhythm
+- Luxury-minimal black-and-white visual tone
+- Official product imagery and commerce category presentation
+- Product categories: bags, accessories, ready-to-wear, shoes
 
-中文：Saint Laurent 中国官网作为主要品牌、视觉和电商参考。
-
-Reference points / 参考重点：
-
-- EN: Typography, header, footer, navigation, spacing, and layout rhythm  
-  中文：字体、header、footer、导航、间距和页面节奏
-- EN: Luxury-minimal black-and-white visual tone  
-  中文：黑白极简的奢侈品视觉调性
-- EN: Official product imagery and commerce category presentation  
-  中文：官网商品图片和电商品类展示方式
-- EN: Product categories: bags, accessories, ready-to-wear, shoes  
-  中文：商品品类：包袋、配饰、成衣、鞋履
-
-Implementation principle / 实施原则：
+Implementation principle:
 
 ```text
 BC defines the interaction logic. YSL defines the brand expression.
+```
+
+### Saint Laurent Official Product Assets
+
+Asset folder: `ysl官网素材/`
+
+Use the saved Saint Laurent China official website product-page assets as the primary product image and category reference for the Valentine Gift Campaign demo.
+
+Asset structure:
+
+| Folder | Included Product Pages | Demo Usage |
+| --- | --- | --- |
+| `ysl官网素材/女/` | Homepage, ready-to-wear, shoes, accessories, small leather goods | Gift for Her, date-night outfit, self gift |
+| `ysl官网素材/男/` | Summer 26 men, travel bags, shoes, accessories, small leather goods | Gift for Him, understated luxury, classic accessories |
+
+Required usage:
+
+- Product imagery should come from `ysl官网素材/` when building recommendation cards, category tiles, and product detail modules.
+- Product selection should stay within bags, accessories, ready-to-wear, shoes, and small leather goods.
+- Men's and women's journeys should use the corresponding official asset folders to preserve product relevance.
+- Product names, visual hierarchy, spacing, product-card rhythm, header, and footer should align with Saint Laurent official site references.
+
+Do not use:
+
+- Makeup, skincare, beauty gift sets, or fragrance-led gifting as the main flow.
+- Brunello Cucinelli product imagery, color palette, typography, or brand tone in the final YSL demo UI.
+- Generic stock images when an official YSL product asset is available.
+
+Product asset mapping:
+
+| Demo Category | Recommended Asset Source |
+| --- | --- |
+| Bags | Men's travel bags and women's official homepage/category imagery |
+| Accessories | Men's and women's accessories folders |
+| Ready-to-wear | Women's ready-to-wear and men's Summer 26 collection |
+| Shoes | Men's and women's shoes folders |
+| Small leather goods | Men's and women's small leather goods folders |
+
+---
+
+# 中文 PRD
+
+## 1. 项目背景
+
+Kering 已将彩妆和美妆线运营转移至 L'Oreal。因此，本次 Demo 不设计 makeup、skincare 或 beauty gift 相关流程。
+
+本次情人节 Campaign Demo 应聚焦 Saint Laurent 时尚电商品类：
+
+- 包袋
+- 配饰
+- 成衣
+- 鞋履
+
+本次 Campaign 的目标是销售转化导向：帮助用户发现适合作为情人节礼物的商品，理解推荐理由，并完成收藏或加入购物袋等购买前动作。
+
+## 2. 产品目标
+
+构建一个可现场操作的交互式 Live Demo，让 Kering 品牌团队体验完整的 AI 礼品导购路径：
+
+```text
+用户需求或场景 -> AI 理解 -> Saint Laurent 商品推荐 -> 商品详情 -> 收藏或加入购物袋
+```
+
+Demo 需要证明 fAIshion 可以将品牌商品数据转化为节日 Campaign 中可落地的导购推荐体验，帮助奢侈品牌提升商品发现和销售转化。
+
+## 3. 目标用户
+
+### 终端消费者
+
+为伴侣、朋友或自己选购情人节礼物的消费者。
+
+### 品牌与零售团队
+
+评估该方案是否能支持奢侈品节日 Campaign 转化、客户经营和商品发现的 Kering 品牌相关团队。
+
+## 4. 项目范围
+
+### 本期范围
+
+- 情人节礼品推荐路径
+- 自然语言商品搜索
+- 基于风格的商品发现
+- 基于场景的商品推荐
+- 包含图片、品类、价格、风格标签和推荐理由的商品卡片
+- 收藏和购物袋交互
+- 包含 6-8 个商品的 Demo SKU 数据库
+- 符合 Saint Laurent 调性的极简奢侈品 UI
+
+### 不在本期范围
+
+- 彩妆
+- 护肤
+- 美妆礼盒
+- 完整结账流程
+- 支付
+- 用户登录
+- 实时库存同步
+- 第一版 Demo 暂不接入真实 AI API
+
+## 5. 商品品类
+
+Demo SKU 数据库应覆盖以下商品品类。
+
+| 品类 | 示例商品 |
+| --- | --- |
+| 包袋 | 托特包、肩背包、迷你包、手拿包 |
+| 配饰 | 墨镜、皮带、首饰、小皮具 |
+| 成衣 | 夹克、西装外套、连衣裙、大衣 |
+| 鞋履 | 高跟鞋、靴子、乐福鞋、凉鞋 |
+
+香水不作为本次 Demo 的核心品类。如需保留，可作为附加推荐出现，但不应成为主礼品路径。
+
+## 6. 核心需求
+
+### A. 基础搜索推荐
+
+用户可以用自然语言描述自己的送礼需求。
+
+示例输入：
+
+- “帮我选一个送女朋友的情人节礼物，预算 5000 元左右，风格简约。”
+- “我想给男朋友选一件低调经典的礼物。”
+- “推荐一个适合情人节晚餐约会的 Saint Laurent 单品。”
+
+系统需要识别：
+
+- 送礼对象
+- 预算
+- 场景
+- 风格偏好
+- 用户提到的商品品类偏好
+
+系统需要返回：
+
+- 3-5 个推荐商品
+- 商品图片
+- 商品名称
+- 商品品类
+- 价格
+- 风格标签
+- 推荐理由
+- CTA：加入收藏 / 加入购物袋
+
+### B. 风格搜索引擎
+
+用户不仅可以按商品名称搜索，也可以通过审美意图和风格关键词查找商品。
+
+支持的风格标签：
+
+- 简约
+- 优雅
+- 经典
+- 酷感
+- 大胆
+- 高辨识度
+- 晚宴
+- 低调奢华
+
+示例：
+
+用户选择 `简约` + `送给她`。
+
+预期输出：
+
+- 黑色或中性色包袋
+- 精致配饰
+- 优雅鞋履或成衣单品
+- 解释每个商品为何符合该风格的推荐文案
+
+### C. 场景推荐单品
+
+用户可以基于情人节相关场景浏览商品推荐。
+
+必备场景：
+
+- 情人节礼物：送给她
+- 情人节礼物：送给他
+- 约会晚宴穿搭
+- 纪念日礼物
+- 犒赏自己
+- 预算内奢侈礼物
+
+可选筛选条件：
+
+- 送礼对象：她 / 他 / 中性
+- 年龄段：20+ / 30+ / 40+
+- 预算：3000 元以下 / 3000-8000 元 / 8000 元以上
+- 风格：简约 / 经典 / 高辨识度 / 酷感
+
+预期输出：
+
+- 1 个主推商品
+- 2-4 个辅助推荐商品
+- 明确的销售导向推荐理由
+- 收藏和购物袋操作
+
+## 7. 用户路径
+
+1. 用户进入情人节礼品 Campaign 页面。
+2. 用户第一眼看到 AI Gift Finder 作为核心交互入口。
+3. 用户选择三种路径之一：按需求搜索、按风格搜索、按场景推荐。
+4. 系统收集或推断送礼对象、场景、预算和风格。
+5. 系统从包袋、配饰、成衣和鞋履中推荐商品。
+6. 用户打开商品详情卡片。
+7. 用户将一个或多个商品加入收藏或购物袋。
+
+## 8. 页面结构
+
+### 首屏
+
+- Campaign 标题：Saint Laurent Valentine Gift Edit
+- AI Gift Finder 搜索框
+- 三个入口：按需求搜索、按风格搜索、按场景推荐
+- 视觉应以商品和 Campaign 为主，而不是只展示视频。
+
+### 礼品品类区
+
+展示四个品类入口：
+
+- 包袋
+- 配饰
+- 成衣
+- 鞋履
+
+### AI 推荐结果区
+
+展示根据用户选择路径或输入内容生成的商品推荐卡片。
+
+每张卡片包含：
+
+- 商品图片
+- 商品名称
+- 品类
+- 价格
+- 风格标签
+- 推荐理由
+- 加入收藏
+- 加入购物袋
+
+### 商品详情
+
+包含：
+
+- 商品大图
+- 商品名称
+- 价格
+- 材质
+- 搭配建议
+- 礼品推荐理由
+- 行动按钮
+
+## 9. Demo V0.1 推荐逻辑
+
+第一版 Demo 不需要接入真实 AI 模型。为了保证现场稳定性和速度，可先使用规则匹配推荐逻辑。
+
+推荐数据字段：
+
+```js
+{
+  id: "sl-bag-001",
+  name: "Le 5 a 7 Shoulder Bag",
+  category: "Bags",
+  price: 22500,
+  image: "...",
+  tags: ["minimal", "classic", "gift-for-her", "evening"],
+  occasions: ["valentine", "anniversary", "date-night"],
+  recipients: ["her", "neutral"],
+  reason: "A compact Saint Laurent signature bag that feels personal, polished, and easy to wear beyond Valentine's Day."
+}
+```
+
+匹配规则：
+
+1. 优先匹配场景。
+2. 其次匹配送礼对象。
+3. 再匹配预算。
+4. 最后匹配风格标签。
+5. 如果没有完全匹配结果，返回最接近的品类匹配，并说明推荐原因。
+
+## 10. 体验与视觉方向
+
+设计原则：
+
+- 奢侈品极简感
+- 黑、白、中性米色、克制金色点缀
+- 商品优先的页面构图
+- 清晰的销售转化动作
+- 适合展台现场的快速交互
+
+避免：
+
+- 用玫瑰图标作为主要 UI
+- 过重的红色或粉色情人节视觉
+- 彩妆、美妆礼品叙事
+- 页面内出现大段文字
+- 只有视频、无法互动的 Demo 体验
+
+整体体验应像一位 Saint Laurent 数字销售顾问，而不是普通客服机器人。
+
+## 11. Demo 验收标准
+
+- 首次使用者无需讲解即可完成一次推荐路径。
+- A/B/C 三条路径均可操作。
+- 推荐结果只包含包袋、配饰、成衣和鞋履。
+- 用户可以将推荐商品加入收藏或购物袋。
+- 页面响应速度足够支持展台现场使用。
+- 视觉设计符合奢侈品、极简和 Saint Laurent 调性。
+- Demo 能清楚展示给 Kering 评审完整的端到端逻辑。
+
+## 12. 第一版开发清单
+
+- 将玫瑰聊天按钮替换为极简 AI Gift Finder 入口。
+- 重写首屏，围绕 Valentine Gift Edit 和销售型商品发现展开。
+- 增加三条主路径：需求、风格、场景。
+- 创建 6-8 个覆盖允许品类的商品数据。
+- 将普通聊天回复替换为商品推荐结果。
+- 增加推荐结果展示区域。
+- 确保推荐卡片上的收藏和购物袋操作可用。
+- 移除 makeup、skincare、beauty gift 以及以玫瑰为核心的 Campaign 文案。
+- 测试桌面端和移动端可用性。
+
+## 13. 时间节点
+
+| 日期 | 交付物 |
+| --- | --- |
+| 2026 年 6 月 5 日 | 第一轮彩排：基础 Live Demo 路径和 Pitch 初稿 |
+| 2026 年 6 月 16 日 | 完整 Demo 和最终 Pitch Deck |
+| 2026 年 7 月 3 日 | 可用于展台现场体验的交互 Demo |
+
+## 14. 设计参考与商品素材
+
+### Brunello Cucinelli AI 参考
+
+参考目录：`references/brunello-cucinelli-ai/`
+
+Brunello Cucinelli AI 仅作为 UI/UX 工作流参考。
+
+参考重点：
+
+- AI 助手入口和商品发现流程
+- 通过 prompt 探索商品的交互方式
+- 从用户意图到商品结果的引导式推荐路径
+
+不复制：
+
+- Brunello Cucinelli 品牌视觉
+- Brunello Cucinelli 字体、色彩、图片、商品风格或品牌语气
+
+### Saint Laurent 中国官网参考
+
+参考目录：`references/saint-laurent-cn/`
+
+Saint Laurent 中国官网作为主要品牌、视觉和电商参考。
+
+参考重点：
+
+- 字体、header、footer、导航、间距和页面节奏
+- 黑白极简的奢侈品视觉调性
+- 官网商品图片和电商品类展示方式
+- 商品品类：包袋、配饰、成衣、鞋履
+
+实施原则：
+
+```text
 BC 定义交互逻辑；YSL 定义品牌表达。
 ```
 
-### Saint Laurent Official Product Assets / Saint Laurent 官网商品素材
+### Saint Laurent 官网商品素材
 
-Asset folder / 素材目录: `ysl官网素材/`
+素材目录：`ysl官网素材/`
 
-EN: Use the saved Saint Laurent China official website product-page assets as the primary product image and category reference for the Valentine Gift Campaign demo.
+使用已保存的 Saint Laurent 中国官网商品页素材，作为本次情人节礼品 Campaign Demo 的主要商品图片和品类参考。
 
-中文：使用已保存的 Saint Laurent 中国官网商品页素材，作为本次情人节礼品 Campaign Demo 的主要商品图片和品类参考。
+素材结构：
 
-Asset structure / 素材结构：
-
-| Folder / 目录 | Included Product Pages / 包含商品页 | Demo Usage / Demo 用途 |
+| 目录 | 包含商品页 | Demo 用途 |
 | --- | --- | --- |
-| `ysl官网素材/女/` | Homepage, ready-to-wear, shoes, accessories, small leather goods / 官网首页、成衣、鞋履、配饰、小皮具 | Gift for Her, date-night outfit, self gift / 送给她、约会晚宴穿搭、犒赏自己 |
-| `ysl官网素材/男/` | Summer 26 men, travel bags, shoes, accessories, small leather goods / 26 夏季男士系列、旅行袋、鞋履、配饰、小皮具 | Gift for Him, understated luxury, classic accessories / 送给他、低调奢华、经典配饰 |
+| `ysl官网素材/女/` | 官网首页、成衣、鞋履、配饰、小皮具 | 送给她、约会晚宴穿搭、犒赏自己 |
+| `ysl官网素材/男/` | 26 夏季男士系列、旅行袋、鞋履、配饰、小皮具 | 送给他、低调奢华、经典配饰 |
 
-Required usage / 必须使用：
+必须使用：
 
-- EN: Product imagery should come from `ysl官网素材/` when building recommendation cards, category tiles, and product detail modules.  
-  中文：推荐卡片、品类入口和商品详情模块中的商品图，应优先来自 `ysl官网素材/`。
-- EN: Product selection should stay within bags, accessories, ready-to-wear, shoes, and small leather goods.  
-  中文：商品选择应保持在包袋、配饰、成衣、鞋履和小皮具范围内。
-- EN: Men's and women's journeys should use the corresponding official asset folders to preserve product relevance.  
-  中文：男士和女士路径应使用对应的官网素材目录，确保商品相关性。
-- EN: Product names, visual hierarchy, spacing, product-card rhythm, header, and footer should align with Saint Laurent official site references.  
-  中文：商品名称、视觉层级、间距、商品卡片节奏、header 和 footer 应贴近 Saint Laurent 官网参考。
+- 推荐卡片、品类入口和商品详情模块中的商品图，应优先来自 `ysl官网素材/`。
+- 商品选择应保持在包袋、配饰、成衣、鞋履和小皮具范围内。
+- 男士和女士路径应使用对应的官网素材目录，确保商品相关性。
+- 商品名称、视觉层级、间距、商品卡片节奏、header 和 footer 应贴近 Saint Laurent 官网参考。
 
-Do not use / 不使用：
+不使用：
 
-- EN: Makeup, skincare, beauty gift sets, or fragrance-led gifting as the main flow.  
-  中文：不使用彩妆、护肤、美妆礼盒，香水也不作为主要送礼路径。
-- EN: Brunello Cucinelli product imagery, color palette, typography, or brand tone in the final YSL demo UI.  
-  中文：最终 YSL Demo UI 不使用 Brunello Cucinelli 的商品图片、色彩、字体或品牌调性。
-- EN: Generic stock images when an official YSL product asset is available.  
-  中文：如果已有 YSL 官网商品素材，不使用通用图库图片替代。
+- 不使用彩妆、护肤、美妆礼盒，香水也不作为主要送礼路径。
+- 最终 YSL Demo UI 不使用 Brunello Cucinelli 的商品图片、色彩、字体或品牌调性。
+- 如果已有 YSL 官网商品素材，不使用通用图库图片替代。
 
-Product asset mapping / 商品素材映射：
+商品素材映射：
 
-| Demo Category / Demo 品类 | Recommended Asset Source / 推荐素材来源 |
+| Demo 品类 | 推荐素材来源 |
 | --- | --- |
-| Bags / 包袋 | Men's travel bags and women's official homepage/category imagery / 男士旅行袋与女士官网首页、品类图 |
-| Accessories / 配饰 | Men's and women's accessories folders / 男士与女士配饰目录 |
-| Ready-to-wear / 成衣 | Women's ready-to-wear and men's Summer 26 collection / 女士成衣与男士 26 夏季系列 |
-| Shoes / 鞋履 | Men's and women's shoes folders / 男士与女士鞋履目录 |
-| Small leather goods / 小皮具 | Men's and women's small leather goods folders / 男士与女士小皮具目录 |
+| 包袋 | 男士旅行袋与女士官网首页、品类图 |
+| 配饰 | 男士与女士配饰目录 |
+| 成衣 | 女士成衣与男士 26 夏季系列 |
+| 鞋履 | 男士与女士鞋履目录 |
+| 小皮具 | 男士与女士小皮具目录 |
