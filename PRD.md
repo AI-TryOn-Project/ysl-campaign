@@ -1,6 +1,6 @@
 # Saint Laurent Valentine Gift Campaign Demo PRD
 
-Version: v0.8 bilingual, separated by language
+Version: v0.9 bilingual, separated by language
 Owner: fAIshion Demo Team
 Target Event: Kering China Innovation Day 2026
 Primary Page: `valentine.html`
@@ -181,6 +181,129 @@ Expected output:
 - 2-4 supporting products
 - Clear sales-oriented recommendation reason
 - Wishlist and shopping bag actions
+
+### D. AI Concierge UX Principle: Not a Traditional Survey
+
+The AI Gift Finder must not behave like a traditional survey, filter tree, or chatbot transcript. Its value is to reduce decision effort: understand natural language, infer missing context, recommend immediately, and support fast refinement.
+
+Traditional survey behavior to avoid:
+
+- Asking users to complete a fixed sequence before showing any product.
+- Making gender, budget, category, and style feel like mandatory form fields.
+- Showing a long chat history with user bubbles and AI reply bubbles.
+- Returning a cold product list without gift logic or recommendation reasons.
+
+AI concierge behavior to design:
+
+- Natural language first, structured chips second.
+- User can type one sentence and see products immediately.
+- AI extracts visible intent chips such as recipient, occasion, budget, style, and category.
+- AI can infer missing context instead of blocking the flow.
+- Product images appear as the main result, not a text reply.
+- Each recommendation includes a short reason connected to gifting, style, and Saint Laurent product logic.
+- Refinement actions appear after results, such as `Make it cooler`, `Show bags only`, `Higher budget`, or `More formal`.
+- The page can show a current intent summary, but should not show traditional chat history.
+
+### E. Three Demo Storyline UX
+
+These three storylines map directly to the three user needs: basic search recommendation, style search engine, and scenario product recommendation. Each story should be fast enough to complete in a live booth demo.
+
+#### Storyline A: One-Sentence Gift Brief
+
+User need: Basic search recommendation.
+
+User mindset: "I know who I am buying for, but I do not know which Saint Laurent item to choose."
+
+Entry point: Hero AI Gift Finder prompt.
+
+Example prompt: "I need a Valentine's gift for my girlfriend, around RMB 5,000, something Classic Minimal."
+
+AI behavior:
+
+- Extract recipient, budget, occasion, and style from the sentence.
+- Infer missing context, such as Valentine's gifting and suitable categories.
+- Avoid asking a full survey before showing products.
+- Return a balanced gift shortlist across bags, accessories, shoes, and small leather goods.
+
+UX sequence:
+
+1. User enters one sentence in the AI Gift Finder.
+2. System converts the sentence into intent chips: `Gift for Her`, `Valentine`, `Classic Minimal`, `RMB 3,000-8,000`.
+3. Product results appear immediately with large YSL product images.
+4. Each product card shows one short gifting reason.
+5. User can refine with quick actions: `Lower budget`, `More iconic`, `Show bags only`, `More understated`.
+6. User opens product detail and adds to wishlist or shopping bag.
+
+Success signal: The user gets a credible gift shortlist without manually filling out a survey.
+
+#### Storyline B: Style Mood Search
+
+User need: Style search engine.
+
+User mindset: "I know the feeling I want, but I do not know the product name."
+
+Entry point: Three style chips plus optional prompt.
+
+Supported style chips:
+
+- Classic Minimal
+- Black & Cool
+- Polished Elegance
+
+Example prompt: "Something Black & Cool for him, but not too loud."
+
+AI behavior:
+
+- Translate aesthetic intent into YSL product codes and categories.
+- Use the internal style mapping to connect user words with YSL house codes.
+- Recommend products that match the mood, not only exact keywords.
+
+UX sequence:
+
+1. User taps a style chip or writes a style phrase.
+2. System highlights the interpreted mood and explains it with short chips, not long copy.
+3. Product grid updates instantly with matching YSL items.
+4. Results can mix categories when the user did not specify a category.
+5. User refines the mood with actions: `More classic`, `More evening`, `Less bold`, `Add leather`.
+6. Product cards keep the focus on image, style fit, price, and CTA.
+
+Success signal: The user can shop by aesthetic intent instead of knowing exact product names.
+
+#### Storyline C: Occasion Gift Edit
+
+User need: Scenario product recommendation.
+
+User mindset: "I am shopping for a Valentine scenario and want a curated gift edit."
+
+Entry point: Occasion cards.
+
+Required occasion cards:
+
+- Valentine Gift for Her
+- Valentine Gift for Him
+- Date Night Outfit
+- Anniversary Gift
+- Self Gift
+- Luxury Gift Under Budget
+
+AI behavior:
+
+- Treat the occasion as the primary context.
+- Use recipient, age range, budget, and style as optional signals, not mandatory survey steps.
+- Create a curated edit with one hero product and supporting products.
+- Explain how the products work together as a gift or outfit story.
+
+UX sequence:
+
+1. User selects one occasion card, such as `Valentine Gift for Him`.
+2. System offers optional lightweight chips for recipient, budget, and style.
+3. If the user skips chips, AI still returns a recommendation edit.
+4. Result section shows one hero product plus 2-4 supporting items.
+5. Each item has a sales-oriented reason, such as why it fits Valentine gifting or date-night dressing.
+6. User can refine the edit with actions: `More Black & Cool`, `Under RMB 8,000`, `More formal`, `Only accessories`.
+7. User opens product detail or adds items to wishlist or shopping bag.
+
+Success signal: The user feels guided by a Saint Laurent gift editor, not forced through a questionnaire.
 
 ## 7. User Journey
 
@@ -620,6 +743,129 @@ Demo 前台只使用三个用户可理解的风格标签。这三个词应是用
 - 2-4 个辅助推荐商品
 - 明确的销售导向推荐理由
 - 收藏和购物袋操作
+
+### D. AI 导购 UX 原则：不是传统问卷
+
+AI Gift Finder 不应表现为传统问卷、筛选树或聊天记录。它的价值是降低用户决策成本：理解自然语言、推断缺失上下文、即时推荐商品，并支持快速微调。
+
+需要避免的传统问卷行为：
+
+- 用户必须完成固定步骤后才能看到商品。
+- 把性别、预算、品类、风格做成必须填写的表单。
+- 展示一长串用户气泡和 AI 回复气泡。
+- 只返回冷冰冰的商品列表，没有送礼逻辑和推荐理由。
+
+需要设计的 AI 导购行为：
+
+- 自然语言优先，结构化 chips 在后。
+- 用户输入一句话后，应立即看到商品。
+- AI 抽取可见 intent chips，例如送礼对象、场景、预算、风格和品类。
+- AI 可以推断用户没说完整的信息，而不是阻塞流程。
+- 结果应以商品图为主，不是以长文本回复为主。
+- 每个推荐商品给出一句简短理由，连接送礼场景、风格和 Saint Laurent 商品逻辑。
+- 结果后提供快速微调动作，例如 `更酷一点`、`只看包袋`、`提高预算`、`更正式一点`。
+- 页面可以显示 current intent summary，但不做传统 chat history。
+
+### E. 三条 Demo 故事线 UX
+
+这三条故事线分别对应用户提出的三个需求：基础搜索推荐、风格搜索引擎、场景推荐单品。每条故事线都要适合现场 Demo，在短时间内跑完从需求到商品推荐再到收藏或购物袋的路径。
+
+#### 故事线 A：一句话礼物需求
+
+用户需求：基础搜索推荐。
+
+用户心态：“我知道要送给谁，但不知道该选 Saint Laurent 的哪个单品。”
+
+入口：首屏 AI Gift Finder prompt。
+
+示例输入：“帮我选一个送女朋友的情人节礼物，预算 5000 元左右，风格经典极简。”
+
+AI 行为：
+
+- 从一句话里识别送礼对象、预算、场景和风格。
+- 自动推断情人节送礼语境和适合的商品品类。
+- 不要求用户先填完整问卷。
+- 返回覆盖包袋、配饰、鞋履、小皮具的礼品短名单。
+
+UX 顺序：
+
+1. 用户在 AI Gift Finder 输入一句话。
+2. 系统转换为 intent chips：`送给她`、`情人节`、`经典极简`、`3000-8000 元`。
+3. 页面立即展示带有 YSL 商品大图的推荐结果。
+4. 每张商品卡给出一句简短送礼理由。
+5. 用户可以用快捷动作微调：`降低预算`、`更经典`、`只看包袋`、`更低调`。
+6. 用户打开商品详情，并加入收藏或购物袋。
+
+成功信号：用户不用手动填问卷，也能快速得到可信的礼品短名单。
+
+#### 故事线 B：风格意图搜索
+
+用户需求：风格搜索引擎。
+
+用户心态：“我知道想要什么感觉，但不知道商品名字。”
+
+入口：三个风格 chips + 可选 prompt。
+
+支持的风格 chips：
+
+- 经典极简
+- 黑色酷感
+- 利落优雅
+
+示例输入：“送男朋友，黑色酷感，但不要太张扬。”
+
+AI 行为：
+
+- 把用户的审美意图翻译成 YSL 风格代码和商品方向。
+- 用内部风格映射连接用户语言和 YSL house codes。
+- 推荐符合 mood 的商品，而不是只做关键词匹配。
+
+UX 顺序：
+
+1. 用户点击一个风格 chip，或输入一句风格描述。
+2. 系统用短 chips 展示理解到的 mood，不用大段文字解释。
+3. 商品 grid 立即更新为符合该风格的 YSL 商品。
+4. 如果用户没有指定品类，结果可以混合包袋、配饰、鞋履和小皮具。
+5. 用户可以继续微调：`更经典`、`更适合晚宴`、`不要太夸张`、`加入皮革单品`。
+6. 商品卡始终突出图片、风格匹配理由、价格和 CTA。
+
+成功信号：用户无需知道商品名，也能通过审美意图找到合适单品。
+
+#### 故事线 C：场景礼品 Edit
+
+用户需求：场景推荐单品。
+
+用户心态：“我在为一个情人节场景购物，希望看到被策划好的礼品组合。”
+
+入口：场景卡片。
+
+必备场景卡：
+
+- 情人节礼物：送给她
+- 情人节礼物：送给他
+- 约会晚宴穿搭
+- 纪念日礼物
+- 犒赏自己
+- 预算内奢侈礼物
+
+AI 行为：
+
+- 把场景作为第一上下文。
+- 送礼对象、年龄段、预算和风格只作为可选信号，不做强制问卷步骤。
+- 生成一个主推商品 + 2-4 个辅助商品的 curated edit。
+- 解释这些商品如何组成一个礼品故事或穿搭故事。
+
+UX 顺序：
+
+1. 用户选择一个场景卡，例如 `情人节礼物：送给他`。
+2. 系统提供轻量 chips，可选送礼对象、预算和风格。
+3. 用户即使跳过 chips，AI 也直接返回推荐 edit。
+4. 推荐区展示 1 个主推商品和 2-4 个辅助商品。
+5. 每个商品都有销售导向理由，解释为什么适合情人节送礼或约会晚宴穿搭。
+6. 用户可以微调：`更黑色酷感`、`8000 元以内`、`更正式一点`、`只看配饰`。
+7. 用户打开商品详情，或把商品加入收藏/购物袋。
+
+成功信号：用户感受到的是 Saint Laurent 礼品编辑的策划感，而不是被迫填问卷。
 
 ## 7. 用户路径
 
