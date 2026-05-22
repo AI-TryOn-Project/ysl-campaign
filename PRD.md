@@ -1,6 +1,6 @@
 # Saint Laurent Valentine Gift Campaign Demo PRD
 
-Version: v0.4 bilingual, separated by language
+Version: v0.5 bilingual, separated by language
 Owner: fAIshion Demo Team
 Target Event: Kering China Innovation Day 2026
 Primary Page: `valentine.html`
@@ -176,6 +176,33 @@ Expected output:
 5. System recommends products from bags, accessories, ready-to-wear, and shoes.
 6. User opens a product detail card.
 7. User adds one or more products to wishlist or shopping bag.
+
+### User Flow Diagram
+
+```mermaid
+flowchart TD
+  A["Enter Saint Laurent Valentine Gift Campaign"] --> B["AI Gift Finder"]
+  B --> C1["Search by Need"]
+  B --> C2["Search by Style"]
+  B --> C3["Shop by Occasion"]
+
+  C1 --> D1["User describes recipient, budget, occasion, style"]
+  C2 --> D2["User selects Classic Minimal, Black & Cool, or Polished Elegance"]
+  C3 --> D3["User selects Gift for Her, Gift for Him, Date Night, Anniversary, Self Gift, or Budget Gift"]
+
+  D1 --> E["Intent and filter extraction"]
+  D2 --> E
+  D3 --> E
+
+  E --> F["Match YSL product assets and demo SKU data"]
+  F --> G["Generate ranked recommendations"]
+  G --> H["Recommendation cards with product image, price, tags, and reason"]
+  H --> I["Product detail"]
+  I --> J1["Add to Wishlist"]
+  I --> J2["Add to Bag"]
+  J1 --> K["Sales-oriented gift discovery completed"]
+  J2 --> K
+```
 
 ## 8. Page Structure
 
@@ -544,6 +571,33 @@ Demo SKU 数据库应覆盖以下商品品类。
 5. 系统从包袋、配饰、成衣和鞋履中推荐商品。
 6. 用户打开商品详情卡片。
 7. 用户将一个或多个商品加入收藏或购物袋。
+
+### 用户流程图
+
+```mermaid
+flowchart TD
+  A["进入 Saint Laurent 情人节礼品 Campaign"] --> B["AI Gift Finder"]
+  B --> C1["按需求搜索"]
+  B --> C2["按风格搜索"]
+  B --> C3["按场景推荐"]
+
+  C1 --> D1["用户描述送礼对象、预算、场景、风格"]
+  C2 --> D2["用户选择经典极简、黑色酷感或利落优雅"]
+  C3 --> D3["用户选择送给她、送给他、约会晚宴、纪念日、犒赏自己或预算礼物"]
+
+  D1 --> E["意图与筛选条件识别"]
+  D2 --> E
+  D3 --> E
+
+  E --> F["匹配 YSL 官网素材与 Demo SKU 数据"]
+  F --> G["生成排序后的推荐结果"]
+  G --> H["推荐卡片：商品图、价格、标签、推荐理由"]
+  H --> I["商品详情"]
+  I --> J1["加入收藏"]
+  I --> J2["加入购物袋"]
+  J1 --> K["完成销售导向礼品发现路径"]
+  J2 --> K
+```
 
 ## 8. 页面结构
 
