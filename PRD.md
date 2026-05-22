@@ -1,6 +1,6 @@
 # Saint Laurent Valentine Gift Campaign Demo PRD
 
-Version / 版本: v0.2 bilingual  
+Version / 版本: v0.3 bilingual  
 Owner / 负责人: fAIshion Demo Team  
 Target Event / 目标活动: Kering China Innovation Day 2026  
 Primary Page / 主要页面: `valentine.html`
@@ -456,3 +456,48 @@ Implementation principle / 实施原则：
 BC defines the interaction logic. YSL defines the brand expression.
 BC 定义交互逻辑；YSL 定义品牌表达。
 ```
+
+### Saint Laurent Official Product Assets / Saint Laurent 官网商品素材
+
+Asset folder / 素材目录: `ysl官网素材/`
+
+EN: Use the saved Saint Laurent China official website product-page assets as the primary product image and category reference for the Valentine Gift Campaign demo.
+
+中文：使用已保存的 Saint Laurent 中国官网商品页素材，作为本次情人节礼品 Campaign Demo 的主要商品图片和品类参考。
+
+Asset structure / 素材结构：
+
+| Folder / 目录 | Included Product Pages / 包含商品页 | Demo Usage / Demo 用途 |
+| --- | --- | --- |
+| `ysl官网素材/女/` | Homepage, ready-to-wear, shoes, accessories, small leather goods / 官网首页、成衣、鞋履、配饰、小皮具 | Gift for Her, date-night outfit, self gift / 送给她、约会晚宴穿搭、犒赏自己 |
+| `ysl官网素材/男/` | Summer 26 men, travel bags, shoes, accessories, small leather goods / 26 夏季男士系列、旅行袋、鞋履、配饰、小皮具 | Gift for Him, understated luxury, classic accessories / 送给他、低调奢华、经典配饰 |
+
+Required usage / 必须使用：
+
+- EN: Product imagery should come from `ysl官网素材/` when building recommendation cards, category tiles, and product detail modules.  
+  中文：推荐卡片、品类入口和商品详情模块中的商品图，应优先来自 `ysl官网素材/`。
+- EN: Product selection should stay within bags, accessories, ready-to-wear, shoes, and small leather goods.  
+  中文：商品选择应保持在包袋、配饰、成衣、鞋履和小皮具范围内。
+- EN: Men's and women's journeys should use the corresponding official asset folders to preserve product relevance.  
+  中文：男士和女士路径应使用对应的官网素材目录，确保商品相关性。
+- EN: Product names, visual hierarchy, spacing, product-card rhythm, header, and footer should align with Saint Laurent official site references.  
+  中文：商品名称、视觉层级、间距、商品卡片节奏、header 和 footer 应贴近 Saint Laurent 官网参考。
+
+Do not use / 不使用：
+
+- EN: Makeup, skincare, beauty gift sets, or fragrance-led gifting as the main flow.  
+  中文：不使用彩妆、护肤、美妆礼盒，香水也不作为主要送礼路径。
+- EN: Brunello Cucinelli product imagery, color palette, typography, or brand tone in the final YSL demo UI.  
+  中文：最终 YSL Demo UI 不使用 Brunello Cucinelli 的商品图片、色彩、字体或品牌调性。
+- EN: Generic stock images when an official YSL product asset is available.  
+  中文：如果已有 YSL 官网商品素材，不使用通用图库图片替代。
+
+Product asset mapping / 商品素材映射：
+
+| Demo Category / Demo 品类 | Recommended Asset Source / 推荐素材来源 |
+| --- | --- |
+| Bags / 包袋 | Men's travel bags and women's official homepage/category imagery / 男士旅行袋与女士官网首页、品类图 |
+| Accessories / 配饰 | Men's and women's accessories folders / 男士与女士配饰目录 |
+| Ready-to-wear / 成衣 | Women's ready-to-wear and men's Summer 26 collection / 女士成衣与男士 26 夏季系列 |
+| Shoes / 鞋履 | Men's and women's shoes folders / 男士与女士鞋履目录 |
+| Small leather goods / 小皮具 | Men's and women's small leather goods folders / 男士与女士小皮具目录 |
