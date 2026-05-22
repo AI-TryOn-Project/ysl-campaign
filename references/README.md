@@ -46,3 +46,21 @@ BC defines the interaction logic. YSL defines the brand expression.
 中文：
 
 BC 定义交互逻辑；YSL 定义品牌表达。
+
+## Product Page Assets / 商品页素材
+
+Additional Saint Laurent official product page assets are stored in:
+
+- `ysl官网素材/女/`
+- `ysl官网素材/男/`
+
+中文：
+
+更多 Saint Laurent 官网男女商品页素材已存放在：
+
+- `ysl官网素材/女/`
+- `ysl官网素材/男/`
+
+These assets should be used for product authenticity, category coverage, and YSL official commerce-page reference.
+
+中文：这些素材用于保证商品真实感、覆盖男女不同品类，并参考 YSL 官网电商页面结构。

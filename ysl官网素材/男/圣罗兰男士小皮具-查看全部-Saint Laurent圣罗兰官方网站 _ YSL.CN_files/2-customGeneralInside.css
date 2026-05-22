@@ -1,0 +1,187 @@
+#insideSurveyHolder .insideSubmitButton {
+  color: initial !important;
+}
+
+/* fix bug #32683 */
+#inside_liveChatTab:focus-visible {
+  outline: none;
+}
+
+/* balenciaga*/
+#inside_holder[chatsettingname*="bv"],
+#inside_holder[chatsettingname*="balenciaga"] {
+  z-index: 500 !important;
+}
+
+/* bv */
+#inside_holder[chatsettingname*="bv"]:not(.chatPaneOpen) {
+  z-index: 100 !important;
+}
+
+#inside_holder[chatsettingname*="balenciaga"].scrolled-to-bottom #inside_liveChatTab.usingChatHeader,
+#inside_holder[chatsettingname*="balenciaga"].scrolled-to-bottom .inside-notification {
+  transform: translateY(-45px) !important;
+}
+
+/* 38384
+body.inside-chat-tab-shown {
+  padding-bottom: 45px;
+}*/
+
+#insideChatFrame.slideInAnumation,
+#inside_tabs.slideInAnumation {
+  transition: transform 0.2s ease 0s, margin-right 0.78s !important;
+}
+
+#insideChatFrame.slideOutAnumation,
+#inside_tabs.slideOutAnumation {
+  transition: transform 0.2s ease 0s, margin-right 0.4s !important;
+}
+
+.chatPaneOpen #insideChatFrame {
+  margin-top: 0 !important;
+}
+
+.chatPaneOpen#inside_holder[chatsettingname*="bal"] {
+  z-index: 200000 !important;
+}
+
+#inside_holder[chatsettingname*="bal"] #inside_liveChatTab img.inside_chatTabImage {
+    box-shadow: 0 0 12px rgb(0 0 0 / 15%);
+    border-radius: 100px;
+}
+
+/* YSL */
+#inside_holder[pageurl*="://www.ysl"] #inside_tabs,
+#inside_holder[pageurl*="://www.ysl"] #insideChatFrame.notificationMode{
+  margin-top: calc(var(--offset-bottom) * -1) !important;
+}
+#inside_holder[pageurl*="://www.ysl"][device="1"],
+#inside_holder[pageurl*="://www.ysl"][device="3"]{
+  margin-left: calc(var(--offset-right) * -1) !important;
+}
+#inside_holder[pageurl*="://www.ysl"] {
+  z-index: 300 !important;
+}
+#inside_holder[pageurl*="://www.ysl"].mobile-device {
+  z-index: 200 !important;
+}
+
+/* Custom CSS for BV */
+#inside_holder.mobile-device #insideChatFrame.bv-chatpane:not(.notificationMode) {
+	border: 1px solid #000000 !important;
+}
+
+#inside_holder[pageurl*="bottegaveneta.cn"].chatPaneOpen {
+	z-index: 10 !important;
+}
+
+.u-stickycta #inside_holder[pageurl*="bottegaveneta.cn"]:not(.mobile-device) #insideChatFrame {
+  margin-top: -5rem !important;
+  transition: margin 300ms linear;
+}
+
+/* Adjust Chat Tab positioning to account for sticky UI elements */
+[class*="product-detail-sticky-bar_visible"] ~ #inside_holder[pagetitle*="Bottega Veneta"] #inside_liveChatTab,
+#inside_holder[pagetitle*="Bottega Veneta"]:has(~[class*="product-detail-sticky-bar_visible"]) #inside_liveChatTab {
+  bottom: 5rem;
+}
+
+[class*="product-detail-sticky-bar_visible"][class*="wechatQuickPay"] ~ #inside_holder[pagetitle*="Bottega Veneta"].mobile-device #inside_liveChatTab,
+#inside_holder[pagetitle*="Bottega Veneta"].mobile-device:has(~[class*="product-detail-sticky-bar_visible"][class*="wechatQuickPay"]) #inside_liveChatTab {
+  bottom: 200px;
+}
+
+[class*="product-detail-sticky-bar_visible"] ~ #inside_holder[pagetitle*="Bottega Veneta"]:not(.mobile-device) #insideChatFrame,
+#inside_holder[pagetitle*="Bottega Veneta"]:has(~[class*="product-detail-sticky-bar_visible"]):not(.mobile-device) #insideChatFrame {
+  margin-top: -5rem!important;
+}
+
+#inside_holder[pageurl*="alexandermcqueen"] #insideChatFrame.notificationMode {
+  transform: translateY(-50px) !important;
+}
+
+/* AMQ dynamic position */
+#inside_holder[pageurl*="alexandermcqueen.cn"] #inside_tabs {
+  transition: all 350ms ease-out 0s !important;
+}
+
+#inside_holder[pageurl*="alexandermcqueen.cn"]:not(.mobile-device) #insideChatFrame:not(.notransition) {
+  transition: transform 0.2s ease 0s, margin-top 250ms ease-in-out 0s, right 250ms ease-in-out 0s!important;
+}
+
+#inside_holder[pageurl*="alexandermcqueen.cn"].chatPaneOpen #insideChatFrame,
+#inside_holder[pageurl*="alexandermcqueen.cn"].notificationMode #insideChatFrame {
+  margin-top: calc(-1 * var(--inside-custom-bottom-offset, 0)) !important;
+} 
+
+html[style*="--product-detail-close-height"] #inside_holder[pageurl*="alexandermcqueen.cn"].chatPaneOpen:not(.mobile-device):not(.keyboardOpen) #insideChatFrame,
+html[style*="--product-detail-close-height"] #inside_holder[pageurl*="alexandermcqueen.cn"].notificationMode #insideChatFrame {
+  margin-top: calc(-1 * var(--product-detail-close-height, 0)) !important;
+}
+
+@media (min-width: 768px) {
+  .dialogOpen ~ #inside_holder[pageurl*="alexandermcqueen.cn"] #insideChatFrame {
+    right: calc(50% + 5px) !important;
+  }
+  .dialogOpen ~ #inside_holder[pageurl*="alexandermcqueen.cn"] #inside_tabs {
+    right: calc(50% + 12px) !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .dialogOpen ~ #inside_holder[pageurl*="alexandermcqueen.cn"] #insideChatFrame {
+    right: calc(8px + 32.7778%) !important;
+  }
+  .dialogOpen ~ #inside_holder[pageurl*="alexandermcqueen.cn"] #inside_tabs {
+    right: calc(12px + 32.7778%) !important;
+  }
+}
+
+
+/* AMQ - add white drop shadow to chat tab
+#inside_holder[pageurl*="alexandermcqueen"] #inside_liveChatTab img.inside_chatTabImage {
+   box-shadow: 0px 0px 10px 2px rgba(255, 255, 255, 0.45);
+   border-radius: 100px;
+}  */
+
+#inside_holder[pageurl*="bottegaveneta"].mobile-device #insideChatFrame.notificationMode {
+  transform: translateY(-100px) !important;
+}
+
+/* YSL & AMQ dynamic position */
+#inside_holder.dynamicPosition #inside_tabs {
+  transition: margin 350ms ease-out 0s !important;
+}
+
+#inside_holder.dynamicPosition:not(.mobile-device) #insideChatFrame:not(.notransition) {
+  transition: transform 0.2s ease 0s, margin-top 250ms ease-in-out 0s, right 250ms ease-in-out 0s!important;
+}
+
+#inside_holder.dynamicPosition.chatPaneOpen #insideChatFrame,
+#inside_holder.dynamicPosition.notificationMode #insideChatFrame {
+  margin-top: calc(-1 * var(--inside-custom-bottom-offset, 0)) !important;
+} 
+
+#inside_holder.dynamicPosition #insideChatFrame, #inside_holder.dynamicPosition #inside_tabs {
+  margin-right: var(--inside-side-offset) !important;
+}
+
+ #inside_holder.dynamicPosition #inside_tabs {
+  margin-bottom: calc(var(--inside-bottom-offset) + var(--inside-tab-bottom-offset)) !important;
+}
+
+@media (max-width: 1023px) {
+  #inside_holder[pageurl*="ysl.cn"], #inside_holder[pageurl*="ysl.cn"] > * {
+    z-index: 500!important;
+  }
+}
+
+#inside_holder[pageurl*="bottegaveneta"][device="1"] #insideChatFrame {
+  max-height: calc(100vh - 150px) !important;
+}
+
+/* BV - adjust drop shadow on chat tab */
+#inside_holder[pageurl*="bottegaveneta"] .insideDropShadow  {
+    filter: drop-shadow(4px 4px 20px rgba(0, 0, 0, 0.1)) !important;
+}
