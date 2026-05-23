@@ -143,6 +143,12 @@
         url("ysl官网素材/女/官网首页YSL官方线上精品店_files/SAINT_LAURENT_SUMMER26_TANGERINE-TEMPTATION_ECOM_HP_DESK.jpg") center / cover no-repeat;
       transform: scale(1.02);
       animation: heroZoom 16s ease-out forwards;
+      transition: filter .7s var(--ease), transform .9s var(--ease);
+    }
+
+    .hero.guide-open::before {
+      filter: brightness(.72) saturate(.88) contrast(1.06);
+      transform: scale(1.04);
     }
 
     @keyframes heroZoom {
@@ -161,6 +167,13 @@
       max-width: 1440px;
       margin: 0 auto;
       text-align: center;
+      transition: opacity .42s ease, transform .56s var(--ease);
+    }
+
+    .hero.guide-open .hero-inner {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-18px);
     }
 
     .hero-text { display: flex; flex-direction: column; align-items: center; }
@@ -198,78 +211,6 @@
       from { opacity: 0; transform: translateY(18px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
-    .hero-prompt {
-      --pill-h: 64px;
-      --pill-w: 460px;
-      position: relative;
-      width: var(--pill-w);
-      max-width: 100%;
-      height: var(--pill-h);
-      border: 0;
-      background: transparent;
-      color: #fff;
-      cursor: pointer;
-      padding: 0;
-    }
-
-    .hero-prompt-bg {
-      position: absolute;
-      inset: 0;
-      border-radius: 9999px;
-      background: rgba(0,0,0,.62);
-      border: 1px solid rgba(255,255,255,.22);
-      backdrop-filter: blur(20px);
-      clip-path: inset(0 calc(100% - var(--pill-h)) 0 0 round 9999px);
-      animation: pillWipe .8s cubic-bezier(.22,1,.36,1) .35s forwards;
-    }
-
-    @keyframes pillWipe {
-      to { clip-path: inset(0 round 9999px); }
-    }
-
-    .hero-prompt-content {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 0 24px;
-      height: 100%;
-      opacity: 0;
-      transform: translateX(-12px);
-      animation: pillContent .5s cubic-bezier(.22,1,.36,1) .9s forwards;
-    }
-
-    @keyframes pillContent {
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    .hero-prompt-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--gold);
-      box-shadow: 0 0 0 4px rgba(184,160,108,.18);
-      flex-shrink: 0;
-    }
-
-    .hero-prompt-text {
-      flex: 1;
-      text-align: left;
-      font-size: 13px;
-      letter-spacing: .08em;
-      color: rgba(255,255,255,.85);
-    }
-
-    .hero-prompt-arrow {
-      font-size: 16px;
-      color: rgba(255,255,255,.78);
-      transition: transform .35s cubic-bezier(.22,1,.36,1);
-    }
-
-    .hero-prompt:hover .hero-prompt-arrow { transform: translateX(6px); }
-    .hero-prompt:hover .hero-prompt-bg { border-color: rgba(184,160,108,.55); background: rgba(0,0,0,.74); }
 
     .hero-card h2 {
       font-size: 13px;
@@ -350,7 +291,7 @@
 
     .section-head {
       text-align: center;
-      margin-bottom: 38px;
+      margin-bottom: 48px;
     }
 
     .section-head .kicker {
@@ -364,50 +305,467 @@
     .dark .section-head .kicker { color: rgba(255,255,255,.5); }
 
     .section-head h2 {
-      font-size: 44px;
+      font-size: 56px;
       font-weight: 400;
-      letter-spacing: .26em;
+      letter-spacing: .22em;
       text-transform: uppercase;
       line-height: 1.05;
     }
 
     .section-head .section-sub {
-      margin-top: 14px;
-      font-size: 11px;
-      letter-spacing: .26em;
+      margin-top: 20px;
+      font-size: 13px;
+      letter-spacing: .18em;
       text-transform: uppercase;
       color: var(--muted-dark);
     }
 
     .dark .section-head .section-sub { color: rgba(255,255,255,.62); }
 
+    .bc-guide {
+      min-height: 100svh;
+      overflow: hidden;
+      background: #d9d0bd;
+      color: #171512;
+      padding: 112px 40px 104px;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .ysl-bc-suite {
+      background: #d9d0bd;
+    }
+
+    .bc-hero-panel,
+    .bc-immersive-panel,
+    .bc-prompt-panel {
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      background: #050505;
+    }
+
+    .bc-panel-bg,
+    .bc-panel-shade {
+      position: absolute;
+      inset: 0;
+    }
+
+    .bc-panel-bg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.045);
+      transition: transform .9s var(--ease), filter .9s var(--ease);
+    }
+
+    .bc-guide.in-view .bc-panel-bg {
+      transform: scale(1.015);
+      filter: blur(0);
+    }
+
+    .bc-panel-shade {
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.24), rgba(0,0,0,.42)),
+        radial-gradient(circle at 50% 50%, rgba(0,0,0,.06), rgba(0,0,0,.42));
+    }
+
+    .bc-hero-copy,
+    .bc-immersive-copy,
+    .bc-prompt-content {
+      position: relative;
+      z-index: 1;
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .bc-hero-panel .bc-guide-title,
+    .bc-immersive-panel .bc-guide-title,
+    .bc-prompt-panel .bc-guide-title {
+      color: #fff;
+    }
+
+    .bc-hero-panel .bc-guide-copy,
+    .bc-immersive-panel .bc-guide-copy,
+    .bc-prompt-panel .bc-guide-copy,
+    .bc-hero-panel .bc-guide-kicker {
+      color: rgba(255,255,255,.78);
+    }
+
+    .bc-sparkle {
+      margin-bottom: 28px;
+      font-size: 26px;
+      opacity: .78;
+    }
+
+    .bc-guide-inner {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .bc-guide-head {
+      text-align: center;
+      margin-bottom: 46px;
+    }
+
+    .bc-guide-head.align-left {
+      text-align: left;
+      max-width: 720px;
+    }
+
+    .bc-guide-kicker {
+      font-size: 11px;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,.46);
+      margin-bottom: 16px;
+    }
+
+    .bc-guide-title {
+      font-family: var(--display);
+      font-size: clamp(42px, 6vw, 76px);
+      line-height: 1.02;
+      font-weight: 400;
+      letter-spacing: .02em;
+      margin: 0;
+    }
+
+    .bc-guide-copy {
+      max-width: 620px;
+      margin: 20px auto 0;
+      color: rgba(0,0,0,.58);
+      font-size: 14px;
+      line-height: 1.8;
+      letter-spacing: .08em;
+    }
+
+    .bc-guide .bc-reveal,
+    .bc-card,
+    .bc-image-card,
+    .bc-mood-tile,
+    .bc-prompt-suggestions button {
+      opacity: 0;
+      transform: translateY(28px);
+      filter: blur(18px);
+      transition:
+        opacity .78s var(--ease),
+        transform .78s var(--ease),
+        filter .78s var(--ease);
+    }
+
+    .bc-guide.in-view .bc-reveal,
+    .bc-guide.in-view .bc-card,
+    .bc-guide.in-view .bc-image-card,
+    .bc-guide.in-view .bc-mood-tile,
+    .bc-guide.in-view .bc-prompt-suggestions button {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+
+    .bc-guide.in-view .bc-guide-title { transition-delay: .08s; }
+    .bc-guide.in-view .bc-guide-copy { transition-delay: .28s; }
+
+    /* ── Letter-by-letter blur reveal for section titles ──
+       Mirrors ysl-bc-style/LetterBlurReveal.tsx: each char fades from
+       blur(16px)+y18+opacity0 → 0, staggered 0.026s per index.
+       Overrides .bc-reveal container animation on title elements so
+       the per-char animation is the visible effect. */
+    .bc-guide .bc-guide-title.bc-reveal,
+    .hero h1.lr-host {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      transition: none;
+    }
+
+    .lr-char {
+      display: inline-block;
+      opacity: 0;
+      filter: blur(16px);
+      transform: translateY(18px);
+      transition:
+        opacity .64s cubic-bezier(.22,1,.36,1),
+        filter  .64s cubic-bezier(.22,1,.36,1),
+        transform .64s cubic-bezier(.22,1,.36,1);
+      transition-delay: calc(var(--i) * .026s);
+      will-change: transform;
+    }
+
+    .bc-guide.in-view .lr-char,
+    .hero.lr-ready .lr-char {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+
+    /* Placeholder text crossfade when chat scene changes */
+    .bar-placeholder.placeholder-fading { opacity: 0; }
+
+    .bc-carousel {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 2px 0 18px;
+      scrollbar-width: none;
+    }
+
+    .bc-carousel::-webkit-scrollbar { display: none; }
+
+    .bc-card {
+      min-width: 300px;
+      width: 300px;
+      scroll-snap-align: center;
+      border: 0;
+      background: transparent;
+      color: #171512;
+      text-align: left;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .bc-card:nth-child(2) { transition-delay: .06s; }
+    .bc-card:nth-child(3) { transition-delay: .12s; }
+    .bc-card:nth-child(4) { transition-delay: .18s; }
+    .bc-card:nth-child(5) { transition-delay: .24s; }
+
+    .bc-card-media {
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      background: rgba(255,255,255,.24);
+    }
+
+    .bc-card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .75s var(--ease);
+    }
+
+    .bc-card:hover .bc-card-media img { transform: scale(1.045); }
+
+    .bc-look-grid,
+    .bc-product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      transition: grid-template-columns .45s var(--ease);
+    }
+
+    /* Search-result count-aware layout for the look grid.
+       After a chatbot Enter, filterLookCards() sets .count-N here. */
+    .bc-look-grid.count-1 {
+      grid-template-columns: minmax(0, 720px);
+      justify-content: center;
+    }
+    .bc-look-grid.count-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .bc-look-grid.count-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .bc-look-grid.count-3,
+    .bc-look-grid.count-5,
+    .bc-look-grid.count-6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .bc-image-card.is-hidden { display: none; }
+
+    .bc-image-card {
+      position: relative;
+      border: 0;
+      background: transparent;
+      color: #171512;
+      padding: 0;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .bc-image-card:nth-child(2),
+    .bc-mood-tile:nth-child(2),
+    .bc-prompt-suggestions button:nth-child(2) { transition-delay: .06s; }
+    .bc-image-card:nth-child(3),
+    .bc-mood-tile:nth-child(3),
+    .bc-prompt-suggestions button:nth-child(3) { transition-delay: .12s; }
+    .bc-image-card:nth-child(4),
+    .bc-mood-tile:nth-child(4) { transition-delay: .18s; }
+    .bc-image-card:nth-child(5),
+    .bc-mood-tile:nth-child(5) { transition-delay: .24s; }
+    .bc-image-card:nth-child(6),
+    .bc-mood-tile:nth-child(6) { transition-delay: .3s; }
+
+    .bc-image-card > img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      background: rgba(255,255,255,.26);
+      transition: transform .7s var(--ease);
+    }
+
+    .bc-image-card:hover > img { transform: scale(1.035); }
+
+    .bc-image-card > span {
+      position: absolute;
+      margin: 12px 0 0 12px;
+      transform: translateY(calc(-100% - 12px));
+      border-radius: 999px;
+      background: rgba(0,0,0,.34);
+      color: rgba(255,255,255,.84);
+      backdrop-filter: blur(14px);
+      padding: 5px 9px;
+      font-size: 10px;
+      letter-spacing: .08em;
+    }
+
+    .bc-image-card.product {
+      position: relative;
+    }
+
+    .bc-image-card.product::after {
+      content: "♡";
+      position: absolute;
+      right: 14px;
+      bottom: 62px;
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(0,0,0,.34);
+      color: #fff;
+      backdrop-filter: blur(14px);
+      opacity: 0;
+      transition: opacity .25s ease;
+    }
+
+    .bc-image-card.product:hover::after { opacity: 1; }
+
+    .bc-mood-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .bc-mood-tile {
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      background: rgba(255,255,255,.24);
+    }
+
+    .bc-mood-tile.large {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    .bc-mood-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .75s var(--ease);
+    }
+
+    .bc-mood-tile:hover img { transform: scale(1.045); }
+
+    .bc-prompt-suggestions {
+      margin-top: 46px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .bc-prompt-suggestions button {
+      width: min(620px, calc(100vw - 48px));
+      min-height: 52px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.38);
+      color: rgba(255,255,255,.76);
+      backdrop-filter: blur(24px);
+      padding: 0 24px;
+      font-size: 13px;
+      letter-spacing: .05em;
+    }
+
+    .bc-card-cta {
+      margin-top: 14px;
+      padding: 0 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 15px;
+      color: rgba(0,0,0,.86);
+      overflow: hidden;
+    }
+
+    .bc-card-cta span {
+      display: grid;
+      height: 1.45em;
+      overflow: hidden;
+    }
+
+    .bc-card-cta strong {
+      font-weight: 400;
+      transition: transform .32s var(--ease);
+    }
+
+    .bc-card:hover .bc-card-cta strong,
+    .bc-image-card:hover .bc-card-cta strong {
+      transform: translateY(-100%);
+    }
+
+    .bc-card-arrow {
+      transition: transform .32s var(--ease);
+    }
+
+    .bc-card:hover .bc-card-arrow,
+    .bc-image-card:hover .bc-card-arrow { transform: translateX(4px); }
+
+    .bc-sku-row {
+      margin-top: 10px;
+      padding: 0 4px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .bc-sku-row span {
+      border-radius: 999px;
+      background: rgba(0,0,0,.06);
+      padding: 5px 8px;
+      font-size: 10px;
+      letter-spacing: .08em;
+      color: rgba(0,0,0,.5);
+      text-transform: uppercase;
+    }
+
     .results-shell {
       display: grid;
-      grid-template-columns: 280px minmax(0, 1fr);
-      gap: 28px;
+      grid-template-columns: 326px minmax(0, 1fr);
+      gap: 34px;
       align-items: start;
     }
 
     .intent-panel {
       position: sticky;
       top: 94px;
-      border-top: 1px solid #000;
-      padding-top: 18px;
+      border-top: 2px solid #1b1b1b;
+      padding-top: 24px;
     }
 
     .intent-panel h3 {
-      font-size: 11px;
-      letter-spacing: .16em;
+      font-size: 13px;
+      letter-spacing: .08em;
       text-transform: uppercase;
-      font-weight: 400;
-      margin-bottom: 14px;
+      font-weight: 600;
+      margin-bottom: 22px;
     }
 
     .intent-copy {
       color: var(--muted-dark);
-      font-size: 12px;
-      line-height: 1.8;
-      margin-bottom: 18px;
+      font-size: 15px;
+      line-height: 1.75;
+      letter-spacing: .04em;
+      margin-bottom: 26px;
     }
 
     .intent-chips {
@@ -419,9 +777,9 @@
 
     .intent-chip {
       border: 1px solid rgba(0,0,0,.24);
-      padding: 7px 9px;
-      font-size: 10px;
-      letter-spacing: .08em;
+      padding: 11px 14px;
+      font-size: 12px;
+      letter-spacing: .04em;
       text-transform: uppercase;
       color: rgba(0,0,0,.72);
       animation: chipIn .42s var(--ease) both;
@@ -447,6 +805,10 @@
       color: #000;
       background: transparent;
       border-color: rgba(0,0,0,.22);
+      min-height: 48px;
+      padding: 0 18px;
+      font-size: 12px;
+      letter-spacing: .04em;
     }
 
     .quick-row .chip-btn:hover {
@@ -458,7 +820,7 @@
     .product-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 2px;
+      gap: 4px;
     }
 
     .product-grid.revealing .product-card {
@@ -477,52 +839,67 @@
     .product-card {
       background: #fff;
       min-width: 0;
-      border: 1px solid rgba(0,0,0,.04);
+      border: 0;
     }
 
     .product-image {
       position: relative;
-      aspect-ratio: 3 / 4;
-      background: #f1eee8;
+      aspect-ratio: 1 / 1.32;
+      background: #f3f0eb;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-image::before {
+      content: "";
+      position: absolute;
+      inset: 14% 10%;
+      background: rgba(255,255,255,.72);
     }
 
     .product-image img {
+      position: relative;
+      z-index: 1;
       width: 100%;
       height: 100%;
       object-fit: contain;
-      padding: 22px;
+      padding: 50px 42px;
       transition: transform .55s var(--ease);
     }
 
     .product-card:hover .product-image img { transform: scale(1.035); }
 
     .product-meta {
-      min-height: 254px;
-      padding: 18px 16px 16px;
+      min-height: 246px;
+      padding: 24px 22px 20px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      border-top: 1px solid rgba(0,0,0,.06);
+      gap: 12px;
+      border-left: 1px solid rgba(0,0,0,.04);
+      border-right: 1px solid rgba(0,0,0,.04);
+      border-bottom: 1px solid rgba(0,0,0,.04);
     }
 
     .product-kicker {
-      font-size: 9px;
-      letter-spacing: .16em;
+      font-size: 12px;
+      letter-spacing: .06em;
       text-transform: uppercase;
       color: var(--muted-dark);
     }
 
     .product-name {
-      font-size: 13px;
-      font-weight: 400;
+      font-size: 18px;
+      font-weight: 600;
       line-height: 1.35;
-      min-height: 38px;
+      min-height: 50px;
       text-transform: uppercase;
     }
 
     .product-price {
-      font-size: 12px;
+      font-size: 17px;
+      font-weight: 600;
       color: #000;
     }
 
@@ -534,35 +911,36 @@
 
     .tag {
       border: 1px solid rgba(0,0,0,.14);
-      padding: 4px 6px;
-      font-size: 9px;
-      letter-spacing: .06em;
+      padding: 7px 9px;
+      font-size: 11px;
+      letter-spacing: .04em;
       text-transform: uppercase;
       color: rgba(0,0,0,.62);
     }
 
     .reason {
       color: rgba(0,0,0,.66);
-      font-size: 12px;
+      font-size: 14px;
       line-height: 1.7;
-      min-height: 62px;
+      min-height: 72px;
     }
 
     .card-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
+      flex-wrap: wrap;
       gap: 8px;
       margin-top: auto;
     }
 
     .card-actions button {
-      min-height: 36px;
+      min-height: 42px;
       border-radius: 0;
-      border: 1px solid #000;
+      border: 1px solid rgba(0,0,0,.42);
       background: transparent;
       color: #000;
-      font-size: 10px;
-      letter-spacing: .1em;
+      padding: 0 16px;
+      font-size: 12px;
+      letter-spacing: .05em;
       text-transform: uppercase;
     }
 
@@ -571,7 +949,7 @@
       color: #fff;
     }
 
-    .detail-link { grid-column: 1 / -1; border-color: rgba(0,0,0,.18) !important; }
+    .detail-link { border-color: rgba(0,0,0,.18) !important; }
 
     .style-grid {
       display: grid;
@@ -966,30 +1344,30 @@
     }
 
     .guide-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 86;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.78)),
-        url("ysl官网素材/女/官网首页YSL官方线上精品店_files/SLRD_GIFTING_ECOM_HP_DESK.jpg") center / cover no-repeat;
+      position: absolute;
+      z-index: 89;
+      left: 50%;
+      bottom: 112px;
+      width: min(780px, calc(100vw - 36px));
+      padding: 0;
+      background: transparent;
       opacity: 0;
       pointer-events: none;
-      transition: opacity .38s ease;
+      transform: translateX(-50%) translateY(18px);
+      transition: opacity .32s ease, transform .48s var(--ease);
     }
 
     .guide-overlay.open {
       opacity: 1;
       pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
     }
 
     .guide-panel {
-      width: min(680px, calc(100vw - 36px));
+      width: 100%;
       text-align: center;
-      transform: translateY(18px);
-      transition: transform .48s var(--ease);
+      transform: translateY(24px);
+      transition: transform .64s var(--ease);
     }
 
     .guide-overlay.open .guide-panel { transform: translateY(0); }
@@ -998,34 +1376,37 @@
       font-size: 10px;
       letter-spacing: .32em;
       text-transform: uppercase;
-      color: rgba(255,255,255,.5);
-      margin-bottom: 18px;
+      color: rgba(255,255,255,.74);
+      margin-bottom: 12px;
+      text-shadow: 0 1px 18px rgba(0,0,0,.55);
       opacity: 0;
-      transform: translateY(12px);
-      transition: opacity .5s ease .08s, transform .55s var(--ease) .08s;
+      transform: translateY(18px);
+      transition: opacity .58s ease .08s, transform .66s var(--ease) .08s;
     }
 
     .guide-panel h2 {
-      font-size: 66px;
+      font-size: 54px;
       line-height: 1;
       letter-spacing: .08em;
       font-weight: 400;
       text-transform: uppercase;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 24px rgba(0,0,0,.5);
       opacity: 0;
-      transform: translateY(16px);
-      transition: opacity .55s ease .14s, transform .6s var(--ease) .14s;
+      transform: translateY(22px);
+      transition: opacity .62s ease .15s, transform .72s var(--ease) .15s;
     }
 
     .guide-panel p {
-      color: rgba(255,255,255,.6);
+      color: rgba(255,255,255,.72);
       letter-spacing: .16em;
       text-transform: uppercase;
       font-size: 11px;
-      margin-bottom: 38px;
+      margin-bottom: 24px;
+      text-shadow: 0 1px 18px rgba(0,0,0,.55);
       opacity: 0;
-      transform: translateY(14px);
-      transition: opacity .55s ease .22s, transform .55s var(--ease) .22s;
+      transform: translateY(18px);
+      transition: opacity .6s ease .24s, transform .68s var(--ease) .24s;
     }
 
     .guide-overlay.open .guide-eyebrow,
@@ -1037,21 +1418,24 @@
 
     .guide-suggestions {
       display: grid;
-      gap: 12px;
+      gap: 14px;
       justify-items: center;
     }
 
     .guide-suggestion {
       --pill-h: 56px;
       position: relative;
-      width: min(520px, 100%);
-      height: var(--pill-h);
+      width: min(650px, 100%);
+      min-height: var(--pill-h);
       border: 0;
       background: transparent;
       color: #fff;
       text-align: left;
       cursor: pointer;
       padding: 0;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity .34s ease, transform .5s var(--ease);
     }
 
     .guide-suggestion::before {
@@ -1059,17 +1443,26 @@
       position: absolute;
       inset: 0;
       border-radius: 9999px;
-      background: rgba(0,0,0,.4);
+      background: rgba(0,0,0,.72);
       border: 1px solid rgba(255,255,255,.18);
       backdrop-filter: blur(22px);
       clip-path: inset(0 calc(100% - var(--pill-h)) 0 0 round 9999px);
-      transition: clip-path .667s cubic-bezier(.22,1,.36,1), border-color .3s ease, background .3s ease;
+      transition: clip-path .667s var(--ease), border-color .3s ease, background .3s ease, box-shadow .3s ease;
+    }
+
+    .guide-overlay.open .guide-suggestion {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .guide-overlay.open .guide-suggestion::before {
       clip-path: inset(0 round 9999px);
     }
 
+    .guide-overlay.open .guide-suggestion:nth-child(1) { transition-delay: .22s; }
+    .guide-overlay.open .guide-suggestion:nth-child(2) { transition-delay: .29s; }
+    .guide-overlay.open .guide-suggestion:nth-child(3) { transition-delay: .36s; }
+    .guide-overlay.open .guide-suggestion:nth-child(4) { transition-delay: .43s; }
     .guide-overlay.open .guide-suggestion:nth-child(1)::before { transition-delay: .25s; }
     .guide-overlay.open .guide-suggestion:nth-child(2)::before { transition-delay: .32s; }
     .guide-overlay.open .guide-suggestion:nth-child(3)::before { transition-delay: .39s; }
@@ -1081,6 +1474,7 @@
       display: flex;
       align-items: center;
       height: 100%;
+      min-height: var(--pill-h);
       padding: 0 28px;
       font-size: 13px;
       letter-spacing: .08em;
@@ -1101,158 +1495,122 @@
     .guide-overlay.open .guide-suggestion:nth-child(4) span { transition-delay: .91s; }
 
     .guide-suggestion:hover::before {
-      background: rgba(0,0,0,.58);
+      background: rgba(0,0,0,.68);
       border-color: rgba(184,160,108,.5);
+      box-shadow: inset 0 0 0 1px rgba(184,160,108,.16);
     }
 
     .guide-suggestion:hover span { color: #fff; }
 
+    /* chat-bar — visual spec mirrored from ysl-bc-style PromptBar.tsx
+       (rounded-[32px] / max-w-2xl / bg-black/35 / backdrop-blur-2xl / p-2 / shadow-2xl) */
     .chat-bar {
       position: fixed;
       left: 50%;
       bottom: 28px;
       z-index: 90;
-      width: min(780px, calc(100vw - 36px));
-      height: 62px;
+      width: min(672px, calc(100vw - 32px));
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      align-items: stretch;
       gap: 0;
-      background: rgba(0,0,0,.78);
-      border: 1px solid rgba(255,255,255,.2);
-      border-radius: 9999px;
-      padding: 0 8px;
-      backdrop-filter: blur(22px) saturate(140%);
-      box-shadow: 0 12px 48px rgba(0,0,0,.48);
-      transform: translateX(-50%);
-      clip-path: inset(0 calc(50% - 31px) 0 calc(50% - 31px) round 9999px);
-      animation: chatBarWipe .7s cubic-bezier(.22,1,.36,1) 1.1s forwards;
-      transition: border-color .3s ease, box-shadow .3s ease, transform .3s ease;
-    }
-
-    @keyframes chatBarWipe {
-      to { clip-path: inset(0 round 9999px); }
-    }
-
-    .rose-fab {
-      position: fixed;
-      left: 24px;
-      bottom: 28px;
-      z-index: 95;
-      width: 62px;
-      height: 62px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,.22);
-      background: radial-gradient(circle at 30% 30%, rgba(184,160,108,.32), rgba(0,0,0,.85) 70%);
-      backdrop-filter: blur(20px);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow:
-        0 14px 40px rgba(0,0,0,.45),
-        inset 0 0 0 1px rgba(184,160,108,.18);
-      cursor: pointer;
-      transition: transform .25s var(--ease), box-shadow .25s ease, border-color .25s ease;
-    }
-
-    .rose-fab::after {
-      content: "";
-      position: absolute;
-      inset: -6px;
-      border-radius: 50%;
-      border: 1px solid rgba(184,160,108,.34);
-      opacity: .8;
-      animation: rosePulse 2.6s ease-in-out infinite;
-      pointer-events: none;
-    }
-
-    @keyframes rosePulse {
-      0%, 100% { transform: scale(1); opacity: .55; }
-      50% { transform: scale(1.18); opacity: 0; }
-    }
-
-    .rose-fab:hover {
-      transform: translateY(-3px) scale(1.04);
-      border-color: rgba(184,160,108,.6);
-      box-shadow:
-        0 22px 56px rgba(0,0,0,.55),
-        0 0 28px rgba(184,160,108,.32),
-        inset 0 0 0 1px rgba(184,160,108,.36);
-    }
-
-    .rose-fab svg { width: 26px; height: 26px; }
-
-    .rose-fab .rose-label {
-      position: absolute;
-      left: calc(100% + 14px);
-      top: 50%;
-      transform: translateY(-50%);
-      white-space: nowrap;
-      font-size: 10px;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.86);
-      background: rgba(0,0,0,.72);
-      border: 1px solid rgba(255,255,255,.14);
-      padding: 8px 12px;
+      background: rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 32px;
+      padding: 8px;
+      backdrop-filter: blur(40px) saturate(130%);
+      -webkit-backdrop-filter: blur(40px) saturate(130%);
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,.5);
+      /* Blur-reveal entrance — opacity + y + blur,
+         matches framer-motion BlurReveal in ysl-bc-style */
       opacity: 0;
-      pointer-events: none;
-      transition: opacity .2s ease, transform .25s var(--ease);
+      transform: translateX(-50%) translateY(28px);
+      filter: blur(18px);
+      animation: chatBarRise .78s cubic-bezier(.22,1,.36,1) 1.1s forwards;
+      transition:
+        border-color .3s ease,
+        background .45s ease,
+        box-shadow .3s ease,
+        transform .3s ease;
     }
 
-    .rose-fab:hover .rose-label {
-      opacity: 1;
-      transform: translateY(-50%) translateX(2px);
+    @keyframes chatBarRise {
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+        filter: blur(0);
+      }
+    }
+
+    body.guide-active .chat-bar {
+      border-color: rgba(255,255,255,.28);
+      box-shadow:
+        0 18px 70px rgba(0,0,0,.32),
+        inset 0 0 0 1px rgba(255,255,255,.08);
     }
 
     .chat-bar:focus-within,
     .chat-bar.thinking {
-      border-color: rgba(184,160,108,.62);
+      border-color: rgba(255,255,255,.28);
       box-shadow:
-        0 14px 58px rgba(0,0,0,.52),
-        0 0 36px rgba(184,160,108,.18),
-        inset 0 0 0 1px rgba(184,160,108,.18);
+        0 18px 70px rgba(0,0,0,.32),
+        inset 0 0 0 1px rgba(255,255,255,.08);
       transform: translateX(-50%) translateY(-2px);
     }
 
-    .chat-bar:focus-within .send-action,
-    .chat-bar.thinking .send-action {
-      background: var(--gold);
-      color: #0c0608;
-      border-color: transparent;
+    .chat-eyebrow {
+      align-self: stretch;
+      min-height: 16px;
+      padding: 2px 16px 4px;
+      color: rgba(255,255,255,.55);
+      font-size: 11px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      /* eyebrow crossfade — matches framer-motion AnimatePresence mode="wait"
+         (blur 10px, y 8, opacity 0, duration .32) */
+      transition: opacity .32s ease, transform .32s cubic-bezier(.22,1,.36,1), filter .32s ease;
+    }
+
+    .chat-eyebrow.refresh,
+    .chat-input.refresh,
+    .chat-chips.refresh {
+      opacity: 0;
+      transform: translateY(8px);
+      filter: blur(10px);
+    }
+
+    .chat-main {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
     .chat-action {
       flex-shrink: 0;
-      width: 46px;
-      height: 46px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
-      background: rgba(255,255,255,.08);
+      background: rgba(255,255,255,.1);
       border: 0;
-      color: rgba(255,255,255,.72);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      color: rgba(255,255,255,.9);
+      display: grid;
+      place-items: center;
       transition: background .2s ease, color .2s ease, transform .18s ease;
     }
 
-    .chat-action:hover { background: rgba(255,255,255,.14); color: #fff; transform: scale(1.05); }
+    .chat-action:hover { background: rgba(255,255,255,.2); color: #fff; }
+    .chat-action svg { width: 22px; height: 22px; }
 
     .send-action {
-      border: 1px solid rgba(184,160,108,.38);
-      color: #d2bf8c;
-      background: rgba(184,160,108,.14);
+      color: rgba(255,255,255,.9);
+      background: rgba(255,255,255,.1);
     }
 
     .send-action:hover { background: #fff; color: #000; border-color: #fff; }
 
-    .bar-divider {
-      width: 1px;
-      height: 18px;
-      background: rgba(255,255,255,.16);
-      margin: 0 5px;
-      flex-shrink: 0;
-    }
+    /* ysl-bc-style PromptBar has no divider between + and input — hide */
+    .bar-divider { display: none; }
 
     .bar-input-wrap {
       position: relative;
@@ -1261,7 +1619,7 @@
       height: 100%;
       display: flex;
       align-items: center;
-      padding: 0 14px;
+      padding: 0 4px;
       overflow: hidden;
     }
 
@@ -1269,27 +1627,31 @@
       position: relative;
       z-index: 2;
       width: 100%;
+      height: 48px;
       border: 0;
       outline: 0;
       background: transparent;
       color: #fff;
       caret-color: #fff;
-      font-size: 14px;
-      letter-spacing: .04em;
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 0;
+      transition: opacity .32s ease, transform .32s cubic-bezier(.22,1,.36,1), filter .32s ease;
     }
 
     .chat-input::placeholder { color: transparent; }
 
     .bar-placeholder {
       position: absolute;
-      left: 14px;
-      right: 14px;
+      left: 4px;
+      right: 4px;
       top: 50%;
       transform: translateY(-50%);
       pointer-events: none;
-      color: rgba(255,255,255,.42);
-      font-size: 14px;
-      letter-spacing: .08em;
+      color: rgba(255,255,255,.55);
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 0;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -1315,6 +1677,55 @@
     .chat-bar.thinking .chat-input,
     .chat-bar.thinking .bar-placeholder { opacity: 0; }
 
+    .chat-chips {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 8px 8px 4px;
+      overflow: hidden;
+      transition: opacity .35s ease, transform .35s cubic-bezier(.22,1,.36,1), filter .35s ease;
+    }
+
+    .chat-chips button {
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255,255,255,.1);
+      color: rgba(255,255,255,.68);
+      padding: 6px 12px;
+      font-size: 12px;
+      letter-spacing: .02em;
+      transition: background .2s ease, color .2s ease;
+    }
+
+    .chat-chips button:hover {
+      background: rgba(255,255,255,.18);
+      color: #fff;
+    }
+
+    /* product-scene — mirrors ysl-bc-style max-w-4xl light variant
+       (border-stone-900/10 bg-white/82 text-stone-950) */
+    .chat-bar.product-scene {
+      width: min(896px, calc(100vw - 32px));
+      max-width: none;
+      background: rgba(255,255,255,.82);
+      border-color: rgba(28,25,23,.1);
+      color: #1c1917;
+    }
+
+    .chat-bar.product-scene .chat-eyebrow { color: rgba(0,0,0,.46); }
+    .chat-bar.product-scene .chat-input { color: #171512; caret-color: #171512; }
+    .chat-bar.product-scene .bar-placeholder { color: rgba(0,0,0,.42); }
+    .chat-bar.product-scene .chat-action {
+      background: #171512;
+      color: #fff;
+    }
+    .chat-bar.product-scene .bar-divider { background: rgba(0,0,0,.16); }
+    .chat-bar.product-scene .chat-chips button {
+      background: rgba(0,0,0,.06);
+      color: rgba(0,0,0,.7);
+    }
+
     @media (max-width: 1180px) {
       .hero-inner,
       .section-head,
@@ -1328,6 +1739,10 @@
       .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .category-grid, .style-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .intent-panel { position: static; }
+      .bc-card { min-width: 280px; width: 280px; }
+      .bc-look-grid,
+      .bc-product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .bc-mood-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     @media (max-width: 760px) {
@@ -1341,14 +1756,68 @@
       .desktop-only { display: none; }
       .wordmark { width: 132px; }
       .header-right { gap: 2px; }
-      .hero { padding: 104px 18px 34px; min-height: 94svh; }
+      .hero { padding: 104px 18px 126px; min-height: 94svh; }
       .hero-inner { gap: 28px; }
       .hero h1 { font-size: 46px; }
+      .bc-guide {
+        min-height: auto;
+        padding: 76px 18px 88px;
+      }
+      .bc-guide-head {
+        text-align: left;
+        margin-bottom: 32px;
+      }
+      .bc-guide-title { font-size: 38px; }
+      .bc-guide-copy {
+        margin-left: 0;
+        font-size: 13px;
+        letter-spacing: .05em;
+      }
+      .bc-card {
+        min-width: 238px;
+        width: 238px;
+      }
+      .bc-hero-panel,
+      .bc-immersive-panel,
+      .bc-prompt-panel {
+        min-height: 86svh;
+      }
+      .bc-look-grid,
+      .bc-product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px 8px;
+      }
+      .bc-mood-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .bc-mood-tile.large {
+        grid-column: span 2;
+      }
+      .bc-prompt-suggestions {
+        margin-top: 32px;
+      }
+      .guide-overlay { bottom: 94px; }
+      .guide-panel { width: 100%; }
       .section-head h2 { font-size: 30px; }
-      .guide-panel h2 { font-size: 42px; }
+      .section-head .section-sub {
+        font-size: 11px;
+        line-height: 1.8;
+        letter-spacing: .1em;
+      }
+      .guide-panel h2 { font-size: 34px; }
+      .guide-suggestion span {
+        padding: 0 20px;
+        font-size: 12px;
+        line-height: 1.45;
+      }
       .section { padding: 56px 18px; }
       .product-grid, .category-grid, .style-grid { grid-template-columns: 1fr; }
+      .product-image { aspect-ratio: 1 / 1.05; }
+      .product-image img { padding: 36px 30px; }
       .product-meta { min-height: auto; }
+      .product-name { min-height: auto; font-size: 16px; }
+      .reason { min-height: auto; }
       .detail-card { grid-template-columns: 1fr; }
       .detail-media { min-height: 330px; }
       .detail-media img { max-height: 300px; }
@@ -1356,11 +1825,19 @@
       .detail-actions { display: grid; }
       .footer-cols { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; }
-      .chat-bar { bottom: 18px; height: 58px; left: calc(50% + 38px); width: min(620px, calc(100vw - 116px)); }
-      .chat-action { width: 42px; height: 42px; }
-      .rose-fab { left: 16px; bottom: 16px; width: 54px; height: 54px; }
-      .rose-fab svg { width: 22px; height: 22px; }
-      .rose-fab .rose-label { display: none; }
+      .chat-bar {
+        bottom: 16px;
+        width: calc(100vw - 32px);
+        border-radius: 28px;
+        padding: 8px;
+      }
+      .chat-eyebrow { padding: 2px 12px 4px; font-size: 10px; }
+      .chat-main { gap: 10px; }
+      .chat-action { width: 44px; height: 44px; }
+      .chat-input,
+      .bar-placeholder { font-size: 15px; }
+      .chat-chips { padding: 6px 6px 2px; gap: 6px; }
+      .chat-chips button { padding: 5px 10px; font-size: 12px; }
     }
   </style>
 </head>
@@ -1429,42 +1906,229 @@
           <p class="eyebrow">中国七夕 / 2026</p>
           <h1>七夕礼赠</h1>
         </div>
-        <button class="hero-prompt" type="button" id="hero-open-guide" aria-label="打开圣罗兰 AI 礼赠官">
-          <span class="hero-prompt-bg"></span>
-          <span class="hero-prompt-content">
-            <span class="hero-prompt-dot" aria-hidden="true"></span>
-            <span class="hero-prompt-text">告诉我你的七夕送礼想法</span>
-            <span class="hero-prompt-arrow" aria-hidden="true">→</span>
-          </span>
-        </button>
+      </div>
+      <form class="chat-bar" id="chat-bar" aria-label="七夕导购输入">
+        <div class="chat-eyebrow" id="chat-eyebrow">七夕欢迎</div>
+        <div class="chat-main">
+          <button class="chat-action" id="chat-plus" type="button" aria-label="添加提示" aria-controls="guide-overlay" aria-expanded="false">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+              <path d="M12 5v14M5 12h14"></path>
+            </svg>
+          </button>
+          <div class="bar-divider"></div>
+          <div class="bar-input-wrap">
+            <input class="chat-input" id="chat-input" type="text" autocomplete="off" spellcheck="false" aria-label="描述你的七夕送礼需求">
+            <div class="bar-placeholder" id="bar-placeholder">今天想为谁挑选礼赠?</div>
+            <div class="chat-status">正在理解需求并生成推荐...</div>
+          </div>
+          <button class="chat-action send-action" type="submit" aria-label="发送">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 19V5"></path>
+              <path d="m5 12 7-7 7 7"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="chat-chips" id="chat-chips" aria-label="提示标签"></div>
+      </form>
+      <div class="guide-overlay" id="guide-overlay" aria-hidden="true">
+        <div class="guide-panel">
+          <p class="guide-eyebrow">圣罗兰 AI 礼赠官 · 中国七夕</p>
+          <h2>让灵感开始</h2>
+          <p>从一个七夕灵感开始</p>
+          <div class="guide-suggestions">
+            <button class="guide-suggestion" type="button" data-suggestion="我想给女友选一件七夕礼物，预算人民币 5,000 左右，风格经典极简。"><span>给她选一件经典极简的七夕礼物</span></button>
+            <button class="guide-suggestion" type="button" data-suggestion="推荐适合男友的七夕礼物，要黑色酷感，但不要太夸张。"><span>给他找黑色酷感但低调的礼物</span></button>
+            <button class="guide-suggestion" type="button" data-occasion="dinner"><span>为烛光晚餐搭配一组圣罗兰单品</span></button>
+            <button class="guide-suggestion" type="button" data-occasion="weekend"><span>挑一组适合周末短途的圣罗兰单品</span></button>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="section" id="recommendations">
-      <div class="section-inner">
-        <div class="section-head reveal">
-          <p class="kicker">AI 推荐</p>
-          <h2>七夕甄选</h2>
-          <p class="section-sub" id="result-summary">送给她 · 经典极简 · 3,000—8,000 RMB</p>
+    <div class="ysl-bc-suite" id="ysl-bc-style-sections" aria-label="圣罗兰 AI 精品体验">
+      <section class="bc-guide bc-hero-panel" aria-label="圣罗兰欢迎体验">
+        <img class="bc-panel-bg" src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_2160,w_3840/251209_BRUNELLO_BUCHAREST_COQUILLAGE_05_14575?_a=DATAiZAAZAA0" alt="">
+        <div class="bc-panel-shade"></div>
+        <div class="bc-hero-copy">
+          <h2 class="bc-guide-title bc-reveal">欢迎进入七夕礼赠</h2>
+          <p class="bc-guide-copy bc-reveal">沉浸于圣罗兰的利落廓形、黑金细节与七夕礼赠灵感。</p>
+          <p class="bc-guide-kicker bc-reveal">缓缓向下浏览</p>
         </div>
-        <div class="results-shell">
-          <aside class="intent-panel" aria-label="当前意图">
-            <h3>当前意图</h3>
-            <p class="intent-copy" id="intent-copy">送给她，中国七夕，经典极简，人民币 3,000 至 8,000。</p>
-            <div class="intent-chips" id="intent-chips"></div>
-            <h3>快速调整</h3>
-            <div class="quick-row">
-              <button class="chip-btn" type="button" data-refine="lower-budget">降低预算</button>
-              <button class="chip-btn" type="button" data-refine="more-iconic">更经典</button>
-              <button class="chip-btn" type="button" data-refine="bags-only">只看包袋</button>
-              <button class="chip-btn" type="button" data-refine="more-formal">更正式</button>
-              <button class="chip-btn" type="button" data-refine="more-black">更酷感</button>
-            </div>
-          </aside>
-          <div class="product-grid revealing" id="product-grid" aria-live="polite"></div>
+      </section>
+
+      <section class="bc-guide" id="boutique-guide" aria-label="圣罗兰七夕精品入口">
+        <div class="bc-guide-inner">
+          <div class="bc-guide-head">
+            <p class="bc-guide-kicker bc-reveal">精品入口</p>
+            <h2 class="bc-guide-title bc-reveal">选择你的七夕入口</h2>
+            <p class="bc-guide-copy bc-reveal">按礼赠对象、品类与场景进入圣罗兰七夕甄选，继续由 AI 礼赠官为你收窄选择。</p>
+          </div>
+          <div class="bc-carousel" aria-label="七夕精品入口">
+            <button class="bc-card" type="button" data-category="bags">
+              <div class="bc-card-media">
+                <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_700,w_560/251209_BRUNELLO_BUCHAREST_ACQUA_07_10566?_a=DATAiZAAZAA0" alt="女士">
+              </div>
+              <div class="bc-card-cta">
+                <span><strong>包袋礼赠</strong><strong>探索包袋</strong></span>
+                <span class="bc-card-arrow" aria-hidden="true">›</span>
+              </div>
+              <div class="bc-sku-row">
+                <span>LOULOU</span>
+                <span>CASSANDRE</span>
+              </div>
+            </button>
+            <button class="bc-card" type="button" data-category="accessories">
+              <div class="bc-card-media">
+                <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_700,w_560/251209_BRUNELLO_BUCHAREST_ACQUA_04_9355?_a=DATAiZAAZAA0" alt="男士">
+              </div>
+              <div class="bc-card-cta">
+                <span><strong>配饰细节</strong><strong>探索配饰</strong></span>
+                <span class="bc-card-arrow" aria-hidden="true">›</span>
+              </div>
+              <div class="bc-sku-row">
+                <span>腰带</span>
+                <span>小皮具</span>
+              </div>
+            </button>
+            <button class="bc-card" type="button" data-category="ready-to-wear">
+              <div class="bc-card-media">
+                <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_700,w_560/BC_EYEWEART_PE26_CAMPAIGN_SHOT_26_6136?_a=DATAiZAAZAA0" alt="眼镜">
+              </div>
+              <div class="bc-card-cta">
+                <span><strong>剪裁成衣</strong><strong>探索成衣</strong></span>
+                <span class="bc-card-arrow" aria-hidden="true">›</span>
+              </div>
+              <div class="bc-sku-row">
+                <span>晚餐</span>
+                <span>纪念日</span>
+              </div>
+            </button>
+            <button class="bc-card" type="button" data-category="shoes">
+              <div class="bc-card-media">
+                <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_700,w_560/GRUPPONE_PRIMAESECONDAUSCITA_H4?_a=DATAiZAAZAA0" alt="童装">
+              </div>
+              <div class="bc-card-cta">
+                <span><strong>鞋履收尾</strong><strong>探索鞋履</strong></span>
+                <span class="bc-card-arrow" aria-hidden="true">›</span>
+              </div>
+              <div class="bc-sku-row">
+                <span>高跟鞋</span>
+                <span>乐福鞋</span>
+              </div>
+            </button>
+            <button class="bc-card" type="button" data-occasion="weekend">
+              <div class="bc-card-media">
+                <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_700,w_560/BcSS260125?_a=DATAiZAAZAA0" alt="生活方式">
+              </div>
+              <div class="bc-card-cta">
+                <span><strong>周末短途</strong><strong>探索场景</strong></span>
+                <span class="bc-card-arrow" aria-hidden="true">›</span>
+              </div>
+              <div class="bc-sku-row">
+                <span>旅行</span>
+                <span>城市夜晚</span>
+              </div>
+            </button>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section class="bc-guide bc-look-section" id="look-results" aria-label="圣罗兰完整造型">
+        <div class="bc-guide-inner">
+          <div class="bc-guide-head align-left">
+            <h2 class="bc-guide-title bc-reveal">完整造型</h2>
+            <p class="bc-guide-copy bc-reveal">以包袋、鞋履、配饰与剪裁成衣组合七夕约会场景。</p>
+          </div>
+          <div class="bc-look-grid">
+            <button class="bc-image-card" type="button" data-category="bags">
+              <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261WOUTFITCS20_E?_a=DATAiZAAZAA0" alt="查看造型">
+              <div class="bc-card-cta"><span><strong>迷你链条包</strong><strong>查看单品</strong></span><span class="bc-card-arrow">›</span></div>
+            </button>
+            <button class="bc-image-card" type="button" data-category="shoes">
+              <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261WOUTFITCS3_E?_a=DATAiZAAZAA0" alt="查看造型">
+              <div class="bc-card-cta"><span><strong>高跟凉鞋</strong><strong>查看单品</strong></span><span class="bc-card-arrow">›</span></div>
+            </button>
+            <button class="bc-image-card" type="button" data-category="accessories">
+              <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261WOUTFITSPORTCLUB03_E?_a=DATAiZAAZAA0" alt="查看造型">
+              <div class="bc-card-cta"><span><strong>LA 66 腰带</strong><strong>查看单品</strong></span><span class="bc-card-arrow">›</span></div>
+            </button>
+            <button class="bc-image-card" type="button" data-category="ready-to-wear">
+              <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261WOUTFITCS18_E?_a=DATAiZAAZAA0" alt="查看造型">
+              <div class="bc-card-cta"><span><strong>剪裁夹克</strong><strong>查看单品</strong></span><span class="bc-card-arrow">›</span></div>
+            </button>
+            <button class="bc-image-card" type="button" data-occasion="weekend">
+              <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261WOUTFITCS4_E?_a=DATAiZAAZAA0" alt="查看造型">
+              <div class="bc-card-cta"><span><strong>CITY 背包</strong><strong>查看单品</strong></span><span class="bc-card-arrow">›</span></div>
+            </button>
+            <button class="bc-image-card" type="button" data-category="bags">
+              <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261WOUTFITCS76_E?_a=DATAiZAAZAA0" alt="查看造型">
+              <div class="bc-card-cta"><span><strong>小皮具礼赠</strong><strong>查看单品</strong></span><span class="bc-card-arrow">›</span></div>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="bc-guide bc-immersive-panel" aria-label="圣罗兰风格宣言">
+        <img class="bc-panel-bg" src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_2160,w_3840/250630_14_448_yy3e53?_a=DATAiZAAZAA0" alt="">
+        <div class="bc-panel-shade"></div>
+        <div class="bc-immersive-copy">
+          <div class="bc-sparkle" aria-hidden="true">✦</div>
+          <h2 class="bc-guide-title bc-reveal">锋利廓形、黑色光泽与金色标志，构成七夕夜晚的圣罗兰语言。</h2>
+        </div>
+      </section>
+
+      <section class="bc-guide bc-mood-section" aria-label="圣罗兰心情板">
+        <div class="bc-guide-inner">
+          <div class="bc-guide-head">
+            <p class="bc-guide-kicker bc-reveal">视觉记忆</p>
+            <h2 class="bc-guide-title bc-reveal">心情板</h2>
+          </div>
+          <div class="bc-mood-grid">
+            <div class="bc-mood-tile large"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261WOUTFITSPRING18S_E?_a=DATAiZAAZAA0" alt="查看造型"></div>
+            <div class="bc-mood-tile"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261MH5307547C600_F?_a=DATAiZAAZAA0" alt="缎面 monili 西装"></div>
+            <div class="bc-mood-tile"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261MF9407500C8909_F?_a=DATAiZAAZAA0" alt="闪片绣花西装"></div>
+            <div class="bc-mood-tile large"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261WOUTFITCS367_E?_a=DATAiZAAZAA0" alt="查看造型"></div>
+            <div class="bc-mood-tile"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261M0CBR7593C3999_F?_a=DATAiZAAZAA0" alt="网纱绣花西装"></div>
+            <div class="bc-mood-tile"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261MD4557BTCC001_F?_a=DATAiZAAZAA0" alt="羊绒西装"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bc-guide bc-product-selection" aria-label="圣罗兰单品甄选">
+        <div class="bc-guide-inner">
+          <div class="bc-guide-head">
+            <h2 class="bc-guide-title bc-reveal">七夕单品甄选</h2>
+            <p class="bc-guide-copy bc-reveal">以 SKU 级入口继续收藏、比较与加入购物袋。</p>
+          </div>
+          <div class="bc-product-grid">
+            <button class="bc-image-card product" type="button" data-category="bags"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261MH5307547C600_F?_a=DATAiZAAZAA0" alt="缎面 monili 西装"><div class="bc-card-cta"><span><strong>缎面 monili 西装</strong><strong>查看单品</strong></span><span class="bc-card-arrow">›</span></div></button>
+            <button class="bc-image-card product" type="button" data-category="bags"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261MF9407500C8909_F?_a=DATAiZAAZAA0" alt="闪片绣花西装"><div class="bc-card-cta"><span><strong>闪片绣花西装</strong><strong>查看单品</strong></span><span class="bc-card-arrow">›</span></div></button>
+            <button class="bc-image-card product" type="button" data-category="accessories"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261M0CBR7593C3999_F?_a=DATAiZAAZAA0" alt="网纱绣花西装"><div class="bc-card-cta"><span><strong>网纱绣花西装</strong><strong>查看单品</strong></span><span class="bc-card-arrow">›</span></div></button>
+            <button class="bc-image-card product" type="button" data-category="shoes"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261MD4557BTCC001_F?_a=DATAiZAAZAA0" alt="羊绒西装"><div class="bc-card-cta"><span><strong>羊绒西装</strong><strong>查看单品</strong></span><span class="bc-card-arrow">›</span></div></button>
+            <button class="bc-image-card product" type="button" data-category="ready-to-wear"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261M019T7793CIX07_F?_a=DATAiZAAZAA0" alt="条纹针织西装"><div class="bc-card-cta"><span><strong>条纹针织西装</strong><strong>查看单品</strong></span><span class="bc-card-arrow">›</span></div></button>
+            <button class="bc-image-card product" type="button" data-category="shoes"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261MB1177167C1177_F?_a=DATAiZAAZAA0" alt="高定斜纹西装"><div class="bc-card-cta"><span><strong>高定斜纹西装</strong><strong>查看单品</strong></span><span class="bc-card-arrow">›</span></div></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="bc-guide bc-prompt-panel" aria-label="圣罗兰灵感提示">
+        <img class="bc-panel-bg" src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_2160,w_3840/251209_BRUNELLO_BUCHAREST_COQUILLAGE_05_14575?_a=DATAiZAAZAA0" alt="">
+        <div class="bc-panel-shade"></div>
+        <div class="bc-prompt-content">
+          <h2 class="bc-guide-title bc-reveal">让灵感开始</h2>
+          <p class="bc-guide-copy bc-reveal">选择一个建议，或直接在底部 AI 礼赠官输入你的七夕需求。</p>
+          <div class="bc-prompt-suggestions">
+            <button type="button" data-suggestion="给她选一件经典极简的七夕礼物，预算人民币 5,000 左右。">给她选一件经典极简的七夕礼物</button>
+            <button type="button" data-suggestion="推荐适合男友的黑色酷感礼物，不要太夸张。">给他找黑色酷感但低调的礼物</button>
+            <button type="button" data-occasion="dinner">为烛光晚餐搭配一组圣罗兰单品</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- "七夕甄选" recommendations section removed per design feedback. -->
+    <!-- Its JS hooks (renderIntent / renderProducts / revealGrid / scrollToResults)
+         are null-guarded below so chat submission still completes silently. -->
 
     <section class="section dark" id="style-search">
       <div class="section-inner">
@@ -1609,49 +2273,6 @@
       <span>沪公网安备 31010602005654 号</span>
     </div>
   </footer>
-
-  <div class="guide-overlay" id="guide-overlay" aria-hidden="true">
-    <div class="guide-panel">
-      <p class="guide-eyebrow">圣罗兰 AI 礼赠官 · 中国七夕</p>
-      <h2>让灵感开始</h2>
-      <p>从一个七夕灵感开始</p>
-      <div class="guide-suggestions">
-        <button class="guide-suggestion" type="button" data-suggestion="我想给女友选一件七夕礼物，预算人民币 5,000 左右，风格经典极简。"><span>给她选一件经典极简的七夕礼物</span></button>
-        <button class="guide-suggestion" type="button" data-suggestion="推荐适合男友的七夕礼物，要黑色酷感，但不要太夸张。"><span>给他找黑色酷感但低调的礼物</span></button>
-        <button class="guide-suggestion" type="button" data-occasion="dinner"><span>为烛光晚餐搭配一组圣罗兰单品</span></button>
-        <button class="guide-suggestion" type="button" data-occasion="weekend"><span>挑一组适合周末短途的圣罗兰单品</span></button>
-      </div>
-    </div>
-  </div>
-
-  <button class="rose-fab" id="rose-fab" type="button" aria-label="打开圣罗兰 AI 礼赠官">
-    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M16 22c-3 0-5.4-2.2-5.4-5 0-2 1.3-3.6 3.1-4.4-.4-.6-.6-1.3-.6-2 0-1.9 1.5-3.4 3.4-3.4S20 8.6 20 10.6c0 .7-.2 1.4-.6 2 1.8.8 3.1 2.4 3.1 4.4 0 2.8-2.4 5-5.4 5h-1Z"></path>
-      <path d="M16 22v4M14 26h4"></path>
-      <path d="M13.4 14.8c.4 1 1.4 1.7 2.6 1.7s2.2-.7 2.6-1.7"></path>
-    </svg>
-    <span class="rose-label">圣罗兰 AI 礼赠官</span>
-  </button>
-
-  <form class="chat-bar" id="chat-bar" aria-label="七夕导购输入">
-    <button class="chat-action" id="chat-plus" type="button" aria-label="打开导购建议">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-        <path d="M12 5v14M5 12h14"></path>
-      </svg>
-    </button>
-    <div class="bar-divider"></div>
-    <div class="bar-input-wrap">
-      <input class="chat-input" id="chat-input" type="text" autocomplete="off" spellcheck="false" aria-label="描述你的七夕送礼需求">
-      <div class="bar-placeholder" id="bar-placeholder">描述你的七夕送礼需求，例如：给女友，预算人民币 5,000，经典极简</div>
-      <div class="chat-status">正在理解需求并生成推荐...</div>
-    </div>
-    <button class="chat-action send-action" type="submit" aria-label="发送">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 19V5"></path>
-        <path d="m5 12 7-7 7 7"></path>
-      </svg>
-    </button>
-  </form>
 
   <div class="toast" id="toast">已加入</div>
 
@@ -1809,6 +2430,16 @@
       var wishlist = [];
       var bag = [];
       var activeProduct = null;
+      var activePromptIndex = 0;
+      var promptScenes = [
+        { eyebrow: "七夕欢迎",   value: "今天想为谁挑选礼赠?",                chips: ["送给她", "送给他", "犒赏自己"] },
+        { eyebrow: "精品入口",   value: "想看女士还是男士的七夕系列?",        chips: ["女士", "男士", "2026 秋冬"] },
+        { eyebrow: "完整造型",   value: "为约会场景搭配一套整体造型",          chips: ["晚宴", "都市夜", "周末"] },
+        { eyebrow: "风格氛围",   value: "想要温柔晚宴感还是利落都市感?",      chips: ["经典极简", "黑色酷感", "利落优雅"] },
+        { eyebrow: "心情板",     value: "围绕这种轮廓继续探索",                chips: ["羊绒", "晚宴", "光泽感"] },
+        { eyebrow: "单品甄选",   value: "对比心仪单品并加入收藏",              chips: ["手袋", "鞋履", "配饰"] },
+        { eyebrow: "灵感提示",   value: "为我生成专属购物路径",                chips: ["夏夜晚宴", "柔和色调", "天然面料"] }
+      ];
 
       var styleLabels = {
         "classic-minimal": "经典极简",
@@ -1897,21 +2528,26 @@
       }
 
       function renderIntent() {
-        var chips = currentChips();
+        // Recommendations section removed — bail if its DOM nodes are gone.
         var intentCopy = document.getElementById("intent-copy");
+        if (!intentCopy) return;
+        var chips = currentChips();
         intentCopy.classList.add("refresh");
         window.setTimeout(function () {
           intentCopy.textContent = chips.join("，") + "。";
           intentCopy.classList.remove("refresh");
         }, 140);
-        document.getElementById("result-summary").textContent = "已为你锁定：" + chips.join("，") + "。以下单品围绕风格、预算与七夕场景甄选。";
-        document.getElementById("intent-chips").innerHTML = chips.map(function (chip) {
+        var summary = document.getElementById("result-summary");
+        if (summary) summary.textContent = "已为你锁定：" + chips.join("，") + "。以下单品围绕风格、预算与七夕场景甄选。";
+        var intentChipsEl = document.getElementById("intent-chips");
+        if (intentChipsEl) intentChipsEl.innerHTML = chips.map(function (chip) {
           return '<span class="intent-chip">' + chip + '</span>';
         }).join("");
       }
 
       function revealGrid() {
         var grid = document.getElementById("product-grid");
+        if (!grid) return;
         grid.classList.remove("revealing");
         void grid.offsetWidth;
         grid.classList.add("revealing");
@@ -1919,6 +2555,7 @@
 
       function renderProducts() {
         var grid = document.getElementById("product-grid");
+        if (!grid) return;
         grid.innerHTML = getRecommendations().map(function (product) {
           var tags = product.tags.filter(function (tag) {
             return tag === state.style || tag === state.occasion || tag.indexOf("gift-for") === 0 || tag === "budget";
@@ -1947,6 +2584,40 @@
       function renderAll() {
         renderIntent();
         renderProducts();
+        filterLookCards();
+      }
+
+      // Maps Chinese state.category labels to the data-category attributes on .bc-image-card
+      var categoryKeyMap = { "包袋": "bags", "鞋履": "shoes", "配饰": "accessories", "成衣": "ready-to-wear" };
+
+      function filterLookCards() {
+        var section = document.getElementById("look-results");
+        if (!section) return;
+        var grid = section.querySelector(".bc-look-grid");
+        if (!grid) return;
+        var cards = Array.prototype.slice.call(grid.querySelectorAll(".bc-image-card"));
+        var wantedCat = categoryKeyMap[state.category];
+        var wantedOcc = state.occasion;
+        var visible = 0;
+        cards.forEach(function (card) {
+          var cat = card.dataset.category;
+          var occ = card.dataset.occasion;
+          // If user narrowed to a specific category, match only that.
+          // Otherwise match by occasion if the card has one, else keep visible.
+          var match = wantedCat
+            ? (cat === wantedCat)
+            : (wantedOcc && occ ? occ === wantedOcc : true);
+          card.classList.toggle("is-hidden", !match);
+          if (match) visible++;
+        });
+        // Empty result → relax filter so the grid is never blank
+        if (visible === 0) {
+          cards.forEach(function (card) { card.classList.remove("is-hidden"); });
+          visible = cards.length;
+        }
+        // Reset count-* classes then apply current count
+        for (var i = 1; i <= 6; i++) grid.classList.remove("count-" + i);
+        grid.classList.add("count-" + Math.min(visible, 6));
       }
 
       function findProduct(id) {
@@ -2035,7 +2706,9 @@
       }
 
       function scrollToResults() {
-        document.getElementById("recommendations").scrollIntoView({ behavior: "smooth", block: "start" });
+        // After a search, jump to the look-results section (complete-look grid)
+        var section = document.getElementById("look-results");
+        if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
       }
 
       function submitPrompt(text) {
@@ -2052,16 +2725,40 @@
         }, 520);
       }
 
+      function setGuideTriggers(open) {
+        ["chat-plus"].forEach(function (id) {
+          var trigger = document.getElementById(id);
+          if (trigger) trigger.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+      }
+
+      function isHeroGuideAvailable() {
+        var rect = document.getElementById("gift-finder").getBoundingClientRect();
+        var activationLine = window.innerHeight * 0.58;
+        return rect.top <= activationLine && rect.bottom >= activationLine;
+      }
+
       function openGuide() {
+        if (!isHeroGuideAvailable()) {
+          closeGuide();
+          return;
+        }
         var overlay = document.getElementById("guide-overlay");
+        var hero = document.getElementById("gift-finder");
+        document.body.classList.add("guide-active");
+        hero.classList.add("guide-open");
         overlay.classList.add("open");
         overlay.setAttribute("aria-hidden", "false");
+        setGuideTriggers(true);
       }
 
       function closeGuide() {
         var overlay = document.getElementById("guide-overlay");
+        document.body.classList.remove("guide-active");
+        document.getElementById("gift-finder").classList.remove("guide-open");
         overlay.classList.remove("open");
         overlay.setAttribute("aria-hidden", "true");
+        setGuideTriggers(false);
       }
 
       function updatePlaceholder() {
@@ -2074,20 +2771,24 @@
       });
 
       document.getElementById("chat-input").addEventListener("input", updatePlaceholder);
-      document.getElementById("chat-plus").addEventListener("click", openGuide);
-      document.getElementById("hero-open-guide").addEventListener("click", openGuide);
-      document.getElementById("rose-fab").addEventListener("click", openGuide);
+      document.getElementById("chat-bar").addEventListener("click", function (event) {
+        if (event.target.closest(".send-action") || event.target.closest("#chat-plus")) return;
+        openGuide();
+      });
+      document.getElementById("chat-plus").addEventListener("click", function () {
+        document.getElementById("chat-input").focus();
+      });
 
       if (/[?&]open=guide/.test(window.location.search) || window.location.hash === "#gift-finder") {
         window.setTimeout(openGuide, 320);
       }
       document.getElementById("header-search").addEventListener("click", function () {
         document.getElementById("chat-input").focus();
+        openGuide();
       });
-
-      document.getElementById("guide-overlay").addEventListener("click", function (event) {
-        if (event.target.id === "guide-overlay") closeGuide();
-      });
+      window.addEventListener("scroll", function () {
+        if (!isHeroGuideAvailable()) closeGuide();
+      }, { passive: true });
 
       document.addEventListener("click", function (event) {
         var target = event.target.closest("button");
@@ -2196,6 +2897,94 @@
       renderAll();
       updatePlaceholder();
 
+      // ── Letter-by-letter blur reveal (mirrors ysl-bc-style LetterBlurReveal) ──
+      (function () {
+        function splitToChars(el) {
+          if (!el || el.dataset.lrSplit) return;
+          el.dataset.lrSplit = "1";
+          var text = el.textContent;
+          el.textContent = "";
+          var idx = 0;
+          text.split(/(\s+)/).forEach(function (part) {
+            if (/^\s+$/.test(part)) {
+              el.appendChild(document.createTextNode(part));
+              return;
+            }
+            Array.from(part).forEach(function (ch) {
+              var span = document.createElement("span");
+              span.className = "lr-char";
+              span.style.setProperty("--i", idx++);
+              span.setAttribute("aria-hidden", "true");
+              span.textContent = ch;
+              el.appendChild(span);
+            });
+          });
+        }
+        document.querySelectorAll(".bc-guide-title, .hero h1").forEach(splitToChars);
+        var heroH1 = document.querySelector(".hero h1");
+        if (heroH1) {
+          heroH1.classList.add("lr-host");
+          var hero = heroH1.closest(".hero");
+          if (hero) requestAnimationFrame(function () { hero.classList.add("lr-ready"); });
+        }
+      })();
+
+      // ── Per-section chatbot scene (eyebrow + placeholder change on scroll) ──
+      (function () {
+        if (!("IntersectionObserver" in window)) return;
+        var sceneSelectors = [
+          { sel: "#gift-finder",         idx: 0 },
+          { sel: ".bc-hero-panel",       idx: 0 },
+          { sel: "#boutique-guide",      idx: 1 },
+          { sel: ".bc-look-section",     idx: 2 },
+          { sel: ".bc-immersive-panel",  idx: 3 },
+          { sel: ".bc-mood-section",     idx: 4 },
+          { sel: ".bc-product-selection",idx: 5 },
+          { sel: ".bc-prompt-panel",     idx: 6 }
+        ];
+        var nodes = sceneSelectors
+          .map(function (s) { return { el: document.querySelector(s.sel), idx: s.idx }; })
+          .filter(function (s) { return s.el; });
+        if (!nodes.length) return;
+
+        var ratios = new Map();
+        var currentIdx = -1;
+
+        function applyScene(idx) {
+          if (idx === currentIdx) return;
+          var scene = promptScenes[idx];
+          if (!scene) return;
+          currentIdx = idx;
+          var eyebrow = document.getElementById("chat-eyebrow");
+          var placeholder = document.getElementById("bar-placeholder");
+          var input = document.getElementById("chat-input");
+          if (!eyebrow || !placeholder) return;
+          // eyebrow: use the existing .refresh class (blur+y+opacity, .32s)
+          eyebrow.classList.add("refresh");
+          // placeholder: opacity-only fade (avoids transform conflict with translateY(-50%))
+          placeholder.classList.add("placeholder-fading");
+          window.setTimeout(function () {
+            eyebrow.textContent = scene.eyebrow;
+            placeholder.textContent = scene.value;
+            if (input) input.setAttribute("placeholder", scene.value);
+            eyebrow.classList.remove("refresh");
+            placeholder.classList.remove("placeholder-fading");
+          }, 220);
+        }
+
+        var obs = new IntersectionObserver(function (changes) {
+          changes.forEach(function (c) { ratios.set(c.target, c.intersectionRatio); });
+          var bestIdx = -1, bestRatio = 0;
+          nodes.forEach(function (s) {
+            var r = ratios.get(s.el) || 0;
+            if (r > bestRatio) { bestRatio = r; bestIdx = s.idx; }
+          });
+          if (bestRatio >= 0.35 && bestIdx !== -1) applyScene(bestIdx);
+        }, { threshold: [0, 0.35, 0.6, 0.9] });
+
+        nodes.forEach(function (s) { obs.observe(s.el); });
+      })();
+
       if ("IntersectionObserver" in window) {
         var revealObserver = new IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
@@ -2206,11 +2995,11 @@
           });
         }, { threshold: 0.18, rootMargin: "0px 0px -40px 0px" });
 
-        document.querySelectorAll(".reveal, .style-tile, .occasion-card").forEach(function (el) {
+        document.querySelectorAll(".reveal, .style-tile, .occasion-card, .bc-guide").forEach(function (el) {
           revealObserver.observe(el);
         });
       } else {
-        document.querySelectorAll(".reveal, .style-tile, .occasion-card").forEach(function (el) {
+        document.querySelectorAll(".reveal, .style-tile, .occasion-card, .bc-guide").forEach(function (el) {
           el.classList.add("in-view");
         });
       }
