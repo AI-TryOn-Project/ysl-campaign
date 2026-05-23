@@ -1505,11 +1505,8 @@
     /* chat-bar — visual spec mirrored from ysl-bc-style PromptBar.tsx
        (rounded-[32px] / max-w-2xl / bg-black/35 / backdrop-blur-2xl / p-2 / shadow-2xl) */
     .chat-bar {
-      position: fixed;
-      left: 50%;
-      bottom: 28px;
-      z-index: 90;
-      width: min(672px, calc(100vw - 32px));
+      width: 100%;
+      max-width: 672px;
       display: flex;
       flex-direction: column;
       align-items: stretch;
@@ -1524,9 +1521,9 @@
       /* Blur-reveal entrance — opacity + y + blur,
          matches framer-motion BlurReveal in ysl-bc-style */
       opacity: 0;
-      transform: translateX(-50%) translateY(28px);
+      transform: translateY(28px);
       filter: blur(18px);
-      animation: chatBarRise .78s cubic-bezier(.22,1,.36,1) 1.1s forwards;
+      animation: chatBarRise .78s cubic-bezier(.22,1,.36,1) .2s forwards;
       transition:
         border-color .3s ease,
         background .45s ease,
@@ -1537,9 +1534,176 @@
     @keyframes chatBarRise {
       to {
         opacity: 1;
-        transform: translateX(-50%) translateY(0);
+        transform: translateY(0);
         filter: blur(0);
       }
+    }
+
+    /* Entry paths container within hero */
+    .entry-path {
+      width: 100%;
+      max-width: 880px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      opacity: 0;
+      transform: translateY(32px);
+      animation: entryPathReveal .8s cubic-bezier(.22,1,.36,1) forwards;
+    }
+
+    .entry-search-need { animation-delay: .15s; }
+    .entry-search-style { animation-delay: .3s; }
+    .entry-shop-occasion { animation-delay: .45s; }
+
+    @keyframes entryPathReveal {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .entry-kicker {
+      font-size: 11px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.62);
+      margin-bottom: 4px;
+    }
+
+    /* Style chips row */
+    .style-chip-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      width: 100%;
+    }
+
+    .style-chip {
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: #fff;
+      border-radius: 16px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 6px;
+      transition: all .25s ease;
+      cursor: pointer;
+    }
+
+    .style-chip:hover {
+      border-color: rgba(255,255,255,.32);
+      background: rgba(255,255,255,.12);
+    }
+
+    .style-chip.active {
+      border-color: #fff;
+      background: #fff;
+      color: #000;
+    }
+
+    .chip-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .chip-desc {
+      display: block;
+      font-size: 10px;
+      letter-spacing: .04em;
+      opacity: .76;
+    }
+
+    /* Occasion chips row */
+    .occasion-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .occasion-chip {
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.24);
+      color: rgba(255,255,255,.76);
+      border-radius: 28px;
+      padding: 10px 16px;
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: all .25s ease;
+      cursor: pointer;
+      white-space: nowrap;
+      backdrop-filter: blur(12px);
+    }
+
+    .occasion-chip:hover {
+      border-color: rgba(255,255,255,.36);
+      background: rgba(255,255,255,.14);
+      color: #fff;
+    }
+
+    .occasion-chip.active {
+      border-color: rgba(184,160,108,.6);
+      background: rgba(184,160,108,.2);
+      color: #fff;
+    }
+
+    /* Fixed bottom chat bar (separate from hero) */
+    .chat-bar-fixed {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      z-index: 90;
+      width: min(672px, calc(100vw - 32px));
+      max-width: none;
+      transform: translateX(-50%);
+      opacity: 1;
+      filter: blur(0);
+      animation: none;
+    }
+
+    /* Refinement buttons */
+    .refinement-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      padding: 32px 0;
+      border-top: 1px solid rgba(0,0,0,.12);
+      margin-top: 28px;
+    }
+
+    .refinement-btn {
+      border: 1px solid rgba(0,0,0,.22);
+      background: transparent;
+      color: rgba(0,0,0,.72);
+      border-radius: 24px;
+      padding: 8px 16px;
+      font-size: 11px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      transition: all .2s ease;
+      cursor: pointer;
+    }
+
+    .refinement-btn:hover {
+      border-color: rgba(0,0,0,.52);
+      background: rgba(0,0,0,.06);
+      color: #000;
+    }
+
+    .refinement-btn.active {
+      border-color: #000;
+      background: #000;
+      color: #fff;
     }
 
     body.guide-active .chat-bar {
@@ -1743,6 +1907,8 @@
       .bc-look-grid,
       .bc-product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .bc-mood-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .style-chip-row { grid-template-columns: repeat(2, 1fr); }
+      .occasion-chip-row { gap: 8px; }
     }
 
     @media (max-width: 760px) {
@@ -1759,6 +1925,12 @@
       .hero { padding: 104px 18px 126px; min-height: 94svh; }
       .hero-inner { gap: 28px; }
       .hero h1 { font-size: 46px; }
+      .entry-kicker { font-size: 10px; }
+      .style-chip-row { grid-template-columns: 1fr; gap: 10px; }
+      .occasion-chip-row { gap: 8px; }
+      .occasion-chip { padding: 9px 14px; font-size: 10px; }
+      .chip-label { font-size: 11px; }
+      .chip-desc { font-size: 9px; }
       .bc-guide {
         min-height: auto;
         padding: 76px 18px 88px;
@@ -1826,8 +1998,13 @@
       .footer-cols { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; }
       .chat-bar {
-        bottom: 16px;
+        width: 100%;
+        border-radius: 28px;
+        padding: 8px;
+      }
+      .chat-bar-fixed {
         width: calc(100vw - 32px);
+        bottom: 16px;
         border-radius: 28px;
         padding: 8px;
       }
@@ -1906,30 +2083,82 @@
           <p class="eyebrow">中国七夕 / 2026</p>
           <h1>七夕礼赠</h1>
         </div>
-      </div>
-      <form class="chat-bar" id="chat-bar" aria-label="七夕导购输入">
-        <div class="chat-eyebrow" id="chat-eyebrow">七夕欢迎</div>
-        <div class="chat-main">
-          <button class="chat-action" id="chat-plus" type="button" aria-label="添加提示" aria-controls="guide-overlay" aria-expanded="false">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-              <path d="M12 5v14M5 12h14"></path>
-            </svg>
-          </button>
-          <div class="bar-divider"></div>
-          <div class="bar-input-wrap">
-            <input class="chat-input" id="chat-input" type="text" autocomplete="off" spellcheck="false" aria-label="描述你的七夕送礼需求">
-            <div class="bar-placeholder" id="bar-placeholder">今天想为谁挑选礼赠?</div>
-            <div class="chat-status">正在理解需求并生成推荐...</div>
-          </div>
-          <button class="chat-action send-action" type="submit" aria-label="发送">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 19V5"></path>
-              <path d="m5 12 7-7 7 7"></path>
-            </svg>
-          </button>
+        
+        <!-- Entry Path A: Search by Need -->
+        <div class="entry-path entry-search-need">
+          <p class="entry-kicker">直接输入你的需求</p>
+          <form class="chat-bar" id="chat-bar" aria-label="七夕导购输入">
+            <div class="chat-eyebrow" id="chat-eyebrow">七夕欢迎</div>
+            <div class="chat-main">
+              <button class="chat-action" id="chat-plus" type="button" aria-label="添加提示" aria-controls="guide-overlay" aria-expanded="false">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                  <path d="M12 5v14M5 12h14"></path>
+                </svg>
+              </button>
+              <div class="bar-divider"></div>
+              <div class="bar-input-wrap">
+                <input class="chat-input" id="chat-input" type="text" autocomplete="off" spellcheck="false" aria-label="描述你的七夕送礼需求" placeholder="我需要一件七夕礼物，预算人民币 5,000...">
+                <div class="bar-placeholder" id="bar-placeholder">今天想为谁挑选礼赠?</div>
+                <div class="chat-status">正在理解需求并生成推荐...</div>
+              </div>
+              <button class="chat-action send-action" type="submit" aria-label="发送">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 19V5"></path>
+                  <path d="m5 12 7-7 7 7"></path>
+                </svg>
+              </button>
+            </div>
+            <div class="chat-chips" id="chat-chips" aria-label="提示标签"></div>
+          </form>
         </div>
-        <div class="chat-chips" id="chat-chips" aria-label="提示标签"></div>
-      </form>
+
+        <!-- Entry Path B: Search by Style -->
+        <div class="entry-path entry-search-style">
+          <p class="entry-kicker">或按风格浏览</p>
+          <div class="style-chip-row">
+            <button class="style-chip" type="button" data-style="classic-minimal" aria-label="经典极简风格">
+              <span class="chip-label">经典极简</span>
+              <span class="chip-desc">低调 • 精致 • 易搭配</span>
+            </button>
+            <button class="style-chip" type="button" data-style="black-cool" aria-label="黑色酷感风格">
+              <span class="chip-label">黑色酷感</span>
+              <span class="chip-desc">黑色皮革 • 锋利线条</span>
+            </button>
+            <button class="style-chip" type="button" data-style="polished-elegance" aria-label="利落优雅风格">
+              <span class="chip-label">利落优雅</span>
+              <span class="chip-desc">正式 • 精致 • 有仪式感</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Entry Path C: Shop by Occasion -->
+        <div class="entry-path entry-shop-occasion">
+          <p class="entry-kicker">或按七夕场景选择</p>
+          <div class="occasion-chip-row">
+            <button class="occasion-chip" type="button" data-occasion="dinner">
+              <span class="chip-label">烛光晚餐</span>
+            </button>
+            <button class="occasion-chip" type="button" data-occasion="city-night">
+              <span class="chip-label">夏夜城市</span>
+            </button>
+            <button class="occasion-chip" type="button" data-occasion="weekend">
+              <span class="chip-label">周末短途</span>
+            </button>
+            <button class="occasion-chip" type="button" data-occasion="resort">
+              <span class="chip-label">海边度假</span>
+            </button>
+            <button class="occasion-chip" type="button" data-occasion="anniversary">
+              <span class="chip-label">纪念日晚</span>
+            </button>
+            <button class="occasion-chip" type="button" data-occasion="self-gift">
+              <span class="chip-label">犒赏自己</span>
+            </button>
+            <button class="occasion-chip" type="button" data-occasion="budget">
+              <span class="chip-label">预算内奢华</span>
+            </button>
+          </div>
+        </div>
+      </div>
       <div class="guide-overlay" id="guide-overlay" aria-hidden="true">
         <div class="guide-panel">
           <p class="guide-eyebrow">圣罗兰 AI 礼赠官 · 中国七夕</p>
@@ -1942,6 +2171,16 @@
             <button class="guide-suggestion" type="button" data-occasion="weekend"><span>挑一组适合周末短途的圣罗兰单品</span></button>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Product recommendations section (populated by JavaScript) -->
+    <section class="section" id="recommendations-section" style="display: none;">
+      <div class="section-inner">
+        <div class="section-head reveal">
+          <p class="kicker" id="result-summary">为你推荐以下单品</p>
+        </div>
+        <div class="product-grid" id="product-grid"></div>
       </div>
     </section>
 
@@ -2578,6 +2817,26 @@
             '</article>'
           ].join("");
         }).join("");
+        
+        // Remove existing refinement section if present
+        var existingRefinement = grid.nextElementSibling;
+        if (existingRefinement && existingRefinement.classList.contains("refinement-section")) {
+          existingRefinement.parentNode.removeChild(existingRefinement);
+        }
+        
+        // Add refinement buttons
+        var refinementHtml = [
+          '<div class="refinement-section">',
+            '<p style="width: 100%; text-align: center; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: rgba(0,0,0,.5); margin-bottom: 16px;">快速筛选</p>',
+            '<button class="refinement-btn" type="button" data-refine="more-iconic">更多经典</button>',
+            '<button class="refinement-btn" type="button" data-refine="bags-only">仅显示包袋</button>',
+            '<button class="refinement-btn" type="button" data-refine="lower-budget">预算 ¥3,000 以内</button>',
+            '<button class="refinement-btn" type="button" data-refine="more-formal">更多正式感</button>',
+            '<button class="refinement-btn" type="button" data-refine="more-black">更多黑色</button>',
+          '</div>'
+        ].join("");
+        
+        grid.insertAdjacentHTML("afterend", refinementHtml);
         revealGrid();
       }
 
@@ -2585,6 +2844,18 @@
         renderIntent();
         renderProducts();
         filterLookCards();
+        updateActiveButtons();
+      }
+
+      function updateActiveButtons() {
+        // Update style chip active states
+        document.querySelectorAll(".style-chip").forEach(function (chip) {
+          chip.classList.toggle("active", chip.dataset.style === state.style);
+        });
+        // Update occasion chip active states
+        document.querySelectorAll(".occasion-chip").forEach(function (chip) {
+          chip.classList.toggle("active", chip.dataset.occasion === state.occasion);
+        });
       }
 
       // Maps Chinese state.category labels to the data-category attributes on .bc-image-card
@@ -2707,8 +2978,11 @@
 
       function scrollToResults() {
         // After a search, jump to the look-results section (complete-look grid)
-        var section = document.getElementById("look-results");
-        if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
+        var section = document.getElementById("recommendations-section");
+        if (section) {
+          section.style.display = "block";
+          section.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
       }
 
       function submitPrompt(text) {
@@ -2798,21 +3072,39 @@
           submitPrompt(target.dataset.suggestion);
         }
 
-        if (target.dataset.style) {
-          state.style = target.dataset.style;
-          state.source = "风格意图";
+        // Handle style chips (Entry Path B: Search by Style)
+        if (target.classList.contains("style-chip") || (target.closest(".style-chip") && target.closest(".style-chip").dataset.style)) {
+          var styleChip = target.classList.contains("style-chip") ? target : target.closest(".style-chip");
+          var newStyle = styleChip.dataset.style;
+          state.style = newStyle;
+          state.source = "风格入口";
           state.category = null;
-          renderAll();
-          scrollToResults();
-        }
-
-        if (target.dataset.occasion) {
-          state.occasion = target.dataset.occasion;
-          state.source = "七夕场景";
-          if (state.occasion === "budget") state.budget = 8000;
+          state.recipient = "her";
+          document.querySelectorAll(".style-chip").forEach(function (chip) {
+            chip.classList.toggle("active", chip.dataset.style === newStyle);
+          });
           renderAll();
           closeGuide();
           scrollToResults();
+          return;
+        }
+
+        // Handle occasion chips (Entry Path C: Shop by Occasion)
+        if (target.classList.contains("occasion-chip") || (target.closest(".occasion-chip") && target.closest(".occasion-chip").dataset.occasion)) {
+          var occasionChip = target.classList.contains("occasion-chip") ? target : target.closest(".occasion-chip");
+          var newOccasion = occasionChip.dataset.occasion;
+          state.occasion = newOccasion;
+          state.source = "七夕场景入口";
+          state.category = null;
+          state.recipient = "her";
+          if (state.occasion === "budget") state.budget = 8000;
+          document.querySelectorAll(".occasion-chip").forEach(function (chip) {
+            chip.classList.toggle("active", chip.dataset.occasion === newOccasion);
+          });
+          renderAll();
+          closeGuide();
+          scrollToResults();
+          return;
         }
 
         if (target.dataset.category) {
@@ -2841,6 +3133,10 @@
           if (refine === "more-black") state.style = "black-cool";
           state.source = "快速调整";
           renderAll();
+          // Update refinement button active state
+          document.querySelectorAll(".refinement-btn").forEach(function (btn) {
+            btn.classList.toggle("active", btn.dataset.refine === refine);
+          });
         }
 
         if (target.dataset.action) {
