@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>圣罗兰七夕礼赠甄选</title>
+  <title>Saint Laurent Qixi Gift Edit</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -31,8 +31,11 @@
       line-height: 1.45;
       letter-spacing: .02em;
       overflow-x: hidden;
-      padding-bottom: 92px;
+      padding-bottom: 128px;
     }
+
+    body.chat-panel-open { padding-bottom: 220px; }
+    body.curating-active { overflow: hidden; }
 
     img { display: block; width: 100%; }
     button, input { font: inherit; }
@@ -123,106 +126,11 @@
 
     .badge.visible { display: flex; }
 
-    .hero {
-      position: relative;
-      height: 100svh;
-      min-height: 640px;
-      display: grid;
-      align-items: end;
-      padding: 130px 48px 84px;
-      overflow: hidden;
-      background: #050505;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(0deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.18) 32%, rgba(0,0,0,.05) 70%),
-        url("ysl官网素材/女/官网首页YSL官方线上精品店_files/SAINT_LAURENT_SUMMER26_TANGERINE-TEMPTATION_ECOM_HP_DESK.jpg") center / cover no-repeat;
-      transform: scale(1.02);
-      animation: heroZoom 16s ease-out forwards;
-      transition: filter .7s var(--ease), transform .9s var(--ease);
-    }
-
-    .hero.guide-open::before {
-      filter: brightness(.72) saturate(.88) contrast(1.06);
-      transform: scale(1.04);
-    }
-
-    @keyframes heroZoom {
-      from { transform: scale(1.08); }
-      to { transform: scale(1.02); }
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 32px;
-      width: 100%;
-      max-width: 1440px;
-      margin: 0 auto;
-      text-align: center;
-      transition: opacity .42s ease, transform .56s var(--ease);
-    }
-
-    .hero.guide-open .hero-inner {
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(-18px);
-    }
-
-    .hero-text { display: flex; flex-direction: column; align-items: center; }
-
     .eyebrow {
       font-size: 10px;
       letter-spacing: .22em;
       text-transform: uppercase;
       color: rgba(255,255,255,.72);
-      margin-bottom: 18px;
-    }
-
-    .hero .eyebrow {
-      animation: heroLine .7s var(--ease) both;
-    }
-
-    .hero h1 {
-      font-family: var(--display);
-      font-size: clamp(64px, 11vw, 132px);
-      line-height: .94;
-      font-weight: 400;
-      letter-spacing: .32em;
-      text-transform: uppercase;
-      margin: 0;
-      animation: heroLine .9s var(--ease) both .08s;
-    }
-
-    .hero .eyebrow {
-      margin-bottom: 18px;
-      letter-spacing: .32em;
-      color: rgba(255,255,255,.8);
-    }
-
-    @keyframes heroLine {
-      from { opacity: 0; transform: translateY(18px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero-card h2 {
-      font-size: 13px;
-      font-weight: 400;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .hero-card p {
-      color: rgba(255,255,255,.64);
-      line-height: 1.8;
       margin-bottom: 18px;
     }
 
@@ -344,6 +252,15 @@
       text-align: center;
       color: #fff;
       background: #050505;
+    }
+
+    /* Landing welcome — full viewport under fixed header, room for chat dock */
+    #gift-finder.bc-hero-panel {
+      min-height: 100svh;
+      min-height: 100dvh;
+      padding-top: 72px;
+      padding-bottom: 132px;
+      box-sizing: border-box;
     }
 
     .bc-panel-bg,
@@ -475,7 +392,7 @@
        Overrides .bc-reveal container animation on title elements so
        the per-char animation is the visible effect. */
     .bc-guide .bc-guide-title.bc-reveal,
-    .hero h1.lr-host {
+    #gift-finder .bc-guide-title.lr-host {
       opacity: 1;
       transform: none;
       filter: none;
@@ -496,7 +413,7 @@
     }
 
     .bc-guide.in-view .lr-char,
-    .hero.lr-ready .lr-char {
+    #gift-finder.lr-ready .lr-char {
       opacity: 1;
       filter: blur(0);
       transform: translateY(0);
@@ -1539,135 +1456,214 @@
       }
     }
 
-    /* Entry paths container within hero */
-    .entry-path {
-      width: 100%;
-      max-width: 880px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 18px;
-      opacity: 0;
-      transform: translateY(32px);
-      animation: entryPathReveal .8s cubic-bezier(.22,1,.36,1) forwards;
-    }
-
-    .entry-search-need { animation-delay: .15s; }
-    .entry-search-style { animation-delay: .3s; }
-    .entry-shop-occasion { animation-delay: .45s; }
-
-    @keyframes entryPathReveal {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .entry-kicker {
-      font-size: 11px;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.62);
-      margin-bottom: 4px;
-    }
-
-    /* Style chips row */
-    .style-chip-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      width: 100%;
-    }
-
-    .style-chip {
-      border: 1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.06);
-      color: #fff;
-      border-radius: 16px;
-      padding: 14px 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 6px;
-      transition: all .25s ease;
-      cursor: pointer;
-    }
-
-    .style-chip:hover {
-      border-color: rgba(255,255,255,.32);
-      background: rgba(255,255,255,.12);
-    }
-
-    .style-chip.active {
-      border-color: #fff;
-      background: #fff;
-      color: #000;
-    }
-
-    .chip-label {
-      display: block;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .chip-desc {
-      display: block;
-      font-size: 10px;
-      letter-spacing: .04em;
-      opacity: .76;
-    }
-
-    /* Occasion chips row */
-    .occasion-chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      width: 100%;
-      justify-content: center;
-    }
-
-    .occasion-chip {
-      border: 1px solid rgba(255,255,255,.18);
-      background: rgba(0,0,0,.24);
-      color: rgba(255,255,255,.76);
-      border-radius: 28px;
-      padding: 10px 16px;
-      font-size: 11px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      transition: all .25s ease;
-      cursor: pointer;
-      white-space: nowrap;
-      backdrop-filter: blur(12px);
-    }
-
-    .occasion-chip:hover {
-      border-color: rgba(255,255,255,.36);
-      background: rgba(255,255,255,.14);
-      color: #fff;
-    }
-
-    .occasion-chip.active {
-      border-color: rgba(184,160,108,.6);
-      background: rgba(184,160,108,.2);
-      color: #fff;
-    }
-
-    /* Fixed bottom chat bar (separate from hero) */
-    .chat-bar-fixed {
+    /* ── Fixed chat dock (search bar + mode panel) ── */
+    .chat-dock {
       position: fixed;
       left: 50%;
       bottom: 28px;
-      z-index: 90;
+      z-index: 100;
       width: min(672px, calc(100vw - 32px));
-      max-width: none;
       transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .chat-dock > * { pointer-events: auto; }
+
+    .chat-bar-fixed {
+      position: relative;
+      left: auto;
+      bottom: auto;
+      z-index: 1;
+      width: 100%;
+      max-width: none;
+      transform: none;
       opacity: 1;
       filter: blur(0);
       animation: none;
+    }
+
+    .chat-dock .chat-bar:focus-within,
+    .chat-dock .chat-bar.thinking {
+      transform: translateY(-2px);
+    }
+
+    .chat-dock .chat-chips { display: none; }
+
+    /* Mode panel — expands above the pill search bar */
+    .chat-mode-panel {
+      order: -1;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.52);
+      backdrop-filter: blur(40px) saturate(140%);
+      -webkit-backdrop-filter: blur(40px) saturate(140%);
+      box-shadow: 0 20px 60px rgba(0,0,0,.45);
+      padding: 14px 14px 12px;
+      opacity: 0;
+      transform: translateY(12px) scale(.98);
+      pointer-events: none;
+      max-height: 0;
+      overflow: hidden;
+      transition:
+        opacity .32s cubic-bezier(.22,1,.36,1),
+        transform .38s cubic-bezier(.22,1,.36,1),
+        max-height .38s cubic-bezier(.22,1,.36,1),
+        padding .32s ease;
+    }
+
+    .chat-mode-panel.open {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+      max-height: 420px;
+      padding: 16px 16px 14px;
+    }
+
+    .chat-mode-kicker {
+      font-size: 10px;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.5);
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .chat-mode-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .chat-mode-tab {
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.78);
+      border-radius: 999px;
+      padding: 10px 8px;
+      font-size: 10px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      line-height: 1.35;
+      transition: border-color .22s ease, background .22s ease, color .22s ease, box-shadow .22s ease;
+    }
+
+    .chat-mode-tab:hover {
+      border-color: rgba(184,160,108,.45);
+      color: #fff;
+    }
+
+    .chat-mode-tab.active {
+      border-color: rgba(184,160,108,.65);
+      background: rgba(184,160,108,.18);
+      color: #fff;
+      box-shadow: inset 0 0 0 1px rgba(184,160,108,.2);
+    }
+
+    .chat-mode-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      min-height: 0;
+      opacity: 0;
+      transition: opacity .28s ease;
+    }
+
+    .chat-mode-panel.has-mode .chat-mode-chips {
+      opacity: 1;
+      min-height: 32px;
+    }
+
+    .chat-suggestion-chip {
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.08);
+      color: rgba(255,255,255,.82);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 12px;
+      letter-spacing: .02em;
+      transition: border-color .2s ease, background .2s ease, color .2s ease;
+    }
+
+    .chat-suggestion-chip:hover {
+      border-color: rgba(184,160,108,.55);
+      background: rgba(184,160,108,.14);
+      color: #fff;
+    }
+
+    /* Saint Laurent curating loader */
+    .curating-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: grid;
+      place-items: center;
+      background: rgba(0,0,0,.88);
+      backdrop-filter: blur(28px) saturate(120%);
+      -webkit-backdrop-filter: blur(28px) saturate(120%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .45s cubic-bezier(.22,1,.36,1);
+    }
+
+    .curating-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .curating-overlay::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background: radial-gradient(circle at 50% 40%, rgba(184,160,108,.12), transparent 55%);
+      animation: curatingGlow 2.4s ease-in-out infinite;
+    }
+
+    @keyframes curatingGlow {
+      0%, 100% { opacity: .45; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.06); }
+    }
+
+    .curating-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 32px;
+      animation: curatingRise .7s cubic-bezier(.22,1,.36,1);
+    }
+
+    @keyframes curatingRise {
+      from { opacity: 0; transform: translateY(16px); filter: blur(8px); }
+      to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+
+    .curating-wordmark {
+      width: min(200px, 52vw);
+      margin: 0 auto 28px;
+      color: #fff;
+      animation: curatingShimmer 2.2s ease-in-out infinite;
+    }
+
+    @keyframes curatingShimmer {
+      0%, 100% { opacity: .72; filter: blur(0); }
+      50% { opacity: 1; filter: blur(.4px); }
+    }
+
+    .curating-copy {
+      font-size: 11px;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.72);
+    }
+
+    .curating-copy em {
+      font-style: normal;
+      color: var(--gold);
     }
 
     /* Refinement buttons */
@@ -1719,7 +1715,6 @@
       box-shadow:
         0 18px 70px rgba(0,0,0,.32),
         inset 0 0 0 1px rgba(255,255,255,.08);
-      transform: translateX(-50%) translateY(-2px);
     }
 
     .chat-eyebrow {
@@ -1891,15 +1886,12 @@
     }
 
     @media (max-width: 1180px) {
-      .hero-inner,
       .section-head,
       .results-shell,
       .footer-inner {
         grid-template-columns: 1fr;
       }
 
-      .hero-card { justify-self: stretch; }
-      .hero h1 { font-size: 60px; }
       .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .category-grid, .style-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .intent-panel { position: static; }
@@ -1907,8 +1899,6 @@
       .bc-look-grid,
       .bc-product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .bc-mood-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .style-chip-row { grid-template-columns: repeat(2, 1fr); }
-      .occasion-chip-row { gap: 8px; }
     }
 
     @media (max-width: 760px) {
@@ -1922,15 +1912,10 @@
       .desktop-only { display: none; }
       .wordmark { width: 132px; }
       .header-right { gap: 2px; }
-      .hero { padding: 104px 18px 126px; min-height: 94svh; }
-      .hero-inner { gap: 28px; }
-      .hero h1 { font-size: 46px; }
-      .entry-kicker { font-size: 10px; }
-      .style-chip-row { grid-template-columns: 1fr; gap: 10px; }
-      .occasion-chip-row { gap: 8px; }
-      .occasion-chip { padding: 9px 14px; font-size: 10px; }
-      .chip-label { font-size: 11px; }
-      .chip-desc { font-size: 9px; }
+      #gift-finder.bc-hero-panel {
+        padding-top: 62px;
+        padding-bottom: 118px;
+      }
       .bc-guide {
         min-height: auto;
         padding: 76px 18px 88px;
@@ -2002,12 +1987,13 @@
         border-radius: 28px;
         padding: 8px;
       }
-      .chat-bar-fixed {
+      .chat-dock {
         width: calc(100vw - 32px);
         bottom: 16px;
-        border-radius: 28px;
-        padding: 8px;
       }
+      .chat-bar-fixed { border-radius: 28px; padding: 8px; }
+      .chat-mode-tabs { grid-template-columns: 1fr; }
+      .chat-mode-tab { font-size: 11px; padding: 12px; }
       .chat-eyebrow { padding: 2px 12px 4px; font-size: 10px; }
       .chat-main { gap: 10px; }
       .chat-action { width: 44px; height: 44px; }
@@ -2033,40 +2019,40 @@
   </svg>
   <header class="site-header">
     <div class="header-left">
-      <button class="icon-button" aria-label="打开导航">
+      <button class="icon-button" aria-label="Open navigation">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
           <path d="M4 8h16M4 16h16"></path>
         </svg>
       </button>
-      <a class="nav-link desktop-only" href="#categories">精选系列</a>
-      <a class="nav-link desktop-only" href="#style-search">女士</a>
-      <a class="nav-link desktop-only" href="#style-search">男士</a>
-      <a class="nav-link desktop-only" href="#occasions">礼品</a>
-      <a class="nav-link desktop-only" href="#gift-finder">七夕甄选</a>
+      <a class="nav-link desktop-only" href="#categories">Highlights</a>
+      <a class="nav-link desktop-only" href="#style-search">Women</a>
+      <a class="nav-link desktop-only" href="#style-search">Men</a>
+      <a class="nav-link desktop-only" href="#occasions">Gifts</a>
+      <a class="nav-link desktop-only" href="#gift-finder">Qixi Edit</a>
     </div>
-    <a class="wordmark" href="index.html" aria-label="Saint Laurent 首页">
+    <a class="wordmark" href="index.html" aria-label="Saint Laurent home">
       <svg viewBox="0 0 140 32" width="140" height="32" role="img" aria-label="Saint Laurent">
         <use href="#ysl-wordmark"></use>
       </svg>
     </a>
     <div class="header-right">
       <a class="nav-link desktop-only" href="#gift-finder">LA MAISON</a>
-      <a class="nav-link desktop-only" href="#categories">寻找专卖店</a>
-      <a class="nav-link desktop-only" href="#categories">客户服务</a>
-      <a class="nav-link desktop-only" href="#gift-finder">登录</a>
-      <button class="icon-button" aria-label="搜索" id="header-search">
+      <a class="nav-link desktop-only" href="#categories">Store Locator</a>
+      <a class="nav-link desktop-only" href="#categories">Client Service</a>
+      <a class="nav-link desktop-only" href="#gift-finder">Sign In</a>
+      <button class="icon-button" aria-label="Search" id="header-search">
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
           <circle cx="11" cy="11" r="7"></circle>
           <path d="M16.5 16.5 21 21"></path>
         </svg>
       </button>
-      <button class="icon-button" aria-label="收藏清单" data-open-drawer="wishlist">
+      <button class="icon-button" aria-label="Wishlist" data-open-drawer="wishlist">
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
           <path d="M20.4 5.8c-1.7-2-4.6-1.9-6.3.1L12 8.3 9.9 5.9C8.2 3.9 5.3 3.8 3.6 5.8c-1.7 2-1.4 5 .6 6.8L12 20l7.8-7.4c2-1.8 2.3-4.8.6-6.8Z"></path>
         </svg>
         <span class="badge" id="wishlist-count">0</span>
       </button>
-      <button class="icon-button" aria-label="购物袋" data-open-drawer="bag">
+      <button class="icon-button" aria-label="Bag" data-open-drawer="bag">
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
           <path d="M6 8h12l-1 13H7L6 8Z"></path>
           <path d="M9 8a3 3 0 0 1 6 0"></path>
@@ -2077,138 +2063,41 @@
   </header>
 
   <main>
-    <section class="hero" id="gift-finder">
-      <div class="hero-inner">
-        <div class="hero-text">
-          <p class="eyebrow">中国七夕 / 2026</p>
-          <h1>七夕礼赠</h1>
-        </div>
-        
-        <!-- Entry Path A: Search by Need -->
-        <div class="entry-path entry-search-need">
-          <p class="entry-kicker">直接输入你的需求</p>
-          <form class="chat-bar" id="chat-bar" aria-label="七夕导购输入">
-            <div class="chat-eyebrow" id="chat-eyebrow">七夕欢迎</div>
-            <div class="chat-main">
-              <button class="chat-action" id="chat-plus" type="button" aria-label="添加提示" aria-controls="guide-overlay" aria-expanded="false">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-                  <path d="M12 5v14M5 12h14"></path>
-                </svg>
-              </button>
-              <div class="bar-divider"></div>
-              <div class="bar-input-wrap">
-                <input class="chat-input" id="chat-input" type="text" autocomplete="off" spellcheck="false" aria-label="描述你的七夕送礼需求" placeholder="我需要一件七夕礼物，预算人民币 5,000...">
-                <div class="bar-placeholder" id="bar-placeholder">今天想为谁挑选礼赠?</div>
-                <div class="chat-status">正在理解需求并生成推荐...</div>
-              </div>
-              <button class="chat-action send-action" type="submit" aria-label="发送">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 19V5"></path>
-                  <path d="m5 12 7-7 7 7"></path>
-                </svg>
-              </button>
-            </div>
-            <div class="chat-chips" id="chat-chips" aria-label="提示标签"></div>
-          </form>
-        </div>
-
-        <!-- Entry Path B: Search by Style -->
-        <div class="entry-path entry-search-style">
-          <p class="entry-kicker">或按风格浏览</p>
-          <div class="style-chip-row">
-            <button class="style-chip" type="button" data-style="classic-minimal" aria-label="经典极简风格">
-              <span class="chip-label">经典极简</span>
-              <span class="chip-desc">低调 • 精致 • 易搭配</span>
-            </button>
-            <button class="style-chip" type="button" data-style="black-cool" aria-label="黑色酷感风格">
-              <span class="chip-label">黑色酷感</span>
-              <span class="chip-desc">黑色皮革 • 锋利线条</span>
-            </button>
-            <button class="style-chip" type="button" data-style="polished-elegance" aria-label="利落优雅风格">
-              <span class="chip-label">利落优雅</span>
-              <span class="chip-desc">正式 • 精致 • 有仪式感</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Entry Path C: Shop by Occasion -->
-        <div class="entry-path entry-shop-occasion">
-          <p class="entry-kicker">或按七夕场景选择</p>
-          <div class="occasion-chip-row">
-            <button class="occasion-chip" type="button" data-occasion="dinner">
-              <span class="chip-label">烛光晚餐</span>
-            </button>
-            <button class="occasion-chip" type="button" data-occasion="city-night">
-              <span class="chip-label">夏夜城市</span>
-            </button>
-            <button class="occasion-chip" type="button" data-occasion="weekend">
-              <span class="chip-label">周末短途</span>
-            </button>
-            <button class="occasion-chip" type="button" data-occasion="resort">
-              <span class="chip-label">海边度假</span>
-            </button>
-            <button class="occasion-chip" type="button" data-occasion="anniversary">
-              <span class="chip-label">纪念日晚</span>
-            </button>
-            <button class="occasion-chip" type="button" data-occasion="self-gift">
-              <span class="chip-label">犒赏自己</span>
-            </button>
-            <button class="occasion-chip" type="button" data-occasion="budget">
-              <span class="chip-label">预算内奢华</span>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="guide-overlay" id="guide-overlay" aria-hidden="true">
-        <div class="guide-panel">
-          <p class="guide-eyebrow">圣罗兰 AI 礼赠官 · 中国七夕</p>
-          <h2>让灵感开始</h2>
-          <p>从一个七夕灵感开始</p>
-          <div class="guide-suggestions">
-            <button class="guide-suggestion" type="button" data-suggestion="我想给女友选一件七夕礼物，预算人民币 5,000 左右，风格经典极简。"><span>给她选一件经典极简的七夕礼物</span></button>
-            <button class="guide-suggestion" type="button" data-suggestion="推荐适合男友的七夕礼物，要黑色酷感，但不要太夸张。"><span>给他找黑色酷感但低调的礼物</span></button>
-            <button class="guide-suggestion" type="button" data-occasion="dinner"><span>为烛光晚餐搭配一组圣罗兰单品</span></button>
-            <button class="guide-suggestion" type="button" data-occasion="weekend"><span>挑一组适合周末短途的圣罗兰单品</span></button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Product recommendations section (populated by JavaScript) -->
-    <section class="section" id="recommendations-section" style="display: none;">
-      <div class="section-inner">
-        <div class="section-head reveal">
-          <p class="kicker" id="result-summary">为你推荐以下单品</p>
-        </div>
-        <div class="product-grid" id="product-grid"></div>
-      </div>
-    </section>
-
-    <div class="ysl-bc-suite" id="ysl-bc-style-sections" aria-label="圣罗兰 AI 精品体验">
-      <section class="bc-guide bc-hero-panel" aria-label="圣罗兰欢迎体验">
+    <div class="ysl-bc-suite" id="ysl-bc-style-sections" aria-label="Saint Laurent AI boutique experience">
+      <section class="bc-guide bc-hero-panel in-view" id="gift-finder" aria-label="Saint Laurent welcome">
         <img class="bc-panel-bg" src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_2160,w_3840/251209_BRUNELLO_BUCHAREST_COQUILLAGE_05_14575?_a=DATAiZAAZAA0" alt="">
         <div class="bc-panel-shade"></div>
         <div class="bc-hero-copy">
-          <h2 class="bc-guide-title bc-reveal">欢迎进入七夕礼赠</h2>
-          <p class="bc-guide-copy bc-reveal">沉浸于圣罗兰的利落廓形、黑金细节与七夕礼赠灵感。</p>
-          <p class="bc-guide-kicker bc-reveal">缓缓向下浏览</p>
+          <h2 class="bc-guide-title bc-reveal">Welcome to Qixi Gifts</h2>
+          <p class="bc-guide-copy bc-reveal">Saint Laurent tailoring, black-and-gold details, and Qixi gifting inspiration.</p>
+          <p class="bc-guide-kicker bc-reveal">Scroll to explore</p>
         </div>
       </section>
 
-      <section class="bc-guide" id="boutique-guide" aria-label="圣罗兰七夕精品入口">
+      <!-- Product recommendations (populated by JavaScript after chatbot search) -->
+      <section class="section" id="recommendations-section" style="display: none;">
+        <div class="section-inner">
+          <div class="section-head reveal">
+            <p class="kicker" id="result-summary">Selected for you</p>
+          </div>
+          <div class="product-grid" id="product-grid"></div>
+        </div>
+      </section>
+
+      <section class="bc-guide" id="boutique-guide" aria-label="Saint Laurent Qixi boutique entry">
         <div class="bc-guide-inner">
           <div class="bc-guide-head">
-            <p class="bc-guide-kicker bc-reveal">精品入口</p>
-            <h2 class="bc-guide-title bc-reveal">选择你的七夕入口</h2>
-            <p class="bc-guide-copy bc-reveal">按礼赠对象、品类与场景进入圣罗兰七夕甄选，继续由 AI 礼赠官为你收窄选择。</p>
+            <p class="bc-guide-kicker bc-reveal">Boutique entry</p>
+            <h2 class="bc-guide-title bc-reveal">Choose your Qixi entry</h2>
+            <p class="bc-guide-copy bc-reveal">Enter by recipient, category, or moment—then refine with the AI Gift Concierge.</p>
           </div>
-          <div class="bc-carousel" aria-label="七夕精品入口">
+          <div class="bc-carousel" aria-label="Qixi boutique entry">
             <button class="bc-card" type="button" data-category="bags">
               <div class="bc-card-media">
-                <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_700,w_560/251209_BRUNELLO_BUCHAREST_ACQUA_07_10566?_a=DATAiZAAZAA0" alt="女士">
+                <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_700,w_560/251209_BRUNELLO_BUCHAREST_ACQUA_07_10566?_a=DATAiZAAZAA0" alt="Women">
               </div>
               <div class="bc-card-cta">
-                <span><strong>包袋礼赠</strong><strong>探索包袋</strong></span>
+                <span><strong>Bag gifting</strong><strong>Explore bags</strong></span>
                 <span class="bc-card-arrow" aria-hidden="true">›</span>
               </div>
               <div class="bc-sku-row">
@@ -2218,183 +2107,183 @@
             </button>
             <button class="bc-card" type="button" data-category="accessories">
               <div class="bc-card-media">
-                <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_700,w_560/251209_BRUNELLO_BUCHAREST_ACQUA_04_9355?_a=DATAiZAAZAA0" alt="男士">
+                <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_700,w_560/251209_BRUNELLO_BUCHAREST_ACQUA_04_9355?_a=DATAiZAAZAA0" alt="Men">
               </div>
               <div class="bc-card-cta">
-                <span><strong>配饰细节</strong><strong>探索配饰</strong></span>
+                <span><strong>Accessory details</strong><strong>Explore accessories</strong></span>
                 <span class="bc-card-arrow" aria-hidden="true">›</span>
               </div>
               <div class="bc-sku-row">
-                <span>腰带</span>
-                <span>小皮具</span>
+                <span>Belts</span>
+                <span>Small leather goods</span>
               </div>
             </button>
             <button class="bc-card" type="button" data-category="ready-to-wear">
               <div class="bc-card-media">
-                <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_700,w_560/BC_EYEWEART_PE26_CAMPAIGN_SHOT_26_6136?_a=DATAiZAAZAA0" alt="眼镜">
+                <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_700,w_560/BC_EYEWEART_PE26_CAMPAIGN_SHOT_26_6136?_a=DATAiZAAZAA0" alt="Eyewear">
               </div>
               <div class="bc-card-cta">
-                <span><strong>剪裁成衣</strong><strong>探索成衣</strong></span>
+                <span><strong>Ready-to-wear</strong><strong>Explore ready-to-wear</strong></span>
                 <span class="bc-card-arrow" aria-hidden="true">›</span>
               </div>
               <div class="bc-sku-row">
-                <span>晚餐</span>
-                <span>纪念日</span>
+                <span>Dinner</span>
+                <span>Anniversary</span>
               </div>
             </button>
             <button class="bc-card" type="button" data-category="shoes">
               <div class="bc-card-media">
-                <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_700,w_560/GRUPPONE_PRIMAESECONDAUSCITA_H4?_a=DATAiZAAZAA0" alt="童装">
+                <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_700,w_560/GRUPPONE_PRIMAESECONDAUSCITA_H4?_a=DATAiZAAZAA0" alt="Children">
               </div>
               <div class="bc-card-cta">
-                <span><strong>鞋履收尾</strong><strong>探索鞋履</strong></span>
+                <span><strong>Shoes to finish</strong><strong>Explore shoes</strong></span>
                 <span class="bc-card-arrow" aria-hidden="true">›</span>
               </div>
               <div class="bc-sku-row">
-                <span>高跟鞋</span>
-                <span>乐福鞋</span>
+                <span>Heels</span>
+                <span>Loafers</span>
               </div>
             </button>
             <button class="bc-card" type="button" data-occasion="weekend">
               <div class="bc-card-media">
-                <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_700,w_560/BcSS260125?_a=DATAiZAAZAA0" alt="生活方式">
+                <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_700,w_560/BcSS260125?_a=DATAiZAAZAA0" alt="Lifestyle">
               </div>
               <div class="bc-card-cta">
-                <span><strong>周末短途</strong><strong>探索场景</strong></span>
+                <span><strong>Weekend escape</strong><strong>Explore occasions</strong></span>
                 <span class="bc-card-arrow" aria-hidden="true">›</span>
               </div>
               <div class="bc-sku-row">
-                <span>旅行</span>
-                <span>城市夜晚</span>
+                <span>Travel</span>
+                <span>City night</span>
               </div>
             </button>
           </div>
         </div>
       </section>
 
-      <section class="bc-guide bc-look-section" id="look-results" aria-label="圣罗兰完整造型">
+      <section class="bc-guide bc-look-section" id="look-results" aria-label="Saint Laurent complete looks">
         <div class="bc-guide-inner">
           <div class="bc-guide-head align-left">
-            <h2 class="bc-guide-title bc-reveal">完整造型</h2>
-            <p class="bc-guide-copy bc-reveal">以包袋、鞋履、配饰与剪裁成衣组合七夕约会场景。</p>
+            <h2 class="bc-guide-title bc-reveal">Complete looks</h2>
+            <p class="bc-guide-copy bc-reveal">Bags, shoes, accessories, and tailoring—composed for Qixi evenings.</p>
           </div>
           <div class="bc-look-grid">
             <button class="bc-image-card" type="button" data-category="bags">
-              <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261WOUTFITCS20_E?_a=DATAiZAAZAA0" alt="查看造型">
-              <div class="bc-card-cta"><span><strong>迷你链条包</strong><strong>查看单品</strong></span><span class="bc-card-arrow">›</span></div>
+              <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261WOUTFITCS20_E?_a=DATAiZAAZAA0" alt="View look">
+              <div class="bc-card-cta"><span><strong>Mini chain bag</strong><strong>View piece</strong></span><span class="bc-card-arrow">›</span></div>
             </button>
             <button class="bc-image-card" type="button" data-category="shoes">
-              <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261WOUTFITCS3_E?_a=DATAiZAAZAA0" alt="查看造型">
-              <div class="bc-card-cta"><span><strong>高跟凉鞋</strong><strong>查看单品</strong></span><span class="bc-card-arrow">›</span></div>
+              <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261WOUTFITCS3_E?_a=DATAiZAAZAA0" alt="View look">
+              <div class="bc-card-cta"><span><strong>Heeled sandals</strong><strong>View piece</strong></span><span class="bc-card-arrow">›</span></div>
             </button>
             <button class="bc-image-card" type="button" data-category="accessories">
-              <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261WOUTFITSPORTCLUB03_E?_a=DATAiZAAZAA0" alt="查看造型">
-              <div class="bc-card-cta"><span><strong>LA 66 腰带</strong><strong>查看单品</strong></span><span class="bc-card-arrow">›</span></div>
+              <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261WOUTFITSPORTCLUB03_E?_a=DATAiZAAZAA0" alt="View look">
+              <div class="bc-card-cta"><span><strong>LA 66 Belts</strong><strong>View piece</strong></span><span class="bc-card-arrow">›</span></div>
             </button>
             <button class="bc-image-card" type="button" data-category="ready-to-wear">
-              <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261WOUTFITCS18_E?_a=DATAiZAAZAA0" alt="查看造型">
-              <div class="bc-card-cta"><span><strong>剪裁夹克</strong><strong>查看单品</strong></span><span class="bc-card-arrow">›</span></div>
+              <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261WOUTFITCS18_E?_a=DATAiZAAZAA0" alt="View look">
+              <div class="bc-card-cta"><span><strong>Tailored jacket</strong><strong>View piece</strong></span><span class="bc-card-arrow">›</span></div>
             </button>
             <button class="bc-image-card" type="button" data-occasion="weekend">
-              <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261WOUTFITCS4_E?_a=DATAiZAAZAA0" alt="查看造型">
-              <div class="bc-card-cta"><span><strong>CITY 背包</strong><strong>查看单品</strong></span><span class="bc-card-arrow">›</span></div>
+              <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261WOUTFITCS4_E?_a=DATAiZAAZAA0" alt="View look">
+              <div class="bc-card-cta"><span><strong>CITY backpack</strong><strong>View piece</strong></span><span class="bc-card-arrow">›</span></div>
             </button>
             <button class="bc-image-card" type="button" data-category="bags">
-              <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261WOUTFITCS76_E?_a=DATAiZAAZAA0" alt="查看造型">
-              <div class="bc-card-cta"><span><strong>小皮具礼赠</strong><strong>查看单品</strong></span><span class="bc-card-arrow">›</span></div>
+              <img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261WOUTFITCS76_E?_a=DATAiZAAZAA0" alt="View look">
+              <div class="bc-card-cta"><span><strong>Small leather gifting</strong><strong>View piece</strong></span><span class="bc-card-arrow">›</span></div>
             </button>
           </div>
         </div>
       </section>
 
-      <section class="bc-guide bc-immersive-panel" aria-label="圣罗兰风格宣言">
+      <section class="bc-guide bc-immersive-panel" aria-label="Saint Laurent style statement">
         <img class="bc-panel-bg" src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_2160,w_3840/250630_14_448_yy3e53?_a=DATAiZAAZAA0" alt="">
         <div class="bc-panel-shade"></div>
         <div class="bc-immersive-copy">
           <div class="bc-sparkle" aria-hidden="true">✦</div>
-          <h2 class="bc-guide-title bc-reveal">锋利廓形、黑色光泽与金色标志，构成七夕夜晚的圣罗兰语言。</h2>
+          <h2 class="bc-guide-title bc-reveal">Sharp lines, black shine, and gold signatures—the Saint Laurent language of Qixi night.</h2>
         </div>
       </section>
 
-      <section class="bc-guide bc-mood-section" aria-label="圣罗兰心情板">
+      <section class="bc-guide bc-mood-section" aria-label="Saint Laurent moodboard">
         <div class="bc-guide-inner">
           <div class="bc-guide-head">
-            <p class="bc-guide-kicker bc-reveal">视觉记忆</p>
-            <h2 class="bc-guide-title bc-reveal">心情板</h2>
+            <p class="bc-guide-kicker bc-reveal">Visual memory</p>
+            <h2 class="bc-guide-title bc-reveal">Moodboard</h2>
           </div>
           <div class="bc-mood-grid">
-            <div class="bc-mood-tile large"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261WOUTFITSPRING18S_E?_a=DATAiZAAZAA0" alt="查看造型"></div>
-            <div class="bc-mood-tile"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261MH5307547C600_F?_a=DATAiZAAZAA0" alt="缎面 monili 西装"></div>
-            <div class="bc-mood-tile"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261MF9407500C8909_F?_a=DATAiZAAZAA0" alt="闪片绣花西装"></div>
-            <div class="bc-mood-tile large"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261WOUTFITCS367_E?_a=DATAiZAAZAA0" alt="查看造型"></div>
-            <div class="bc-mood-tile"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261M0CBR7593C3999_F?_a=DATAiZAAZAA0" alt="网纱绣花西装"></div>
-            <div class="bc-mood-tile"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261MD4557BTCC001_F?_a=DATAiZAAZAA0" alt="羊绒西装"></div>
+            <div class="bc-mood-tile large"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261WOUTFITSPRING18S_E?_a=DATAiZAAZAA0" alt="View look"></div>
+            <div class="bc-mood-tile"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261MH5307547C600_F?_a=DATAiZAAZAA0" alt="Satin tailoring with Monili"></div>
+            <div class="bc-mood-tile"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261MF9407500C8909_F?_a=DATAiZAAZAA0" alt="Sequinned embroidered jacket"></div>
+            <div class="bc-mood-tile large"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261WOUTFITCS367_E?_a=DATAiZAAZAA0" alt="View look"></div>
+            <div class="bc-mood-tile"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261M0CBR7593C3999_F?_a=DATAiZAAZAA0" alt="Tulle embroidered jacket"></div>
+            <div class="bc-mood-tile"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261MD4557BTCC001_F?_a=DATAiZAAZAA0" alt="Cashmere jacket"></div>
           </div>
         </div>
       </section>
 
-      <section class="bc-guide bc-product-selection" aria-label="圣罗兰单品甄选">
+      <section class="bc-guide bc-product-selection" aria-label="Saint Laurent piece selection">
         <div class="bc-guide-inner">
           <div class="bc-guide-head">
-            <h2 class="bc-guide-title bc-reveal">七夕单品甄选</h2>
-            <p class="bc-guide-copy bc-reveal">以 SKU 级入口继续收藏、比较与加入购物袋。</p>
+            <h2 class="bc-guide-title bc-reveal">Qixi piece edit</h2>
+            <p class="bc-guide-copy bc-reveal">Save, compare, and add to your bag—piece by piece.</p>
           </div>
           <div class="bc-product-grid">
-            <button class="bc-image-card product" type="button" data-category="bags"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261MH5307547C600_F?_a=DATAiZAAZAA0" alt="缎面 monili 西装"><div class="bc-card-cta"><span><strong>缎面 monili 西装</strong><strong>查看单品</strong></span><span class="bc-card-arrow">›</span></div></button>
-            <button class="bc-image-card product" type="button" data-category="bags"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261MF9407500C8909_F?_a=DATAiZAAZAA0" alt="闪片绣花西装"><div class="bc-card-cta"><span><strong>闪片绣花西装</strong><strong>查看单品</strong></span><span class="bc-card-arrow">›</span></div></button>
-            <button class="bc-image-card product" type="button" data-category="accessories"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261M0CBR7593C3999_F?_a=DATAiZAAZAA0" alt="网纱绣花西装"><div class="bc-card-cta"><span><strong>网纱绣花西装</strong><strong>查看单品</strong></span><span class="bc-card-arrow">›</span></div></button>
-            <button class="bc-image-card product" type="button" data-category="shoes"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261MD4557BTCC001_F?_a=DATAiZAAZAA0" alt="羊绒西装"><div class="bc-card-cta"><span><strong>羊绒西装</strong><strong>查看单品</strong></span><span class="bc-card-arrow">›</span></div></button>
-            <button class="bc-image-card product" type="button" data-category="ready-to-wear"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261M019T7793CIX07_F?_a=DATAiZAAZAA0" alt="条纹针织西装"><div class="bc-card-cta"><span><strong>条纹针织西装</strong><strong>查看单品</strong></span><span class="bc-card-arrow">›</span></div></button>
-            <button class="bc-image-card product" type="button" data-category="shoes"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261MB1177167C1177_F?_a=DATAiZAAZAA0" alt="高定斜纹西装"><div class="bc-card-cta"><span><strong>高定斜纹西装</strong><strong>查看单品</strong></span><span class="bc-card-arrow">›</span></div></button>
+            <button class="bc-image-card product" type="button" data-category="bags"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261MH5307547C600_F?_a=DATAiZAAZAA0" alt="Satin tailoring with Monili"><div class="bc-card-cta"><span><strong>Satin tailoring with Monili</strong><strong>View piece</strong></span><span class="bc-card-arrow">›</span></div></button>
+            <button class="bc-image-card product" type="button" data-category="bags"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261MF9407500C8909_F?_a=DATAiZAAZAA0" alt="Sequinned embroidered jacket"><div class="bc-card-cta"><span><strong>Sequinned embroidered jacket</strong><strong>View piece</strong></span><span class="bc-card-arrow">›</span></div></button>
+            <button class="bc-image-card product" type="button" data-category="accessories"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261M0CBR7593C3999_F?_a=DATAiZAAZAA0" alt="Tulle embroidered jacket"><div class="bc-card-cta"><span><strong>Tulle embroidered jacket</strong><strong>View piece</strong></span><span class="bc-card-arrow">›</span></div></button>
+            <button class="bc-image-card product" type="button" data-category="shoes"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261MD4557BTCC001_F?_a=DATAiZAAZAA0" alt="Cashmere jacket"><div class="bc-card-cta"><span><strong>Cashmere jacket</strong><strong>View piece</strong></span><span class="bc-card-arrow">›</span></div></button>
+            <button class="bc-image-card product" type="button" data-category="ready-to-wear"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261M019T7793CIX07_F?_a=DATAiZAAZAA0" alt="Striped knit jacket"><div class="bc-card-cta"><span><strong>Striped knit jacket</strong><strong>View piece</strong></span><span class="bc-card-arrow">›</span></div></button>
+            <button class="bc-image-card product" type="button" data-category="shoes"><img src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_1376,w_1100/261MB1177167C1177_F?_a=DATAiZAAZAA0" alt="Haute couture twill jacket"><div class="bc-card-cta"><span><strong>Haute couture twill jacket</strong><strong>View piece</strong></span><span class="bc-card-arrow">›</span></div></button>
           </div>
         </div>
       </section>
 
-      <section class="bc-guide bc-prompt-panel" aria-label="圣罗兰灵感提示">
+      <section class="bc-guide bc-prompt-panel" aria-label="Saint Laurent inspiration prompts">
         <img class="bc-panel-bg" src="https://media.brunellocucinelli.com/brunellocucinelli-dynamic/image/upload/f_auto/q_80/c_fill,g_auto,h_2160,w_3840/251209_BRUNELLO_BUCHAREST_COQUILLAGE_05_14575?_a=DATAiZAAZAA0" alt="">
         <div class="bc-panel-shade"></div>
         <div class="bc-prompt-content">
-          <h2 class="bc-guide-title bc-reveal">让灵感开始</h2>
-          <p class="bc-guide-copy bc-reveal">选择一个建议，或直接在底部 AI 礼赠官输入你的七夕需求。</p>
+          <h2 class="bc-guide-title bc-reveal">Begin with inspiration</h2>
+          <p class="bc-guide-copy bc-reveal">Choose a prompt—or tell the AI Gift Concierge what you need below.</p>
           <div class="bc-prompt-suggestions">
-            <button type="button" data-suggestion="给她选一件经典极简的七夕礼物，预算人民币 5,000 左右。">给她选一件经典极简的七夕礼物</button>
-            <button type="button" data-suggestion="推荐适合男友的黑色酷感礼物，不要太夸张。">给他找黑色酷感但低调的礼物</button>
-            <button type="button" data-occasion="dinner">为烛光晚餐搭配一组圣罗兰单品</button>
+            <button type="button" data-suggestion="A classic minimal Qixi gift for her—around RMB 5,000.">A classic minimal Qixi gift for her</button>
+            <button type="button" data-suggestion="A black, sharp gift for him—understated, not loud.">A black, sharp gift for him—understated</button>
+            <button type="button" data-occasion="dinner">Saint Laurent pieces for candlelit dinner</button>
           </div>
         </div>
       </section>
     </div>
 
-    <!-- "七夕甄选" recommendations section removed per design feedback. -->
+    <!-- "Qixi Edit" recommendations section removed per design feedback. -->
     <!-- Its JS hooks (renderIntent / renderProducts / revealGrid / scrollToResults)
          are null-guarded below so chat submission still completes silently. -->
 
     <section class="section dark" id="style-search">
       <div class="section-inner">
         <div class="section-head reveal">
-          <p class="kicker">风格甄选</p>
-          <h2>三种七夕心意</h2>
+          <p class="kicker">Style edit</p>
+          <h2>Three Qixi moods</h2>
         </div>
         <div class="style-grid">
           <button class="style-tile" type="button" data-style="classic-minimal" style="--tile-image:url('ysl官网素材/女/小皮具-Saint Laurent圣罗兰官方网站 _ YSL.CN_files/773592AABVP1000_A.jpg')">
             <div class="tile-content">
-              <span>标志性极简</span>
-              <strong>经典极简</strong>
-              <p>低调、精致、不容易出错，适合作为有质感的七夕礼物。</p>
+              <span>Iconic minimal</span>
+              <strong>Classic minimal</strong>
+              <p>Understated, refined, never wrong—a Qixi gift with presence.</p>
             </div>
           </button>
           <button class="style-tile" type="button" data-style="black-cool" style="--tile-image:url('ysl官网素材/男/圣罗兰男士旅行袋-查看全部-探索圣罗兰经典双肩包_行李包_公文包-SAINT LAURENT圣罗兰官方网站 _ YSL.CN_files/534967AAE8M1000_A.jpg')">
             <div class="tile-content">
-              <span>黑色皮革态度</span>
-              <strong>黑色酷感</strong>
-              <p>黑色、皮革、利落线条，适合夏夜城市约会和更有态度的礼物。</p>
+              <span>Black leather attitude</span>
+              <strong>Black cool</strong>
+              <p>Black leather, clean lines—for summer nights and gifts with attitude.</p>
             </div>
           </button>
           <button class="style-tile" type="button" data-style="polished-elegance" style="--tile-image:url('ysl官网素材/男/26 夏季男士系列 _ Saint Laurent 圣罗兰 _ YSL.CN_files/862885Y99581000_A.jpg')">
             <div class="tile-content">
-              <span>利落剪裁</span>
-              <strong>利落优雅</strong>
-              <p>更成熟、正式、精致，适合纪念日晚餐与仪式感穿搭。</p>
+              <span>Sharp tailoring</span>
+              <strong>Polished elegance</strong>
+              <p>Mature, formal, refined—for anniversary dinner and ceremonial dressing.</p>
             </div>
           </button>
         </div>
@@ -2404,57 +2293,57 @@
     <section class="section" id="occasions">
       <div class="section-inner">
         <div class="section-head reveal">
-          <p class="kicker">场景</p>
-          <h2>夏日七夕</h2>
+          <p class="kicker">Occasions</p>
+          <h2>Summer Qixi</h2>
         </div>
         <div class="occasion-grid">
           <button class="occasion-card" type="button" data-occasion="dinner" style="--tile-image:url('ysl官网素材/女/官网首页YSL官方线上精品店_files/SLRD_GIFTING_ECOM_HP_DESK.jpg')">
             <div class="tile-content">
-              <span>烛光晚餐</span>
-              <strong>晚餐甄选</strong>
-              <p>小号包袋、精致鞋履与利落配饰。</p>
+              <span>Candlelit dinner</span>
+              <strong>Dinner edit</strong>
+              <p>Mini bags, refined shoes, and sharp accessories.</p>
             </div>
           </button>
           <button class="occasion-card" type="button" data-occasion="city-night" style="--tile-image:url('ysl官网素材/女/官网首页YSL官方线上精品店_files/SAINT LAURENT_WSUMMER26_LOOKBOOK_4X5_19_B.jpg')">
             <div class="tile-content">
-              <span>夏夜城市</span>
-              <strong>夜色甄选</strong>
-              <p>黑色皮革、太阳镜与锋利线条。</p>
+              <span>Summer city night</span>
+              <strong>Night edit</strong>
+              <p>Black leather, sunglasses, and clean lines.</p>
             </div>
           </button>
           <button class="occasion-card" type="button" data-occasion="weekend" style="--tile-image:url('ysl官网素材/男/圣罗兰男士旅行袋-查看全部-探索圣罗兰经典双肩包_行李包_公文包-SAINT LAURENT圣罗兰官方网站 _ YSL.CN_files/756285FACEO1000_A.jpg')">
             <div class="tile-content">
-              <span>周末短途</span>
-              <strong>旅行甄选</strong>
-              <p>旅行包、小皮具与适合步行的鞋履。</p>
+              <span>Weekend escape</span>
+              <strong>Travel edit</strong>
+              <p>Travel bags, small leather goods, and walkable shoes.</p>
             </div>
           </button>
           <button class="occasion-card" type="button" data-occasion="resort" style="--tile-image:url('ysl官网素材/女/官网首页YSL官方线上精品店_files/SAINT_LAURENT_SUMMER26_TANGERINE-TEMPTATION_ECOM_HP_DESK.jpg')">
             <div class="tile-content">
-              <span>海边度假</span>
-              <strong>度假甄选</strong>
-              <p>凉鞋、太阳镜与轻盈夏日单品。</p>
+              <span>Seaside resort</span>
+              <strong>Resort edit</strong>
+              <p>Sandals, sunglasses, and light summer pieces.</p>
             </div>
           </button>
           <button class="occasion-card" type="button" data-occasion="anniversary" style="--tile-image:url('ysl官网素材/女/官网首页YSL官方线上精品店_files/SAINT LAURENT_WSUMMER26_LOOKBOOK_4X5_20_.jpg')">
             <div class="tile-content">
-              <span>纪念日晚</span>
-              <strong>仪式甄选</strong>
-              <p>结构感礼物、剪裁与正式鞋履。</p>
+              <span>Anniversary evening</span>
+              <strong>Ceremony edit</strong>
+              <p>Structured gifts, tailoring, and formal shoes.</p>
             </div>
           </button>
           <button class="occasion-card" type="button" data-occasion="self-gift" style="--tile-image:url('ysl官网素材/女/小皮具-Saint Laurent圣罗兰官方网站 _ YSL.CN_files/823962AAEAX1000_A.jpg')">
             <div class="tile-content">
-              <span>犒赏自己</span>
-              <strong>自我礼赠</strong>
-              <p>标志性、日常可用、值得长期保留。</p>
+              <span>For yourself</span>
+              <strong>Gift yourself</strong>
+              <p>Iconic, wearable, worth keeping.</p>
             </div>
           </button>
           <button class="occasion-card" type="button" data-occasion="budget" style="--tile-image:url('ysl官网素材/女/配饰-Saint Laurent圣罗兰官方网站 _ YSL.CN_files/554465BOO0W1000_A.jpg')">
             <div class="tile-content">
-              <span>预算内奢华</span>
-              <strong>预算甄选</strong>
-              <p>人民币 8,000 以内的配饰与小皮具。</p>
+              <span>Luxury within budget</span>
+              <strong>Within budget</strong>
+              <p>Accessories and small leather goods under RMB 8,000.</p>
             </div>
           </button>
         </div>
@@ -2464,25 +2353,25 @@
     <section class="section dark" id="categories">
       <div class="section-inner">
         <div class="section-head reveal">
-          <p class="kicker">品类</p>
-          <h2>包袋 · 配饰 · 成衣 · 鞋履</h2>
+          <p class="kicker">Categories</p>
+          <h2>Bags · Accessories · Ready-to-wear · Shoes</h2>
         </div>
         <div class="category-grid">
           <button class="category-tile" type="button" data-category="bags">
-            <img src="ysl官网素材/女/小皮具-Saint Laurent圣罗兰官方网站 _ YSL.CN_files/8239510EN041000_A.jpg" alt="圣罗兰包袋">
-            <span class="category-label">包袋</span>
+            <img src="ysl官网素材/女/小皮具-Saint Laurent圣罗兰官方网站 _ YSL.CN_files/8239510EN041000_A.jpg" alt="Saint Laurent bags">
+            <span class="category-label">Bags</span>
           </button>
           <button class="category-tile" type="button" data-category="accessories">
-            <img src="ysl官网素材/男/圣罗兰男士查看全部-配饰-Saint Laurent圣罗兰官方网站 _ YSL.CN_files/847812AAB251000_A.jpg" alt="圣罗兰配饰">
-            <span class="category-label">配饰</span>
+            <img src="ysl官网素材/男/圣罗兰男士查看全部-配饰-Saint Laurent圣罗兰官方网站 _ YSL.CN_files/847812AAB251000_A.jpg" alt="Saint Laurent accessories">
+            <span class="category-label">Accessories</span>
           </button>
           <button class="category-tile" type="button" data-category="ready-to-wear">
-            <img src="ysl官网素材/男/26 夏季男士系列 _ Saint Laurent 圣罗兰 _ YSL.CN_files/862885Y99581000_A.jpg" alt="圣罗兰成衣">
-            <span class="category-label">成衣</span>
+            <img src="ysl官网素材/男/26 夏季男士系列 _ Saint Laurent 圣罗兰 _ YSL.CN_files/862885Y99581000_A.jpg" alt="Saint Laurent ready-to-wear">
+            <span class="category-label">Ready-to-wear</span>
           </button>
           <button class="category-tile" type="button" data-category="shoes">
-            <img src="ysl官网素材/女/鞋履 新品系列 _ Saint Laurent 圣罗兰 _ YSL.CN_files/8705051TVAN6206_A.jpg" alt="圣罗兰鞋履">
-            <span class="category-label">鞋履</span>
+            <img src="ysl官网素材/女/鞋履 新品系列 _ Saint Laurent 圣罗兰 _ YSL.CN_files/8705051TVAN6206_A.jpg" alt="Saint Laurent shoes">
+            <span class="category-label">Shoes</span>
           </button>
         </div>
       </div>
@@ -2491,35 +2380,80 @@
 
   <footer class="site-footer">
     <div class="footer-row">
-      <span class="footer-region">配送至：中国大陆地区</span>
+      <span class="footer-region">Shipping to: Mainland China</span>
       <span class="footer-sep" aria-hidden="true"></span>
-      <a href="#categories">客户服务</a>
-      <a href="#categories">配送</a>
-      <a href="#categories">退货</a>
-      <a href="#categories">联系我们</a>
-      <a href="#categories">追踪订单</a>
+      <a href="#categories">Client Service</a>
+      <a href="#categories">Delivery</a>
+      <a href="#categories">Returns</a>
+      <a href="#categories">Contact us</a>
+      <a href="#categories">Track order</a>
       <a href="#categories">400 001 1599</a>
       <span class="footer-sep" aria-hidden="true"></span>
-      <a href="#categories">寻找专卖店</a>
-      <a href="#categories">职业生涯</a>
-      <a href="#categories">法律声明</a>
-      <a href="#categories">隐私政策</a>
-      <a href="#categories">订阅时事通讯</a>
+      <a href="#categories">Store Locator</a>
+      <a href="#categories">Careers</a>
+      <a href="#categories">Legal notice</a>
+      <a href="#categories">Privacy policy</a>
+      <a href="#categories">Newsletter</a>
     </div>
     <div class="footer-legal">
-      <span>© 2026 圣罗兰(上海)贸易有限公司</span>
-      <span>沪 ICP 备 20006710 号 -1</span>
-      <span>沪公网安备 31010602005654 号</span>
+      <span>© 2026 Saint Laurent (Shanghai) Trading Co., Ltd.</span>
+      <span>Shanghai ICP Filing No. 20006710-1</span>
+      <span>Shanghai Public Security Network Filing No. 31010602005654</span>
     </div>
   </footer>
 
-  <div class="toast" id="toast">已加入</div>
+  <!-- Fixed chat dock: mode panel + search bar (see CHATBOT_CONFIG in script) -->
+  <div class="chat-dock" id="chat-dock">
+    <div class="chat-mode-panel" id="chat-mode-panel" aria-hidden="true">
+      <p class="chat-mode-kicker">Saint Laurent AI Gift Concierge</p>
+      <div class="chat-mode-tabs" role="tablist" aria-label="Concierge modes">
+        <button class="chat-mode-tab" type="button" role="tab" data-chat-mode="need" aria-selected="false">Search by Need</button>
+        <button class="chat-mode-tab" type="button" role="tab" data-chat-mode="style" aria-selected="false">Browse by Style</button>
+        <button class="chat-mode-tab" type="button" role="tab" data-chat-mode="occasion" aria-selected="false">Shop by Occasion</button>
+      </div>
+      <div class="chat-mode-chips" id="chat-mode-chips" role="group" aria-label="Suggested prompts"></div>
+    </div>
+    <form class="chat-bar chat-bar-fixed" id="chat-bar" aria-label="Qixi gift concierge input">
+      <div class="chat-eyebrow" id="chat-eyebrow">Qixi Welcome</div>
+      <div class="chat-main">
+        <button class="chat-action" id="chat-plus" type="button" aria-label="Open concierge modes" aria-controls="chat-mode-panel" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <path d="M12 5v14M5 12h14"></path>
+          </svg>
+        </button>
+        <div class="bar-divider"></div>
+        <div class="bar-input-wrap">
+          <input class="chat-input" id="chat-input" type="text" autocomplete="off" spellcheck="false" aria-label="Describe your Qixi gifting brief" placeholder="">
+          <div class="bar-placeholder" id="bar-placeholder">今天想为谁挑选七夕礼赠？</div>
+          <div class="chat-status">Curating your Saint Laurent edit…</div>
+        </div>
+        <button class="chat-action send-action" type="submit" aria-label="Send">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 19V5"></path>
+            <path d="m5 12 7-7 7 7"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="chat-chips" id="chat-chips" aria-hidden="true"></div>
+    </form>
+  </div>
+
+  <div class="curating-overlay" id="curating-overlay" aria-hidden="true" aria-live="polite">
+    <div class="curating-inner">
+      <svg class="curating-wordmark" viewBox="0 0 140 32" width="200" height="46" role="img" aria-label="Saint Laurent">
+        <use href="#ysl-wordmark"></use>
+      </svg>
+      <p class="curating-copy">Curating your <em>Saint Laurent</em> edit…</p>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Added</div>
 
   <div class="drawer" id="drawer" aria-hidden="true">
     <div class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
       <div class="drawer-head">
-        <h3 id="drawer-title">收藏清单</h3>
-        <button class="close-btn" type="button" id="drawer-close" aria-label="关闭">&times;</button>
+        <h3 id="drawer-title">Wishlist</h3>
+        <button class="close-btn" type="button" id="drawer-close" aria-label="Close">&times;</button>
       </div>
       <div class="drawer-items" id="drawer-items"></div>
     </div>
@@ -2531,26 +2465,26 @@
         <img id="detail-image" src="" alt="">
       </div>
       <div class="detail-copy">
-        <button class="close-btn" type="button" id="detail-close" aria-label="关闭">&times;</button>
+        <button class="close-btn" type="button" id="detail-close" aria-label="Close">&times;</button>
         <div class="product-kicker" id="detail-category"></div>
         <h3 id="detail-name"></h3>
         <div class="detail-price" id="detail-price"></div>
         <div class="tag-row" id="detail-tags"></div>
         <div class="detail-block">
-          <span>材质</span>
+          <span>Materials</span>
           <p id="detail-materials"></p>
         </div>
         <div class="detail-block">
-          <span>搭配建议</span>
+          <span>How to wear</span>
           <p id="detail-styling"></p>
         </div>
         <div class="detail-block">
-          <span>推荐理由</span>
+          <span>Why we chose it</span>
           <p id="detail-reason"></p>
         </div>
         <div class="detail-actions">
-          <button class="secondary-btn" type="button" id="detail-wishlist">加入收藏</button>
-          <button class="secondary-btn" type="button" id="detail-bag">加入购物袋</button>
+          <button class="secondary-btn" type="button" id="detail-wishlist">Save to wishlist</button>
+          <button class="secondary-btn" type="button" id="detail-bag">Add to bag</button>
         </div>
       </div>
     </div>
@@ -2561,99 +2495,99 @@
       var products = [
         {
           id: "sl-loulou-micro",
-          name: "LOULOU 小羊皮微型手袋",
-          category: "包袋",
+          name: "LOULOU lambskin micro bag",
+          category: "Bags",
           price: 8200,
           image: "ysl官网素材/女/小皮具-Saint Laurent圣罗兰官方网站 _ YSL.CN_files/823962AAEAX1000_A.jpg",
           tags: ["classic-minimal", "gift-for-her", "dinner", "self-gift"],
           recipients: ["her", "neutral"],
-          material: "小羊皮绗缝包身，搭配链条肩带与紧凑廓形。",
-          styling: "适合黑色连衣裙、利落西装外套或简洁夏日晚餐造型。",
-          reason: "小号标志性包袋既有礼物感，也能在七夕之后长期日常使用。"
+          material: "Quilted lambskin with chain strap and a compact silhouette.",
+          styling: "Pairs with a black dress, sharp blazer, or a clean summer dinner look.",
+          reason: "An iconic mini bag—gift-worthy now, worn long after Qixi."
         },
         {
           id: "sl-cassandre-cube",
-          name: "CASSANDRE MATELASSE CARRE 迷你立方体链条包",
-          category: "小皮具",
+          name: "CASSANDRE MATELASSE CARRE mini cube chain bag",
+          category: "Small leather goods",
           price: 4300,
           image: "ysl官网素材/女/小皮具-Saint Laurent圣罗兰官方网站 _ YSL.CN_files/773592AABVP1000_A.jpg",
           tags: ["classic-minimal", "gift-for-her", "budget", "dinner", "self-gift"],
           recipients: ["her", "neutral"],
-          material: "羊皮革绗缝包身，配以 Cassandre 标志。",
-          styling: "可作为晚餐约会、纪念日或犒赏自己的轻量礼物。",
-          reason: "预算友好且有明确圣罗兰识别度，是七夕入门奢华礼物。"
+          material: "Quilted lambskin with the Cassandre monogram.",
+          styling: "A light gift for dinner dates, anniversaries, or treating yourself.",
+          reason: "An accessible entry to Saint Laurent—clear signatures, unmistakable Qixi polish."
         },
         {
           id: "sl-cassandre-belt",
-          name: "字母标志方扣光面皮窄款腰带",
-          category: "配饰",
+          name: "Monogram square-buckle smooth leather belt",
+          category: "Accessories",
           price: 3550,
           image: "ysl官网素材/女/配饰-Saint Laurent圣罗兰官方网站 _ YSL.CN_files/554465BOO0W1000_A.jpg",
           tags: ["classic-minimal", "budget", "gift-for-her", "self-gift", "anniversary"],
           recipients: ["her", "neutral"],
-          material: "光面皮革，搭配字母标志方扣。",
-          styling: "可搭配西装外套、连衣裙或夏夜城市造型。",
-          reason: "尺码风险相对低，标志感清晰，适合经典极简风格的送礼需求。"
+          material: "Smooth leather with a monogram square buckle.",
+          styling: "With tailoring, dresses, or a summer city-night look.",
+          reason: "Low sizing risk, strong codes—ideal for classic minimal gifting."
         },
         {
           id: "sl-women-sandal",
-          name: "26 夏季女士系列高跟凉鞋",
-          category: "鞋履",
+          name: "Summer 26 women's heeled sandals",
+          category: "Shoes",
           price: 9600,
           image: "ysl官网素材/女/鞋履 新品系列 _ Saint Laurent 圣罗兰 _ YSL.CN_files/8705051TVAN6206_A.jpg",
           tags: ["polished-elegance", "dinner", "anniversary", "resort", "gift-for-her"],
           recipients: ["her", "neutral"],
-          material: "女士夏季系列皮革高跟凉鞋。",
-          styling: "适合黑色长裙、修身外套或纪念日晚餐造型。",
-          reason: "为烛光晚餐和纪念日场景增加更正式、精致的收尾。"
+          material: "Leather heeled sandals from the women's summer line.",
+          styling: "With a black gown, fitted jacket, or anniversary dinner.",
+          reason: "A formal, refined finish for candlelit dinners and anniversaries."
         },
         {
           id: "sl-city-backpack",
-          name: "黑色皮革经典 CITY 背包",
-          category: "包袋",
+          name: "Classic CITY backpack in black leather",
+          category: "Bags",
           price: 14200,
           image: "ysl官网素材/男/圣罗兰男士旅行袋-查看全部-探索圣罗兰经典双肩包_行李包_公文包-SAINT LAURENT圣罗兰官方网站 _ YSL.CN_files/534967AAE8M1000_A.jpg",
           tags: ["black-cool", "gift-for-him", "weekend", "city-night", "travel"],
           recipients: ["him", "neutral"],
-          material: "黑色皮革背包，经典 CITY 廓形。",
-          styling: "适合周末短途、黑色丹宁或低调城市通勤造型。",
-          reason: "实用但足够锋利，适合给男友的黑色酷感七夕礼物。"
+          material: "Black leather in the classic CITY silhouette.",
+          styling: "For weekend escapes, black denim, or understated city commutes.",
+          reason: "Practical yet sharp—the black, cool Qixi gift for him."
         },
         {
           id: "sl-la66-belt",
-          name: "LA 66 光滑皮革腰带",
-          category: "配饰",
+          name: "LA 66 smooth leather belt",
+          category: "Accessories",
           price: 4200,
           image: "ysl官网素材/男/圣罗兰男士查看全部-配饰-Saint Laurent圣罗兰官方网站 _ YSL.CN_files/847812AAB251000_A.jpg",
           tags: ["black-cool", "classic-minimal", "gift-for-him", "budget", "city-night"],
           recipients: ["him"],
-          material: "光滑皮革腰带，搭配 LA 66 搭扣。",
-          styling: "适合黑色长裤、丹宁或剪裁外套。",
-          reason: "低调、实用、有品牌识别度，适合预算内的男士礼物。"
+          material: "Smooth leather with the LA 66 buckle.",
+          styling: "With black trousers, denim, or tailored outerwear.",
+          reason: "Understated, wearable, unmistakably Saint Laurent—within budget for him."
         },
         {
           id: "sl-men-tailoring",
-          name: "26 夏季男士系列西装夹克",
-          category: "成衣",
+          name: "Summer 26 men's tailored jacket",
+          category: "Ready-to-wear",
           price: 18500,
           image: "ysl官网素材/男/26 夏季男士系列 _ Saint Laurent 圣罗兰 _ YSL.CN_files/862885Y99581000_A.jpg",
           tags: ["polished-elegance", "gift-for-him", "anniversary", "dinner", "city-night"],
           recipients: ["him", "neutral"],
-          material: "圣罗兰男士夏季系列剪裁成衣。",
-          styling: "搭配修身长裤与黑色皮鞋，适合纪念日晚餐。",
-          reason: "更高预算下的正式礼物选择，强调利落优雅和仪式感。"
+          material: "Saint Laurent men's summer tailoring.",
+          styling: "With slim trousers and black leather shoes for anniversary dinner.",
+          reason: "A formal, elevated gift—polished elegance with ceremony."
         },
         {
           id: "sl-men-loafer",
-          name: "男士黑色乐福鞋",
-          category: "鞋履",
+          name: "Men's black leather loafers",
+          category: "Shoes",
           price: 8500,
           image: "ysl官网素材/男/男士鞋履 新品系列 _ Saint Laurent 圣罗兰 _ YSL.CN_files/841196AAD4X1000_A.jpg",
           tags: ["black-cool", "polished-elegance", "gift-for-him", "weekend", "dinner"],
           recipients: ["him", "neutral"],
-          material: "男士系列黑色皮革乐福鞋。",
-          styling: "适合晚餐约会、画廊下午或周末城市旅行。",
-          reason: "锋利但好穿，是男士七夕礼物里兼顾风格和实用性的选择。"
+          material: "Men's black leather loafers.",
+          styling: "For dinner dates, gallery afternoons, or weekend city travel.",
+          reason: "Sharp yet easy to wear—style and utility for his Qixi gift."
         }
       ];
 
@@ -2663,38 +2597,80 @@
         style: "classic-minimal",
         budget: 8000,
         category: null,
-        source: "默认七夕礼赠需求"
+        source: "Default Qixi gifting brief"
       };
 
       var wishlist = [];
       var bag = [];
       var activeProduct = null;
-      var activePromptIndex = 0;
-      var promptScenes = [
-        { eyebrow: "七夕欢迎",   value: "今天想为谁挑选礼赠?",                chips: ["送给她", "送给他", "犒赏自己"] },
-        { eyebrow: "精品入口",   value: "想看女士还是男士的七夕系列?",        chips: ["女士", "男士", "2026 秋冬"] },
-        { eyebrow: "完整造型",   value: "为约会场景搭配一套整体造型",          chips: ["晚宴", "都市夜", "周末"] },
-        { eyebrow: "风格氛围",   value: "想要温柔晚宴感还是利落都市感?",      chips: ["经典极简", "黑色酷感", "利落优雅"] },
-        { eyebrow: "心情板",     value: "围绕这种轮廓继续探索",                chips: ["羊绒", "晚宴", "光泽感"] },
-        { eyebrow: "单品甄选",   value: "对比心仪单品并加入收藏",              chips: ["手袋", "鞋履", "配饰"] },
-        { eyebrow: "灵感提示",   value: "为我生成专属购物路径",                chips: ["夏夜晚宴", "柔和色调", "天然面料"] }
-      ];
+      var activeChatMode = null;
+
+      /* ── CHATBOT_CONFIG — edit mode labels, chips, and scroll placeholders here ── */
+      var CHATBOT_CONFIG = {
+        modes: {
+          need: {
+            label: "Search by Need",
+            suggestions: [
+              { text: "A romantic red look" },
+              { text: "A gift under ¥10,000", budget: 10000 },
+              { text: "A statement evening bag", category: "Bags" },
+              { text: "Silk pieces for summer nights", occasion: "resort" },
+              { text: "Jewelry for a subtle love note", category: "Accessories" },
+              { text: "A complete dinner-date outfit", occasion: "dinner" }
+            ]
+          },
+          style: {
+            label: "Browse by Style",
+            suggestions: [
+              { text: "Classic minimal", style: "classic-minimal" },
+              { text: "Black cool", style: "black-cool" },
+              { text: "Polished elegance", style: "polished-elegance" },
+              { text: "Soft romantic", style: "classic-minimal" },
+              { text: "Parisian night", style: "polished-elegance", occasion: "city-night" },
+              { text: "Modern muse", style: "black-cool" }
+            ]
+          },
+          occasion: {
+            label: "Shop by Occasion",
+            suggestions: [
+              { text: "Fine dining", occasion: "dinner" },
+              { text: "Rooftop drinks", occasion: "city-night" },
+              { text: "Qixi date night", occasion: "dinner" },
+              { text: "Weekend escape", occasion: "weekend" },
+              { text: "Hawaii trip", occasion: "resort" },
+              { text: "Meet-the-parents dinner", occasion: "dinner", style: "polished-elegance" },
+              { text: "Anniversary gift", occasion: "anniversary" },
+              { text: "Sunset walk", occasion: "city-night" }
+            ]
+          }
+        },
+        sectionPlaceholders: [
+          { sel: "#gift-finder", placeholder: "今天想为谁挑选七夕礼赠？", eyebrow: "Qixi Gifts", productScene: false },
+          { sel: "#recommendations-section", placeholder: "Refine these recommendations…", eyebrow: "Your edit", productScene: true },
+          { sel: "#style-search", placeholder: "Describe the style you want to gift…", eyebrow: "Style", productScene: false },
+          { sel: "#occasions", placeholder: "Shop by a Qixi moment…", eyebrow: "Occasions", productScene: false },
+          { sel: "#categories", placeholder: "Explore bags, accessories, ready-to-wear, shoes…", eyebrow: "Categories", productScene: false },
+          { sel: "#boutique-guide", placeholder: "Choose a category or moment to begin…", eyebrow: "Boutique", productScene: false },
+          { sel: "#look-results", placeholder: "Build a complete Qixi look…", eyebrow: "Complete looks", productScene: false },
+          { sel: ".bc-product-selection", placeholder: "Compare pieces and add to your bag…", eyebrow: "Selection", productScene: true }
+        ]
+      };
 
       var styleLabels = {
-        "classic-minimal": "经典极简",
-        "black-cool": "黑色酷感",
-        "polished-elegance": "利落优雅"
+        "classic-minimal": "Classic minimal",
+        "black-cool": "Black cool",
+        "polished-elegance": "Polished elegance"
       };
 
       var occasionLabels = {
-        qixi: "中国七夕",
-        dinner: "烛光晚餐",
-        "city-night": "夏夜城市",
-        weekend: "周末短途",
-        resort: "海边度假",
-        anniversary: "纪念日晚",
-        "self-gift": "犒赏自己",
-        budget: "预算内奢华"
+        qixi: "Qixi Festival",
+        dinner: "Candlelit dinner",
+        "city-night": "Summer city night",
+        weekend: "Weekend escape",
+        resort: "Seaside resort",
+        anniversary: "Anniversary evening",
+        "self-gift": "For yourself",
+        budget: "Luxury within budget"
       };
 
       function money(value) {
@@ -2703,11 +2679,11 @@
 
       function labelTag(tag) {
         var tagLabels = {
-          "gift-for-her": "送给她",
-          "gift-for-him": "送给他",
-          travel: "旅行",
-          budget: "预算内",
-          "self-gift": "犒赏自己"
+          "gift-for-her": "For her",
+          "gift-for-him": "For him",
+          travel: "Travel",
+          budget: "Within budget",
+          "self-gift": "For yourself"
         };
         return styleLabels[tag] || occasionLabels[tag] || tagLabels[tag] || tag.replace(/-/g, " ");
       }
@@ -2717,19 +2693,32 @@
         var next = {
           recipient: /boyfriend|husband|him|男友|老公|男士|先生|他/.test(lower) ? "him" : (/myself|self|自己|犒赏|本人/.test(lower) ? "neutral" : "her"),
           occasion: "qixi",
-          style: /black|cool|leather|酷|黑|皮革/.test(lower) ? "black-cool" : (/formal|polished|elegance|dinner|anniversary|优雅|正式|纪念|利落|晚餐/.test(lower) ? "polished-elegance" : "classic-minimal"),
-          budget: /3000|3,000|三千|低预算/.test(lower) ? 3000 : (/8000|8,000|八千/.test(lower) ? 8000 : (/高预算|预算高|更贵|higher/.test(lower) ? 20000 : 8000)),
-          category: /包|bag/.test(lower) ? "包袋" : (/鞋|shoe|heel|loafer/.test(lower) ? "鞋履" : (/belt|accessor|配饰|腰带/.test(lower) ? "配饰" : null)),
-          source: "一句话需求"
+          style: /black|cool|leather|muse|酷|黑|皮革/.test(lower) ? "black-cool" : (/formal|polished|elegance|parisian|romantic|优雅|正式|纪念|利落/.test(lower) ? "polished-elegance" : "classic-minimal"),
+          budget: /10,?000|10000|一万/.test(lower) ? 10000 : (/3000|3,000|三千|低预算/.test(lower) ? 3000 : (/8000|8,000|八千/.test(lower) ? 8000 : (/高预算|预算高|更贵|higher/.test(lower) ? 20000 : 8000))),
+          category: /jewelry|accessor|belt|配饰|腰带/.test(lower) ? "Accessories" : (/包|bag|evening bag|handbag/.test(lower) ? "Bags" : (/鞋|shoe|heel|loafer|sandal/.test(lower) ? "Shoes" : (/silk|jacket|成衣|tailor/.test(lower) ? "Ready-to-wear" : null))),
+          source: "One-line brief"
         };
-        if (/dinner|晚餐|约会|烛光/.test(lower)) next.occasion = "dinner";
-        if (/city|night|城市|夏夜|夜/.test(lower)) next.occasion = "city-night";
-        if (/weekend|travel|getaway|旅行|周末|短途/.test(lower)) next.occasion = "weekend";
-        if (/resort|holiday|vacation|度假|海边/.test(lower)) next.occasion = "resort";
+        if (/fine dining|candlelit|dinner date|meet-the-parents|晚餐|约会|烛光|date night/.test(lower)) next.occasion = "dinner";
+        if (/rooftop|city night|sunset walk|夏夜|城市|夜/.test(lower)) next.occasion = "city-night";
+        if (/weekend|escape|getaway|旅行|周末|短途/.test(lower)) next.occasion = "weekend";
+        if (/hawaii|resort|seaside|silk|summer night|度假|海边/.test(lower)) next.occasion = "resort";
         if (/anniversary|纪念/.test(lower)) next.occasion = "anniversary";
         if (/self|myself|自己|犒赏/.test(lower)) next.occasion = "self-gift";
-        if (/budget-friendly|under|预算内|低预算|控制预算|预算有限/.test(lower)) next.occasion = "budget";
+        if (/under ¥|budget|预算内|低预算|控制预算|预算有限|gift under/.test(lower)) next.occasion = "budget";
+        if (/romantic red|red look/.test(lower)) {
+          next.recipient = "her";
+          next.style = "polished-elegance";
+        }
         state = next;
+      }
+
+      function applySuggestionMeta(meta) {
+        if (!meta) return;
+        if (meta.style) state.style = meta.style;
+        if (meta.occasion) state.occasion = meta.occasion;
+        if (meta.category) state.category = meta.category;
+        if (meta.budget) state.budget = meta.budget;
+        state.source = "Concierge suggestion";
       }
 
       function scoreProduct(product) {
@@ -2758,10 +2747,10 @@
 
       function currentChips() {
         var chips = [];
-        chips.push(state.recipient === "him" ? "送给他" : state.recipient === "her" ? "送给她" : "犒赏自己");
-        chips.push(occasionLabels[state.occasion] || "中国七夕");
+        chips.push(state.recipient === "him" ? "For him" : state.recipient === "her" ? "For her" : "For yourself");
+        chips.push(occasionLabels[state.occasion] || "Qixi Festival");
         chips.push(styleLabels[state.style]);
-        chips.push(state.budget <= 3000 ? "人民币 3,000 以内" : state.budget <= 8000 ? "人民币 3,000 至 8,000" : "人民币 8,000 以上");
+        chips.push(state.budget <= 3000 ? "Under RMB 3,000" : state.budget <= 8000 ? "RMB 3,000–8,000" : "Above RMB 8,000");
         if (state.category) chips.push(state.category);
         return chips;
       }
@@ -2773,11 +2762,11 @@
         var chips = currentChips();
         intentCopy.classList.add("refresh");
         window.setTimeout(function () {
-          intentCopy.textContent = chips.join("，") + "。";
+          intentCopy.textContent = chips.join(", ") + ".";
           intentCopy.classList.remove("refresh");
         }, 140);
         var summary = document.getElementById("result-summary");
-        if (summary) summary.textContent = "已为你锁定：" + chips.join("，") + "。以下单品围绕风格、预算与七夕场景甄选。";
+        if (summary) summary.textContent = "Curated for you: " + chips.join(", ") + ". Pieces selected for style, budget, and your Qixi moment.";
         var intentChipsEl = document.getElementById("intent-chips");
         if (intentChipsEl) intentChipsEl.innerHTML = chips.map(function (chip) {
           return '<span class="intent-chip">' + chip + '</span>';
@@ -2809,9 +2798,9 @@
                 '<div class="tag-row">' + tags.map(function (tag) { return '<span class="tag">' + labelTag(tag) + '</span>'; }).join("") + '</div>',
                 '<p class="reason">' + product.reason + '</p>',
                 '<div class="card-actions">',
-                  '<button type="button" data-action="wishlist" data-id="' + product.id + '">收藏</button>',
-                  '<button type="button" data-action="bag" data-id="' + product.id + '">加入购物袋</button>',
-                  '<button class="detail-link" type="button" data-action="detail" data-id="' + product.id + '">查看详情</button>',
+                  '<button type="button" data-action="wishlist" data-id="' + product.id + '">Save</button>',
+                  '<button type="button" data-action="bag" data-id="' + product.id + '">Add to bag</button>',
+                  '<button class="detail-link" type="button" data-action="detail" data-id="' + product.id + '">View details</button>',
                 '</div>',
               '</div>',
             '</article>'
@@ -2827,12 +2816,12 @@
         // Add refinement buttons
         var refinementHtml = [
           '<div class="refinement-section">',
-            '<p style="width: 100%; text-align: center; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: rgba(0,0,0,.5); margin-bottom: 16px;">快速筛选</p>',
-            '<button class="refinement-btn" type="button" data-refine="more-iconic">更多经典</button>',
-            '<button class="refinement-btn" type="button" data-refine="bags-only">仅显示包袋</button>',
-            '<button class="refinement-btn" type="button" data-refine="lower-budget">预算 ¥3,000 以内</button>',
-            '<button class="refinement-btn" type="button" data-refine="more-formal">更多正式感</button>',
-            '<button class="refinement-btn" type="button" data-refine="more-black">更多黑色</button>',
+            '<p style="width: 100%; text-align: center; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: rgba(0,0,0,.5); margin-bottom: 16px;">Quick filters</p>',
+            '<button class="refinement-btn" type="button" data-refine="more-iconic">More iconic</button>',
+            '<button class="refinement-btn" type="button" data-refine="bags-only">Bags only</button>',
+            '<button class="refinement-btn" type="button" data-refine="lower-budget">Under ¥3,000</button>',
+            '<button class="refinement-btn" type="button" data-refine="more-formal">More formal</button>',
+            '<button class="refinement-btn" type="button" data-refine="more-black">More black</button>',
           '</div>'
         ].join("");
         
@@ -2859,7 +2848,7 @@
       }
 
       // Maps Chinese state.category labels to the data-category attributes on .bc-image-card
-      var categoryKeyMap = { "包袋": "bags", "鞋履": "shoes", "配饰": "accessories", "成衣": "ready-to-wear" };
+      var categoryKeyMap = { "Bags": "bags", "Shoes": "shoes", "Accessories": "accessories", "Ready-to-wear": "ready-to-wear", "Small leather goods": "accessories" };
 
       function filterLookCards() {
         var section = document.getElementById("look-results");
@@ -2938,11 +2927,11 @@
         var title = document.getElementById("drawer-title");
         var items = document.getElementById("drawer-items");
         if (type === "bag") {
-          title.textContent = "购物袋";
-          items.innerHTML = drawerTemplate(bag, "购物袋为空。可从推荐单品中加入商品。");
+          title.textContent = "Bag";
+          items.innerHTML = drawerTemplate(bag, "Your bag is empty. Add pieces from your recommendations.");
         } else {
-          title.textContent = "收藏清单";
-          items.innerHTML = drawerTemplate(wishlist, "收藏清单为空。可先收藏一件七夕推荐单品。");
+          title.textContent = "Wishlist";
+          items.innerHTML = drawerTemplate(wishlist, "Your wishlist is empty. Save a Qixi recommendation to begin.");
         }
         drawer.classList.add("open");
         drawer.setAttribute("aria-hidden", "false");
@@ -2985,54 +2974,127 @@
         }
       }
 
-      function submitPrompt(text) {
-        if (text && text.trim()) analyzePrompt(text.trim());
-        var bar = document.getElementById("chat-bar");
-        bar.classList.add("thinking");
-        closeGuide();
-        window.setTimeout(function () {
-          renderAll();
-          bar.classList.remove("thinking");
-          document.getElementById("chat-input").value = "";
-          updatePlaceholder();
-          scrollToResults();
-        }, 520);
-      }
-
-      function setGuideTriggers(open) {
-        ["chat-plus"].forEach(function (id) {
-          var trigger = document.getElementById(id);
-          if (trigger) trigger.setAttribute("aria-expanded", open ? "true" : "false");
-        });
-      }
-
-      function isHeroGuideAvailable() {
-        var rect = document.getElementById("gift-finder").getBoundingClientRect();
-        var activationLine = window.innerHeight * 0.58;
-        return rect.top <= activationLine && rect.bottom >= activationLine;
-      }
-
-      function openGuide() {
-        if (!isHeroGuideAvailable()) {
-          closeGuide();
-          return;
-        }
-        var overlay = document.getElementById("guide-overlay");
-        var hero = document.getElementById("gift-finder");
-        document.body.classList.add("guide-active");
-        hero.classList.add("guide-open");
+      function showCuratingOverlay() {
+        var overlay = document.getElementById("curating-overlay");
+        if (!overlay) return;
         overlay.classList.add("open");
         overlay.setAttribute("aria-hidden", "false");
-        setGuideTriggers(true);
+        document.body.classList.add("curating-active");
       }
 
-      function closeGuide() {
-        var overlay = document.getElementById("guide-overlay");
-        document.body.classList.remove("guide-active");
-        document.getElementById("gift-finder").classList.remove("guide-open");
+      function hideCuratingOverlay() {
+        var overlay = document.getElementById("curating-overlay");
+        if (!overlay) return;
         overlay.classList.remove("open");
         overlay.setAttribute("aria-hidden", "true");
-        setGuideTriggers(false);
+        document.body.classList.remove("curating-active");
+      }
+
+      function submitPrompt(text, meta) {
+        var bar = document.getElementById("chat-bar");
+        var input = document.getElementById("chat-input");
+        if (text && text.trim()) {
+          analyzePrompt(text.trim());
+          if (input) input.value = text.trim();
+        }
+        if (meta) applySuggestionMeta(meta);
+        closeChatPanel();
+        if (bar) bar.classList.add("thinking");
+        showCuratingOverlay();
+        window.setTimeout(function () {
+          renderAll();
+          hideCuratingOverlay();
+          if (bar) bar.classList.remove("thinking");
+          updatePlaceholder();
+          scrollToResults();
+        }, 1480);
+      }
+
+      function setChatPanelTriggers(open) {
+        var trigger = document.getElementById("chat-plus");
+        if (trigger) trigger.setAttribute("aria-expanded", open ? "true" : "false");
+      }
+
+      function openChatPanel() {
+        var panel = document.getElementById("chat-mode-panel");
+        if (!panel) return;
+        panel.classList.add("open");
+        panel.setAttribute("aria-hidden", "false");
+        document.body.classList.add("chat-panel-open");
+        setChatPanelTriggers(true);
+        if (!activeChatMode) selectChatMode("need");
+      }
+
+      function closeChatPanel() {
+        var panel = document.getElementById("chat-mode-panel");
+        if (!panel) return;
+        panel.classList.remove("open");
+        panel.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("chat-panel-open");
+        setChatPanelTriggers(false);
+      }
+
+      function toggleChatPanel() {
+        var panel = document.getElementById("chat-mode-panel");
+        if (panel && panel.classList.contains("open")) closeChatPanel();
+        else openChatPanel();
+      }
+
+      function selectChatMode(modeKey) {
+        var mode = CHATBOT_CONFIG.modes[modeKey];
+        if (!mode) return;
+        activeChatMode = modeKey;
+        var panel = document.getElementById("chat-mode-panel");
+        var chipsEl = document.getElementById("chat-mode-chips");
+        document.querySelectorAll(".chat-mode-tab").forEach(function (tab) {
+          var isActive = tab.dataset.chatMode === modeKey;
+          tab.classList.toggle("active", isActive);
+          tab.setAttribute("aria-selected", isActive ? "true" : "false");
+        });
+        if (panel) panel.classList.add("has-mode");
+        if (!chipsEl) return;
+        chipsEl.innerHTML = mode.suggestions.map(function (item) {
+          var attrs = ' type="button" class="chat-suggestion-chip" data-chat-suggestion="' + item.text.replace(/"/g, "&quot;") + '"';
+          if (item.style) attrs += ' data-style="' + item.style + '"';
+          if (item.occasion) attrs += ' data-occasion="' + item.occasion + '"';
+          if (item.category) attrs += ' data-category-label="' + item.category + '"';
+          if (item.budget) attrs += ' data-budget="' + item.budget + '"';
+          return "<button" + attrs + ">" + item.text + "</button>";
+        }).join("");
+      }
+
+      function suggestionMetaFromButton(btn) {
+        if (!btn) return null;
+        var meta = { text: btn.dataset.chatSuggestion || btn.textContent };
+        if (btn.dataset.style) meta.style = btn.dataset.style;
+        if (btn.dataset.occasion) meta.occasion = btn.dataset.occasion;
+        if (btn.dataset.categoryLabel) meta.category = btn.dataset.categoryLabel;
+        if (btn.dataset.budget) meta.budget = parseInt(btn.dataset.budget, 10);
+        return meta;
+      }
+
+      function setSectionPlaceholder(scene) {
+        if (!scene) return;
+        var eyebrow = document.getElementById("chat-eyebrow");
+        var placeholder = document.getElementById("bar-placeholder");
+        var input = document.getElementById("chat-input");
+        var bar = document.getElementById("chat-bar");
+        if (eyebrow) {
+          eyebrow.classList.add("refresh");
+          window.setTimeout(function () {
+            eyebrow.textContent = scene.eyebrow || "Qixi";
+            eyebrow.classList.remove("refresh");
+          }, 180);
+        }
+        if (placeholder) {
+          placeholder.classList.add("placeholder-fading");
+          window.setTimeout(function () {
+            placeholder.textContent = scene.placeholder;
+            if (input && !input.value) input.setAttribute("placeholder", scene.placeholder);
+            placeholder.classList.remove("placeholder-fading");
+          }, 180);
+        }
+        if (bar) bar.classList.toggle("product-scene", !!scene.productScene);
       }
 
       function updatePlaceholder() {
@@ -3041,28 +3103,42 @@
 
       document.getElementById("chat-bar").addEventListener("submit", function (event) {
         event.preventDefault();
-        submitPrompt(document.getElementById("chat-input").value || "我想找一件七夕礼物");
+        submitPrompt(document.getElementById("chat-input").value || "I'm looking for a Qixi gift");
       });
 
       document.getElementById("chat-input").addEventListener("input", updatePlaceholder);
-      document.getElementById("chat-bar").addEventListener("click", function (event) {
-        if (event.target.closest(".send-action") || event.target.closest("#chat-plus")) return;
-        openGuide();
-      });
-      document.getElementById("chat-plus").addEventListener("click", function () {
+      document.getElementById("chat-input").addEventListener("focus", openChatPanel);
+
+      document.getElementById("chat-plus").addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        toggleChatPanel();
         document.getElementById("chat-input").focus();
       });
 
-      if (/[?&]open=guide/.test(window.location.search) || window.location.hash === "#gift-finder") {
-        window.setTimeout(openGuide, 320);
-      }
       document.getElementById("header-search").addEventListener("click", function () {
         document.getElementById("chat-input").focus();
-        openGuide();
+        openChatPanel();
+        window.scrollTo({ top: 0, behavior: "smooth" });
       });
-      window.addEventListener("scroll", function () {
-        if (!isHeroGuideAvailable()) closeGuide();
-      }, { passive: true });
+
+      document.querySelectorAll(".chat-mode-tab").forEach(function (tab) {
+        tab.addEventListener("click", function () {
+          selectChatMode(tab.dataset.chatMode);
+        });
+      });
+
+      document.getElementById("chat-mode-chips").addEventListener("click", function (event) {
+        var chip = event.target.closest(".chat-suggestion-chip");
+        if (!chip) return;
+        event.preventDefault();
+        var meta = suggestionMetaFromButton(chip);
+        submitPrompt(meta.text, meta);
+      });
+
+      document.addEventListener("click", function (event) {
+        if (!event.target.closest("#chat-dock")) closeChatPanel();
+      });
 
       document.addEventListener("click", function (event) {
         var target = event.target.closest("button");
@@ -3077,15 +3153,13 @@
           var styleChip = target.classList.contains("style-chip") ? target : target.closest(".style-chip");
           var newStyle = styleChip.dataset.style;
           state.style = newStyle;
-          state.source = "风格入口";
+          state.source = "Style entry";
           state.category = null;
           state.recipient = "her";
           document.querySelectorAll(".style-chip").forEach(function (chip) {
             chip.classList.toggle("active", chip.dataset.style === newStyle);
           });
-          renderAll();
-          closeGuide();
-          scrollToResults();
+          submitPrompt(styleChip.querySelector(".chip-label") ? styleChip.querySelector(".chip-label").textContent : "", { style: newStyle });
           return;
         }
 
@@ -3094,30 +3168,33 @@
           var occasionChip = target.classList.contains("occasion-chip") ? target : target.closest(".occasion-chip");
           var newOccasion = occasionChip.dataset.occasion;
           state.occasion = newOccasion;
-          state.source = "七夕场景入口";
+          state.source = "Qixi occasion entry";
           state.category = null;
           state.recipient = "her";
           if (state.occasion === "budget") state.budget = 8000;
           document.querySelectorAll(".occasion-chip").forEach(function (chip) {
             chip.classList.toggle("active", chip.dataset.occasion === newOccasion);
           });
-          renderAll();
-          closeGuide();
-          scrollToResults();
+          var occLabel = occasionChip.querySelector(".chip-label");
+          submitPrompt(occLabel ? occLabel.textContent : "", { occasion: newOccasion });
           return;
         }
 
         if (target.dataset.category) {
-          var labels = {
-            bags: "包袋",
-            accessories: "配饰",
-            "ready-to-wear": "成衣",
-            shoes: "鞋履"
+          var catLabels = {
+            bags: "Bags",
+            accessories: "Accessories",
+            "ready-to-wear": "Ready-to-wear",
+            shoes: "Shoes"
           };
-          state.category = labels[target.dataset.category];
-          state.source = "品类入口";
-          renderAll();
-          scrollToResults();
+          state.category = catLabels[target.dataset.category];
+          state.source = "Category entry";
+          if (target.closest(".bc-card, .category-tile")) {
+            submitPrompt("", { category: state.category });
+          } else {
+            renderAll();
+            scrollToResults();
+          }
         }
 
         if (target.dataset.scroll) {
@@ -3128,10 +3205,10 @@
           var refine = target.dataset.refine;
           if (refine === "lower-budget") state.budget = 3000;
           if (refine === "more-iconic") state.style = "classic-minimal";
-          if (refine === "bags-only") state.category = "包袋";
+          if (refine === "bags-only") state.category = "Bags";
           if (refine === "more-formal") state.style = "polished-elegance";
           if (refine === "more-black") state.style = "black-cool";
-          state.source = "快速调整";
+          state.source = "Quick refine";
           renderAll();
           // Update refinement button active state
           document.querySelectorAll(".refinement-btn").forEach(function (btn) {
@@ -3145,12 +3222,12 @@
           if (target.dataset.action === "wishlist") {
             addUnique(wishlist, product);
             updateBadges();
-            showToast("已加入收藏");
+            showToast("Saved to wishlist");
           }
           if (target.dataset.action === "bag") {
             addUnique(bag, product);
             updateBadges();
-            showToast("已加入购物袋");
+            showToast("Added to bag");
           }
           if (target.dataset.action === "detail") openDetail(product);
         }
@@ -3172,19 +3249,20 @@
         if (!activeProduct) return;
         addUnique(wishlist, activeProduct);
         updateBadges();
-        showToast("已加入收藏");
+        showToast("Saved to wishlist");
       });
 
       document.getElementById("detail-bag").addEventListener("click", function () {
         if (!activeProduct) return;
         addUnique(bag, activeProduct);
         updateBadges();
-        showToast("已加入购物袋");
+        showToast("Added to bag");
       });
 
       document.addEventListener("keydown", function (event) {
         if (event.key === "Escape") {
-          closeGuide();
+          closeChatPanel();
+          hideCuratingOverlay();
           closeDrawer();
           closeDetail();
         }
@@ -3216,69 +3294,50 @@
             });
           });
         }
-        document.querySelectorAll(".bc-guide-title, .hero h1").forEach(splitToChars);
-        var heroH1 = document.querySelector(".hero h1");
-        if (heroH1) {
-          heroH1.classList.add("lr-host");
-          var hero = heroH1.closest(".hero");
-          if (hero) requestAnimationFrame(function () { hero.classList.add("lr-ready"); });
+        var landingTitle = document.querySelector("#gift-finder .bc-guide-title");
+        if (landingTitle) {
+          splitToChars(landingTitle);
+          landingTitle.classList.add("lr-host");
+          var landing = document.getElementById("gift-finder");
+          if (landing) requestAnimationFrame(function () { landing.classList.add("lr-ready"); });
         }
       })();
 
-      // ── Per-section chatbot scene (eyebrow + placeholder change on scroll) ──
+      // ── Scroll-synced placeholder (see CHATBOT_CONFIG.sectionPlaceholders) ──
       (function () {
         if (!("IntersectionObserver" in window)) return;
-        var sceneSelectors = [
-          { sel: "#gift-finder",         idx: 0 },
-          { sel: ".bc-hero-panel",       idx: 0 },
-          { sel: "#boutique-guide",      idx: 1 },
-          { sel: ".bc-look-section",     idx: 2 },
-          { sel: ".bc-immersive-panel",  idx: 3 },
-          { sel: ".bc-mood-section",     idx: 4 },
-          { sel: ".bc-product-selection",idx: 5 },
-          { sel: ".bc-prompt-panel",     idx: 6 }
-        ];
-        var nodes = sceneSelectors
-          .map(function (s) { return { el: document.querySelector(s.sel), idx: s.idx }; })
+        var nodes = CHATBOT_CONFIG.sectionPlaceholders
+          .map(function (scene, idx) {
+            return { el: document.querySelector(scene.sel), scene: scene, idx: idx };
+          })
           .filter(function (s) { return s.el; });
         if (!nodes.length) return;
 
         var ratios = new Map();
-        var currentIdx = -1;
-
-        function applyScene(idx) {
-          if (idx === currentIdx) return;
-          var scene = promptScenes[idx];
-          if (!scene) return;
-          currentIdx = idx;
-          var eyebrow = document.getElementById("chat-eyebrow");
-          var placeholder = document.getElementById("bar-placeholder");
-          var input = document.getElementById("chat-input");
-          if (!eyebrow || !placeholder) return;
-          // eyebrow: use the existing .refresh class (blur+y+opacity, .32s)
-          eyebrow.classList.add("refresh");
-          // placeholder: opacity-only fade (avoids transform conflict with translateY(-50%))
-          placeholder.classList.add("placeholder-fading");
-          window.setTimeout(function () {
-            eyebrow.textContent = scene.eyebrow;
-            placeholder.textContent = scene.value;
-            if (input) input.setAttribute("placeholder", scene.value);
-            eyebrow.classList.remove("refresh");
-            placeholder.classList.remove("placeholder-fading");
-          }, 220);
-        }
+        var currentSceneKey = "";
 
         var obs = new IntersectionObserver(function (changes) {
           changes.forEach(function (c) { ratios.set(c.target, c.intersectionRatio); });
-          var bestIdx = -1, bestRatio = 0;
+          var best = null;
+          var bestRatio = 0;
           nodes.forEach(function (s) {
             var r = ratios.get(s.el) || 0;
-            if (r > bestRatio) { bestRatio = r; bestIdx = s.idx; }
+            if (r > bestRatio) {
+              bestRatio = r;
+              best = s;
+            }
           });
-          if (bestRatio >= 0.35 && bestIdx !== -1) applyScene(bestIdx);
-        }, { threshold: [0, 0.35, 0.6, 0.9] });
+          if (bestRatio >= 0.32 && best) {
+            var key = best.idx + best.scene.sel;
+            if (key !== currentSceneKey) {
+              currentSceneKey = key;
+              setSectionPlaceholder(best.scene);
+            }
+          }
+        }, { threshold: [0, 0.25, 0.4, 0.55, 0.75], rootMargin: "-10% 0px -35% 0px" });
 
         nodes.forEach(function (s) { obs.observe(s.el); });
+        setSectionPlaceholder(nodes[0].scene);
       })();
 
       if ("IntersectionObserver" in window) {
