@@ -1,1 +1,0 @@
-bouncex.callbacks["campaign-live-index"]({"campaigns":[],"index":{}});
