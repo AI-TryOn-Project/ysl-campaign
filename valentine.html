@@ -343,6 +343,524 @@
       box-sizing: border-box;
     }
 
+    /* Style Guide — cinematic campaign posters */
+    .vl-style-guide {
+      padding: clamp(72px, 10vw, 120px) 0 clamp(88px, 12vw, 140px);
+      background: var(--black);
+      overflow: hidden;
+    }
+
+    .vl-style-guide-head {
+      padding: 0 clamp(24px, 6vw, 80px) clamp(40px, 6vw, 64px);
+      max-width: 720px;
+    }
+
+    .vl-style-guide-head .vl-subhead {
+      margin-top: 8px;
+    }
+
+    .vl-style-guide-track {
+      display: flex;
+      gap: clamp(14px, 2vw, 22px);
+      padding: 0 clamp(24px, 6vw, 80px) 12px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: clamp(24px, 6vw, 80px);
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .vl-style-guide-track::-webkit-scrollbar { display: none; }
+
+    .vl-sg-card {
+      position: relative;
+      flex: 0 0 clamp(200px, 22vw, 272px);
+      aspect-ratio: 9 / 16;
+      border: 0;
+      padding: 0;
+      border-radius: 2px;
+      overflow: hidden;
+      cursor: pointer;
+      scroll-snap-align: start;
+      background: #0a0a0a;
+      text-align: left;
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity 1s var(--ease),
+        transform 1s var(--ease),
+        box-shadow .55s ease;
+    }
+
+    .vl-style-guide.in-view .vl-sg-card {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .vl-sg-card:nth-child(1) { transition-delay: .08s; }
+    .vl-sg-card:nth-child(2) { transition-delay: .16s; }
+    .vl-sg-card:nth-child(3) { transition-delay: .24s; }
+    .vl-sg-card:nth-child(4) { transition-delay: .32s; }
+    .vl-sg-card:nth-child(5) { transition-delay: .4s; }
+    .vl-sg-card:nth-child(6) { transition-delay: .48s; }
+    .vl-sg-card:nth-child(7) { transition-delay: .56s; }
+    .vl-sg-card:nth-child(8) { transition-delay: .64s; }
+
+    .vl-sg-card-media {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .vl-sg-card-parallax {
+      width: 100%;
+      height: 100%;
+      will-change: transform;
+      transition: transform .12s linear;
+    }
+
+    .vl-sg-card-media img,
+    .style-guide-media {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transform: scale(1.04);
+      transition: transform 1.8s cubic-bezier(.22,1,.36,1), filter 1.2s ease;
+      will-change: transform;
+    }
+
+    .vl-sg-card-media img.style-guide-media,
+    .style-guide-media:not(video) {
+      animation: sg-ken-burns 22s ease-in-out infinite;
+    }
+
+    /* Style Guide Motion Assets — cinematic video cards */
+    .style-guide-card video,
+    .vl-sg-card video.style-guide-media {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transform: scale(1.04);
+      transition: transform 1.8s cubic-bezier(.22,1,.36,1);
+      pointer-events: none;
+      animation: none;
+    }
+
+    @keyframes sg-ken-burns {
+      0%, 100% { transform: scale(1.04) translateY(0); }
+      50% { transform: scale(1.1) translateY(-1.2%); }
+    }
+
+    .vl-sg-card-shade {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.08) 0%, rgba(0,0,0,.22) 38%, rgba(0,0,0,.78) 100%);
+      transition: background .55s ease;
+    }
+
+    .vl-sg-card-glow {
+      position: absolute;
+      inset: 0;
+      border: 1px solid transparent;
+      box-shadow: inset 0 0 0 1px rgba(184,160,108,0);
+      transition: box-shadow .55s ease, border-color .55s ease;
+      pointer-events: none;
+    }
+
+    .vl-sg-card-copy {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 2;
+      padding: clamp(18px, 4vw, 28px) clamp(16px, 3vw, 22px);
+    }
+
+    .vl-sg-card-kicker {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 8px;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      color: rgba(184,160,108,.72);
+      transition: color .45s ease;
+    }
+
+    .vl-sg-card-title {
+      margin: 0 0 8px;
+      font-family: var(--display);
+      font-size: clamp(18px, 2.4vw, 24px);
+      font-weight: 400;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      line-height: 1.15;
+      color: rgba(255,255,255,.82);
+      transition: color .45s ease, text-shadow .45s ease;
+    }
+
+    .vl-sg-card-desc {
+      margin: 0;
+      font-size: 11px;
+      line-height: 1.65;
+      letter-spacing: .04em;
+      color: rgba(255,255,255,.48);
+      transition: color .45s ease;
+    }
+
+    .vl-sg-card:hover .vl-sg-card-media img,
+    .vl-sg-card:hover .style-guide-media,
+    .vl-sg-card:focus-visible .vl-sg-card-media img,
+    .vl-sg-card:focus-visible .style-guide-media {
+      transform: scale(1.12);
+      animation: none;
+    }
+
+    .vl-sg-card:hover .vl-sg-card-shade,
+    .vl-sg-card:focus-visible .vl-sg-card-shade {
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.04) 0%, rgba(0,0,0,.18) 34%, rgba(0,0,0,.72) 100%);
+    }
+
+    .vl-sg-card:hover .vl-sg-card-glow,
+    .vl-sg-card:focus-visible .vl-sg-card-glow {
+      border-color: rgba(184,160,108,.42);
+      box-shadow:
+        inset 0 0 0 1px rgba(184,160,108,.28),
+        0 0 32px rgba(184,160,108,.14);
+    }
+
+    .vl-sg-card:hover .vl-sg-card-title,
+    .vl-sg-card:focus-visible .vl-sg-card-title {
+      color: #fff;
+      text-shadow: 0 0 24px rgba(184,160,108,.18);
+    }
+
+    .vl-sg-card:hover .vl-sg-card-desc,
+    .vl-sg-card:focus-visible .vl-sg-card-desc {
+      color: rgba(255,255,255,.72);
+    }
+
+    .vl-sg-card:hover .vl-sg-card-kicker,
+    .vl-sg-card:focus-visible .vl-sg-card-kicker {
+      color: rgba(184,160,108,.95);
+    }
+
+    /* Style Guide immersive modal */
+    .sg-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 95;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .4s ease;
+    }
+
+    .sg-modal.open {
+      pointer-events: auto;
+      opacity: 1;
+    }
+
+    .sg-modal::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .sg-modal-panel {
+      position: absolute;
+      inset: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background: #050505;
+      color: #fff;
+      transform: translateY(24px);
+      opacity: 0;
+      transition: transform .55s cubic-bezier(.22,1,.36,1), opacity .45s ease;
+    }
+
+    .sg-modal.open .sg-modal-panel {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    body.sg-modal-open { overflow: hidden; }
+
+    .sg-modal-close {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 3;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255,255,255,.28);
+      background: rgba(0,0,0,.55);
+      color: #fff;
+      font-size: 22px;
+      line-height: 1;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: border-color .25s ease, background .25s ease;
+    }
+
+    .sg-modal-close:hover {
+      border-color: rgba(184,160,108,.55);
+      background: rgba(184,160,108,.12);
+    }
+
+    .sg-modal-hero {
+      position: relative;
+      min-height: min(72vh, 820px);
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .sg-modal-hero-media {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .sg-modal-hero-media img,
+    .sg-modal-hero-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transform: scale(1.02);
+    }
+
+    .sg-modal-hero-media img {
+      animation: sg-ken-burns 28s ease-in-out infinite;
+    }
+
+    .sg-modal-hero-media video {
+      pointer-events: none;
+      animation: none;
+    }
+
+    .sg-modal-hero-shade {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.12) 0%, rgba(0,0,0,.35) 42%, rgba(0,0,0,.88) 100%);
+    }
+
+    .sg-modal-hero-copy {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 920px;
+      padding: clamp(48px, 8vw, 96px) clamp(24px, 6vw, 80px);
+    }
+
+    .sg-modal-kicker {
+      margin: 0 0 14px;
+      font-size: 9px;
+      letter-spacing: .34em;
+      text-transform: uppercase;
+      color: rgba(184,160,108,.88);
+    }
+
+    .sg-modal-title {
+      margin: 0 0 16px;
+      font-family: var(--display);
+      font-size: clamp(36px, 7vw, 72px);
+      font-weight: 400;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      line-height: 1.02;
+    }
+
+    .sg-modal-tagline {
+      margin: 0;
+      max-width: 560px;
+      font-size: clamp(14px, 1.8vw, 18px);
+      line-height: 1.75;
+      letter-spacing: .05em;
+      color: rgba(255,255,255,.72);
+    }
+
+    .sg-modal-body {
+      padding: clamp(48px, 8vw, 88px) clamp(24px, 6vw, 80px) clamp(80px, 12vw, 140px);
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .sg-modal-section {
+      margin-bottom: clamp(48px, 7vw, 72px);
+    }
+
+    .sg-modal-section:last-child { margin-bottom: 0; }
+
+    .sg-modal-section-head {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+
+    .sg-modal-section-head h3 {
+      margin: 0;
+      font-size: 11px;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .sg-modal-section-head span {
+      font-size: 10px;
+      letter-spacing: .12em;
+      color: rgba(255,255,255,.42);
+    }
+
+    .sg-modal-note {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.85;
+      letter-spacing: .03em;
+      color: rgba(255,255,255,.68);
+      max-width: 680px;
+    }
+
+    .sg-modal-note + .sg-modal-note { margin-top: 14px; }
+
+    .sg-modal-products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: clamp(16px, 2.5vw, 24px);
+    }
+
+    .sg-product-card {
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+      transition: border-color .3s ease, box-shadow .3s ease, transform .3s ease;
+    }
+
+    .sg-product-card:hover {
+      border-color: rgba(184,160,108,.32);
+      box-shadow: 0 12px 40px rgba(0,0,0,.35);
+      transform: translateY(-2px);
+    }
+
+    .sg-product-link {
+      display: block;
+      width: 100%;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .sg-product-media {
+      aspect-ratio: 4 / 5;
+      background: #111;
+      overflow: hidden;
+    }
+
+    .sg-product-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .7s cubic-bezier(.22,1,.36,1);
+    }
+
+    .sg-product-card:hover .sg-product-media img {
+      transform: scale(1.04);
+    }
+
+    .sg-product-copy {
+      padding: 16px 16px 12px;
+    }
+
+    .sg-product-kicker {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 9px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(184,160,108,.78);
+    }
+
+    .sg-product-copy h4 {
+      margin: 0 0 6px;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      line-height: 1.45;
+    }
+
+    .sg-product-price {
+      margin: 0;
+      font-size: 11px;
+      color: rgba(255,255,255,.55);
+      letter-spacing: .06em;
+    }
+
+    .sg-product-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(255,255,255,.08);
+    }
+
+    .sg-product-actions button {
+      border: 0;
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.78);
+      padding: 11px 10px;
+      font-size: 9px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      transition: background .2s ease, color .2s ease;
+    }
+
+    .sg-product-actions button:hover {
+      background: rgba(184,160,108,.16);
+      color: #fff;
+    }
+
+    .sg-modal-fragrance {
+      padding: clamp(24px, 4vw, 36px);
+      border: 1px solid rgba(184,160,108,.22);
+      background: linear-gradient(135deg, rgba(184,160,108,.08) 0%, rgba(0,0,0,.2) 100%);
+    }
+
+    .sg-modal-fragrance strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 10px;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: rgba(184,160,108,.9);
+      font-weight: 400;
+    }
+
+    .sg-modal-fragrance p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.8;
+      color: rgba(255,255,255,.72);
+    }
+
+    @media (max-width: 720px) {
+      .vl-sg-card { flex-basis: clamp(168px, 58vw, 220px); }
+      .sg-modal-hero { min-height: 58vh; }
+      .sg-modal-products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
     /* 2. Editorial campaign — split panel */
     .vl-campaign {
       display: grid;
@@ -2551,6 +3069,7 @@
       <a class="nav-link desktop-only" href="#collection-intro">Women</a>
       <a class="nav-link desktop-only" href="#gifts-for-him">Men</a>
       <a class="nav-link desktop-only" href="#gifts-for-her">Gifts</a>
+      <a class="nav-link desktop-only" href="#style-guide-section">Style Guide</a>
       <a class="nav-link desktop-only" href="#gift-finder">Qixi Edit</a>
     </div>
     <a class="wordmark" href="index.html" aria-label="Saint Laurent home">
@@ -2598,6 +3117,14 @@
       </div>
     </section>
 
+    <!-- STYLE GUIDE — cinematic style worlds -->
+    <section class="vl-style-guide vl-reveal" id="style-guide-section" aria-label="Style Guide">
+      <div class="vl-style-guide-head">
+        <h2 class="vl-headline">Style Guide</h2>
+      </div>
+      <div class="vl-style-guide-track" id="style-guide-track" role="list"></div>
+    </section>
+
     <!-- Product recommendations (populated by JavaScript after chatbot search) -->
     <section class="section" id="recommendations-section" style="display: none;">
       <div class="section-inner">
@@ -2636,48 +3163,7 @@
           <h2 class="vl-headline">Luxurious Gifts, Undeniably Hers</h2>
           <p class="vl-body">Transform a simple gift into a grand gesture with sculptural bags, silk textures, and gold-toned details.</p>
         </div>
-        <div class="vl-edit-row">
-          <article class="vl-edit-card">
-            <button class="vl-edit-card-link" type="button" data-action="detail" data-id="sl-loulou-micro">
-              <div class="vl-edit-card-media"><img src="ysl官网素材/女/小皮具-Saint Laurent圣罗兰官方网站 _ YSL.CN_files/823962AAEAX1000_A.jpg" alt="LOULOU lambskin micro bag"></div>
-              <div class="vl-edit-card-copy"><span class="vl-edit-kicker">Bags</span><h3>LOULOU lambskin micro bag</h3><p class="vl-edit-price">¥8,200</p></div>
-            </button>
-            <div class="vl-edit-actions">
-              <button type="button" data-action="wishlist" data-id="sl-loulou-micro">Save</button>
-              <button type="button" data-action="bag" data-id="sl-loulou-micro">Add to bag</button>
-            </div>
-          </article>
-          <article class="vl-edit-card">
-            <button class="vl-edit-card-link" type="button" data-action="detail" data-id="sl-cassandre-cube">
-              <div class="vl-edit-card-media"><img src="ysl官网素材/女/小皮具-Saint Laurent圣罗兰官方网站 _ YSL.CN_files/773592AABVP1000_A.jpg" alt="CASSANDRE mini cube chain bag"></div>
-              <div class="vl-edit-card-copy"><span class="vl-edit-kicker">Small leather goods</span><h3>CASSANDRE mini cube chain bag</h3><p class="vl-edit-price">¥4,300</p></div>
-            </button>
-            <div class="vl-edit-actions">
-              <button type="button" data-action="wishlist" data-id="sl-cassandre-cube">Save</button>
-              <button type="button" data-action="bag" data-id="sl-cassandre-cube">Add to bag</button>
-            </div>
-          </article>
-          <article class="vl-edit-card">
-            <button class="vl-edit-card-link" type="button" data-action="detail" data-id="sl-cassandre-belt">
-              <div class="vl-edit-card-media"><img src="ysl官网素材/女/配饰-Saint Laurent圣罗兰官方网站 _ YSL.CN_files/554465BOO0W1000_A.jpg" alt="Monogram square-buckle belt"></div>
-              <div class="vl-edit-card-copy"><span class="vl-edit-kicker">Accessories</span><h3>Monogram square-buckle belt</h3><p class="vl-edit-price">¥3,550</p></div>
-            </button>
-            <div class="vl-edit-actions">
-              <button type="button" data-action="wishlist" data-id="sl-cassandre-belt">Save</button>
-              <button type="button" data-action="bag" data-id="sl-cassandre-belt">Add to bag</button>
-            </div>
-          </article>
-          <article class="vl-edit-card">
-            <button class="vl-edit-card-link" type="button" data-action="detail" data-id="sl-women-sandal">
-              <div class="vl-edit-card-media"><img src="ysl官网素材/女/鞋履 新品系列 _ Saint Laurent 圣罗兰 _ YSL.CN_files/8705051TVAN6206_A.jpg" alt="Summer 26 heeled sandals"></div>
-              <div class="vl-edit-card-copy"><span class="vl-edit-kicker">Shoes</span><h3>Summer 26 heeled sandals</h3><p class="vl-edit-price">¥9,600</p></div>
-            </button>
-            <div class="vl-edit-actions">
-              <button type="button" data-action="wishlist" data-id="sl-women-sandal">Save</button>
-              <button type="button" data-action="bag" data-id="sl-women-sandal">Add to bag</button>
-            </div>
-          </article>
-        </div>
+        <div class="vl-edit-row" id="gifts-for-her-grid"></div>
       </div>
     </section>
 
@@ -2689,48 +3175,7 @@
           <h2 class="vl-headline">Elegant Gifts, Unmistakably His</h2>
           <p class="vl-body">For the one drawn to sharp tailoring, black leather, and quiet confidence.</p>
         </div>
-        <div class="vl-edit-row">
-          <article class="vl-edit-card">
-            <button class="vl-edit-card-link" type="button" data-action="detail" data-id="sl-city-backpack">
-              <div class="vl-edit-card-media"><img src="ysl官网素材/男/圣罗兰男士旅行袋-查看全部-探索圣罗兰经典双肩包_行李包_公文包-SAINT LAURENT圣罗兰官方网站 _ YSL.CN_files/534967AAE8M1000_A.jpg" alt="Classic CITY backpack"></div>
-              <div class="vl-edit-card-copy"><span class="vl-edit-kicker">Bags</span><h3>Classic CITY backpack</h3><p class="vl-edit-price">¥14,200</p></div>
-            </button>
-            <div class="vl-edit-actions">
-              <button type="button" data-action="wishlist" data-id="sl-city-backpack">Save</button>
-              <button type="button" data-action="bag" data-id="sl-city-backpack">Add to bag</button>
-            </div>
-          </article>
-          <article class="vl-edit-card">
-            <button class="vl-edit-card-link" type="button" data-action="detail" data-id="sl-la66-belt">
-              <div class="vl-edit-card-media"><img src="ysl官网素材/男/圣罗兰男士查看全部-配饰-Saint Laurent圣罗兰官方网站 _ YSL.CN_files/847812AAB251000_A.jpg" alt="LA 66 smooth leather belt"></div>
-              <div class="vl-edit-card-copy"><span class="vl-edit-kicker">Accessories</span><h3>LA 66 smooth leather belt</h3><p class="vl-edit-price">¥4,200</p></div>
-            </button>
-            <div class="vl-edit-actions">
-              <button type="button" data-action="wishlist" data-id="sl-la66-belt">Save</button>
-              <button type="button" data-action="bag" data-id="sl-la66-belt">Add to bag</button>
-            </div>
-          </article>
-          <article class="vl-edit-card">
-            <button class="vl-edit-card-link" type="button" data-action="detail" data-id="sl-men-tailoring">
-              <div class="vl-edit-card-media"><img src="ysl官网素材/男/26 夏季男士系列 _ Saint Laurent 圣罗兰 _ YSL.CN_files/862885Y99581000_A.jpg" alt="Summer 26 tailored jacket"></div>
-              <div class="vl-edit-card-copy"><span class="vl-edit-kicker">Ready-to-wear</span><h3>Summer 26 tailored jacket</h3><p class="vl-edit-price">¥18,500</p></div>
-            </button>
-            <div class="vl-edit-actions">
-              <button type="button" data-action="wishlist" data-id="sl-men-tailoring">Save</button>
-              <button type="button" data-action="bag" data-id="sl-men-tailoring">Add to bag</button>
-            </div>
-          </article>
-          <article class="vl-edit-card">
-            <button class="vl-edit-card-link" type="button" data-action="detail" data-id="sl-men-loafer">
-              <div class="vl-edit-card-media"><img src="ysl官网素材/男/男士鞋履 新品系列 _ Saint Laurent 圣罗兰 _ YSL.CN_files/841196AAD4X1000_A.jpg" alt="Men's black leather loafers"></div>
-              <div class="vl-edit-card-copy"><span class="vl-edit-kicker">Shoes</span><h3>Men's black leather loafers</h3><p class="vl-edit-price">¥8,500</p></div>
-            </button>
-            <div class="vl-edit-actions">
-              <button type="button" data-action="wishlist" data-id="sl-men-loafer">Save</button>
-              <button type="button" data-action="bag" data-id="sl-men-loafer">Add to bag</button>
-            </div>
-          </article>
-        </div>
+        <div class="vl-edit-row" id="gifts-for-him-grid"></div>
       </div>
     </section>
 
@@ -2855,6 +3300,31 @@
     </div>
   </div>
 
+  <div class="sg-modal" id="sg-modal" aria-hidden="true">
+    <div class="sg-modal-panel" role="dialog" aria-modal="true" aria-labelledby="sg-modal-title">
+      <button class="sg-modal-close" type="button" id="sg-modal-close" aria-label="Close style guide">&times;</button>
+      <div class="sg-modal-hero">
+        <div class="sg-modal-hero-media"></div>
+        <div class="sg-modal-hero-shade"></div>
+        <div class="sg-modal-hero-copy">
+          <p class="sg-modal-kicker">Saint Laurent Style Guide</p>
+          <h2 class="sg-modal-title" id="sg-modal-title"></h2>
+          <p class="sg-modal-tagline" id="sg-modal-tagline"></p>
+        </div>
+      </div>
+      <div class="sg-modal-body">
+        <section class="sg-modal-section">
+          <div class="sg-modal-section-head"><h3>Styling Notes</h3></div>
+          <p class="sg-modal-note" id="sg-modal-styling"></p>
+        </section>
+        <section class="sg-modal-section">
+          <div class="sg-modal-section-head"><h3>Curated Pieces</h3><span id="sg-modal-product-count"></span></div>
+          <div class="sg-modal-products" id="sg-modal-products"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+
   <div class="detail-modal" id="detail-modal" aria-hidden="true">
     <div class="detail-card" role="dialog" aria-modal="true" aria-labelledby="detail-name">
       <div class="detail-media">
@@ -2886,106 +3356,34 @@
     </div>
   </div>
 
+  <script src="products.js"></script>
   <script>
     (function () {
-      var products = [
-        {
-          id: "sl-loulou-micro",
-          name: "LOULOU lambskin micro bag",
-          category: "Bags",
-          price: 8200,
-          image: "ysl官网素材/女/小皮具-Saint Laurent圣罗兰官方网站 _ YSL.CN_files/823962AAEAX1000_A.jpg",
-          tags: ["classic-minimal", "gift-for-her", "dinner", "self-gift"],
-          recipients: ["her", "neutral"],
-          material: "Quilted lambskin with chain strap and a compact silhouette.",
-          styling: "Pairs with a black dress, sharp blazer, or a clean summer dinner look.",
-          reason: "An iconic mini bag—gift-worthy now, worn long after Qixi."
-        },
-        {
-          id: "sl-cassandre-cube",
-          name: "CASSANDRE MATELASSE CARRE mini cube chain bag",
-          category: "Small leather goods",
-          price: 4300,
-          image: "ysl官网素材/女/小皮具-Saint Laurent圣罗兰官方网站 _ YSL.CN_files/773592AABVP1000_A.jpg",
-          tags: ["classic-minimal", "gift-for-her", "budget", "dinner", "self-gift"],
-          recipients: ["her", "neutral"],
-          material: "Quilted lambskin with the Cassandre monogram.",
-          styling: "A light gift for dinner dates, anniversaries, or treating yourself.",
-          reason: "An accessible entry to Saint Laurent—clear signatures, unmistakable Qixi polish."
-        },
-        {
-          id: "sl-cassandre-belt",
-          name: "Monogram square-buckle smooth leather belt",
-          category: "Accessories",
-          price: 3550,
-          image: "ysl官网素材/女/配饰-Saint Laurent圣罗兰官方网站 _ YSL.CN_files/554465BOO0W1000_A.jpg",
-          tags: ["classic-minimal", "budget", "gift-for-her", "self-gift", "anniversary"],
-          recipients: ["her", "neutral"],
-          material: "Smooth leather with a monogram square buckle.",
-          styling: "With tailoring, dresses, or a summer city-night look.",
-          reason: "Low sizing risk, strong codes—ideal for classic minimal gifting."
-        },
-        {
-          id: "sl-women-sandal",
-          name: "Summer 26 women's heeled sandals",
-          category: "Shoes",
-          price: 9600,
-          image: "ysl官网素材/女/鞋履 新品系列 _ Saint Laurent 圣罗兰 _ YSL.CN_files/8705051TVAN6206_A.jpg",
-          tags: ["polished-elegance", "dinner", "anniversary", "resort", "gift-for-her"],
-          recipients: ["her", "neutral"],
-          material: "Leather heeled sandals from the women's summer line.",
-          styling: "With a black gown, fitted jacket, or anniversary dinner.",
-          reason: "A formal, refined finish for candlelit dinners and anniversaries."
-        },
-        {
-          id: "sl-city-backpack",
-          name: "Classic CITY backpack in black leather",
-          category: "Bags",
-          price: 14200,
-          image: "ysl官网素材/男/圣罗兰男士旅行袋-查看全部-探索圣罗兰经典双肩包_行李包_公文包-SAINT LAURENT圣罗兰官方网站 _ YSL.CN_files/534967AAE8M1000_A.jpg",
-          tags: ["black-cool", "gift-for-him", "weekend", "city-night", "travel"],
-          recipients: ["him", "neutral"],
-          material: "Black leather in the classic CITY silhouette.",
-          styling: "For weekend escapes, black denim, or understated city commutes.",
-          reason: "Practical yet sharp—the black, cool Qixi gift for him."
-        },
-        {
-          id: "sl-la66-belt",
-          name: "LA 66 smooth leather belt",
-          category: "Accessories",
-          price: 4200,
-          image: "ysl官网素材/男/圣罗兰男士查看全部-配饰-Saint Laurent圣罗兰官方网站 _ YSL.CN_files/847812AAB251000_A.jpg",
-          tags: ["black-cool", "classic-minimal", "gift-for-him", "budget", "city-night"],
-          recipients: ["him"],
-          material: "Smooth leather with the LA 66 buckle.",
-          styling: "With black trousers, denim, or tailored outerwear.",
-          reason: "Understated, wearable, unmistakably Saint Laurent—within budget for him."
-        },
-        {
-          id: "sl-men-tailoring",
-          name: "Summer 26 men's tailored jacket",
-          category: "Ready-to-wear",
-          price: 18500,
-          image: "ysl官网素材/男/26 夏季男士系列 _ Saint Laurent 圣罗兰 _ YSL.CN_files/862885Y99581000_A.jpg",
-          tags: ["polished-elegance", "gift-for-him", "anniversary", "dinner", "city-night"],
-          recipients: ["him", "neutral"],
-          material: "Saint Laurent men's summer tailoring.",
-          styling: "With slim trousers and black leather shoes for anniversary dinner.",
-          reason: "A formal, elevated gift—polished elegance with ceremony."
-        },
-        {
-          id: "sl-men-loafer",
-          name: "Men's black leather loafers",
-          category: "Shoes",
-          price: 8500,
-          image: "ysl官网素材/男/男士鞋履 新品系列 _ Saint Laurent 圣罗兰 _ YSL.CN_files/841196AAD4X1000_A.jpg",
-          tags: ["black-cool", "polished-elegance", "gift-for-him", "weekend", "dinner"],
-          recipients: ["him", "neutral"],
-          material: "Men's black leather loafers.",
-          styling: "For dinner dates, gallery afternoons, or weekend city travel.",
-          reason: "Sharp yet easy to wear—style and utility for his Qixi gift."
-        }
-      ];
+      /* YSL Summer 2026 Product Inventory — sourced from products.js */
+      var products = (window.YSL_SUMMER_2026_PRODUCTS || []).map(function (item) {
+        return {
+          id: item.id,
+          sku: item.sku,
+          name: item.name,
+          gender: item.gender,
+          category: item.categoryLabel,
+          categoryKey: item.category,
+          price: item.price,
+          image: item.image,
+          detailPath: item.detailPath,
+          styleTags: item.styleTags || [],
+          occasionTags: item.occasionTags || [],
+          description: item.description,
+          reason: item.reason,
+          material: item.material,
+          styling: item.styling,
+          tags: (item.styleTags || []).concat(item.occasionTags || []),
+          recipients: item.gender === "men" ? ["him", "neutral"] : ["her", "neutral"]
+        };
+      });
+
+      /* Style Guide Product Mapping — sourced from products.js */
+      var STYLE_GUIDES = window.YSL_STYLE_GUIDES || [];
 
       var state = {
         recipient: "her",
@@ -3000,6 +3398,7 @@
       var bag = [];
       var activeProduct = null;
       var activeChatMode = null;
+      var lastFilterContext = { mode: "need", text: "", meta: null };
       var chatThinkingTimer = null;
       var chatConciergeActive = false;
       var chatPostSubmitMode = false;
@@ -3035,7 +3434,7 @@
           return "Matching the mood, the moment, and the person…";
         }
         if (/hawaii|resort|silk|beach|summer night/i.test(t)) {
-          return "Curating pieces for your weekend escape…";
+          return "Curating pieces for your tropical escape…";
         }
         if (/statement|evening bag|jewelry|gift under|¥10/i.test(t)) {
           return "Selecting pieces with the right silhouette, texture, and finish…";
@@ -3068,17 +3467,27 @@
         if (send) send.disabled = active;
       }
 
-      function setDefaultPlaceholder() {
+      function setChatInputValue(value) {
+        var input = document.getElementById("chat-input");
+        var placeholder = document.getElementById("bar-placeholder");
+        if (!input) return;
+        value = value == null ? "" : String(value);
+        input.value = value;
+        if (placeholder) {
+          placeholder.classList.toggle("hidden", value.trim().length > 0);
+        }
+      }
+
+      function resetChatPlaceholder() {
         var placeholder = document.getElementById("bar-placeholder");
         var input = document.getElementById("chat-input");
-        if (placeholder) {
-          placeholder.textContent = CHAT_DEFAULT_PLACEHOLDER;
-          placeholder.classList.remove("hidden");
-        }
-        if (input) {
-          input.value = "";
-          input.setAttribute("placeholder", CHAT_DEFAULT_PLACEHOLDER);
-        }
+        if (placeholder) placeholder.textContent = CHAT_DEFAULT_PLACEHOLDER;
+        if (input) input.setAttribute("placeholder", CHAT_DEFAULT_PLACEHOLDER);
+      }
+
+      function clearChatInput() {
+        setChatInputValue("");
+        resetChatPlaceholder();
       }
 
       /* ── CHATBOT_CONFIG — edit mode labels, chips, and scroll placeholders here ── */
@@ -3122,6 +3531,7 @@
         },
         sectionPlaceholders: [
           { sel: "#gift-finder", placeholder: "What do you want to gift today?", eyebrow: "Qixi Gifts", productScene: false },
+          { sel: "#style-guide-section", placeholder: "Tell me the mood, moment, or person…", eyebrow: "Style Guide", productScene: false },
           { sel: "#recommendations-section", placeholder: "Refine these recommendations…", eyebrow: "Your Selection", productScene: true },
           { sel: "#campaign-section", placeholder: "What are we finding for Qixi?", eyebrow: "Campaign", productScene: false },
           { sel: "#collection-intro", placeholder: "Explore the Qixi Gift Edit…", eyebrow: "Collection", productScene: false },
@@ -3151,7 +3561,49 @@
       };
 
       function money(value) {
+        if (value == null || value === "") return "Price upon request";
         return "¥" + value.toLocaleString("en-US");
+      }
+
+      var styleTagMap = {
+        "classic-minimal": ["polished elegance", "quiet power"],
+        "black-cool": ["city lights", "after dark"],
+        "polished-elegance": ["polished elegance", "evening silhouette", "after dark"]
+      };
+
+      var occasionTagMap = {
+        qixi: ["qixi", "qixi date night"],
+        dinner: ["fine dining", "candlelit dinner"],
+        "city-night": ["qixi date night"],
+        weekend: ["weekend escape"],
+        resort: ["weekend escape"],
+        anniversary: ["anniversary gift"],
+        "self-gift": ["qixi"],
+        budget: []
+      };
+
+      var categoryLabelMap = {
+        bags: "Bags",
+        bag: "Bags",
+        shoes: "Shoes",
+        accessories: "Accessories",
+        "ready-to-wear": "Ready-to-wear",
+        "small-leather-goods": "Small leather goods"
+      };
+
+      function productMatchesTags(product, tags) {
+        if (!tags || !tags.length) return false;
+        return tags.some(function (tag) {
+          return (product.styleTags || []).indexOf(tag) > -1 || (product.occasionTags || []).indexOf(tag) > -1;
+        });
+      }
+
+      function productMatchesText(product, text) {
+        if (!text) return false;
+        var hay = [product.name, product.description, product.material, product.category, product.categoryKey].join(" ").toLowerCase();
+        return text.split(/\s+/).some(function (word) {
+          return word.length > 2 && hay.indexOf(word) > -1;
+        });
       }
 
       function labelTag(tag) {
@@ -3172,7 +3624,7 @@
           occasion: "qixi",
           style: /black|cool|leather|muse|酷|黑|皮革/.test(lower) ? "black-cool" : (/formal|polished|elegance|parisian|romantic|优雅|正式|纪念|利落/.test(lower) ? "polished-elegance" : "classic-minimal"),
           budget: /10,?000|10000|一万/.test(lower) ? 10000 : (/3000|3,000|三千|低预算/.test(lower) ? 3000 : (/8000|8,000|八千/.test(lower) ? 8000 : (/高预算|预算高|更贵|higher/.test(lower) ? 20000 : 8000))),
-          category: /jewelry|accessor|belt|配饰|腰带/.test(lower) ? "Accessories" : (/包|bag|evening bag|handbag/.test(lower) ? "Bags" : (/鞋|shoe|heel|loafer|sandal/.test(lower) ? "Shoes" : (/silk|jacket|成衣|tailor/.test(lower) ? "Ready-to-wear" : null))),
+          category: /jewelry|accessor|belt|配饰|腰带/.test(lower) ? "Accessories" : (/包|bag|evening bag|handbag/.test(lower) ? "Bags" : (/鞋|shoe|heel|loafer|sandal/.test(lower) ? "Shoes" : (/silk|jacket|成衣|tailor|blazer|jacket/.test(lower) ? "Ready-to-wear" : null))),
           source: "One-line brief"
         };
         if (/fine dining|candlelit|dinner date|meet-the-parents|晚餐|约会|烛光|date night/.test(lower)) next.occasion = "dinner";
@@ -3198,26 +3650,62 @@
         state.source = "Concierge suggestion";
       }
 
+      /* Chatbot Product Filtering */
       function scoreProduct(product) {
         var score = 0;
-        if (product.recipients.indexOf(state.recipient) > -1) score += 7;
-        if (state.recipient !== "neutral" && product.recipients.indexOf(state.recipient) === -1) score -= 8;
-        if (state.recipient === "neutral" && product.recipients.indexOf("neutral") > -1) score += 3;
-        if (product.tags.indexOf(state.style) > -1) score += 6;
-        if (product.tags.indexOf(state.occasion) > -1) score += 5;
-        if (state.occasion === "qixi") score += 2;
-        if (state.category && product.category === state.category) score += 8;
+        var mode = lastFilterContext.mode || activeChatMode || "need";
+        var promptText = (lastFilterContext.text || "").toLowerCase();
+        var meta = lastFilterContext.meta;
+
+        if (state.recipient === "him" && product.gender === "men") score += 7;
+        if (state.recipient === "her" && product.gender === "women") score += 7;
+        if (state.recipient === "neutral") score += 2;
+        if (state.recipient === "him" && product.gender === "women") score -= 6;
+        if (state.recipient === "her" && product.gender === "men") score -= 6;
+
+        if (mode === "style") {
+          var styleTags = styleTagMap[state.style] || [state.style];
+          if (meta && meta.style) styleTags = styleTags.concat(styleTagMap[meta.style] || [meta.style.replace(/-/g, " ")]);
+          styleTags.forEach(function (tag) {
+            if ((product.styleTags || []).indexOf(tag) > -1) score += 8;
+          });
+        } else if (mode === "occasion") {
+          var occTags = occasionTagMap[state.occasion] || [state.occasion];
+          if (meta && meta.occasion) occTags = occTags.concat(occasionTagMap[meta.occasion] || [meta.occasion.replace(/-/g, " ")]);
+          occTags.forEach(function (tag) {
+            if ((product.occasionTags || []).indexOf(tag) > -1) score += 8;
+          });
+        } else {
+          (styleTagMap[state.style] || []).forEach(function (tag) {
+            if ((product.styleTags || []).indexOf(tag) > -1) score += 4;
+          });
+          (occasionTagMap[state.occasion] || []).forEach(function (tag) {
+            if ((product.occasionTags || []).indexOf(tag) > -1) score += 4;
+          });
+          if (promptText && productMatchesText(product, promptText)) score += 7;
+          if (meta && meta.text && productMatchesText(product, meta.text.toLowerCase())) score += 6;
+        }
+
+        if (state.category && product.category === state.category) score += 9;
+        if (meta && meta.category) {
+          var wanted = categoryLabelMap[meta.category.toLowerCase()] || meta.category;
+          if (product.category === wanted) score += 9;
+        }
         if (!state.category) score += 1;
-        if (state.budget && product.price <= state.budget) score += 4;
-        if (state.budget && product.price > state.budget && product.price <= state.budget * 1.35) score += 1;
-        if (state.occasion === "budget" && product.price <= 8000) score += 6;
+
+        if (product.price && state.budget && product.price <= state.budget) score += 5;
+        if (product.price && state.budget && product.price > state.budget && product.price <= state.budget * 1.35) score += 1;
+        if (state.occasion === "budget" && product.price && product.price <= 8000) score += 6;
+        if (!product.price) score += 1;
+
         return score;
       }
 
       function getRecommendations() {
         var candidates = products.filter(function (product) {
           if (state.recipient === "neutral") return true;
-          return product.recipients.indexOf(state.recipient) > -1;
+          if (state.recipient === "him") return product.gender === "men";
+          return product.gender === "women";
         });
         return candidates.sort(function (a, b) { return scoreProduct(b) - scoreProduct(a); }).slice(0, 4);
       }
@@ -3243,7 +3731,12 @@
           intentCopy.classList.remove("refresh");
         }, 140);
         var summary = document.getElementById("result-summary");
-        if (summary) summary.textContent = "Curated for you: " + chips.join(", ") + ". Pieces selected for style, budget, and your Qixi moment.";
+        if (summary) {
+          var queryPrefix = lastFilterContext.text
+            ? '"' + lastFilterContext.text + '" — '
+            : "";
+          summary.textContent = queryPrefix + "Curated for you: " + chips.join(", ") + ". Pieces selected for style, budget, and your Qixi moment.";
+        }
         var intentChipsEl = document.getElementById("intent-chips");
         if (intentChipsEl) intentChipsEl.innerHTML = chips.map(function (chip) {
           return '<span class="intent-chip">' + chip + '</span>';
@@ -3262,8 +3755,8 @@
         var grid = document.getElementById("product-grid");
         if (!grid) return;
         grid.innerHTML = getRecommendations().map(function (product) {
-          var tags = product.tags.filter(function (tag) {
-            return tag === state.style || tag === state.occasion || tag.indexOf("gift-for") === 0 || tag === "budget";
+          var tags = (product.styleTags || []).concat(product.occasionTags || []).filter(function (tag, idx, arr) {
+            return arr.indexOf(tag) === idx;
           }).slice(0, 3);
           return [
             '<article class="product-card">',
@@ -3357,8 +3850,185 @@
         grid.classList.add("count-" + Math.min(visible, 6));
       }
 
+      function renderFeaturedGiftCard(product) {
+        if (!product) return "";
+        return [
+          '<article class="vl-edit-card">',
+            '<button class="vl-edit-card-link" type="button" data-action="detail" data-id="' + product.id + '">',
+              '<div class="vl-edit-card-media"><img src="' + product.image + '" alt="' + product.name + '"></div>',
+              '<div class="vl-edit-card-copy"><span class="vl-edit-kicker">' + product.category + '</span><h3>' + product.name + '</h3><p class="vl-edit-price">' + money(product.price) + '</p></div>',
+            '</button>',
+            '<div class="vl-edit-actions">',
+              '<button type="button" data-action="wishlist" data-id="' + product.id + '">Save</button>',
+              '<button type="button" data-action="bag" data-id="' + product.id + '">Add to bag</button>',
+            '</div>',
+          '</article>'
+        ].join("");
+      }
+
       function findProduct(id) {
         return products.filter(function (product) { return product.id === id; })[0];
+      }
+
+      function renderFeaturedGifts() {
+        var featured = window.YSL_FEATURED_PRODUCTS || { her: [], him: [] };
+        var herRow = document.getElementById("gifts-for-her-grid") || document.querySelector("#gifts-for-her .vl-edit-row");
+        var himRow = document.getElementById("gifts-for-him-grid") || document.querySelector("#gifts-for-him .vl-edit-row");
+        if (herRow) {
+          herRow.innerHTML = (featured.her || []).map(function (id) {
+            return renderFeaturedGiftCard(findProduct(id));
+          }).join("");
+        }
+        if (himRow) {
+          himRow.innerHTML = (featured.him || []).map(function (id) {
+            return renderFeaturedGiftCard(findProduct(id));
+          }).join("");
+        }
+      }
+
+      function findStyleGuide(id) {
+        return STYLE_GUIDES.filter(function (guide) { return guide.id === id; })[0];
+      }
+
+      function styleGuidePoster(guide) {
+        return guide.poster || guide.image || "";
+      }
+
+      /* Style Guide Motion Assets — Render image or video media */
+      function renderStyleGuideMedia(guide) {
+        var poster = styleGuidePoster(guide);
+        var mediaType = guide.mediaType || "image";
+        var mediaSrc = guide.media || poster;
+
+        if (mediaType === "video" && guide.media) {
+          return [
+            '<video class="style-guide-media" autoplay muted loop playsinline disablepictureinpicture disableremoteplayback',
+              ' poster="' + poster + '" aria-hidden="true">',
+              '<source src="' + guide.media + '" type="video/mp4">',
+            '</video>'
+          ].join("");
+        }
+
+        if (mediaType === "gif" && guide.media) {
+          return '<img class="style-guide-media" src="' + guide.media + '" alt="' + guide.title + '" loading="lazy">';
+        }
+
+        return '<img class="style-guide-media" src="' + mediaSrc + '" alt="' + guide.title + '" loading="lazy">';
+      }
+
+      function setStyleGuideHeroMedia(guide) {
+        var heroWrap = document.querySelector(".sg-modal-hero-media");
+        if (!heroWrap || !guide) return;
+        heroWrap.innerHTML = renderStyleGuideMedia(guide);
+        initStyleGuideVideos(heroWrap);
+      }
+
+      function initStyleGuideVideos(root) {
+        var scope = root || document;
+        scope.querySelectorAll("video.style-guide-media").forEach(function (video) {
+          video.controls = false;
+          video.playbackRate = 0.88;
+          var playAttempt = video.play();
+          if (playAttempt && playAttempt.catch) {
+            playAttempt.catch(function () {});
+          }
+        });
+      }
+
+      function renderStyleGuideCards() {
+        var track = document.getElementById("style-guide-track");
+        if (!track) return;
+        track.innerHTML = STYLE_GUIDES.map(function (guide) {
+          return [
+            '<button class="vl-sg-card style-guide-card" type="button" role="listitem" data-sg-open="' + guide.id + '" aria-label="Open ' + guide.title + ' style guide">',
+              '<div class="vl-sg-card-media"><div class="vl-sg-card-parallax">' + renderStyleGuideMedia(guide) + '</div></div>',
+              '<div class="vl-sg-card-shade"></div>',
+              '<div class="vl-sg-card-glow"></div>',
+              '<div class="vl-sg-card-copy">',
+                '<span class="vl-sg-card-kicker">Style Guide</span>',
+                '<h3 class="vl-sg-card-title">' + guide.title + '</h3>',
+                '<p class="vl-sg-card-desc">' + guide.tagline + '</p>',
+              '</div>',
+            '</button>'
+          ].join("");
+        }).join("");
+        initStyleGuideVideos(track);
+      }
+
+      function renderStyleGuideProducts(guide) {
+        var grid = document.getElementById("sg-modal-products");
+        if (!grid || !guide) return;
+        var items = guide.productIds.map(findProduct).filter(Boolean);
+        document.getElementById("sg-modal-product-count").textContent = items.length + " pieces";
+        grid.innerHTML = items.map(function (product) {
+          return [
+            '<article class="sg-product-card">',
+              '<button class="sg-product-link" type="button" data-action="detail" data-id="' + product.id + '">',
+                '<div class="sg-product-media"><img src="' + product.image + '" alt="' + product.name + '"></div>',
+                '<div class="sg-product-copy">',
+                  '<span class="sg-product-kicker">' + product.category + '</span>',
+                  '<h4>' + product.name + '</h4>',
+                  '<p class="sg-product-price">' + money(product.price) + '</p>',
+                '</div>',
+              '</button>',
+              '<div class="sg-product-actions">',
+                '<button type="button" data-action="bag" data-id="' + product.id + '">Add to bag</button>',
+                '<button type="button" data-action="detail" data-id="' + product.id + '">View details</button>',
+              '</div>',
+            '</article>'
+          ].join("");
+        }).join("");
+      }
+
+      /* Style Guide Detail View */
+      function openStyleGuide(id) {
+        var guide = findStyleGuide(id);
+        if (!guide) return;
+        var modal = document.getElementById("sg-modal");
+        setStyleGuideHeroMedia(guide);
+        document.getElementById("sg-modal-title").textContent = guide.title;
+        document.getElementById("sg-modal-tagline").textContent = guide.tagline;
+        document.getElementById("sg-modal-styling").textContent = guide.stylingNotes;
+        renderStyleGuideProducts(guide);
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("sg-modal-open");
+        modal.querySelector(".sg-modal-panel").scrollTop = 0;
+      }
+
+      function closeStyleGuide() {
+        var modal = document.getElementById("sg-modal");
+        if (!modal) return;
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("sg-modal-open");
+      }
+
+      function initStyleGuideParallax() {
+        var track = document.getElementById("style-guide-track");
+        if (!track) return;
+        var ticking = false;
+        function updateParallax() {
+          var center = window.innerWidth * 0.5;
+          track.querySelectorAll(".vl-sg-card-parallax").forEach(function (layer) {
+            var card = layer.closest(".vl-sg-card");
+            if (!card) return;
+            var rect = card.getBoundingClientRect();
+            var cardCenter = rect.left + rect.width * 0.5;
+            var offset = Math.max(-1, Math.min(1, (cardCenter - center) / center));
+            layer.style.transform = "translateX(" + (offset * -12) + "px)";
+          });
+          ticking = false;
+        }
+        function requestTick() {
+          if (!ticking) {
+            ticking = true;
+            window.requestAnimationFrame(updateParallax);
+          }
+        }
+        track.addEventListener("scroll", requestTick, { passive: true });
+        window.addEventListener("resize", requestTick);
+        requestTick();
       }
 
       function addUnique(list, product) {
@@ -3470,22 +4140,24 @@
       function submitPrompt(text, meta) {
         if (chatConciergeActive) return;
         var input = document.getElementById("chat-input");
-        var promptText = text && text.trim() ? text.trim() : (meta && meta.text ? meta.text.trim() : "");
+        var submittedQuery = input ? input.value.trim() : "";
+        if (!submittedQuery && text && text.trim()) submittedQuery = text.trim();
+        if (!submittedQuery && meta && meta.text) submittedQuery = meta.text.trim();
+        if (!submittedQuery && meta && meta.category) submittedQuery = String(meta.category).trim();
 
+        if (!submittedQuery) return;
+
+        setChatInputValue(submittedQuery);
         closeChatPanel();
 
-        if (promptText) analyzePrompt(promptText);
+        if (submittedQuery) analyzePrompt(submittedQuery);
         if (meta) applySuggestionMeta(meta);
-
-        /* Clear input immediately — keep bar clean with default placeholder */
-        setDefaultPlaceholder();
-        if (input) input.blur();
-        updatePlaceholder();
+        lastFilterContext = { mode: activeChatMode || "need", text: submittedQuery, meta: meta || null };
 
         var eyebrow = document.getElementById("chat-eyebrow");
         if (eyebrow) eyebrow.textContent = "Qixi Gifts";
 
-        var thinkingMsg = getThinkingMessage(promptText, meta);
+        var thinkingMsg = getThinkingMessage(submittedQuery, meta);
         setConciergeThinkingState(true, thinkingMsg);
 
         window.clearTimeout(chatThinkingTimer);
@@ -3493,8 +4165,7 @@
           renderAll();
           setConciergeThinkingState(false);
           chatPostSubmitMode = true;
-          setDefaultPlaceholder();
-          updatePlaceholder();
+          clearChatInput();
           scrollToResults();
         }, CHAT_THINK_MS);
       }
@@ -3567,9 +4238,12 @@
         if (chatPostSubmitMode || chatConciergeActive) {
           return;
         }
+        var input = document.getElementById("chat-input");
+        if (input && input.value.trim()) {
+          return;
+        }
         var eyebrow = document.getElementById("chat-eyebrow");
         var placeholder = document.getElementById("bar-placeholder");
-        var input = document.getElementById("chat-input");
         var bar = document.getElementById("chat-bar");
         if (eyebrow) {
           eyebrow.classList.add("refresh");
@@ -3582,7 +4256,8 @@
           placeholder.classList.add("placeholder-fading");
           window.setTimeout(function () {
             placeholder.textContent = scene.placeholder;
-            if (input && !input.value) input.setAttribute("placeholder", scene.placeholder);
+            if (input && !input.value.trim()) input.setAttribute("placeholder", scene.placeholder);
+            placeholder.classList.toggle("hidden", input && input.value.trim().length > 0);
             placeholder.classList.remove("placeholder-fading");
           }, 180);
         }
@@ -3590,12 +4265,20 @@
       }
 
       function updatePlaceholder() {
-        document.getElementById("bar-placeholder").classList.toggle("hidden", !!document.getElementById("chat-input").value);
+        var input = document.getElementById("chat-input");
+        var placeholder = document.getElementById("bar-placeholder");
+        if (placeholder && input) {
+          placeholder.classList.toggle("hidden", input.value.trim().length > 0);
+        }
       }
 
       document.getElementById("chat-bar").addEventListener("submit", function (event) {
         event.preventDefault();
-        submitPrompt(document.getElementById("chat-input").value || "I'm looking for a Qixi gift");
+        var input = document.getElementById("chat-input");
+        var submittedQuery = input ? input.value.trim() : "";
+        if (!submittedQuery) return;
+        setChatInputValue(submittedQuery);
+        submitPrompt(submittedQuery);
       });
 
       document.getElementById("chat-input").addEventListener("input", updatePlaceholder);
@@ -3637,6 +4320,7 @@
         if (!chip) return;
         event.preventDefault();
         var meta = suggestionMetaFromButton(chip);
+        setChatInputValue(meta.text);
         submitPrompt(meta.text, meta);
       });
 
@@ -3649,7 +4333,13 @@
         if (!target) return;
 
         if (target.dataset.suggestion) {
+          setChatInputValue(target.dataset.suggestion);
           submitPrompt(target.dataset.suggestion);
+        }
+
+        if (target.dataset.sgOpen) {
+          openStyleGuide(target.dataset.sgOpen);
+          return;
         }
 
         // Handle style chips (Entry Path B: Search by Style)
@@ -3663,7 +4353,9 @@
           document.querySelectorAll(".style-chip").forEach(function (chip) {
             chip.classList.toggle("active", chip.dataset.style === newStyle);
           });
-          submitPrompt(styleChip.querySelector(".chip-label") ? styleChip.querySelector(".chip-label").textContent : "", { style: newStyle });
+          var styleLabel = styleChip.querySelector(".chip-label") ? styleChip.querySelector(".chip-label").textContent : "";
+          setChatInputValue(styleLabel);
+          submitPrompt(styleLabel, { style: newStyle });
           return;
         }
 
@@ -3680,7 +4372,9 @@
             chip.classList.toggle("active", chip.dataset.occasion === newOccasion);
           });
           var occLabel = occasionChip.querySelector(".chip-label");
-          submitPrompt(occLabel ? occLabel.textContent : "", { occasion: newOccasion });
+          var occText = occLabel ? occLabel.textContent : "";
+          setChatInputValue(occText);
+          submitPrompt(occText, { occasion: newOccasion });
           return;
         }
 
@@ -3694,7 +4388,8 @@
           state.category = catLabels[target.dataset.category];
           state.source = "Category entry";
           if (target.closest(".bc-card, .category-tile")) {
-            submitPrompt("", { category: state.category });
+            setChatInputValue(state.category);
+            submitPrompt(state.category, { category: state.category });
           } else {
             renderAll();
             scrollToResults();
@@ -3744,6 +4439,11 @@
         if (event.target.id === "drawer") closeDrawer();
       });
 
+      document.getElementById("sg-modal-close").addEventListener("click", closeStyleGuide);
+      document.getElementById("sg-modal").addEventListener("click", function (event) {
+        if (event.target.id === "sg-modal") closeStyleGuide();
+      });
+
       document.getElementById("detail-close").addEventListener("click", closeDetail);
       document.getElementById("detail-modal").addEventListener("click", function (event) {
         if (event.target.id === "detail-modal") closeDetail();
@@ -3770,16 +4470,18 @@
           window.clearTimeout(chatThinkingTimer);
           setConciergeThinkingState(false);
           chatPostSubmitMode = false;
-          setDefaultPlaceholder();
-          updatePlaceholder();
+          clearChatInput();
+          closeStyleGuide();
           closeDrawer();
           closeDetail();
         }
       });
 
       renderAll();
-      setDefaultPlaceholder();
-      updatePlaceholder();
+      renderFeaturedGifts();
+      renderStyleGuideCards();
+      initStyleGuideParallax();
+      clearChatInput();
 
       // ── Letter-by-letter blur reveal (mirrors ysl-bc-style LetterBlurReveal) ──
       (function () {

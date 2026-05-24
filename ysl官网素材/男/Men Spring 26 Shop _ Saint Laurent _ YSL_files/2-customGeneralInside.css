@@ -1,0 +1,175 @@
+.inside_chatTabImage {
+	height: auto !important;
+}
+
+.chatPaneOpen  #insideChatFrame {
+	transition: transform 0.2s ease 0s !important;
+}
+
+/* fix bug #32683 */
+#inside_liveChatTab:focus-visible {
+  outline: none;
+}
+
+/*#region resolve CSS conflict */
+
+#inside_holder:not([chatpaneversion="2"]):not([pageurl*="boucheron"]):not([pageurl*="balenciaga"]):not([pageurl*=bottegaveneta]) #inside_tabs {
+  margin-top: 0px !important;
+}
+
+/* fix chat header alignment on IE */
+#inside_siteLogo,
+#inside_holder #inside_liveChatTab.usingChatHeader .chatTab_siteLogo {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+#inside_holder #inside_liveChatTab.usingChatHeader .chatTab_header {
+  height: 100%;
+}
+
+/* resolve conflict on YSL checkout page */
+body.iti-mobile div .intl-tel-input.iti-container {
+  position: absolute;
+  top: 53px;
+  left: 0;
+  right: auto;
+}
+
+body.iti-mobile div .intl-tel-input .country-list {
+  max-height: 200px;
+  position: relative;
+  width: calc(100% + 2px);
+}
+
+body.iti-mobile div .intl-tel-input .country-list .country-name,
+body.iti-mobile div .intl-tel-input .country-list .dial-code {
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+body.iti-mobile div .intl-tel-input .country-list .country {
+  padding: 4px 8px;
+  line-height: unset;
+}
+.inside_dept_selector input:focus,
+#inside_holder .insideSubmitButton:focus,
+#inside_holder [type="button"]:focus {
+  outline: 1px solid #2776c5 !important;
+}
+
+.inside_messageText:focus,
+.inside_systemMessage:focus,
+.inside_messageText .staples-bot-action-button:focus,
+#inside_chatHeaderAndWindowHolder, #inside_prechatForm {
+  outline: none !important;
+}
+
+/* resolve css conflict with Eagle website */
+#inside_holder .inside_chatPane {
+  min-width: 0;
+  min-height: 0;
+  left: auto;
+  padding: 0;
+}
+
+#inside_holder.showChatPaneFullScreen .inside_chatPane {
+  left:0;
+}
+
+/*#endregion resolve CSS conflict */
+
+/* fix bug #20544 */
+body > main[style*="display: none"] ~ #inside_holder.mobile-device.iOSMobile[pageurl*="ulysse-nardin"] {
+  position: static;
+  height: auto;
+}
+
+body > main[style*="display: none"] ~ #inside_holder.mobile-device.iOSMobile[pageurl*="ulysse-nardin"]  #insideChatFrame{
+  position: static !important;
+  transition: none !important;
+}
+
+/* Apply custom drop shadow to Balenciaga V2 theme */
+#inside_holder[chatsettingsid='45'] #inside_liveChatTab img.inside_chatTabImage {
+   box-shadow: 0px 0px 12px rgb(0, 0, 0, 0.15);
+   border-radius: 100px;
+}
+
+
+
+/* Custom CSS for BV */
+#inside_holder.mobile-device #insideChatFrame.bv-chatpane:not(.notificationMode) {
+	border: 1px solid #000000 !important;
+}
+
+#inside_holder[pageurl*="bottegaveneta.com"].chatPaneOpen {
+	z-index: 10 !important;
+}
+
+.u-stickycta #inside_liveChatTab {
+    bottom: 0;
+}
+
+
+/* AMQ dynamic position */
+#inside_holder[pageurl*="alexandermcqueen.com"]:not(.mobile-device) #insideChatFrame:not(.notransition) {
+  transition: transform 0.2s ease 0s, margin-top 250ms ease-in-out 0s, right 250ms ease-in-out 0s!important;
+}
+
+[data-price-bottom-sticky-bar-visible]:not([data-open-dialogs]) #inside_holder[pageurl*="alexandermcqueen.com"].chatPaneOpen #insideChatFrame,
+[data-price-bottom-sticky-bar-visible]:not([data-open-dialogs]) #inside_holder[pageurl*="alexandermcqueen.com"].notificationMode #insideChatFrame {
+  margin-top: -70px !important;
+} 
+
+[data-sticky-drawer-visible]:not([data-open-dialogs]) #inside_holder[pageurl*="alexandermcqueen.com"].chatPaneOpen #insideChatFrame,
+[data-sticky-drawer-visible]:not([data-open-dialogs]) #inside_holder[pageurl*="alexandermcqueen.com"].notificationMode #insideChatFrame {
+  margin-top: calc(-1 * var(--stickyDrawerHeight, 0)) !important;
+}
+
+@media (min-width: 768px) {
+  [data-open-dialogs] #inside_holder[pageurl*="alexandermcqueen.com"] #insideChatFrame {
+    bottom: 0px !important;
+    right: calc(50% + 2px) !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  [data-open-dialogs] #inside_holder[pageurl*="alexandermcqueen.com"] #insideChatFrame {
+    right: calc(2px + min(32.7778%, 472px)) !important;
+  }
+}
+
+/* AMQ - add white drop shadow to chat tab */
+#inside_holder[pageurl*="alexandermcqueen"] #inside_liveChatTab img.inside_chatTabImage {
+   box-shadow: 0px 0px 10px 2px rgba(255, 255, 255, 0.45);
+   border-radius: 100px;
+}
+
+/* Positioning overrides */
+#inside_holder #inside_tabs {
+  transition: margin 0.7s cubic-bezier(.22,1,.36,1) !important;
+  margin-right: var(--inside-side-offset, 0px) !important;
+  margin-bottom: calc(var(--inside-bottom-offset, 0px) + var(--inside-tab-bottom-offset, 0px)) !important;
+}
+
+#inside_holder:not(.mobile-device.chatPaneOpen) #insideChatFrame {
+  margin-right: var(--inside-side-offset, 0px) !important;
+  margin-top: calc(var(--inside-bottom-offset, 0px) * -1) !important;
+  max-height: calc(var(--inside-viewport-height, 100vh) - var(--inside-keyboard-height, 0px) - var(--inside-bottom-offset, 0px) - 20px);
+}
+
+#inside_holder #insideChatFrame:not(.notransition) {
+  transition: transform 0.2s ease 0s, margin 0.7s cubic-bezier(.22,1,.36,1) !important;
+}
+
+@media (max-width: 1023px) {
+  #inside_holder[pageurl*="ysl.com"], #inside_holder[pageurl*="ysl.com"] > * {
+    z-index: 98 !important;
+  }
+}
+
+#inside_holder[pageurl*="pomellato.com"] {
+  z-index: 2147483647;
+}
