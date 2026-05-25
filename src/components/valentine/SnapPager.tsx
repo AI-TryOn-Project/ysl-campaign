@@ -1,21 +1,27 @@
 "use client";
 
-import { type ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import { useSnapPager } from "./hooks/useSnapPager";
 
 export type SnapPagerProps = {
   children: ReactNode;
   onPageChange?: (index: number) => void;
+  pageIndex?: number;
   pageIndicators?: boolean;
 };
 
-export function SnapPager({ children, onPageChange, pageIndicators }: SnapPagerProps) {
-  const pageCount = Array.isArray(children) ? children.length : children ? 1 : 0;
-  const { currentPage, containerRef, goTo } = useSnapPager(pageCount);
+export function SnapPager({ children, onPageChange, pageIndex, pageIndicators }: SnapPagerProps) {
+  const pages = Array.isArray(children) ? children : children ? [children] : [];
+  const pageCount = pages.length;
+  const { currentPage, containerRef, goTo, rebound } = useSnapPager(pageCount, { onPageChange });
+
+  useEffect(() => {
+    if (typeof pageIndex !== "number" || pageIndex === currentPage) return;
+    goTo(pageIndex);
+  }, [currentPage, goTo, pageIndex]);
 
   const handleIndicatorClick = (index: number) => {
     goTo(index);
-    onPageChange?.(index);
   };
 
   return (
@@ -25,17 +31,21 @@ export function SnapPager({ children, onPageChange, pageIndicators }: SnapPagerP
         className="snap-pager-track"
         style={{ touchAction: "none", willChange: "transform" }}
       >
-        {Array.isArray(children)
-          ? children.map((child, index) => (
-              <div
-                key={index}
-                className={`snap-page ${index === currentPage ? "is-active" : ""}`}
-                data-page={index}
-              >
-                {child}
-              </div>
-            ))
-          : children}
+        {pages.map((child, index) => (
+          <div
+            key={index}
+            className={[
+              "snap-page",
+              index === currentPage ? "is-active" : "",
+              rebound?.page === index ? `is-rebounding rebound-${rebound.direction}` : "",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            data-page={index}
+          >
+            {child}
+          </div>
+        ))}
       </div>
 
       {pageIndicators && pageCount > 1 && (

@@ -10,6 +10,8 @@ import {
   type StyleGuide,
 } from "@/data/campaign";
 
+export type { Product, StyleGuide } from "@/data/campaign";
+
 export type DrawerKind = "wishlist" | "bag";
 export type ChatMode = "need" | "style" | "occasion";
 

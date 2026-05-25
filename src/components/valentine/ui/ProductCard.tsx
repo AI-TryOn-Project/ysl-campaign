@@ -14,7 +14,7 @@ export function ProductCard({
   onWishlist: () => void;
   onDetail: () => void;
 }) {
-  const { labelTag } = useValentine();
+  const { labelTag, money } = useValentine();
   const tags = [...product.styleTags, ...product.occasionTags].slice(0, 3);
 
   return (
@@ -25,7 +25,7 @@ export function ProductCard({
       <div className="product-meta">
         <p className="product-kicker">{product.categoryLabel}</p>
         <h3 className="product-name">{product.name}</h3>
-        <span className="product-price">{useValentine().money(product.price)}</span>
+        <span className="product-price">{money(product.price)}</span>
         <div className="tag-row">
           {tags.map((tag) => (
             <small className="tag" key={tag}>

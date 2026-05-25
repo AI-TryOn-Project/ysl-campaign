@@ -142,6 +142,60 @@
   background: var(--black);
 }
 
+.valentine-shell .snap-pager {
+  position: relative;
+  height: 100svh;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--black);
+}
+
+.valentine-shell .snap-pager-track {
+  height: 100%;
+  touch-action: none;
+  transform: translate3d(0, 0, 0);
+}
+
+.valentine-shell .snap-page {
+  position: relative;
+  height: 100svh;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--black);
+}
+
+.valentine-shell .snap-pager-dots {
+  position: fixed;
+  top: 50%;
+  right: clamp(14px, 2vw, 28px);
+  z-index: 64;
+  display: grid;
+  gap: 10px;
+  transform: translateY(-50%);
+}
+
+.valentine-shell .snap-pager-dots button {
+  width: 6px;
+  height: 22px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.48);
+  border-radius: 999px;
+  background: transparent;
+  opacity: 0.5;
+  transition:
+    height 0.32s var(--ease),
+    background 0.32s ease,
+    border-color 0.32s ease,
+    opacity 0.32s ease;
+}
+
+.valentine-shell .snap-pager-dots button.active {
+  height: 36px;
+  background: rgba(255, 255, 255, 0.86);
+  border-color: rgba(255, 255, 255, 0.86);
+  opacity: 1;
+}
+
 html.valentine-snap-mode {
   scroll-behavior: auto;
   scroll-snap-type: none;
@@ -155,6 +209,7 @@ html.valentine-snap-mode body {
 .valentine-shell .snap-section {
   min-height: 100svh;
   min-height: 100dvh;
+  height: 100%;
   scroll-snap-align: start;
   scroll-snap-stop: always;
   position: relative;
@@ -169,22 +224,22 @@ html.valentine-snap-mode body {
 .valentine-shell .letter-reveal .lr-char {
   display: inline-block;
   opacity: 0;
-  filter: blur(22px);
-  transform: translate3d(0, 24px, 0) scale(0.985);
+  filter: blur(24px);
+  transform: translate3d(0, 22px, 0) scale(0.982) rotateX(12deg);
   transform-origin: 50% 80%;
   transition:
-    opacity 0.9s var(--ease),
-    filter 0.9s var(--ease),
-    transform 0.9s var(--ease),
-    text-shadow 0.9s ease;
-  transition-delay: calc(0.06s + var(--char-index) * 0.032s);
+    opacity 1.02s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1.02s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.02s cubic-bezier(0.16, 1, 0.3, 1),
+    text-shadow 1.02s ease;
+  transition-delay: calc(0.08s + var(--char-index) * 0.038s);
   will-change: opacity, filter, transform;
 }
 
 .valentine-shell .snap-section.is-active .letter-reveal .lr-char {
   opacity: 1;
   filter: blur(0);
-  transform: translate3d(0, 0, 0) scale(1);
+  transform: translate3d(0, 0, 0) scale(1) rotateX(0deg);
   text-shadow: 0 0 18px rgba(184, 160, 108, 0.08);
 }
 
@@ -297,6 +352,14 @@ html.valentine-snap-mode body {
   --snap-rebound-y: 10px;
 }
 
+.valentine-shell .snap-page.rebound-next {
+  --snap-rebound-y: -10px;
+}
+
+.valentine-shell .snap-page.rebound-prev {
+  --snap-rebound-y: 10px;
+}
+
 .valentine-shell .snap-section.is-rebounding .bc-hero-copy,
 .valentine-shell .snap-section.is-rebounding .vl-style-guide-head,
 .valentine-shell .snap-section.is-rebounding .section-inner,
@@ -305,7 +368,16 @@ html.valentine-snap-mode body {
 .valentine-shell .snap-section.is-rebounding .vl-statement-copy,
 .valentine-shell .snap-section.is-rebounding .vl-services-inner,
 .valentine-shell .snap-section.is-rebounding.vl-collection > *,
-.valentine-shell .snap-section.is-rebounding.vl-membership > * {
+.valentine-shell .snap-section.is-rebounding.vl-membership > *,
+.valentine-shell .snap-page.is-rebounding .bc-hero-copy,
+.valentine-shell .snap-page.is-rebounding .vl-style-guide-head,
+.valentine-shell .snap-page.is-rebounding .section-inner,
+.valentine-shell .snap-page.is-rebounding .vl-campaign-copy,
+.valentine-shell .snap-page.is-rebounding .vl-gifts-inner,
+.valentine-shell .snap-page.is-rebounding .vl-statement-copy,
+.valentine-shell .snap-page.is-rebounding .vl-services-inner,
+.valentine-shell .snap-page.is-rebounding .vl-collection > *,
+.valentine-shell .snap-page.is-rebounding .vl-membership > * {
   animation: snapSoftRebound 0.43s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -1142,6 +1214,20 @@ html.valentine-snap-mode body {
   color: rgba(255, 255, 255, 0.72);
   font-size: 11px;
   letter-spacing: 0.04em;
+}
+
+.valentine-shell .footer-row button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+}
+
+.valentine-shell .footer-row button:hover {
+  color: #fff;
 }
 
 .valentine-shell .footer-sep {
