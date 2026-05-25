@@ -1,6 +1,8 @@
 "use client";
 
-import { createContext, useContext, useState, useMemo, useCallback, type FormEvent, type ReactNode } from "react";
+import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
+import { createContext, useContext, useState, useMemo, useCallback, useEffect, type FormEvent, type ReactNode } from "react";
 import {
   EDITORIAL_ASSETS,
   FEATURED_PRODUCTS,
@@ -9,11 +11,15 @@ import {
   type Product,
   type StyleGuide,
 } from "@/data/campaign";
+import { extractYslChatSnapshot, type YslChatProduct } from "@/lib/ysl-chat";
 
 export type { Product, StyleGuide } from "@/data/campaign";
 
 export type DrawerKind = "wishlist" | "bag";
 export type ChatMode = "need" | "style" | "occasion";
+
+const YSL_CHAT_API =
+  process.env.NEXT_PUBLIC_YSL_CHAT_API_URL ?? "http://staging.app.faishion.ai/api/public/ysl-chat";
 
 export type Suggestion = {
   text: string;
@@ -70,21 +76,6 @@ const CHATBOT_CONFIG: Record<ChatMode, { label: string; suggestions: Suggestion[
   },
 };
 
-const styleTagMap: Record<string, string[]> = {
-  "classic-minimal": ["polished elegance", "quiet power"],
-  "black-cool": ["city lights", "after dark"],
-  "polished-elegance": ["polished elegance", "evening silhouette", "after dark"],
-};
-
-const occasionTagMap: Record<string, string[]> = {
-  qixi: ["qixi", "qixi date night"],
-  dinner: ["fine dining", "candlelit dinner"],
-  "city-night": ["qixi date night", "after dark"],
-  weekend: ["weekend escape", "weekend getaway"],
-  resort: ["weekend escape"],
-  anniversary: ["anniversary gift"],
-};
-
 export const quickPrompts: Suggestion[] = [
   { text: "A gift for her under ¥10,000", recipient: "her", budget: 10000 },
   { text: "An elegant gift for him", recipient: "him", style: "polished-elegance" },
@@ -100,10 +91,10 @@ export const SNAP_SCENES: SnapScene[] = [
     skuProductIds: [FEATURED_PRODUCTS.her[0], FEATURED_PRODUCTS.him[0], FEATURED_PRODUCTS.her[1]].filter(Boolean),
   },
   {
-    id: "style-guide-section",
-    eyebrow: "Style Guide",
-    placeholder: "Tell me the mood, moment, or person...",
-    skuProductIds: STYLE_GUIDES.flatMap((guide) => guide.productIds).slice(0, 4),
+    id: "concierge-reply-section",
+    eyebrow: "Concierge",
+    placeholder: "Refine the mood, recipient, budget, or SKU...",
+    skuProductIds: [],
   },
   {
     id: "recommendations-section",
@@ -111,6 +102,12 @@ export const SNAP_SCENES: SnapScene[] = [
     placeholder: "Refine by SKU, budget, category, or occasion...",
     productScene: true,
     skuProductIds: [],
+  },
+  {
+    id: "style-guide-section",
+    eyebrow: "Style Guide",
+    placeholder: "Tell me the mood, moment, or person...",
+    skuProductIds: STYLE_GUIDES.flatMap((guide) => guide.productIds).slice(0, 4),
   },
   {
     id: "campaign-section",
@@ -180,67 +177,6 @@ function byIds(ids: readonly string[]) {
   return ids.map(getProduct).filter((product): product is Product => Boolean(product));
 }
 
-function getThinkingCopy(text: string, suggestion?: Suggestion) {
-  const normalized = text.toLowerCase();
-  if (suggestion?.recipient === "him" || /for him|his|men|男/.test(normalized)) {
-    return "Curating gifts with sharp tailoring, black leather, and quiet confidence.";
-  }
-  if (suggestion?.budget || /under|budget|¥|price/.test(normalized)) {
-    return "Filtering the edit by gesture value, category, and price sensitivity.";
-  }
-  if (suggestion?.occasion === "weekend" || /weekend|escape|travel|hawaii/.test(normalized)) {
-    return "Building a lighter travel edit with leather, resort texture, and easy movement.";
-  }
-  if (suggestion?.occasion === "dinner" || /dinner|date|qixi|romantic/.test(normalized)) {
-    return "Choosing pieces with after-dark presence for a Qixi dinner moment.";
-  }
-  return "Matching the mood, the moment, and the person.";
-}
-
-function scoreProduct(product: Product, text: string, suggestion?: Suggestion) {
-  const query = text.toLowerCase();
-  const tags = [...product.styleTags, ...product.occasionTags].map((tag) => tag.toLowerCase());
-  const haystack = [product.sku, product.name, product.description, product.material, product.categoryLabel, product.category]
-    .join(" ")
-    .toLowerCase();
-
-  let score = 0;
-  if (query.includes(product.sku.toLowerCase())) score += 18;
-  if (suggestion?.recipient === "him" && product.gender === "men") score += 8;
-  if (suggestion?.recipient === "her" && product.gender === "women") score += 8;
-  if (!suggestion?.recipient && /for him|his|men|男/.test(query) && product.gender === "men") score += 6;
-  if (!suggestion?.recipient && /for her|hers|women|女士|她/.test(query) && product.gender === "women") score += 6;
-  if (suggestion?.budget && product.price != null && product.price <= suggestion.budget) score += 5;
-  if (suggestion?.category && product.categoryLabel === suggestion.category) score += 5;
-
-  const styleTags = suggestion?.style ? styleTagMap[suggestion.style] ?? [] : [];
-  const occasionTags = suggestion?.occasion ? occasionTagMap[suggestion.occasion] ?? [] : [];
-  for (const tag of [...styleTags, ...occasionTags]) {
-    if (tags.includes(tag.toLowerCase())) score += 4;
-  }
-
-  for (const word of query.split(/\s+/).filter((item) => item.length > 2)) {
-    if (haystack.includes(word)) score += 2;
-    if (tags.some((tag) => tag.includes(word))) score += 2;
-  }
-
-  if (tags.includes("qixi")) score += 1;
-  return score;
-}
-
-function curateProducts(text: string, suggestion?: Suggestion) {
-  const sorted = PRODUCTS.map((product) => ({
-    product,
-    score: scoreProduct(product, text, suggestion),
-  }))
-    .sort((a, b) => b.score - a.score)
-    .map((item) => item.product);
-
-  const highSignal = sorted.filter((product) => scoreProduct(product, text, suggestion) > 0);
-  const fallback = byIds([...FEATURED_PRODUCTS.her, ...FEATURED_PRODUCTS.him]);
-  return (highSignal.length ? highSignal : fallback).slice(0, 8);
-}
-
 // Context type
 interface ValentineContextValue {
   // Data
@@ -261,9 +197,16 @@ interface ValentineContextValue {
   activeMode: ChatMode;
   modePanelOpen: boolean;
   results: Product[];
+  recommendationProducts: YslChatProduct[];
   hasSearched: boolean;
+  hasProductSearch: boolean;
+  assistantReplyText: string;
   thinkingCopy: string;
   isCurating: boolean;
+  isAwaitingAssistant: boolean;
+  isSearchingProducts: boolean;
+  isChatBusy: boolean;
+  chatErrorText: string | null;
   toast: string;
   activeSection: string;
 
@@ -318,9 +261,30 @@ export function ValentineProvider({ children, activeSection, onActiveSectionChan
   const [modePanelOpen, setModePanelOpen] = useState(false);
   const [results, setResults] = useState<Product[]>(initialResults);
   const [hasSearched, setHasSearched] = useState(false);
-  const [thinkingCopy, setThinkingCopy] = useState("Selected for Qixi gifting");
-  const [isCurating, setIsCurating] = useState(false);
   const [toast, setToast] = useState("");
+  const chat = useChat({
+    id: "ysl-campaign-concierge",
+    transport: new DefaultChatTransport({
+      api: YSL_CHAT_API,
+      credentials: "omit",
+    }),
+  });
+  const chatSnapshot = useMemo(
+    () => extractYslChatSnapshot(chat.messages, chat.error),
+    [chat.error, chat.messages]
+  );
+  const isChatBusy = chat.status === "submitted" || chat.status === "streaming";
+  const isAwaitingAssistant = hasSearched && isChatBusy && !chatSnapshot.assistantText;
+  const isSearchingProducts =
+    hasSearched &&
+    (chatSnapshot.isSearching ||
+      (isChatBusy && chatSnapshot.hasSearch && chatSnapshot.products.length === 0));
+  const thinkingCopy =
+    chatSnapshot.assistantText ||
+    (isAwaitingAssistant
+      ? "Reading the gesture, the person, and the Saint Laurent mood."
+      : "Selected for Qixi gifting");
+  const isCurating = false;
 
   const activeScene = useMemo(
     () => SNAP_SCENES.find((scene) => scene.id === activeSection) ?? SNAP_SCENES[0],
@@ -334,6 +298,11 @@ export function ValentineProvider({ children, activeSection, onActiveSectionChan
   }, [activeScene, results]);
 
   const drawerProducts = byIds(drawer === "bag" ? bag : wishlist);
+
+  useEffect(() => {
+    if (!hasSearched || !chatSnapshot.hasSearch) return;
+    onActiveSectionChange("recommendations-section");
+  }, [chatSnapshot.hasSearch, hasSearched, onActiveSectionChange]);
 
   const showToast = useCallback((message: string) => {
     setToast(message);
@@ -358,19 +327,29 @@ export function ValentineProvider({ children, activeSection, onActiveSectionChan
     setBag((current) => current.filter((item) => item !== id));
   }, []);
 
+  const buildConciergePrompt = useCallback((text: string, suggestion?: Suggestion) => {
+    const hints = [
+      suggestion?.recipient ? `recipient: ${suggestion.recipient}` : null,
+      suggestion?.budget ? `budget under ¥${suggestion.budget.toLocaleString("en-US")}` : null,
+      suggestion?.category ? `category: ${suggestion.category}` : null,
+      suggestion?.style ? `style: ${suggestion.style}` : null,
+      suggestion?.occasion ? `occasion: ${suggestion.occasion}` : null,
+    ].filter(Boolean);
+
+    return hints.length ? `${text}\n\nPreference hints: ${hints.join(", ")}.` : text;
+  }, []);
+
   const runSearch = useCallback((text: string, suggestion?: Suggestion) => {
     const query = text.trim() || "Qixi gift";
-    const nextResults = curateProducts(query, suggestion);
-    setThinkingCopy(getThinkingCopy(query, suggestion));
     setModePanelOpen(false);
-    setIsCurating(true);
-    window.setTimeout(() => {
-      setResults(nextResults);
-      setHasSearched(true);
-      setIsCurating(false);
-      onActiveSectionChange("recommendations-section");
-    }, 720);
-  }, [onActiveSectionChange]);
+    setHasSearched(true);
+    setResults(initialResults);
+    chat.stop();
+    chat.clearError();
+    chat.setMessages([]);
+    onActiveSectionChange("concierge-reply-section");
+    void chat.sendMessage({ text: buildConciergePrompt(query, suggestion) });
+  }, [buildConciergePrompt, chat, initialResults, onActiveSectionChange]);
 
   const submitSearch = useCallback((event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -383,7 +362,7 @@ export function ValentineProvider({ children, activeSection, onActiveSectionChan
   }, [runSearch]);
 
   const chooseSku = useCallback((product: Product) => {
-    const query = `SKU ${product.sku} ${product.name}`;
+    const query = `Saint Laurent SKU ${product.sku} ${product.name}`;
     setInputValue(query);
     runSearch(query, {
       text: query,
@@ -408,9 +387,16 @@ export function ValentineProvider({ children, activeSection, onActiveSectionChan
     activeMode,
     modePanelOpen,
     results,
+    recommendationProducts: chatSnapshot.products,
     hasSearched,
+    hasProductSearch: chatSnapshot.hasSearch,
+    assistantReplyText: chatSnapshot.assistantText,
     thinkingCopy,
     isCurating,
+    isAwaitingAssistant,
+    isSearchingProducts,
+    isChatBusy,
+    chatErrorText: chatSnapshot.errorText,
     toast,
     activeSection,
     activeScene,

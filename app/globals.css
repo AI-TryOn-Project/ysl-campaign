@@ -693,6 +693,83 @@ html.valentine-snap-mode body {
   margin: 0 auto;
 }
 
+.valentine-shell .concierge-reply-section {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  background: #080808;
+  color: #fff;
+  padding: 96px 28px 130px;
+}
+
+.valentine-shell .concierge-reply-inner {
+  width: min(920px, 100%);
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+
+.valentine-shell .concierge-reply-mark {
+  width: min(210px, 58vw);
+  color: #fff;
+  margin-bottom: 46px;
+  opacity: 0.92;
+}
+
+.valentine-shell .concierge-reply-inner .kicker {
+  margin: 0 0 22px;
+  font-size: 10px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: rgba(184, 160, 108, 0.82);
+}
+
+.valentine-shell .concierge-reply-inner h2 {
+  margin: 0;
+  max-width: 860px;
+  font-family: var(--display);
+  font-size: clamp(30px, 5vw, 68px);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1.16;
+  text-transform: uppercase;
+}
+
+.valentine-shell .concierge-pulse {
+  display: flex;
+  gap: 9px;
+  margin-top: 36px;
+}
+
+.valentine-shell .concierge-pulse span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(184, 160, 108, 0.84);
+  animation: conciergePulse 1.1s ease-in-out infinite;
+}
+
+.valentine-shell .concierge-pulse span:nth-child(2) {
+  animation-delay: 0.16s;
+}
+
+.valentine-shell .concierge-pulse span:nth-child(3) {
+  animation-delay: 0.32s;
+}
+
+@keyframes conciergePulse {
+  0%,
+  100% {
+    opacity: 0.32;
+    transform: translateY(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(-5px);
+  }
+}
+
 .valentine-shell .section-head {
   text-align: center;
   margin-bottom: 48px;
@@ -740,6 +817,7 @@ html.valentine-snap-mode body {
   padding: 0;
   background: #f3f0eb;
   overflow: hidden;
+  text-decoration: none;
 }
 
 .valentine-shell .product-image::before {
@@ -779,6 +857,15 @@ html.valentine-snap-mode body {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--muted-dark);
+}
+
+.valentine-shell .product-sku {
+  margin: -4px 0 0;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.44);
+  overflow-wrap: anywhere;
 }
 
 .valentine-shell .product-name {
@@ -828,6 +915,7 @@ html.valentine-snap-mode body {
 }
 
 .valentine-shell .card-actions button,
+.valentine-shell .card-actions a,
 .valentine-shell .detail-modal__actions button {
   min-height: 42px;
   border-radius: 0;
@@ -838,12 +926,80 @@ html.valentine-snap-mode body {
   font-size: 12px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 }
 
 .valentine-shell .card-actions button:hover,
+.valentine-shell .card-actions a:hover,
 .valentine-shell .detail-modal__actions button:hover {
   background: #000;
   color: #fff;
+}
+
+.valentine-shell .product-card--skeleton .product-image,
+.valentine-shell .product-card--skeleton .product-meta span,
+.valentine-shell .product-card--skeleton .product-meta strong,
+.valentine-shell .product-card--skeleton .product-meta em,
+.valentine-shell .product-card--skeleton .product-meta p {
+  position: relative;
+  overflow: hidden;
+  background: #ece7df;
+}
+
+.valentine-shell .product-card--skeleton .product-image::before,
+.valentine-shell .product-card--skeleton .product-meta span::before,
+.valentine-shell .product-card--skeleton .product-meta strong::before,
+.valentine-shell .product-card--skeleton .product-meta em::before,
+.valentine-shell .product-card--skeleton .product-meta p::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.62), transparent);
+  transform: translateX(-100%);
+  animation: yslSkeleton 1.25s ease-in-out infinite;
+}
+
+.valentine-shell .product-card--skeleton .product-meta span,
+.valentine-shell .product-card--skeleton .product-meta strong,
+.valentine-shell .product-card--skeleton .product-meta em,
+.valentine-shell .product-card--skeleton .product-meta p {
+  display: block;
+  height: 12px;
+}
+
+.valentine-shell .product-card--skeleton .product-meta strong {
+  width: 78%;
+  height: 26px;
+}
+
+.valentine-shell .product-card--skeleton .product-meta em {
+  width: 34%;
+  height: 18px;
+}
+
+.valentine-shell .product-card--skeleton .product-meta p {
+  width: 92%;
+  height: 54px;
+}
+
+.valentine-shell .recommendation-error {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 22px 24px;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  color: rgba(0, 0, 0, 0.68);
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+@keyframes yslSkeleton {
+  to {
+    transform: translateX(100%);
+  }
 }
 
 .valentine-shell .refinement-section {
@@ -1367,6 +1523,13 @@ html.valentine-snap-mode body {
 .valentine-shell .send-action:hover {
   background: #fff;
   color: #000;
+}
+
+.valentine-shell .chat-action:disabled,
+.valentine-shell .chat-suggestion-chip:disabled,
+.valentine-shell .chat-input:disabled {
+  cursor: wait;
+  opacity: 0.58;
 }
 
 .valentine-shell .chat-bar.product-scene .chat-action {
@@ -2123,6 +2286,19 @@ html.valentine-snap-mode body {
 
   .valentine-shell .section-head h2 {
     font-size: 30px;
+  }
+
+  .valentine-shell .concierge-reply-section {
+    padding: 86px 20px 118px;
+  }
+
+  .valentine-shell .concierge-reply-mark {
+    margin-bottom: 34px;
+  }
+
+  .valentine-shell .concierge-reply-inner h2 {
+    font-size: 29px;
+    letter-spacing: 0.06em;
   }
 
   .valentine-shell .product-grid,

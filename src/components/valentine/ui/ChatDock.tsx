@@ -1,6 +1,7 @@
 "use client";
 
 import { useValentine, type ChatMode } from "../ValentineContext";
+import { getYslProductSku } from "@/lib/ysl-chat";
 
 export function ChatDock() {
   const {
@@ -13,12 +14,16 @@ export function ChatDock() {
     setInputValue,
     activeScene,
     activeSceneProducts,
+    recommendationProducts,
     isCurating,
+    isChatBusy,
     thinkingCopy,
+    runSearch,
     submitSearch,
     chooseSuggestion,
     chooseSku,
   } = useValentine();
+  const visibleRemoteSkus = recommendationProducts.slice(0, 4);
 
   return (
     <form
@@ -44,7 +49,13 @@ export function ChatDock() {
         </div>
         <div className="chat-mode-chips">
           {chatbotConfig[activeMode].suggestions.map((suggestion) => (
-            <button className="chat-suggestion-chip" key={suggestion.text} type="button" onClick={() => chooseSuggestion(suggestion)}>
+            <button
+              className="chat-suggestion-chip"
+              key={suggestion.text}
+              type="button"
+              onClick={() => chooseSuggestion(suggestion)}
+              disabled={isChatBusy}
+            >
               {suggestion.text}
             </button>
           ))}
@@ -81,6 +92,7 @@ export function ChatDock() {
               value={inputValue}
               onChange={(event) => setInputValue(event.target.value)}
               placeholder={activeScene.placeholder}
+              disabled={isChatBusy}
             />
             {!inputValue ? (
               <div className="bar-placeholder">
@@ -90,7 +102,7 @@ export function ChatDock() {
               </div>
             ) : null}
           </div>
-          <button className="chat-action send-action" type="submit" aria-label="Send recommendation request">
+          <button className="chat-action send-action" type="submit" aria-label="Send recommendation request" disabled={isChatBusy}>
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 19V5" />
               <path d="m5 12 7-7 7 7" />
@@ -99,11 +111,23 @@ export function ChatDock() {
         </div>
         <div className="chat-sku-strip" aria-label="Visible page SKUs">
           <span>SKU</span>
-          {activeSceneProducts.slice(0, 4).map((product) => (
-            <button key={product.id} type="button" title={product.name} onClick={() => chooseSku(product)}>
-              {product.sku}
-            </button>
-          ))}
+          {visibleRemoteSkus.length
+            ? visibleRemoteSkus.map((product) => (
+                <button
+                  key={product.id}
+                  type="button"
+                  title={product.name}
+                  disabled={isChatBusy}
+                  onClick={() => runSearch(`Saint Laurent SKU ${getYslProductSku(product)} ${product.name}`)}
+                >
+                  {getYslProductSku(product)}
+                </button>
+              ))
+            : activeSceneProducts.slice(0, 4).map((product) => (
+                <button key={product.id} type="button" title={product.name} disabled={isChatBusy} onClick={() => chooseSku(product)}>
+                  {product.sku}
+                </button>
+              ))}
         </div>
       </div>
     </form>

@@ -16,6 +16,7 @@ import { ServicesSection } from "./valentine/sections/ServicesSection";
 import { StatementSection } from "./valentine/sections/StatementSection";
 import { StyleGuideSection } from "./valentine/sections/StyleGuideSection";
 import { ChatDock } from "./valentine/ui/ChatDock";
+import { ConciergeReplySection } from "./valentine/sections/ConciergeReplySection";
 import { Drawer } from "./valentine/ui/Drawer";
 import { ProductDetailModal } from "./valentine/ui/ProductDetailModal";
 import { StyleGuideModal } from "./valentine/ui/StyleGuideModal";
@@ -108,8 +109,9 @@ function ValentineSections({ pageIndex, onPageChange }: { pageIndex: number; onP
   const pages = useMemo(
     () => [
       <HeroSection key="gift-finder" active={isActive("gift-finder")} />,
-      <StyleGuideSection key="style-guide-section" active={isActive("style-guide-section")} />,
+      <ConciergeReplySection key="concierge-reply-section" active={isActive("concierge-reply-section")} />,
       <RecommendationsSection key="recommendations-section" active={isActive("recommendations-section")} />,
+      <StyleGuideSection key="style-guide-section" active={isActive("style-guide-section")} />,
       <CampaignSection key="campaign-section" active={isActive("campaign-section")} />,
       <CollectionIntroSection key="collection-intro" active={isActive("collection-intro")} />,
       <GiftsForHerSection key="gifts-for-her" active={isActive("gifts-for-her")} />,
