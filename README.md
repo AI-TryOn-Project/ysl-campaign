@@ -13,9 +13,16 @@ Next.js demo for the Saint Laurent China Qixi gift-shopping campaign.
 app/                  App Router pages and global CSS
 src/components/       React UI for the homepage and Valentine experience
 src/data/campaign.ts  Product, style guide, homepage, and media manifest data
-public/assets/        Curated local campaign assets used by the app
-docs/                 PRD, architecture notes, and asset inventory
+public/assets/        Curated local fallback/product/editorial assets
+docs/                 PRD, architecture notes, asset inventory, and implementation rules
 ```
+
+## Implementation Rules
+
+- Read `docs/ai-frontend-guidelines.md` before changing AI concierge, media, or Valentine frontend behavior.
+- README/documentation videos and large images must be uploaded to Vercel Blob and referenced by public Blob URL.
+- Do not add README-only videos or screenshots to `public/assets`, and do not point documentation media at homepage or campaign runtime assets.
+- Campaign motion assets should be served from Vercel Blob; inactive frontend sections should render posters instead of mounting autoplay videos.
 
 ## Commands
 

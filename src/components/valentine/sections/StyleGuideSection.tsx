@@ -30,7 +30,7 @@ export function StyleGuideSection({ active }: { active: boolean }) {
           >
             <div className="vl-sg-card-media">
               <div className="vl-sg-card-parallax">
-                <Media guide={guide} className="style-guide-media" />
+                <Media guide={guide} className="style-guide-media" active={active} />
               </div>
             </div>
             <span className="vl-sg-card-shade" aria-hidden="true" />

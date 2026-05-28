@@ -6,7 +6,7 @@ Curated assets retained in `public/assets`:
 
 - `public/assets/products/` - 27 product images used by the recommendation and gift flows.
 - `public/assets/editorial/` - homepage, Qixi, and style guide poster imagery.
-- `public/assets/motion/` - 3 MP4 motion assets used by the Qixi teaser and style guide cards.
+- `public/assets/motion/` - legacy local MP4 copies only. Runtime campaign video references should use Vercel Blob URLs from `src/data/campaign.ts`.
 
 Removed source folders:
 
@@ -17,4 +17,10 @@ Removed source folders:
 - static `products.js`
 - static `vercel.json`
 
-When adding new assets, put them under `public/assets/<type>/` first, then reference them from `src/data/campaign.ts`.
+## New Asset Rules
+
+Small product/editorial images required by the app may live under `public/assets/<type>/`, then be referenced from `src/data/campaign.ts`.
+
+Videos, GIFs, README media, and large documentation images must be uploaded to Vercel Blob first. Reference the public Blob URL rather than adding documentation-only files under `public/assets`.
+
+Do not use homepage assets as README or documentation media. Documentation should not depend on `/assets/...` runtime paths.

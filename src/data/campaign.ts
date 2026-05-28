@@ -823,7 +823,7 @@ export const STYLE_GUIDES: StyleGuide[] = [
     "title": "After Dark",
     "tagline": "Velvet hours, sculpted silhouettes, and the art of arrival.",
     "mediaType": "video",
-    "media": "/assets/motion/sl-ss26-15-seconds-edit.mp4",
+    "media": "https://f1m2wvuqxivimpbz.public.blob.vercel-storage.com/ysl-campaign/valentine/motion/sl-ss26-15-seconds-edit.mp4",
     "poster": "/assets/editorial/medium2-saint-laurent-wsummer26-lookbook-2x3-19-a.jpg",
     "image": "/assets/editorial/medium2-saint-laurent-wsummer26-lookbook-2x3-19-a.jpg",
     "productIds": [
@@ -839,7 +839,7 @@ export const STYLE_GUIDES: StyleGuide[] = [
     "title": "Candlelit Dinner",
     "tagline": "Polished presence for the table, the toast, and the walk home.",
     "mediaType": "video",
-    "media": "/assets/motion/saint-laurent-productions-hp.mp4",
+    "media": "https://f1m2wvuqxivimpbz.public.blob.vercel-storage.com/ysl-campaign/valentine/motion/saint-laurent-productions-hp.mp4",
     "poster": "/assets/editorial/saint-laurent-wsummer26-lookbook-4x5-20.jpg",
     "image": "/assets/editorial/saint-laurent-wsummer26-lookbook-4x5-20.jpg",
     "productIds": [
@@ -871,7 +871,7 @@ export const STYLE_GUIDES: StyleGuide[] = [
     "title": "City Lights",
     "tagline": "Neon reflections, leather accents, and the pulse of the summer city.",
     "mediaType": "video",
-    "media": "/assets/motion/slp-intro-9-16.mp4",
+    "media": "https://f1m2wvuqxivimpbz.public.blob.vercel-storage.com/ysl-campaign/valentine/motion/slp-intro-9-16.mp4",
     "poster": "/assets/editorial/saint-laurent-women-fall-26-4x5-08.jpg",
     "image": "/assets/editorial/saint-laurent-women-fall-26-4x5-08.jpg",
     "productIds": [
@@ -887,7 +887,7 @@ export const STYLE_GUIDES: StyleGuide[] = [
     "title": "The Weekend Getaway",
     "tagline": "Departure at dawn. Return with stories.",
     "mediaType": "video",
-    "media": "/assets/motion/saint-laurent-productions-hp.mp4",
+    "media": "https://f1m2wvuqxivimpbz.public.blob.vercel-storage.com/ysl-campaign/valentine/motion/saint-laurent-productions-hp.mp4",
     "poster": "/assets/editorial/saint-laurent-lb-mspring26-ecom-2x3-32-a.jpg",
     "image": "/assets/editorial/saint-laurent-lb-mspring26-ecom-2x3-32-a.jpg",
     "productIds": [
@@ -903,7 +903,7 @@ export const STYLE_GUIDES: StyleGuide[] = [
     "title": "Quiet Power",
     "tagline": "Tailoring that speaks softly. Presence that lingers.",
     "mediaType": "video",
-    "media": "/assets/motion/slp-intro-9-16.mp4",
+    "media": "https://f1m2wvuqxivimpbz.public.blob.vercel-storage.com/ysl-campaign/valentine/motion/slp-intro-9-16.mp4",
     "poster": "/assets/editorial/saintlaurent-fall26-wlookbook-ecom-2x3-36.jpg",
     "image": "/assets/editorial/saintlaurent-fall26-wlookbook-ecom-2x3-36.jpg",
     "productIds": [
@@ -919,7 +919,7 @@ export const STYLE_GUIDES: StyleGuide[] = [
     "title": "The Evening Silhouette",
     "tagline": "Sculptural lines for the hour when daylight yields.",
     "mediaType": "video",
-    "media": "/assets/motion/sl-ss26-15-seconds-edit.mp4",
+    "media": "https://f1m2wvuqxivimpbz.public.blob.vercel-storage.com/ysl-campaign/valentine/motion/sl-ss26-15-seconds-edit.mp4",
     "poster": "/assets/editorial/saint-laurent-wsummer26-lookbook-2x3-19-b.jpg",
     "image": "/assets/editorial/saint-laurent-wsummer26-lookbook-2x3-19-b.jpg",
     "productIds": [
@@ -935,7 +935,7 @@ export const STYLE_GUIDES: StyleGuide[] = [
     "title": "A Gesture of Desire",
     "tagline": "The gift that says everything without speaking.",
     "mediaType": "video",
-    "media": "/assets/motion/saint-laurent-productions-hp.mp4",
+    "media": "https://f1m2wvuqxivimpbz.public.blob.vercel-storage.com/ysl-campaign/valentine/motion/saint-laurent-productions-hp.mp4",
     "poster": "/assets/editorial/slrd-gifting-ecom-hp-desk.jpg",
     "image": "/assets/editorial/slrd-gifting-ecom-hp-desk.jpg",
     "productIds": [
@@ -1024,5 +1024,5 @@ export const EDITORIAL_ASSETS = {
   "valentineCampaign": "/assets/editorial/slrd-gifting-ecom-hp-desk.jpg",
   "valentineStatement": "/assets/editorial/saint-laurent-wsummer26-lookbook-4x5-19-b.jpg",
   "qixiTeaserPoster": "/assets/editorial/slrd-gifting-ecom-hp-desk.jpg",
-  "qixiTeaserVideo": "/assets/motion/sl-ss26-15-seconds-edit.mp4"
+  "qixiTeaserVideo": "https://f1m2wvuqxivimpbz.public.blob.vercel-storage.com/ysl-campaign/valentine/motion/sl-ss26-15-seconds-edit.mp4"
 };
