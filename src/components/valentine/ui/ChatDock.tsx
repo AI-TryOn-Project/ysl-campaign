@@ -1,8 +1,45 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useValentine, type ChatMode } from "../ValentineContext";
-import { getYslProductSku } from "@/lib/ysl-chat";
-import { getChatProductChipName } from "@/lib/chat-product-display";
+
+type ConciergeContextKey = "qixi" | "hers" | "his";
+
+// Section-aware placeholder + conversation starters. Each context maps to a content
+// zone on the page (gift grid, "Undeniably Hers", "Unmistakably His") and seeds
+// realistic questions a customer would naturally ask an AI stylist.
+const CONCIERGE_CONTEXTS: Record<
+  ConciergeContextKey,
+  { placeholder: string; prompts: string[] }
+> = {
+  qixi: {
+    placeholder: "Find the perfect Qixi look.",
+    prompts: [
+      "What should I get her for Qixi?",
+      "What's a classic Saint Laurent gift?",
+      "I'm shopping for my girlfriend.",
+      "Can you recommend a Qixi gift?",
+    ],
+  },
+  hers: {
+    placeholder: "What should I wear for a Qixi dinner date?",
+    prompts: [
+      "Can you style a romantic red look?",
+      "What should I wear for a Qixi dinner date?",
+      "Which Saint Laurent bag goes with this look?",
+      "Help me put together a complete outfit.",
+    ],
+  },
+  his: {
+    placeholder: "What would make a good gift for him?",
+    prompts: [
+      "What would make a good gift for him?",
+      "Can you build a look for him?",
+      "What are your most popular men's pieces?",
+      "I'm shopping for my boyfriend.",
+    ],
+  },
+};
 
 function modeIcon(type: string) {
   if (type === "search") return (
@@ -32,22 +69,42 @@ export function ChatDock() {
     inputValue,
     setInputValue,
     activeScene,
-    activeSceneProducts,
-    recommendationProducts,
     isCurating,
     isChatBusy,
     thinkingCopy,
-    runSearch,
     submitSearch,
     chooseSuggestion,
-    chooseSku,
   } = useValentine();
 
-  // Suggested-piece chips: show readable product names only — never raw SKU codes.
-  const remoteSuggestions = recommendationProducts
-    .slice(0, 4)
-    .filter((product) => product.name?.trim());
-  const localSuggestions = activeSceneProducts.slice(0, 4).filter((product) => product.name?.trim());
+  // Track which editorial zone is centered in the viewport so the dock copy follows
+  // the page. Defaults to the "Selected for Qixi" gift context.
+  const [conciergeContext, setConciergeContext] = useState<ConciergeContextKey>("qixi");
+
+  useEffect(() => {
+    const hers = document.getElementById("qixi-hers");
+    const his = document.getElementById("qixi-his");
+    if (!hers && !his) return;
+
+    const centered = new Set<string>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) centered.add(entry.target.id);
+          else centered.delete(entry.target.id);
+        }
+        if (centered.has("qixi-his")) setConciergeContext("his");
+        else if (centered.has("qixi-hers")) setConciergeContext("hers");
+        else setConciergeContext("qixi");
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 },
+    );
+
+    if (hers) observer.observe(hers);
+    if (his) observer.observe(his);
+    return () => observer.disconnect();
+  }, []);
+
+  const context = CONCIERGE_CONTEXTS[conciergeContext];
 
   return (
     <form
@@ -134,13 +191,13 @@ export function ChatDock() {
               className="chat-input"
               value={inputValue}
               onChange={(event) => setInputValue(event.target.value)}
-              placeholder={activeScene.placeholder}
+              placeholder={context.placeholder}
               disabled={isChatBusy}
             />
             {!inputValue ? (
               <div className="bar-placeholder">
-                <span className="chat-scene-copy" key={activeScene.placeholder}>
-                  {activeScene.placeholder}
+                <span className="chat-scene-copy" key={context.placeholder}>
+                  {context.placeholder}
                 </span>
               </div>
             ) : null}
@@ -152,27 +209,18 @@ export function ChatDock() {
             </svg>
           </button>
         </div>
-        {remoteSuggestions.length || localSuggestions.length ? (
-          <div className="chat-sku-strip" aria-label="Suggested pieces">
-            {remoteSuggestions.length
-              ? remoteSuggestions.map((product) => (
-                  <button
-                    key={product.id}
-                    type="button"
-                    title={product.name}
-                    disabled={isChatBusy}
-                    onClick={() => runSearch(`Saint Laurent ${getYslProductSku(product)} ${product.name}`)}
-                  >
-                    {getChatProductChipName(product)}
-                  </button>
-                ))
-              : localSuggestions.map((product) => (
-                  <button key={product.id} type="button" title={product.name} disabled={isChatBusy} onClick={() => chooseSku(product)}>
-                    {getChatProductChipName(product)}
-                  </button>
-                ))}
-          </div>
-        ) : null}
+        <div className="chat-sku-strip" aria-label="Conversation starters">
+          {context.prompts.map((prompt) => (
+            <button
+              key={prompt}
+              type="button"
+              disabled={isChatBusy}
+              onClick={() => chooseSuggestion({ text: prompt })}
+            >
+              {prompt}
+            </button>
+          ))}
+        </div>
       </div>
     </form>
   );

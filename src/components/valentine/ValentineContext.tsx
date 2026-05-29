@@ -92,7 +92,7 @@ export const SNAP_SCENES: SnapScene[] = [
   {
     id: "gift-finder",
     eyebrow: "Qixi Gifts",
-    placeholder: "Who are you shopping for?",
+    placeholder: "Find the perfect Qixi look.",
     skuProductIds: [FEATURED_PRODUCTS.her[0], FEATURED_PRODUCTS.him[0], FEATURED_PRODUCTS.her[1]].filter(Boolean),
   },
   {

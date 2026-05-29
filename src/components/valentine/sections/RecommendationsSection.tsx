@@ -1,6 +1,7 @@
 "use client";
 
 import { useValentine } from "../ValentineContext";
+import { openProductDetail } from "@/lib/product-link";
 import { BlurRevealText } from "../ui/BlurRevealText";
 import { ProductCard } from "../ui/ProductCard";
 import { RecommendationProductCard } from "../ui/RecommendationProductCard";
@@ -27,7 +28,6 @@ export function RecommendationsSection({ active }: { active: boolean }) {
     chatErrorText,
     quickPrompts,
     addItem,
-    setSelectedProduct,
     chooseSuggestion,
   } = useValentine();
   const hasRemoteProducts = recommendationProducts.length > 0;
@@ -68,7 +68,7 @@ export function RecommendationsSection({ active }: { active: boolean }) {
                 product={product}
                 onBag={() => addItem("bag", product)}
                 onWishlist={() => addItem("wishlist", product)}
-                onDetail={() => setSelectedProduct(product)}
+                onDetail={() => openProductDetail(product)}
               />
             ))}
           </div>

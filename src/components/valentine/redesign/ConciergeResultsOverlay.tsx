@@ -1,6 +1,7 @@
 "use client";
 
 import { useValentine } from "../ValentineContext";
+import { getProductDetailUrl } from "@/lib/product-link";
 
 // Surfaces the AI Stylist results as a full-screen editorial overlay.
 // NOTE: reads existing chat state only — it does not alter any chat/recommendation logic.
@@ -15,7 +16,6 @@ export function ConciergeResultsOverlay() {
     isAwaitingAssistant,
     chatErrorText,
     quickPrompts,
-    setSelectedProduct,
     setActiveSection,
     chooseSuggestion,
   } = useValentine();
@@ -31,16 +31,16 @@ export function ConciergeResultsOverlay() {
   return (
     <div className="vl-ed-results" role="dialog" aria-modal="true" aria-label="AI Stylist selection" aria-live="polite">
       <header className="vl-ed-collection-bar">
-        <p className="vl-ed-collection-eyebrow">AI Stylist</p>
-        <h2 className="vl-ed-collection-title">{hasSearched ? "Selected for You" : "Selected for Qixi"}</h2>
         <button
-          className="vl-ed-collection-close"
+          className="vl-ed-collection-back"
           type="button"
           onClick={() => setActiveSection("highlights")}
-          aria-label="Close AI Stylist selection"
+          aria-label="Back to campaign"
         >
-          Close
+          <span aria-hidden="true">&larr;</span> Back
         </button>
+        <h2 className="vl-ed-collection-title">{hasSearched ? "Selected for You" : "Selected for Qixi"}</h2>
+        <span className="vl-ed-collection-spacer" aria-hidden="true" />
       </header>
 
       <div className="vl-ed-collection-scroll">
@@ -59,43 +59,39 @@ export function ConciergeResultsOverlay() {
           </p>
         ) : hasRemote ? (
           <div className="vl-ed-grid vl-ed-grid--collection">
-            {recommendationProducts.map((product) => {
-              const card = (
-                <>
+            {recommendationProducts.map((product) => (
+              <article className="vl-ed-product" key={product.id}>
+                <a
+                  className="vl-ed-product-link"
+                  href={getProductDetailUrl(product)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`View ${product.name}`}
+                >
                   <span className="vl-ed-product-media">
                     <img src={product.img} alt={product.name} loading="lazy" referrerPolicy="no-referrer" />
                   </span>
                   <span className="vl-ed-product-name">{product.name}</span>
-                </>
-              );
-              return (
-                <article className="vl-ed-product" key={product.id}>
-                  {product.shopUrl ? (
-                    <a className="vl-ed-product-link" href={product.shopUrl} target="_blank" rel="noreferrer">
-                      {card}
-                    </a>
-                  ) : (
-                    <div className="vl-ed-product-link">{card}</div>
-                  )}
-                </article>
-              );
-            })}
+                </a>
+              </article>
+            ))}
           </div>
         ) : (
           <div className="vl-ed-grid vl-ed-grid--collection">
             {results.map((product) => (
               <article className="vl-ed-product" key={product.id}>
-                <button
+                <a
                   className="vl-ed-product-link"
-                  type="button"
-                  onClick={() => setSelectedProduct(product)}
+                  href={getProductDetailUrl(product)}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={`View ${product.name}`}
                 >
                   <span className="vl-ed-product-media">
                     <img src={product.image} alt={product.name} loading="lazy" />
                   </span>
                   <span className="vl-ed-product-name">{product.name}</span>
-                </button>
+                </a>
               </article>
             ))}
           </div>

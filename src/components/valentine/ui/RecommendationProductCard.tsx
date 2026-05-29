@@ -2,10 +2,11 @@
 
 import {
   getYslProductReason,
-  getYslProductSku,
   getYslProductTags,
   type YslChatProduct,
 } from "@/lib/ysl-chat";
+import { getChatProductChipName } from "@/lib/chat-product-display";
+import { getProductDetailUrl } from "@/lib/product-link";
 
 function money(value: number | null | undefined) {
   if (value == null) return "Price upon request";
@@ -21,28 +22,15 @@ function labelTag(tag: string) {
 
 export function RecommendationProductCard({ product }: { product: YslChatProduct }) {
   const tags = getYslProductTags(product);
-  const sku = getYslProductSku(product);
-  const image = (
-    <img
-      src={product.img}
-      alt={product.name}
-      loading="lazy"
-      referrerPolicy="no-referrer"
-    />
-  );
+  const detailUrl = getProductDetailUrl(product);
 
   return (
     <article className="product-card concierge-product-card">
-      {product.shopUrl ? (
-        <a className="product-image" href={product.shopUrl} target="_blank" rel="noreferrer">
-          {image}
-        </a>
-      ) : (
-        <div className="product-image">{image}</div>
-      )}
+      <a className="product-image" href={detailUrl} target="_blank" rel="noopener noreferrer">
+        <img src={product.img} alt={product.name} loading="lazy" referrerPolicy="no-referrer" />
+      </a>
       <div className="product-meta">
-        <p className="product-kicker">{product.brand ?? "Selected Product"}</p>
-        <p className="product-sku">SKU {sku}</p>
+        <p className="product-kicker">{product.brand ?? getChatProductChipName(product)}</p>
         <h3 className="product-name">{product.name}</h3>
         <span className="product-price">{money(product.price)}</span>
         <div className="tag-row">
@@ -54,11 +42,9 @@ export function RecommendationProductCard({ product }: { product: YslChatProduct
         </div>
         <p className="reason">{getYslProductReason(product)}</p>
         <div className="card-actions">
-          {product.shopUrl ? (
-            <a href={product.shopUrl} target="_blank" rel="noreferrer">
-              View
-            </a>
-          ) : null}
+          <a href={detailUrl} target="_blank" rel="noopener noreferrer">
+            View
+          </a>
         </div>
       </div>
     </article>

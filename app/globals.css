@@ -1738,10 +1738,9 @@ html.valentine-snap-mode body {
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.06);
   color: rgba(255, 255, 255, 0.72);
-  padding: 5px 9px;
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  padding: 5px 11px;
+  font-size: 11px;
+  letter-spacing: 0.02em;
   white-space: nowrap;
   transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
@@ -2647,7 +2646,7 @@ html.valentine-snap-mode body {
   }
 
   .valentine-shell .chat-sku-strip button {
-    max-width: 128px;
+    max-width: 240px;
     overflow: hidden;
     text-overflow: ellipsis;
   }
@@ -4558,6 +4557,15 @@ button {
   opacity: 0.55;
 }
 
+.valentine-shell--editorial .vl-ed-editorial-preview {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 3vw, 32px);
+  width: 100%;
+  max-width: 640px;
+  margin-top: 16px;
+}
+
 /* Collection + AI results overlays */
 .valentine-shell--editorial .vl-ed-collection,
 .valentine-shell--editorial .vl-ed-results {
@@ -4628,6 +4636,27 @@ button {
 }
 
 .valentine-shell--editorial .vl-ed-collection-close:hover {
+  opacity: 0.55;
+}
+
+.valentine-shell--editorial .vl-ed-collection-back {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: #0a0a0a;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.valentine-shell--editorial .vl-ed-collection-back:hover {
   opacity: 0.55;
 }
 
@@ -4820,6 +4849,218 @@ button {
 @media (max-width: 540px) {
   .valentine-shell--editorial .vl-ed-footer-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ── Product Detail Page (local /products/[slug]) ─────────── */
+.vl-pdp {
+  min-height: 100vh;
+  background: #ffffff;
+  color: #0a0a0a;
+  font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+  padding: 0 clamp(20px, 5vw, 64px) 120px;
+}
+
+.vl-pdp-topbar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  min-height: 80px;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.vl-pdp-back {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #0a0a0a;
+  text-decoration: none;
+}
+
+.vl-pdp-back:hover {
+  opacity: 0.6;
+}
+
+.vl-pdp-brand {
+  justify-self: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.vl-pdp-topbar-spacer {
+  display: block;
+}
+
+.vl-pdp-main {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(32px, 6vw, 96px);
+  max-width: 1280px;
+  margin: clamp(40px, 6vw, 80px) auto 0;
+}
+
+.vl-pdp-frame {
+  background: #f7f7f7;
+  padding: clamp(24px, 5%, 56px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vl-pdp-frame img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.vl-pdp-info {
+  padding-top: 8px;
+}
+
+.vl-pdp-category {
+  margin: 0 0 16px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #6f6f6f;
+}
+
+.vl-pdp-name {
+  margin: 0 0 18px;
+  font-size: clamp(20px, 2.4vw, 28px);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.vl-pdp-price {
+  margin: 0 0 28px;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+}
+
+.vl-pdp-description {
+  margin: 0 0 28px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #2a2a2a;
+  max-width: 46ch;
+}
+
+.vl-pdp-cta {
+  display: inline-block;
+  padding: 16px 40px;
+  margin-bottom: 36px;
+  border: 1px solid #0a0a0a;
+  background: #0a0a0a;
+  color: #ffffff;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.vl-pdp-cta:hover {
+  background: #ffffff;
+  color: #0a0a0a;
+}
+
+.vl-pdp-specs {
+  margin: 0;
+  border-top: 1px solid #ececec;
+}
+
+.vl-pdp-spec {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px;
+  padding: 18px 0;
+  border-bottom: 1px solid #ececec;
+}
+
+.vl-pdp-spec dt {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #6f6f6f;
+}
+
+.vl-pdp-spec dd {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #2a2a2a;
+}
+
+.vl-pdp-related {
+  max-width: 1280px;
+  margin: clamp(64px, 9vw, 130px) auto 0;
+}
+
+.vl-pdp-related-title {
+  margin: 0 0 40px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.vl-pdp-related-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(24px, 4vw, 56px);
+}
+
+.vl-pdp-related-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.vl-pdp-related-media {
+  background: #f7f7f7;
+  padding: clamp(16px, 9%, 36px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vl-pdp-related-media img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  transition: opacity 0.25s ease;
+}
+
+.vl-pdp-related-card:hover .vl-pdp-related-media img {
+  opacity: 0.7;
+}
+
+.vl-pdp-related-name {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.vl-pdp-related-price {
+  font-size: 11px;
+  color: #6f6f6f;
+  text-align: center;
+}
+
+@media (max-width: 860px) {
+  .vl-pdp-main {
+    grid-template-columns: 1fr;
+  }
+
+  .vl-pdp-related-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

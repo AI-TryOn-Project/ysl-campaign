@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { PRODUCTS, type Product } from "@/data/campaign";
+import { openProductDetail } from "@/lib/product-link";
 import { SaintLaurentMark } from "./SaintLaurentMark";
 import { ValentineProvider, useValentine } from "./valentine/ValentineContext";
 import { ChatDock } from "./valentine/ui/ChatDock";
@@ -47,9 +48,6 @@ function TopBar({ onOpenCollection }: { onOpenCollection: (view: CollectionView)
         </button>
         <button className="vl-ed-navlink" type="button" onClick={() => scrollToId("gifts")}>
           Gifts
-        </button>
-        <button className="vl-ed-navlink" type="button" onClick={() => openStylist(setModePanelOpen)}>
-          AI Stylist
         </button>
       </nav>
 
@@ -116,6 +114,8 @@ function ValentineOverlays() {
     addItem,
   } = useValentine();
 
+  // Every product click opens a dedicated detail experience in a new tab.
+
   const isLoading = isAwaitingAssistant || isSearchingProducts;
 
   return (
@@ -139,7 +139,7 @@ function ValentineOverlays() {
           products={drawerProducts}
           onClose={() => setDrawer(null)}
           onRemove={(id) => removeItem(drawer, id)}
-          onDetail={setSelectedProduct}
+          onDetail={openProductDetail}
         />
       ) : null}
 
@@ -156,7 +156,7 @@ function ValentineOverlays() {
         <StyleGuideModal
           guide={selectedGuide}
           onClose={() => setSelectedGuide(null)}
-          onDetail={setSelectedProduct}
+          onDetail={openProductDetail}
           onBag={(product) => addItem("bag", product)}
         />
       ) : null}
@@ -165,7 +165,7 @@ function ValentineOverlays() {
 }
 
 function ValentineExperience() {
-  const { featuredHer, featuredHim, setSelectedProduct } = useValentine();
+  const { featuredHer, featuredHim } = useValentine();
   const [collection, setCollection] = useState<CollectionView>(null);
 
   const womenProducts = useMemo(() => PRODUCTS.filter((p) => p.gender === "women"), []);
@@ -175,7 +175,7 @@ function ValentineExperience() {
     [featuredHer, featuredHim],
   );
 
-  const onDetail = (product: Product) => setSelectedProduct(product);
+  const onDetail = (product: Product) => openProductDetail(product);
 
   return (
     <>
@@ -190,14 +190,18 @@ function ValentineExperience() {
           image={HERS_IMAGE}
           imageAlt="Saint Laurent women's Qixi campaign"
           title="Qixi, Undeniably Hers"
+          products={womenProducts.slice(0, 3)}
           onView={() => setCollection("her")}
+          onDetail={onDetail}
         />
         <EditorialCategory
           id="qixi-his"
           image={HIS_IMAGE}
           imageAlt="Saint Laurent men's Qixi campaign"
           title="Qixi, Unmistakably His"
+          products={menProducts.slice(0, 3)}
           onView={() => setCollection("him")}
+          onDetail={onDetail}
         />
       </main>
 

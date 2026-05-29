@@ -1,10 +1,11 @@
 "use client";
 
 import { useValentine } from "../ValentineContext";
+import { openProductDetail } from "@/lib/product-link";
 import { GiftSection } from "../ui/GiftSection";
 
 export function GiftsForHerSection({ active }: { active: boolean }) {
-  const { featuredHer, addItem, setSelectedProduct } = useValentine();
+  const { featuredHer, addItem } = useValentine();
 
   return (
     <GiftSection
@@ -17,7 +18,7 @@ export function GiftsForHerSection({ active }: { active: boolean }) {
       active={active}
       onBag={(product) => addItem("bag", product)}
       onWishlist={(product) => addItem("wishlist", product)}
-      onDetail={setSelectedProduct}
+      onDetail={openProductDetail}
     />
   );
 }
