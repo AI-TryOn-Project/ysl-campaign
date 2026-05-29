@@ -967,7 +967,7 @@ export const HOME_SLIDES: HomeSlide[] = [
   {
     "id": "women-fall-26",
     "kicker": "WOMEN'S FALL 26",
-    "cta": "探索系列",
+    "cta": "Explore the Collection",
     "href": "/valentine",
     "image": "/assets/editorial/women-fall-26-hero.jpg",
     "imagePosition": "center top",
@@ -976,7 +976,7 @@ export const HOME_SLIDES: HomeSlide[] = [
   {
     "id": "spring-summer-26",
     "kicker": "SPRING SUMMER 26",
-    "cta": "进入七夕礼物企划",
+    "cta": "Enter the Qixi Gift Edit",
     "href": "/valentine",
     "image": "/assets/editorial/spring-summer-26-gifting.jpg",
     "imagePosition": "center center",
@@ -985,7 +985,7 @@ export const HOME_SLIDES: HomeSlide[] = [
   {
     "id": "men-summer-26",
     "kicker": "MEN'S SUMMER 26",
-    "cta": "探索男士礼物",
+    "cta": "Explore Gifts for Him",
     "href": "/valentine#gifts-for-him",
     "image": "/assets/editorial/men-summer-26-hero.jpg",
     "imagePosition": "center top",
@@ -994,7 +994,7 @@ export const HOME_SLIDES: HomeSlide[] = [
   {
     "id": "rive-droite",
     "kicker": "RIVE DROITE",
-    "cta": "探索灵感",
+    "cta": "Explore Inspiration",
     "href": "/valentine#style-guide-section",
     "image": "/assets/editorial/rive-droite-gifting.jpg",
     "imagePosition": "center center",
@@ -1005,15 +1005,15 @@ export const HOME_SLIDES: HomeSlide[] = [
 export const HOME_TILES: HomeTile[] = [
   {
     "id": "handbags",
-    "kicker": "手袋",
-    "cta": "发现",
+    "kicker": "HANDBAGS",
+    "cta": "Discover",
     "href": "/valentine#gifts-for-her",
     "image": "/assets/editorial/women-fall-handbag.jpg"
   },
   {
     "id": "shoes",
-    "kicker": "鞋履",
-    "cta": "查看更多",
+    "kicker": "SHOES",
+    "cta": "View More",
     "href": "/valentine#style-guide-section",
     "image": "/assets/editorial/saint-laurent-women-fall-26-4x5-08.jpg"
   }

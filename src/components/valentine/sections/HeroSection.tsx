@@ -14,13 +14,13 @@ export function HeroSection({ active }: { active: boolean }) {
       <div className="bc-panel-shade" />
       <div className="bc-hero-copy">
         <p className="bc-guide-kicker bc-hero-kicker bc-reveal">
-          SAINT LAURENT<br />2026 七夕特别呈献
+          SAINT LAURENT<br />QIXI 2026
         </p>
-        <BlurRevealText as="h1" className="bc-guide-title bc-hero-headline bc-reveal" text="因你，独一无二" />
+        <BlurRevealText as="h1" className="bc-guide-title bc-hero-headline bc-reveal" text="Undeniably Yours" />
         <p className="bc-guide-copy bc-hero-subtitle bc-reveal">
-          献给不需被定义的爱
+          For a love that needs no definition
         </p>
-        <p className="bc-hero-scroll bc-reveal">探索七夕甄选</p>
+        <p className="bc-hero-scroll bc-reveal">Explore the Qixi Edit</p>
       </div>
     </section>
   );

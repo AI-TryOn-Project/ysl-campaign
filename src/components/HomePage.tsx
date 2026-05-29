@@ -22,9 +22,9 @@ export function HomePage() {
 
   const navItems = useMemo(
     () => [
-      { label: "精选系列", href: "/valentine#collection-intro" },
-      { label: "女士", href: "/valentine#gifts-for-her" },
-      { label: "男士", href: "/valentine#gifts-for-him" },
+      { label: "HIGHLIGHTS", href: "/valentine#collection-intro" },
+      { label: "WOMEN", href: "/valentine#gifts-for-her" },
+      { label: "MEN", href: "/valentine#gifts-for-him" },
       { label: "SL PRODUCTIONS", href: "/valentine#style-guide-section" },
       { label: "RIVE DROITE", href: "/valentine#campaign-section" },
     ],
@@ -52,12 +52,12 @@ export function HomePage() {
     <div className="home-shell">
       {bannerOpen ? (
         <div className="home-banner">
-          <span>免费标准配送及退货。七夕礼物企划现已上线。</span>
-          <Link href="/valentine">立即探索</Link>
+          <span>Complimentary standard shipping and returns. The Qixi Gift Edit is now live.</span>
+          <Link href="/valentine">Explore Now</Link>
           <button
             className="icon-button icon-button--plain"
             type="button"
-            aria-label="关闭通知"
+            aria-label="Close notification"
             onClick={() => setBannerOpen(false)}
           >
             ×
@@ -74,14 +74,14 @@ export function HomePage() {
           ))}
         </nav>
 
-        <Link className="header-brand" href="/" aria-label="Saint Laurent 首页">
+        <Link className="header-brand" href="/" aria-label="Saint Laurent home">
           <SaintLaurentMark />
         </Link>
 
         <nav className="header-nav header-nav--right" aria-label="Client service">
           <Link href="/valentine">LA MAISON</Link>
-          <Link href="/valentine#services-section">客户服务</Link>
-          <Link href="/valentine#gift-finder">登录</Link>
+          <Link href="/valentine#services-section">SERVICES</Link>
+          <Link href="/valentine#gift-finder">LOGIN</Link>
           <span className="header-symbols" aria-hidden="true">
             <span>⌕</span>
             <span>♡</span>
@@ -108,20 +108,20 @@ export function HomePage() {
             </Link>
           ))}
 
-          <button className="slide-control slide-control--prev" type="button" aria-label="上一张" onClick={() => goToSlide(activeSlide - 1)}>
+          <button className="slide-control slide-control--prev" type="button" aria-label="Previous slide" onClick={() => goToSlide(activeSlide - 1)}>
             ‹
           </button>
-          <button className="slide-control slide-control--next" type="button" aria-label="下一张" onClick={() => goToSlide(activeSlide + 1)}>
+          <button className="slide-control slide-control--next" type="button" aria-label="Next slide" onClick={() => goToSlide(activeSlide + 1)}>
             ›
           </button>
 
-          <div className="slide-dots" aria-label="幻灯片选择">
+          <div className="slide-dots" aria-label="Slide selection">
             {HOME_SLIDES.map((slide, index) => (
               <button
                 key={slide.id}
                 className={index === activeSlide ? "is-active" : ""}
                 type="button"
-                aria-label={`切换到 ${slide.kicker}`}
+                aria-label={`Go to ${slide.kicker}`}
                 aria-current={index === activeSlide ? "true" : undefined}
                 onClick={() => goToSlide(index)}
               />
@@ -146,7 +146,7 @@ export function HomePage() {
       <footer className="site-footer site-footer--light">
         <div>
           <h2>SAINT LAURENT</h2>
-          <p>七夕礼物企划与 AI 导购演示。首页保留品牌站式入口，主体验集中在 Valentine 页面。</p>
+          <p>A Qixi Gift Edit and AI concierge demonstration. The home page serves as the brand entry point, with the full experience on the Valentine page.</p>
         </div>
         <div className="footer-links">
           <Link href="/valentine">Qixi Gift Concierge</Link>
@@ -159,7 +159,7 @@ export function HomePage() {
       <Link
         className="qixi-teaser"
         href="/valentine"
-        aria-label="进入七夕礼物 AI 导购"
+        aria-label="Enter the Qixi gift AI concierge"
         onMouseEnter={playQixiPreview}
         onMouseLeave={stopQixiPreview}
       >
@@ -174,7 +174,7 @@ export function HomePage() {
           <source src={EDITORIAL_ASSETS.qixiTeaserVideo} type="video/mp4" />
         </video>
         <span>
-          <strong>七夕礼物</strong>
+          <strong>Qixi Gifts</strong>
           <small>AI Concierge</small>
         </span>
       </Link>

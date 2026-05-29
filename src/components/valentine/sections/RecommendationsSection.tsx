@@ -11,7 +11,7 @@ function LoadingVideo() {
       <video autoPlay muted loop playsInline preload="auto">
         <source src="/loading-ai-stylist.mp4" type="video/mp4" />
       </video>
-      <span className="loading-video-label">AI 正在为您甄选</span>
+      <span className="loading-video-label">Saint Laurent AI is curating your selection</span>
     </div>
   );
 }

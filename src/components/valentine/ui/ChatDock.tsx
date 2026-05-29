@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef } from "react";
 import { useValentine, type ChatMode } from "../ValentineContext";
 import { getYslProductSku } from "@/lib/ysl-chat";
+import { getChatProductChipName } from "@/lib/chat-product-display";
 
 function modeIcon(type: string) {
   if (type === "search") return (
@@ -36,55 +36,30 @@ export function ChatDock() {
     recommendationProducts,
     isCurating,
     isChatBusy,
-    hasSearched,
     thinkingCopy,
     runSearch,
     submitSearch,
     chooseSuggestion,
     chooseSku,
   } = useValentine();
-  const visibleRemoteSkus = recommendationProducts.slice(0, 4);
-  const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleTriggerEnter = () => {
-    if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
-    hoverTimerRef.current = setTimeout(() => setModePanelOpen(true), 120);
-  };
-
-  const handleDockLeave = () => {
-    if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
-    hoverTimerRef.current = setTimeout(() => setModePanelOpen(false), 280);
-  };
-
-  const handleDockEnter = () => {
-    if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
-  };
+  // Suggested-piece chips: show readable product names only — never raw SKU codes.
+  const remoteSuggestions = recommendationProducts
+    .slice(0, 4)
+    .filter((product) => product.name?.trim());
+  const localSuggestions = activeSceneProducts.slice(0, 4).filter((product) => product.name?.trim());
 
   return (
     <form
       className={`chat-dock ${activeScene.productScene ? "product-scene-dock" : ""}`}
       onSubmit={submitSearch}
-      onMouseEnter={handleDockEnter}
-      onMouseLeave={handleDockLeave}
-      aria-label="Qixi gift concierge input"
+      aria-label="Saint Laurent gift concierge"
     >
-      <div
-        className={`chat-concierge-handle ${hasSearched ? "searched" : ""}`}
-        onMouseEnter={handleTriggerEnter}
-        aria-label="Open AI concierge"
-      >
-        <span className="handle-chevron">∧</span>
-        <div className="handle-text">
-          <span className="handle-title">✨ AI 礼物顾问</span>
-          <span className="handle-subtitle">七夕礼物推荐</span>
-        </div>
-      </div>
-
       <div className={`chat-mode-panel ${modePanelOpen ? "open has-mode" : ""}`} aria-hidden={!modePanelOpen}>
         <button
           className="chat-mode-close"
           type="button"
-          aria-label="关闭"
+          aria-label="Close"
           onClick={() => setModePanelOpen(false)}
         >
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
@@ -92,8 +67,7 @@ export function ChatDock() {
           </svg>
         </button>
         <div className="chat-mode-header">
-          <p className="chat-mode-kicker">Saint Laurent AI Gift Concierge</p>
-          <p className="chat-mode-subtitle">你 的 专 属 A I 礼 物 顾 问</p>
+          <p className="chat-mode-kicker">AI Stylist</p>
         </div>
         <div className="chat-mode-tabs" role="tablist" aria-label="Concierge modes">
           {(Object.keys(chatbotConfig) as ChatMode[]).map((mode) => (
@@ -108,12 +82,11 @@ export function ChatDock() {
               <span className="tab-icon">{modeIcon(chatbotConfig[mode].icon)}</span>
               <span className="tab-sublabel">{chatbotConfig[mode].sublabel}</span>
               <span className="tab-label">{chatbotConfig[mode].label}</span>
-              <span className="tab-desc">{chatbotConfig[mode].description}</span>
             </button>
           ))}
         </div>
         <div className="chat-mode-chips">
-          <p className="chips-section-title"><span>—</span> 热门搜索 <span>—</span></p>
+          <p className="chips-section-title"><span>—</span> Popular Searches <span>—</span></p>
           <div className="chips-grid">
             {chatbotConfig[activeMode].suggestions.map((suggestion) => (
               <button
@@ -129,7 +102,7 @@ export function ChatDock() {
             ))}
           </div>
         </div>
-        <p className="chat-mode-footer">AI 推荐由 Saint Laurent 专属算法生成</p>
+        <p className="chat-mode-footer">Recommendations Curated by Saint Laurent AI</p>
       </div>
 
       <div className={`chat-concierge-bubble ${isCurating ? "visible" : ""}`} aria-hidden={!isCurating}>
@@ -147,7 +120,7 @@ export function ChatDock() {
           <button
             className="chat-action"
             type="button"
-            aria-label="Open concierge modes"
+            aria-label="Open recommendation options"
             aria-expanded={modePanelOpen}
             onClick={() => setModePanelOpen((open: boolean) => !open)}
           >
@@ -179,26 +152,27 @@ export function ChatDock() {
             </svg>
           </button>
         </div>
-        <div className="chat-sku-strip" aria-label="Visible page SKUs">
-          <span>SKU</span>
-          {visibleRemoteSkus.length
-            ? visibleRemoteSkus.map((product) => (
-                <button
-                  key={product.id}
-                  type="button"
-                  title={product.name}
-                  disabled={isChatBusy}
-                  onClick={() => runSearch(`Saint Laurent SKU ${getYslProductSku(product)} ${product.name}`)}
-                >
-                  {getYslProductSku(product)}
-                </button>
-              ))
-            : activeSceneProducts.slice(0, 4).map((product) => (
-                <button key={product.id} type="button" title={product.name} disabled={isChatBusy} onClick={() => chooseSku(product)}>
-                  {product.sku}
-                </button>
-              ))}
-        </div>
+        {remoteSuggestions.length || localSuggestions.length ? (
+          <div className="chat-sku-strip" aria-label="Suggested pieces">
+            {remoteSuggestions.length
+              ? remoteSuggestions.map((product) => (
+                  <button
+                    key={product.id}
+                    type="button"
+                    title={product.name}
+                    disabled={isChatBusy}
+                    onClick={() => runSearch(`Saint Laurent ${getYslProductSku(product)} ${product.name}`)}
+                  >
+                    {getChatProductChipName(product)}
+                  </button>
+                ))
+              : localSuggestions.map((product) => (
+                  <button key={product.id} type="button" title={product.name} disabled={isChatBusy} onClick={() => chooseSku(product)}>
+                    {getChatProductChipName(product)}
+                  </button>
+                ))}
+          </div>
+        ) : null}
       </div>
     </form>
   );
