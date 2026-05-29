@@ -5,20 +5,13 @@ import { BlurRevealText } from "../ui/BlurRevealText";
 import { ProductCard } from "../ui/ProductCard";
 import { RecommendationProductCard } from "../ui/RecommendationProductCard";
 
-function ProductSkeletonGrid() {
+function LoadingVideo() {
   return (
-    <div className="product-grid" aria-label="Loading product recommendations">
-      {Array.from({ length: 4 }).map((_, index) => (
-        <article className="product-card product-card--skeleton" key={index}>
-          <div className="product-image" />
-          <div className="product-meta">
-            <span />
-            <strong />
-            <em />
-            <p />
-          </div>
-        </article>
-      ))}
+    <div className="loading-video-wrap" aria-label="Loading product recommendations">
+      <video autoPlay muted loop playsInline preload="auto">
+        <source src="/loading-ai-stylist.mp4" type="video/mp4" />
+      </video>
+      <span className="loading-video-label">AI 正在为您甄选</span>
     </div>
   );
 }
@@ -52,7 +45,7 @@ export function RecommendationsSection({ active }: { active: boolean }) {
           <BlurRevealText as="h2" text={thinkingCopy} />
         </div>
         {isSearchingProducts ? (
-          <ProductSkeletonGrid />
+          <LoadingVideo />
         ) : chatErrorText ? (
           <div className="recommendation-error" role="alert">
             {chatErrorText}

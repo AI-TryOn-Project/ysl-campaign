@@ -526,6 +526,67 @@ html.valentine-snap-mode body {
     radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.42));
 }
 
+/* ── Hero: 七夕 Campaign Override ─────────────────────────── */
+.valentine-shell .vl-hero .bc-panel-shade {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.35) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.valentine-shell .vl-hero .bc-hero-kicker {
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 8px;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: none;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.valentine-shell .vl-hero .bc-hero-headline {
+  font-size: clamp(52px, 9vw, 120px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -2px;
+  text-transform: none;
+  white-space: nowrap;
+  width: auto;
+  max-width: 92vw;
+  margin-left: auto;
+  margin-right: auto;
+  color: #fff;
+}
+
+.valentine-shell .vl-hero .bc-hero-subtitle {
+  font-size: clamp(18px, 2.2vw, 28px);
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.82);
+  text-align: center;
+  margin-top: 32px;
+  max-width: none;
+  letter-spacing: 0.04em;
+}
+
+.valentine-shell .bc-hero-scroll {
+  display: inline-block;
+  margin-top: 36px;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+  padding-bottom: 5px;
+  text-transform: none;
+  transition: opacity 0.3s ease;
+  cursor: default;
+}
+
+.valentine-shell .bc-hero-scroll:hover {
+  opacity: 0.75;
+}
+
 .valentine-shell .bc-hero-copy {
   position: relative;
   z-index: 1;
@@ -697,12 +758,16 @@ html.valentine-snap-mode body {
   min-height: 100svh;
   display: grid;
   place-items: center;
-  background: #080808;
+  background: url('/concierge-bg.jpg') center center / cover no-repeat;
   color: #fff;
   padding: 96px 28px 130px;
+  position: relative;
 }
 
+
 .valentine-shell .concierge-reply-inner {
+  position: relative;
+  z-index: 1;
   width: min(920px, 100%);
   display: grid;
   justify-items: center;
@@ -800,63 +865,72 @@ html.valentine-snap-mode body {
 }
 
 .valentine-shell .product-card {
-  background: #fff;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
   min-width: 0;
   border: 0;
-  color: #000;
+  background: #f3f0eb;
+  color: #fff;
 }
 
 .valentine-shell .product-image {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: absolute;
+  inset: 0;
   width: 100%;
-  aspect-ratio: 1 / 1.32;
+  height: 100%;
   border: 0;
   padding: 0;
-  background: #f3f0eb;
+  background: transparent;
   overflow: hidden;
-  text-decoration: none;
+  cursor: pointer;
+  display: block;
 }
 
 .valentine-shell .product-image::before {
-  content: "";
-  position: absolute;
-  inset: 14% 10%;
-  background: rgba(255, 255, 255, 0.72);
+  content: none;
 }
 
 .valentine-shell .product-image img {
-  position: relative;
-  z-index: 1;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  padding: 50px 42px;
+  object-fit: cover;
   transition: transform 0.55s var(--ease);
 }
 
 .valentine-shell .product-card:hover .product-image img {
-  transform: scale(1.035);
+  transform: scale(1.05);
 }
 
 .valentine-shell .product-meta {
-  min-height: 246px;
-  padding: 24px 22px 20px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 56px 18px 18px;
+  background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.45) 65%, transparent 100%);
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  border-top: 0;
+  gap: 7px;
+  min-height: 0;
+  border: 0;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.38s cubic-bezier(.22, 1, .36, 1), opacity 0.28s ease;
+}
+
+.valentine-shell .product-card:hover .product-meta {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .valentine-shell .product-kicker {
   margin: 0;
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--muted-dark);
+  color: rgba(255, 255, 255, 0.65);
 }
 
 .valentine-shell .product-sku {
@@ -870,17 +944,18 @@ html.valentine-snap-mode body {
 
 .valentine-shell .product-name {
   margin: 0;
-  min-height: 50px;
-  font-size: 18px;
+  min-height: 0;
+  font-size: 15px;
   font-weight: 600;
-  line-height: 1.35;
+  line-height: 1.3;
   text-transform: uppercase;
+  color: #fff;
 }
 
 .valentine-shell .product-price {
-  font-size: 17px;
-  font-weight: 600;
-  color: #000;
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .valentine-shell .tag-row {
@@ -891,20 +966,21 @@ html.valentine-snap-mode body {
 
 .valentine-shell .tag-row small,
 .valentine-shell .tag {
-  border: 1px solid rgba(0, 0, 0, 0.14);
-  padding: 7px 9px;
-  font-size: 11px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 5px 9px;
+  font-size: 10px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.62);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .valentine-shell .reason {
   margin: 0;
-  color: rgba(0, 0, 0, 0.66);
-  font-size: 14px;
-  line-height: 1.7;
-  min-height: 72px;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 12px;
+  line-height: 1.6;
+  min-height: 0;
+  display: none;
 }
 
 .valentine-shell .card-actions {
@@ -917,26 +993,27 @@ html.valentine-snap-mode body {
 .valentine-shell .card-actions button,
 .valentine-shell .card-actions a,
 .valentine-shell .detail-modal__actions button {
-  min-height: 42px;
+  min-height: 36px;
   border-radius: 0;
-  border: 1px solid rgba(0, 0, 0, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.45);
   background: transparent;
-  color: #000;
-  padding: 0 16px;
-  font-size: 12px;
+  color: #fff;
+  padding: 0 14px;
+  font-size: 11px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .valentine-shell .card-actions button:hover,
 .valentine-shell .card-actions a:hover,
 .valentine-shell .detail-modal__actions button:hover {
-  background: #000;
-  color: #fff;
+  background: #fff;
+  color: #000;
 }
 
 .valentine-shell .product-card--skeleton .product-image,
@@ -983,6 +1060,35 @@ html.valentine-snap-mode body {
 .valentine-shell .product-card--skeleton .product-meta p {
   width: 92%;
   height: 54px;
+}
+
+.valentine-shell .loading-video-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #000;
+}
+
+.valentine-shell .loading-video-wrap video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.valentine-shell .loading-video-label {
+  position: absolute;
+  bottom: 28px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  z-index: 2;
 }
 
 .valentine-shell .recommendation-error {
@@ -1419,7 +1525,7 @@ html.valentine-snap-mode body {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 10px;
+  gap: 0;
   pointer-events: none;
   transition: width 0.38s var(--ease), bottom 0.28s ease;
 }
@@ -1655,37 +1761,145 @@ html.valentine-snap-mode body {
   color: #000;
 }
 
+.valentine-shell .chat-concierge-handle {
+  order: -2;
+  align-self: center;
+  padding: 10px 20px 10px 14px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 999px;
+  background: rgba(36, 28, 18, 0.76);
+  backdrop-filter: blur(24px) saturate(140%);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 8px;
+  transition: border-color 0.25s ease, background 0.25s ease, opacity 0.28s ease, transform 0.3s var(--ease), margin 0.3s ease;
+}
+
+.valentine-shell .chat-concierge-handle:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(44, 34, 22, 0.85);
+}
+
+.valentine-shell .chat-concierge-handle.searched {
+  opacity: 0;
+  transform: translateY(6px) scale(0.97);
+  pointer-events: none;
+  max-height: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+  border-width: 0;
+}
+
+.valentine-shell .handle-chevron {
+  font-size: 13px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.45);
+  flex-shrink: 0;
+  transition: color 0.25s, transform 0.3s var(--ease);
+}
+
+.valentine-shell .chat-concierge-handle:hover .handle-chevron,
+.valentine-shell .chat-dock:has(.chat-mode-panel.open) .handle-chevron {
+  color: rgba(255, 255, 255, 0.75);
+  transform: rotate(180deg);
+}
+
+.valentine-shell .handle-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.valentine-shell .handle-title {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.3;
+}
+
+.valentine-shell .handle-subtitle {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.2;
+}
+
 .valentine-shell .chat-mode-panel {
   order: -1;
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(0, 0, 0, 0.52);
-  backdrop-filter: blur(40px) saturate(140%);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
-  padding: 0 14px;
+  position: relative;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(8, 7, 6, 0.92);
+  backdrop-filter: blur(48px) saturate(160%);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6), inset 0 -1px 0 rgba(255,255,255,0.04);
+  padding: 0 16px;
   opacity: 0;
-  transform: translateY(12px) scale(0.98);
+  transform: translateY(-8px) scale(0.99);
   pointer-events: none;
   max-height: 0;
   overflow: hidden;
-  transition: opacity 0.32s var(--ease), transform 0.38s var(--ease), max-height 0.38s var(--ease), padding 0.32s ease;
+  transition: opacity 0.32s var(--ease), transform 0.36s var(--ease), max-height 0.38s var(--ease), padding 0.32s ease;
 }
 
 .valentine-shell .chat-mode-panel.open {
   opacity: 1;
   transform: translateY(0) scale(1);
   pointer-events: auto;
-  max-height: 480px;
-  padding: 18px 18px 16px;
+  max-height: 680px;
+  padding: 20px 20px 18px;
+  margin-bottom: 8px;
+}
+
+.valentine-shell .chat-mode-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.valentine-shell .chat-mode-close:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.valentine-shell .chat-mode-header {
+  text-align: center;
+  margin-bottom: 18px;
 }
 
 .valentine-shell .chat-mode-kicker {
-  margin: 0 0 10px;
-  font-size: 10px;
-  letter-spacing: 0.24em;
+  margin: 0 0 6px;
+  font-size: 11px;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
-  text-align: center;
+  color: rgba(201, 165, 96, 0.9);
+}
+
+.valentine-shell .chat-mode-subtitle {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.38);
 }
 
 .valentine-shell .chat-mode-tabs {
@@ -1698,61 +1912,130 @@ html.valentine-snap-mode body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 58px;
-  padding: 12px 10px 10px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 12px;
-  background: rgba(0, 0, 0, 0.48);
-  color: rgba(255, 255, 255, 0.82);
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  justify-content: flex-start;
+  gap: 4px;
+  min-height: 130px;
+  padding: 18px 12px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.25s ease, background 0.25s ease;
 }
 
-.valentine-shell .chat-mode-tab:hover,
+.valentine-shell .chat-mode-tab:hover {
+  border-color: rgba(201, 165, 96, 0.5);
+  background: rgba(201, 165, 96, 0.06);
+  color: #fff;
+}
+
 .valentine-shell .chat-mode-tab.active {
-  border-color: rgba(184, 160, 108, 0.85);
-  background: rgba(184, 160, 108, 0.16);
+  border-color: rgba(201, 165, 96, 0.8);
+  background: linear-gradient(160deg, rgba(201,165,96,0.18) 0%, rgba(0,0,0,0) 100%);
   color: #fff;
 }
 
 .valentine-shell .chat-mode-tab.active::before {
-  content: "Active";
-  display: block;
-  font-size: 7px;
+  content: "ACTIVE";
+  font-size: 8px;
   font-weight: 400;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
+  letter-spacing: 0.3em;
   color: var(--gold);
-  margin-bottom: 5px;
+  margin-bottom: 2px;
+}
+
+.valentine-shell .tab-icon {
+  color: var(--gold);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.valentine-shell .tab-sublabel {
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.valentine-shell .tab-label {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+  color: inherit;
+}
+
+.valentine-shell .tab-desc {
+  font-size: 10px;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.38);
+  line-height: 1.5;
+  margin-top: 2px;
 }
 
 .valentine-shell .chat-mode-chips {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.valentine-shell .chips-section-title {
+  margin: 0 0 12px;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.valentine-shell .chips-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 7px;
+  gap: 8px;
   justify-content: center;
-  margin-top: 22px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.09);
 }
 
 .valentine-shell .chat-suggestion-chip {
-  border: 1px solid rgba(255, 255, 255, 0.11);
-  background: rgba(255, 255, 255, 0.05);
-  color: rgba(255, 255, 255, 0.74);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.72);
   border-radius: 999px;
-  padding: 7px 13px;
-  font-size: 11px;
-  letter-spacing: 0.01em;
+  padding: 8px 14px;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
 
 .valentine-shell .chat-suggestion-chip:hover {
-  border-color: rgba(255, 255, 255, 0.22);
-  background: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.92);
+  border-color: rgba(201, 165, 96, 0.55);
+  background: rgba(201, 165, 96, 0.1);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.valentine-shell .chip-icon {
+  font-size: 13px;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.valentine-shell .chat-mode-footer {
+  margin: 14px 0 0;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.2);
+  text-align: center;
 }
 
 .valentine-shell .chat-concierge-bubble {
@@ -1778,6 +2061,7 @@ html.valentine-snap-mode body {
   pointer-events: auto;
   max-height: 120px;
   padding: 14px 18px 16px;
+  margin-top: 8px;
   margin-bottom: 8px;
 }
 
@@ -1795,6 +2079,22 @@ html.valentine-snap-mode body {
   font-size: 12px;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.86);
+}
+
+.valentine-shell .loading-video-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 190;
+  background: #000;
+  overflow: hidden;
+}
+
+.valentine-shell .loading-video-overlay video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .valentine-shell .curating-overlay {
@@ -2265,6 +2565,19 @@ html.valentine-snap-mode body {
     font-size: 38px;
   }
 
+  .valentine-shell .vl-hero .bc-hero-headline {
+    font-size: clamp(40px, 10vw, 80px);
+    letter-spacing: -1px;
+  }
+
+  .valentine-shell .vl-hero .bc-hero-subtitle {
+    font-size: 18px;
+  }
+
+  .valentine-shell .bc-hero-scroll {
+    font-size: 16px;
+  }
+
   .valentine-shell .vl-headline {
     letter-spacing: 0.1em;
   }
@@ -2352,7 +2665,21 @@ html.valentine-snap-mode body {
   }
 
   .valentine-shell .chat-mode-tabs {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+  }
+
+  .valentine-shell .chat-mode-tab {
+    min-height: 110px;
+    padding: 14px 8px 12px;
+  }
+
+  .valentine-shell .tab-label {
+    font-size: 11px;
+  }
+
+  .valentine-shell .tab-desc {
+    display: none;
   }
 
   .valentine-shell .chat-action {
@@ -2799,34 +3126,35 @@ button {
   position: fixed;
   z-index: 45;
   left: 24px;
-  bottom: 24px;
-  display: grid;
-  grid-template-columns: 74px minmax(0, 1fr);
-  align-items: center;
-  width: 238px;
-  min-height: 92px;
+  bottom: 28px;
+  width: 200px;
+  height: 248px;
+  border: 4px solid #1a1a1a;
+  border-radius: 24px;
   overflow: hidden;
-  color: var(--white);
-  background: rgba(0, 0, 0, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.24);
+  cursor: pointer;
+  box-shadow:
+    0 16px 60px rgba(0, 0, 0, .5),
+    0 4px 16px rgba(0, 0, 0, .3);
+  display: block;
+  text-decoration: none;
+  transition: transform .35s cubic-bezier(.22, 1, .36, 1), box-shadow .35s ease;
+}
+
+.qixi-teaser:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow:
+    0 28px 80px rgba(0, 0, 0, .6),
+    0 0 40px rgba(201, 165, 96, .25);
 }
 
 .qixi-teaser video {
-  height: 92px;
-}
-
-.qixi-teaser span {
-  display: grid;
-  gap: 4px;
-  padding: 0 15px;
-}
-
-.qixi-teaser strong {
-  font-weight: 500;
-}
-
-.qixi-teaser small {
-  color: var(--muted-light);
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
 }
 
 .valentine-shell {
@@ -3745,13 +4073,10 @@ button {
 
   .qixi-teaser {
     left: 12px;
-    bottom: 12px;
-    width: 205px;
-    grid-template-columns: 64px minmax(0, 1fr);
-  }
-
-  .qixi-teaser video {
-    height: 82px;
+    bottom: 16px;
+    width: 150px;
+    height: 186px;
+    border-radius: 18px;
   }
 
   .valentine-hero {

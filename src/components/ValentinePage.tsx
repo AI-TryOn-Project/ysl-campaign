@@ -163,6 +163,8 @@ function ValentineOverlays() {
     selectedGuide,
     toast,
     isCurating,
+    isAwaitingAssistant,
+    isSearchingProducts,
     setDrawer,
     removeItem,
     setSelectedProduct,
@@ -170,9 +172,19 @@ function ValentineOverlays() {
     addItem,
   } = useValentine();
 
+  const isLoading = isAwaitingAssistant || isSearchingProducts;
+
   return (
     <>
       <ChatDock />
+
+      {isLoading && (
+        <div className="loading-video-overlay" aria-label="AI is curating your selection" aria-live="polite">
+          <video autoPlay muted loop playsInline preload="auto" key="loading-video">
+            <source src="/loading-ai-stylist.mp4" type="video/mp4" />
+          </video>
+        </div>
+      )}
 
       <div className={`curating-overlay ${isCurating ? "open" : ""}`} aria-hidden={!isCurating} aria-live="polite">
         <div className="curating-inner">

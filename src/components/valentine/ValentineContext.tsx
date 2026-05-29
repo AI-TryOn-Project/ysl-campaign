@@ -23,6 +23,7 @@ const YSL_CHAT_API =
 
 export type Suggestion = {
   text: string;
+  icon?: string;
   style?: string;
   occasion?: string;
   category?: string;
@@ -38,40 +39,44 @@ export type SnapScene = {
   skuProductIds: readonly string[];
 };
 
-const CHATBOT_CONFIG: Record<ChatMode, { label: string; suggestions: Suggestion[] }> = {
+const CHATBOT_CONFIG: Record<ChatMode, { label: string; sublabel: string; description: string; icon: string; suggestions: Suggestion[] }> = {
   need: {
-    label: "Search by Need",
+    label: "为我的她挑选七夕礼物",
+    sublabel: "SEARCH BY GIFT",
+    description: "根据需求，发现最受欢迎礼赠单品",
+    icon: "search",
     suggestions: [
-      { text: "A romantic red look" },
-      { text: "A gift under ¥10,000", budget: 10000 },
-      { text: "A statement evening bag", category: "Bags" },
-      { text: "Silk pieces for summer nights", occasion: "resort" },
-      { text: "Jewelry for a subtle love note", category: "Accessories" },
-      { text: "A complete dinner-date outfit", occasion: "dinner" },
+      { text: "七夕热门礼物", icon: "♡", recipient: "her" },
+      { text: "首饰推荐", icon: "◇", category: "Accessories" },
+      { text: "经典包款", icon: "◈", category: "Bags" },
+      { text: "小黑裙", icon: "◻", category: "Ready-to-Wear" },
+      { text: "2026新品", icon: "✦" },
     ],
   },
   style: {
-    label: "Browse by Style",
+    label: "探索你的 Saint Laurent 风格",
+    sublabel: "BROWSE BY STYLE",
+    description: "从风格出发，发现最适合你的单品",
+    icon: "sparkle",
     suggestions: [
-      { text: "Classic minimal", style: "classic-minimal" },
-      { text: "Black cool", style: "black-cool" },
-      { text: "Polished elegance", style: "polished-elegance" },
-      { text: "Soft romantic", style: "classic-minimal" },
-      { text: "Parisian night", style: "polished-elegance", occasion: "city-night" },
-      { text: "Modern muse", style: "black-cool" },
+      { text: "Rosé同款", icon: "♡", style: "classic-minimal" },
+      { text: "Office Lady", icon: "◇", style: "polished-elegance" },
+      { text: "大女人风格", icon: "✦", style: "black-cool" },
+      { text: "暗夜风格", icon: "☾", style: "black-cool", occasion: "city-night" },
+      { text: "法式高级感", icon: "◈", style: "polished-elegance" },
     ],
   },
   occasion: {
-    label: "Shop by Occasion",
+    label: "根据场景寻找单品",
+    sublabel: "SHOP BY OCCASION",
+    description: "根据场景需求，推荐合适的单品",
+    icon: "calendar",
     suggestions: [
-      { text: "Fine dining", occasion: "dinner" },
-      { text: "Rooftop drinks", occasion: "city-night" },
-      { text: "Qixi date night", occasion: "dinner" },
-      { text: "Weekend escape", occasion: "weekend" },
-      { text: "Hawaii trip", occasion: "resort" },
-      { text: "Anniversary gift", occasion: "anniversary" },
-      { text: "Meet-the-parents dinner", occasion: "dinner", style: "polished-elegance" },
-      { text: "Gift for him", recipient: "him" },
+      { text: "晚上餐厅约会", icon: "◈", occasion: "dinner" },
+      { text: "上海外滩街拍", icon: "☀", occasion: "weekend" },
+      { text: "商务晚宴", icon: "◇", occasion: "dinner", style: "polished-elegance" },
+      { text: "欧洲旅行", icon: "✦", occasion: "resort" },
+      { text: "夏季度假", icon: "☾", occasion: "resort" },
     ],
   },
 };

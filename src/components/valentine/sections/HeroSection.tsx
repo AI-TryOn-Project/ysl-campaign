@@ -13,12 +13,14 @@ export function HeroSection({ active }: { active: boolean }) {
       <img className="bc-panel-bg" src={EDITORIAL_ASSETS.valentineHero} alt="" />
       <div className="bc-panel-shade" />
       <div className="bc-hero-copy">
-        <p className="bc-guide-kicker bc-reveal">Saint Laurent AI Gift Concierge</p>
-        <BlurRevealText as="h1" className="bc-guide-title bc-reveal" text="Welcome to Qixi Gifts" />
-        <p className="bc-guide-copy bc-reveal">
-          Saint Laurent tailoring, black-and-gold details, and Qixi gifting inspiration.
+        <p className="bc-guide-kicker bc-hero-kicker bc-reveal">
+          SAINT LAURENT<br />2026 七夕特别呈献
         </p>
-        <p className="bc-guide-kicker bc-reveal">Scroll to explore</p>
+        <BlurRevealText as="h1" className="bc-guide-title bc-hero-headline bc-reveal" text="因你，独一无二" />
+        <p className="bc-guide-copy bc-hero-subtitle bc-reveal">
+          献给不需被定义的爱
+        </p>
+        <p className="bc-hero-scroll bc-reveal">探索七夕甄选</p>
       </div>
     </section>
   );

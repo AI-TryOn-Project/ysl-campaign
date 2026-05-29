@@ -1024,5 +1024,5 @@ export const EDITORIAL_ASSETS = {
   "valentineCampaign": "/assets/editorial/slrd-gifting-ecom-hp-desk.jpg",
   "valentineStatement": "/assets/editorial/saint-laurent-wsummer26-lookbook-4x5-19-b.jpg",
   "qixiTeaserPoster": "/assets/editorial/slrd-gifting-ecom-hp-desk.jpg",
-  "qixiTeaserVideo": "/assets/motion/sl-ss26-15-seconds-edit.mp4"
+  "qixiTeaserVideo": "/ysl-new-access.mp4"
 };
