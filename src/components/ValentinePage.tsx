@@ -1,10 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { PRODUCTS, type Product } from "@/data/campaign";
 import { openProductDetail } from "@/lib/product-link";
 import { SaintLaurentMark } from "./SaintLaurentMark";
+import { LanguageToggle } from "./LanguageToggle";
+import { useLanguage } from "@/lib/use-language";
+import { i18n } from "@/lib/i18n";
 import { ValentineProvider, useValentine } from "./valentine/ValentineContext";
 import { ChatDock } from "./valentine/ui/ChatDock";
 import { Drawer } from "./valentine/ui/Drawer";
@@ -33,21 +36,23 @@ function openStylist(setModePanelOpen: (open: boolean) => void) {
 
 function TopBar({ onOpenCollection }: { onOpenCollection: (view: CollectionView) => void }) {
   const { wishlist, bag, setDrawer, setModePanelOpen } = useValentine();
+  const { lang } = useLanguage();
+  const T = i18n[lang];
 
   return (
     <header className="vl-ed-topbar">
       <nav className="vl-ed-nav vl-ed-nav--left" aria-label="Primary">
         <button className="vl-ed-navlink" type="button" onClick={() => scrollToId("highlights")}>
-          Highlights
+          {T.highlights}
         </button>
         <button className="vl-ed-navlink" type="button" onClick={() => onOpenCollection("her")}>
-          Women
+          {T.women}
         </button>
         <button className="vl-ed-navlink" type="button" onClick={() => onOpenCollection("him")}>
-          Men
+          {T.men}
         </button>
         <button className="vl-ed-navlink" type="button" onClick={() => scrollToId("gifts")}>
-          Gifts
+          {T.gifts}
         </button>
       </nav>
 
@@ -57,13 +62,13 @@ function TopBar({ onOpenCollection }: { onOpenCollection: (view: CollectionView)
 
       <div className="vl-ed-nav vl-ed-nav--right">
         <button className="vl-ed-navlink vl-ed-navlink--minor" type="button" onClick={() => scrollToId("highlights")}>
-          La Maison
+          {T.laMaison}
         </button>
         <button className="vl-ed-navlink vl-ed-navlink--minor" type="button" onClick={() => scrollToId("site-footer")}>
-          Services
+          {T.services}
         </button>
         <button className="vl-ed-navlink vl-ed-navlink--minor" type="button" onClick={() => openStylist(setModePanelOpen)}>
-          Login
+          {T.login}
         </button>
         <button className="vl-ed-icon" type="button" aria-label="Search with the AI Stylist" onClick={() => openStylist(setModePanelOpen)}>
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -90,11 +95,20 @@ function TopBar({ onOpenCollection }: { onOpenCollection: (view: CollectionView)
 }
 
 function CampaignHeader({ onOpenCollection }: { onOpenCollection: (view: CollectionView) => void }) {
-  const { setModePanelOpen } = useValentine();
+  const { lang } = useLanguage();
+  const T = i18n[lang];
   return (
     <div className="vl-ed-campaign-header">
-      <p className="vl-ed-campaign-title">Saint Laurent Qixi Campaign</p>
+      <p className="vl-ed-campaign-title">{T.campaignTitle}</p>
     </div>
+  );
+}
+
+function SeamlessLoadingVideo() {
+  return (
+    <video autoPlay muted playsInline preload="auto">
+      <source src="/loading-ai-stylist-new.mp4" type="video/mp4" />
+    </video>
   );
 }
 
@@ -107,6 +121,8 @@ function ValentineOverlays() {
     toast,
     isAwaitingAssistant,
     isSearchingProducts,
+    isChatBusy,
+    recommendationProducts,
     setDrawer,
     removeItem,
     setSelectedProduct,
@@ -114,20 +130,51 @@ function ValentineOverlays() {
     addItem,
   } = useValentine();
 
-  // Every product click opens a dedicated detail experience in a new tab.
+  const isLoading = (isAwaitingAssistant || isSearchingProducts) && recommendationProducts.length === 0;
 
-  const isLoading = isAwaitingAssistant || isSearchingProducts;
+  // Latch: once products arrive, block the overlay from coming back
+  // (the AI SDK may briefly toggle loading states while finalising the stream).
+  // Reset the latch only when a genuinely new search starts (chat busy + no products yet).
+  const [resultsLatch, setResultsLatch] = useState(false);
+  useEffect(() => {
+    if (recommendationProducts.length > 0) setResultsLatch(true);
+  }, [recommendationProducts.length]);
+  useEffect(() => {
+    if (isChatBusy && recommendationProducts.length === 0) setResultsLatch(false);
+  }, [isChatBusy, recommendationProducts.length]);
+
+  const shouldLoad = isLoading && !resultsLatch;
+
+  // Keep overlay mounted during fade-out so unmount doesn't cause a flash.
+  const [overlayVisible, setOverlayVisible] = useState(false);
+  const [overlayFading, setOverlayFading] = useState(false);
+
+  useEffect(() => {
+    if (shouldLoad) {
+      setOverlayVisible(true);
+      setOverlayFading(false);
+    } else if (overlayVisible) {
+      setOverlayFading(true);
+      const t = setTimeout(() => {
+        setOverlayVisible(false);
+        setOverlayFading(false);
+      }, 500);
+      return () => clearTimeout(t);
+    }
+  }, [shouldLoad]);
 
   return (
     <>
       <ConciergeResultsOverlay />
       <ChatDock />
 
-      {isLoading && (
-        <div className="loading-video-overlay" aria-label="AI is curating your selection" aria-live="polite">
-          <video autoPlay muted loop playsInline preload="auto" key="loading-video">
-            <source src="/loading-ai-stylist.mp4" type="video/mp4" />
-          </video>
+      {overlayVisible && (
+        <div
+          className={`loading-video-overlay${overlayFading ? " is-fading" : ""}`}
+          aria-label="AI is curating your selection"
+          aria-live="polite"
+        >
+          <SeamlessLoadingVideo />
         </div>
       )}
 
@@ -167,6 +214,8 @@ function ValentineOverlays() {
 function ValentineExperience() {
   const { featuredHer, featuredHim } = useValentine();
   const [collection, setCollection] = useState<CollectionView>(null);
+  const { lang } = useLanguage();
+  const T = i18n[lang];
 
   const womenProducts = useMemo(() => PRODUCTS.filter((p) => p.gender === "women"), []);
   const menProducts = useMemo(() => PRODUCTS.filter((p) => p.gender === "men"), []);
@@ -179,40 +228,43 @@ function ValentineExperience() {
 
   return (
     <>
+      <LanguageToggle />
       <TopBar onOpenCollection={setCollection} />
       <CampaignHeader onOpenCollection={setCollection} />
 
       <main className="vl-ed-main">
         <HeroCampaign />
-        <SelectedForQixi products={qixiSelection} onDetail={onDetail} />
+        <SelectedForQixi products={qixiSelection} onDetail={onDetail} title={T.selectedForQixi} />
         <EditorialCategory
           id="qixi-hers"
           image={HERS_IMAGE}
           imageAlt="Saint Laurent women's Qixi campaign"
-          title="Qixi, Undeniably Hers"
+          title={T.qixiHers}
           products={womenProducts.slice(0, 3)}
           onView={() => setCollection("her")}
           onDetail={onDetail}
+          viewLabel={T.view}
         />
         <EditorialCategory
           id="qixi-his"
           image={HIS_IMAGE}
           imageAlt="Saint Laurent men's Qixi campaign"
-          title="Qixi, Unmistakably His"
+          title={T.qixiHis}
           products={menProducts.slice(0, 3)}
           onView={() => setCollection("him")}
           onDetail={onDetail}
+          viewLabel={T.view}
         />
       </main>
 
       <div id="site-footer">
-        <SaintLaurentFooter />
+        <SaintLaurentFooter lang={lang} />
       </div>
 
       {collection === "her" ? (
         <CollectionOverlay
           eyebrow="Saint Laurent — Qixi"
-          title="Qixi, Undeniably Hers"
+          title={T.qixiHers}
           products={womenProducts}
           onClose={() => setCollection(null)}
           onDetail={onDetail}
@@ -222,7 +274,7 @@ function ValentineExperience() {
       {collection === "him" ? (
         <CollectionOverlay
           eyebrow="Saint Laurent — Qixi"
-          title="Qixi, Unmistakably His"
+          title={T.qixiHis}
           products={menProducts}
           onClose={() => setCollection(null)}
           onDetail={onDetail}

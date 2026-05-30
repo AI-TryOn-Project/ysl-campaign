@@ -13,6 +13,7 @@ export function EditorialCategory({
   products,
   onView,
   onDetail,
+  viewLabel = "View",
 }: {
   id: string;
   image: string;
@@ -21,6 +22,7 @@ export function EditorialCategory({
   products: Product[];
   onView: () => void;
   onDetail: (product: Product) => void;
+  viewLabel?: string;
 }) {
   return (
     <section className="vl-ed-editorial" id={id} aria-label={title}>
@@ -30,7 +32,7 @@ export function EditorialCategory({
       <div className="vl-ed-editorial-copy">
         <h2 className="vl-ed-editorial-title">{title}</h2>
         <button className="vl-ed-link" type="button" onClick={onView}>
-          View
+          {viewLabel}
         </button>
       </div>
 

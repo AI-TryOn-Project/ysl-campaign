@@ -6,14 +6,16 @@ import { type Product } from "@/data/campaign";
 export function SelectedForQixi({
   products,
   onDetail,
+  title,
 }: {
   products: Product[];
   onDetail: (product: Product) => void;
+  title: string;
 }) {
   return (
-    <section className="vl-ed-section" id="gifts" aria-label="Selected for Qixi">
+    <section className="vl-ed-section" id="gifts" aria-label={title}>
       <header className="vl-ed-section-head">
-        <h2 className="vl-ed-heading">Selected for Qixi</h2>
+        <h2 className="vl-ed-heading">{title}</h2>
       </header>
       <div className="vl-ed-grid">
         {products.map((product) => (

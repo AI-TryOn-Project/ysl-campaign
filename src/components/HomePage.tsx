@@ -2,62 +2,78 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { EDITORIAL_ASSETS, HOME_SLIDES, HOME_TILES } from "@/data/campaign";
+import { HOME_SLIDES, HOME_TILES } from "@/data/campaign";
 import { SaintLaurentMark } from "./SaintLaurentMark";
+import { LanguageToggle } from "./LanguageToggle";
+import { useLanguage } from "@/lib/use-language";
+import { i18n } from "@/lib/i18n";
 
 export function HomePage() {
   const [bannerOpen, setBannerOpen] = useState(true);
   const [activeSlide, setActiveSlide] = useState(0);
-  const qixiVideoRef = useRef<HTMLVideoElement | null>(null);
+  const teaserVideoRef = useRef<HTMLVideoElement>(null);
+  const { lang } = useLanguage();
+  const T = i18n[lang];
 
   const activeTone = HOME_SLIDES[activeSlide]?.tone ?? "light";
+
+  useEffect(() => {
+    const video = teaserVideoRef.current;
+    if (!video) return;
+    const onTimeUpdate = () => {
+      if (video.currentTime >= 4) {
+        video.pause();
+        setTimeout(() => {
+          video.currentTime = 0;
+          void video.play();
+        }, 1000);
+      }
+    };
+    video.addEventListener("timeupdate", onTimeUpdate);
+    return () => video.removeEventListener("timeupdate", onTimeUpdate);
+  }, []);
 
   useEffect(() => {
     const timer = window.setInterval(() => {
       setActiveSlide((current) => (current + 1) % HOME_SLIDES.length);
     }, 5200);
-
     return () => window.clearInterval(timer);
   }, []);
 
   const navItems = useMemo(
     () => [
-      { label: "HIGHLIGHTS", href: "/valentine#collection-intro" },
-      { label: "WOMEN", href: "/valentine#gifts-for-her" },
-      { label: "MEN", href: "/valentine#gifts-for-him" },
-      { label: "SL PRODUCTIONS", href: "/valentine#style-guide-section" },
-      { label: "RIVE DROITE", href: "/valentine#campaign-section" },
+      { label: T.highlights.toUpperCase(), href: "/valentine#collection-intro" },
+      { label: T.women.toUpperCase(), href: "/valentine#gifts-for-her" },
+      { label: T.men.toUpperCase(), href: "/valentine#gifts-for-him" },
+      { label: T.slProductions.toUpperCase(), href: "/valentine#style-guide-section" },
+      { label: T.riveDroite.toUpperCase(), href: "/valentine#campaign-section" },
     ],
-    [],
+    [T],
   );
+
+  const slideLabels: Record<string, { kicker: string; cta: string }> = {
+    "women-fall-26": { kicker: T.womenFall, cta: T.exploreEdit },
+    "spring-summer-26": { kicker: T.springSummer, cta: T.enterEdit },
+    "men-summer-26": { kicker: T.menSummer, cta: T.exploreGifts },
+    "rive-droite": { kicker: T.riveDroiteSlide, cta: T.exploreInspiration },
+  };
 
   function goToSlide(nextIndex: number) {
     setActiveSlide((nextIndex + HOME_SLIDES.length) % HOME_SLIDES.length);
   }
 
-  function playQixiPreview() {
-    const video = qixiVideoRef.current;
-    if (!video) return;
-    void video.play().catch(() => undefined);
-  }
-
-  function stopQixiPreview() {
-    const video = qixiVideoRef.current;
-    if (!video) return;
-    video.pause();
-    video.currentTime = 0;
-  }
-
   return (
     <div className="home-shell">
+      <LanguageToggle />
+
       {bannerOpen ? (
         <div className="home-banner">
-          <span>Complimentary standard shipping and returns. The Qixi Gift Edit is now live.</span>
-          <Link href="/valentine">Explore Now</Link>
+          <span>{T.banner}</span>
+          <Link href="/valentine">{T.exploreNow}</Link>
           <button
             className="icon-button icon-button--plain"
             type="button"
-            aria-label="Close notification"
+            aria-label={T.closeNotification}
             onClick={() => setBannerOpen(false)}
           >
             ×
@@ -79,9 +95,9 @@ export function HomePage() {
         </Link>
 
         <nav className="header-nav header-nav--right" aria-label="Client service">
-          <Link href="/valentine">LA MAISON</Link>
-          <Link href="/valentine#services-section">SERVICES</Link>
-          <Link href="/valentine#gift-finder">LOGIN</Link>
+          <Link href="/valentine">{T.laMaison.toUpperCase()}</Link>
+          <Link href="/valentine#services-section">{T.services.toUpperCase()}</Link>
+          <Link href="/valentine#gift-finder">{T.login.toUpperCase()}</Link>
           <span className="header-symbols" aria-hidden="true">
             <span>⌕</span>
             <span>♡</span>
@@ -92,21 +108,24 @@ export function HomePage() {
 
       <main>
         <section className={`home-hero home-hero--${activeTone}`} aria-label="Saint Laurent campaign slides">
-          {HOME_SLIDES.map((slide, index) => (
-            <Link
-              key={slide.id}
-              className={`home-slide ${index === activeSlide ? "is-active" : ""}`}
-              href={slide.href}
-              aria-hidden={index === activeSlide ? "false" : "true"}
-              tabIndex={index === activeSlide ? 0 : -1}
-            >
-              <img src={slide.image} alt={slide.kicker} style={{ objectPosition: slide.imagePosition }} />
-              <div className="home-slide__caption">
-                <p>{slide.kicker}</p>
-                <span>{slide.cta}</span>
-              </div>
-            </Link>
-          ))}
+          {HOME_SLIDES.map((slide, index) => {
+            const label = slideLabels[slide.id] ?? { kicker: slide.kicker, cta: slide.cta };
+            return (
+              <Link
+                key={slide.id}
+                className={`home-slide ${index === activeSlide ? "is-active" : ""}`}
+                href={slide.href}
+                aria-hidden={index === activeSlide ? "false" : "true"}
+                tabIndex={index === activeSlide ? 0 : -1}
+              >
+                <img src={slide.image} alt={label.kicker} style={{ objectPosition: slide.imagePosition }} />
+                <div className="home-slide__caption">
+                  <p>{label.kicker}</p>
+                  <span>{label.cta}</span>
+                </div>
+              </Link>
+            );
+          })}
 
           <button className="slide-control slide-control--prev" type="button" aria-label="Previous slide" onClick={() => goToSlide(activeSlide - 1)}>
             ‹
@@ -121,7 +140,7 @@ export function HomePage() {
                 key={slide.id}
                 className={index === activeSlide ? "is-active" : ""}
                 type="button"
-                aria-label={`Go to ${slide.kicker}`}
+                aria-label={`Go to ${slideLabels[slide.id]?.kicker ?? slide.kicker}`}
                 aria-current={index === activeSlide ? "true" : undefined}
                 onClick={() => goToSlide(index)}
               />
@@ -146,13 +165,13 @@ export function HomePage() {
       <footer className="site-footer site-footer--light">
         <div>
           <h2>SAINT LAURENT</h2>
-          <p>A Qixi Gift Edit and AI concierge demonstration. The home page serves as the brand entry point, with the full experience on the Valentine page.</p>
+          <p>A Qixi Gift Edit and AI concierge demonstration.</p>
         </div>
         <div className="footer-links">
-          <Link href="/valentine">Qixi Gift Concierge</Link>
-          <Link href="/valentine#style-guide-section">Style Guide</Link>
-          <Link href="/valentine#gifts-for-her">For Her</Link>
-          <Link href="/valentine#gifts-for-him">For Him</Link>
+          <Link href="/valentine">{lang === "zh" ? "七夕礼品顾问" : "Qixi Gift Concierge"}</Link>
+          <Link href="/valentine#style-guide-section">{lang === "zh" ? "造型指南" : "Style Guide"}</Link>
+          <Link href="/valentine#gifts-for-her">{lang === "zh" ? "她的礼物" : "For Her"}</Link>
+          <Link href="/valentine#gifts-for-him">{lang === "zh" ? "他的礼物" : "For Him"}</Link>
         </div>
       </footer>
 
@@ -160,23 +179,10 @@ export function HomePage() {
         className="qixi-teaser"
         href="/valentine"
         aria-label="Enter the Qixi gift AI concierge"
-        onMouseEnter={playQixiPreview}
-        onMouseLeave={stopQixiPreview}
       >
-        <video
-          ref={qixiVideoRef}
-          muted
-          loop
-          playsInline
-          poster={EDITORIAL_ASSETS.qixiTeaserPoster}
-          preload="metadata"
-        >
-          <source src={EDITORIAL_ASSETS.qixiTeaserVideo} type="video/mp4" />
+        <video ref={teaserVideoRef} autoPlay muted playsInline>
+          <source src="/ysl-new-access.mp4" type="video/mp4" />
         </video>
-        <span>
-          <strong>Qixi Gifts</strong>
-          <small>AI Concierge</small>
-        </span>
       </Link>
     </div>
   );

@@ -2,6 +2,8 @@
 
 import { useValentine } from "../ValentineContext";
 import { getProductDetailUrl } from "@/lib/product-link";
+import { useLanguage } from "@/lib/use-language";
+import { i18n } from "@/lib/i18n";
 
 // Surfaces the AI Stylist results as a full-screen editorial overlay.
 // NOTE: reads existing chat state only — it does not alter any chat/recommendation logic.
@@ -20,13 +22,16 @@ export function ConciergeResultsOverlay() {
     chooseSuggestion,
   } = useValentine();
 
+  const { lang } = useLanguage();
+  const T = i18n[lang];
+
   const isResultsScene =
     activeSection === "concierge-reply-section" || activeSection === "recommendations-section";
 
   if (!hasSearched || !isResultsScene) return null;
 
-  const isWorking = isSearchingProducts || isAwaitingAssistant;
   const hasRemote = recommendationProducts.length > 0;
+  const isWorking = (isSearchingProducts || isAwaitingAssistant) && !hasRemote;
 
   return (
     <div className="vl-ed-results" role="dialog" aria-modal="true" aria-label="AI Stylist selection" aria-live="polite">
@@ -39,7 +44,7 @@ export function ConciergeResultsOverlay() {
         >
           <span aria-hidden="true">&larr;</span> Back
         </button>
-        <h2 className="vl-ed-collection-title">{hasSearched ? "Selected for You" : "Selected for Qixi"}</h2>
+        <h2 className="vl-ed-collection-title">{hasSearched ? (lang === "zh" ? "为你精选" : "Selected for You") : T.selectedForQixi}</h2>
         <span className="vl-ed-collection-spacer" aria-hidden="true" />
       </header>
 

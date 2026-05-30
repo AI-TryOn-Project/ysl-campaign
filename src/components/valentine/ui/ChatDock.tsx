@@ -175,14 +175,22 @@ export function ChatDock() {
         </div>
         <div className="chat-main">
           <button
-            className="chat-action"
+            className="chat-action stylist-action"
             type="button"
             aria-label="Open recommendation options"
             aria-expanded={modePanelOpen}
             onClick={() => setModePanelOpen((open: boolean) => !open)}
           >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 5v14M5 12h14" />
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              {/* Open-corner rounded square frame */}
+              <path d="M7 2.5H3.5a1 1 0 0 0-1 1V7" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M17 2.5h3.5a1 1 0 0 1 1 1V7" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M21.5 17v3.5a1 1 0 0 1-1 1H17" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M2.5 17v3.5a1 1 0 0 0 1 1H7" strokeLinecap="round" strokeLinejoin="round" />
+              {/* Large sparkle star */}
+              <path d="M11 7.5 L12.3 10.7 L15.5 12 L12.3 13.3 L11 16.5 L9.7 13.3 L6.5 12 L9.7 10.7 Z" strokeLinejoin="round" />
+              {/* Small sparkle star */}
+              <path d="M17 5.5 L17.7 7 L19.2 7.5 L17.7 8 L17 9.5 L16.3 8 L14.8 7.5 L16.3 7 Z" strokeLinejoin="round" />
             </svg>
           </button>
           <div className="bar-input-wrap">

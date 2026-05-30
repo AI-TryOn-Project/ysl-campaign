@@ -1657,6 +1657,31 @@ html.valentine-snap-mode body {
   stroke-linejoin: round;
 }
 
+.valentine-shell .stylist-action {
+  background: rgba(210, 180, 120, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 99, 0.45) !important;
+  color: #d4af63;
+  box-shadow:
+    0 2px 16px rgba(212, 175, 99, 0.18),
+    inset 0 1px 0 rgba(255, 245, 200, 0.2);
+}
+
+.valentine-shell .stylist-action:hover {
+  background: rgba(212, 175, 99, 0.22);
+  color: #f0d080;
+  border-color: rgba(212, 175, 99, 0.75) !important;
+  box-shadow:
+    0 4px 24px rgba(212, 175, 99, 0.32),
+    inset 0 1px 0 rgba(255, 245, 200, 0.3);
+}
+
+.valentine-shell .stylist-action svg path:nth-child(5),
+.valentine-shell .stylist-action svg path:nth-child(6) {
+  fill: rgba(212, 175, 99, 0.35);
+}
+
 .valentine-shell .bar-input-wrap {
   position: relative;
   flex: 1;
@@ -2074,6 +2099,12 @@ html.valentine-snap-mode body {
   z-index: 190;
   background: #000;
   overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.valentine-shell .loading-video-overlay.is-fading {
+  opacity: 0;
 }
 
 .valentine-shell .loading-video-overlay video {
@@ -3103,6 +3134,62 @@ button {
   justify-content: flex-end;
   gap: 14px 22px;
   font-size: 0.82rem;
+}
+
+.lang-toggle {
+  position: fixed;
+  top: 120px;
+  right: 24px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: rgba(180, 180, 180, 0.22);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(200, 200, 200, 0.3);
+  border-radius: 40px;
+  padding: 4px;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.lang-toggle__btn {
+  padding: 6px 16px;
+  border: 0;
+  border-radius: 32px;
+  background: rgba(160, 160, 160, 0.2);
+  color: rgba(220, 220, 220, 0.7);
+  font-size: 0.78rem;
+  font-family: inherit;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: background 0.22s ease, color 0.22s ease, box-shadow 0.22s ease;
+  line-height: 1;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+.lang-toggle__btn.is-active {
+  background: rgba(255, 255, 255, 0.72);
+  color: #1a1a1a;
+  font-weight: 600;
+  text-shadow: none;
+  box-shadow:
+    0 2px 10px rgba(255, 255, 255, 0.35),
+    0 0 18px rgba(255, 255, 255, 0.2);
+}
+
+.lang-toggle__btn:hover:not(.is-active) {
+  background: rgba(200, 200, 200, 0.3);
+  color: rgba(240, 240, 240, 0.9);
+}
+
+.lang-toggle__divider {
+  width: 1px;
+  height: 12px;
+  background: rgba(200, 200, 200, 0.25);
+  flex-shrink: 0;
 }
 
 .qixi-teaser {
