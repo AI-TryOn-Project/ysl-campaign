@@ -197,7 +197,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "ysl-w-s26-871494aaang3212",
     "sku": "871494AAANG3212",
-    "name": "LE 5 À 7 small in quilted leather",
+    "name": "Quilted leather tote bag",
     "gender": "women",
     "category": "bag",
     "categoryLabel": "Bags",
@@ -220,7 +220,7 @@ export const PRODUCTS: Product[] = [
     ],
     "description": "A sculptural Saint Laurent bag from the Summer 2026 collection with refined evening presence.",
     "reason": "Works beautifully for Qixi because it feels intimate, polished, and unmistakably Saint Laurent.",
-    "material": "Saint Laurent Summer 2026 bags — LE 5 À 7 small in quilted leather.",
+    "material": "Saint Laurent Summer 2026 bags — quilted leather tote bag.",
     "styling": "Pair with monochrome tailoring, after-dark silhouettes, or relaxed weekend layers from the Summer 26 edit."
   },
   {
@@ -255,7 +255,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "ysl-w-s26-862210aacx71000",
     "sku": "862210AACX71000",
-    "name": "LE 5 À 7 bucket bag in leather",
+    "name": "Leather hobo bag with chain strap",
     "gender": "women",
     "category": "bag",
     "categoryLabel": "Bags",
@@ -278,13 +278,13 @@ export const PRODUCTS: Product[] = [
     ],
     "description": "A sculptural Saint Laurent bag from the Summer 2026 collection with refined evening presence.",
     "reason": "Works beautifully for Qixi because it feels intimate, polished, and unmistakably Saint Laurent.",
-    "material": "Saint Laurent Summer 2026 bags — LE 5 À 7 bucket bag in leather.",
+    "material": "Saint Laurent Summer 2026 bags — leather hobo bag with chain strap.",
     "styling": "Pair with monochrome tailoring, after-dark silhouettes, or relaxed weekend layers from the Summer 26 edit."
   },
   {
     "id": "ysl-w-s26-8705051tvan6206",
     "sku": "8705051TVAN6206",
-    "name": "Summer 26 women's heeled sandals",
+    "name": "Slingback pumps in patent leather",
     "gender": "women",
     "category": "shoes",
     "categoryLabel": "Shoes",
@@ -304,13 +304,13 @@ export const PRODUCTS: Product[] = [
     ],
     "description": "Summer 26 footwear with sharp proportion, polished finish, and Saint Laurent attitude.",
     "reason": "Works beautifully for Qixi because it feels intimate, polished, and unmistakably Saint Laurent.",
-    "material": "Saint Laurent Summer 2026 shoes — Summer 26 women's heeled sandals.",
+    "material": "Saint Laurent Summer 2026 shoes — slingback pumps in patent leather.",
     "styling": "Pair with monochrome tailoring, after-dark silhouettes, or relaxed weekend layers from the Summer 26 edit."
   },
   {
     "id": "ysl-w-s26-8705051tvan3306",
     "sku": "8705051TVAN3306",
-    "name": "Summer 26 women's heeled sandals",
+    "name": "Slingback pumps in patent leather",
     "gender": "women",
     "category": "shoes",
     "categoryLabel": "Shoes",
@@ -330,13 +330,13 @@ export const PRODUCTS: Product[] = [
     ],
     "description": "Summer 26 footwear with sharp proportion, polished finish, and Saint Laurent attitude.",
     "reason": "Works beautifully for Qixi because it feels intimate, polished, and unmistakably Saint Laurent.",
-    "material": "Saint Laurent Summer 2026 shoes — Summer 26 women's heeled sandals.",
+    "material": "Saint Laurent Summer 2026 shoes — slingback pumps in patent leather.",
     "styling": "Pair with monochrome tailoring, after-dark silhouettes, or relaxed weekend layers from the Summer 26 edit."
   },
   {
     "id": "ysl-w-s26-867272aagm66485",
     "sku": "867272AAGM66485",
-    "name": "Summer 26 women's slingback pumps",
+    "name": "Slingback pumps in silk",
     "gender": "women",
     "category": "shoes",
     "categoryLabel": "Shoes",
@@ -356,13 +356,13 @@ export const PRODUCTS: Product[] = [
     ],
     "description": "Summer 26 footwear with sharp proportion, polished finish, and Saint Laurent attitude.",
     "reason": "Works beautifully for Qixi because it feels intimate, polished, and unmistakably Saint Laurent.",
-    "material": "Saint Laurent Summer 2026 shoes — Summer 26 women's slingback pumps.",
+    "material": "Saint Laurent Summer 2026 shoes — slingback pumps in silk.",
     "styling": "Pair with monochrome tailoring, after-dark silhouettes, or relaxed weekend layers from the Summer 26 edit."
   },
   {
     "id": "ysl-w-s26-8671811tvan2226",
     "sku": "8671811TVAN2226",
-    "name": "Summer 26 women's heeled sandals",
+    "name": "Slingback pumps in patent leather",
     "gender": "women",
     "category": "shoes",
     "categoryLabel": "Shoes",
@@ -382,13 +382,13 @@ export const PRODUCTS: Product[] = [
     ],
     "description": "Summer 26 footwear with sharp proportion, polished finish, and Saint Laurent attitude.",
     "reason": "Works beautifully for Qixi because it feels intimate, polished, and unmistakably Saint Laurent.",
-    "material": "Saint Laurent Summer 2026 shoes — Summer 26 women's heeled sandals.",
+    "material": "Saint Laurent Summer 2026 shoes — slingback pumps in patent leather.",
     "styling": "Pair with monochrome tailoring, after-dark silhouettes, or relaxed weekend layers from the Summer 26 edit."
   },
   {
     "id": "ysl-w-s26-867272aagjq2369",
     "sku": "867272AAGJQ2369",
-    "name": "Summer 26 women's pumps",
+    "name": "Slingback pumps in silk",
     "gender": "women",
     "category": "shoes",
     "categoryLabel": "Shoes",
@@ -408,7 +408,7 @@ export const PRODUCTS: Product[] = [
     ],
     "description": "Summer 26 footwear with sharp proportion, polished finish, and Saint Laurent attitude.",
     "reason": "Works beautifully for Qixi because it feels intimate, polished, and unmistakably Saint Laurent.",
-    "material": "Saint Laurent Summer 2026 shoes — Summer 26 women's pumps.",
+    "material": "Saint Laurent Summer 2026 shoes — slingback pumps in silk.",
     "styling": "Pair with monochrome tailoring, after-dark silhouettes, or relaxed weekend layers from the Summer 26 edit."
   },
   {
@@ -501,10 +501,10 @@ export const PRODUCTS: Product[] = [
   {
     "id": "ysl-m-s26-862885y99581000",
     "sku": "862885Y99581000",
-    "name": "Summer 26 men's tailored jacket",
+    "name": "Sunglasses in acetate",
     "gender": "men",
-    "category": "ready-to-wear",
-    "categoryLabel": "Ready-to-wear",
+    "category": "accessories",
+    "categoryLabel": "Sunglasses",
     "price": 18500,
     "image": "/assets/products/862885y99581000.jpg",
     "detailPath": "https://www.ysl.cn/products/862885y99581000.html",
@@ -520,18 +520,18 @@ export const PRODUCTS: Product[] = [
       "qixi date night",
       "weekend escape"
     ],
-    "description": "Summer 26 tailoring with architectural lines and understated Saint Laurent power.",
+    "description": "Sculptural Saint Laurent sunglasses in bold acetate with gold-tone detail.",
     "reason": "A confident Qixi gesture—sharp, wearable, and rooted in Saint Laurent Summer 26 codes.",
-    "material": "Saint Laurent Summer 2026 ready-to-wear — Summer 26 men's tailored jacket.",
+    "material": "Saint Laurent Summer 2026 eyewear — sunglasses in acetate.",
     "styling": "Pair with monochrome tailoring, after-dark silhouettes, or relaxed weekend layers from the Summer 26 edit."
   },
   {
     "id": "ysl-m-s26-862887y99581000",
     "sku": "862887Y99581000",
-    "name": "Summer 26 men's single-breasted jacket",
+    "name": "Sunglasses in acetate",
     "gender": "men",
-    "category": "ready-to-wear",
-    "categoryLabel": "Ready-to-wear",
+    "category": "accessories",
+    "categoryLabel": "Sunglasses",
     "price": null,
     "image": "/assets/products/862887y99581000.jpg",
     "detailPath": "https://www.ysl.cn/products/862887y99581000.html",
@@ -547,15 +547,15 @@ export const PRODUCTS: Product[] = [
       "qixi date night",
       "weekend escape"
     ],
-    "description": "Summer 26 tailoring with architectural lines and understated Saint Laurent power.",
+    "description": "Sculptural Saint Laurent sunglasses in bold acetate with gold-tone detail.",
     "reason": "A confident Qixi gesture—sharp, wearable, and rooted in Saint Laurent Summer 26 codes.",
-    "material": "Saint Laurent Summer 2026 ready-to-wear — Summer 26 men's single-breasted jacket.",
+    "material": "Saint Laurent Summer 2026 eyewear — sunglasses in acetate.",
     "styling": "Pair with monochrome tailoring, after-dark silhouettes, or relaxed weekend layers from the Summer 26 edit."
   },
   {
     "id": "ysl-m-s26-854459y1n022019",
     "sku": "854459Y1N022019",
-    "name": "Summer 26 men's wool jacket",
+    "name": "Belted shorts in wool",
     "gender": "men",
     "category": "ready-to-wear",
     "categoryLabel": "Ready-to-wear",
@@ -574,15 +574,15 @@ export const PRODUCTS: Product[] = [
       "qixi date night",
       "weekend escape"
     ],
-    "description": "Summer 26 tailoring with architectural lines and understated Saint Laurent power.",
+    "description": "Tailored Summer 26 shorts with a cinched belt and clean, architectural lines.",
     "reason": "A confident Qixi gesture—sharp, wearable, and rooted in Saint Laurent Summer 26 codes.",
-    "material": "Saint Laurent Summer 2026 ready-to-wear — Summer 26 men's wool jacket.",
+    "material": "Saint Laurent Summer 2026 ready-to-wear — belted shorts in wool.",
     "styling": "Pair with monochrome tailoring, after-dark silhouettes, or relaxed weekend layers from the Summer 26 edit."
   },
   {
     "id": "ysl-m-s26-854428y1n023204",
     "sku": "854428Y1N023204",
-    "name": "Summer 26 men's leather jacket",
+    "name": "Belted trousers in wool",
     "gender": "men",
     "category": "ready-to-wear",
     "categoryLabel": "Ready-to-wear",
@@ -601,15 +601,15 @@ export const PRODUCTS: Product[] = [
       "qixi date night",
       "weekend escape"
     ],
-    "description": "Summer 26 tailoring with architectural lines and understated Saint Laurent power.",
+    "description": "Pleated Summer 26 trousers with a cinched belt and a fluid, tailored drape.",
     "reason": "A confident Qixi gesture—sharp, wearable, and rooted in Saint Laurent Summer 26 codes.",
-    "material": "Saint Laurent Summer 2026 ready-to-wear — Summer 26 men's leather jacket.",
+    "material": "Saint Laurent Summer 2026 ready-to-wear — belted trousers in wool.",
     "styling": "Pair with monochrome tailoring, after-dark silhouettes, or relaxed weekend layers from the Summer 26 edit."
   },
   {
     "id": "ysl-m-s26-841196aad4x1000",
     "sku": "841196AAD4X1000",
-    "name": "Men's black leather loafers",
+    "name": "Black leather Chelsea boots",
     "gender": "men",
     "category": "shoes",
     "categoryLabel": "Shoes",
@@ -632,13 +632,13 @@ export const PRODUCTS: Product[] = [
     ],
     "description": "Summer 26 footwear with sharp proportion, polished finish, and Saint Laurent attitude.",
     "reason": "A confident Qixi gesture—sharp, wearable, and rooted in Saint Laurent Summer 26 codes.",
-    "material": "Saint Laurent Summer 2026 shoes — Men's black leather loafers.",
+    "material": "Saint Laurent Summer 2026 shoes — black leather Chelsea boots.",
     "styling": "Pair with monochrome tailoring, after-dark silhouettes, or relaxed weekend layers from the Summer 26 edit."
   },
   {
     "id": "ysl-m-s26-83947125vaa1000",
     "sku": "83947125VAA1000",
-    "name": "Men's leather derby shoes",
+    "name": "Black leather penny loafers",
     "gender": "men",
     "category": "shoes",
     "categoryLabel": "Shoes",
@@ -661,7 +661,7 @@ export const PRODUCTS: Product[] = [
     ],
     "description": "Summer 26 footwear with sharp proportion, polished finish, and Saint Laurent attitude.",
     "reason": "A confident Qixi gesture—sharp, wearable, and rooted in Saint Laurent Summer 26 codes.",
-    "material": "Saint Laurent Summer 2026 shoes — Men's leather derby shoes.",
+    "material": "Saint Laurent Summer 2026 shoes — black leather penny loafers.",
     "styling": "Pair with monochrome tailoring, after-dark silhouettes, or relaxed weekend layers from the Summer 26 edit."
   },
   {
@@ -697,7 +697,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "ysl-m-s26-756285faceo1000",
     "sku": "756285FACEO1000",
-    "name": "Rive Gauche duffel bag in canvas and leather",
+    "name": "Rive Gauche backpack in canvas",
     "gender": "men",
     "category": "bag",
     "categoryLabel": "Bags",
@@ -721,7 +721,7 @@ export const PRODUCTS: Product[] = [
     ],
     "description": "A sculptural Saint Laurent bag from the Summer 2026 collection with refined evening presence.",
     "reason": "A confident Qixi gesture—sharp, wearable, and rooted in Saint Laurent Summer 26 codes.",
-    "material": "Saint Laurent Summer 2026 bags — Rive Gauche duffel bag in canvas and leather.",
+    "material": "Saint Laurent Summer 2026 bags — Rive Gauche backpack in canvas.",
     "styling": "Pair with monochrome tailoring, after-dark silhouettes, or relaxed weekend layers from the Summer 26 edit."
   },
   {
@@ -787,7 +787,7 @@ export const PRODUCTS: Product[] = [
   {
     "id": "ysl-m-s26-847954aaet94784",
     "sku": "847954AAET94784",
-    "name": "Saint Laurent card holder",
+    "name": "Bifold wallet in leather",
     "gender": "men",
     "category": "small-leather-goods",
     "categoryLabel": "Small leather goods",
@@ -812,7 +812,7 @@ export const PRODUCTS: Product[] = [
     ],
     "description": "Compact leather goods with Cassandre codes—personal, polished, and gift-ready.",
     "reason": "A confident Qixi gesture—sharp, wearable, and rooted in Saint Laurent Summer 26 codes.",
-    "material": "Saint Laurent Summer 2026 small leather goods — Saint Laurent card holder.",
+    "material": "Saint Laurent Summer 2026 small leather goods — bifold wallet in leather.",
     "styling": "Pair with monochrome tailoring, after-dark silhouettes, or relaxed weekend layers from the Summer 26 edit."
   }
 ];
@@ -967,7 +967,7 @@ export const HOME_SLIDES: HomeSlide[] = [
   {
     "id": "women-fall-26",
     "kicker": "WOMEN'S FALL 26",
-    "cta": "探索系列",
+    "cta": "Explore the Collection",
     "href": "/valentine",
     "image": "/assets/editorial/women-fall-26-hero.jpg",
     "imagePosition": "center top",
@@ -976,7 +976,7 @@ export const HOME_SLIDES: HomeSlide[] = [
   {
     "id": "spring-summer-26",
     "kicker": "SPRING SUMMER 26",
-    "cta": "进入七夕礼物企划",
+    "cta": "Enter the Qixi Gift Edit",
     "href": "/valentine",
     "image": "/assets/editorial/spring-summer-26-gifting.jpg",
     "imagePosition": "center center",
@@ -985,7 +985,7 @@ export const HOME_SLIDES: HomeSlide[] = [
   {
     "id": "men-summer-26",
     "kicker": "MEN'S SUMMER 26",
-    "cta": "探索男士礼物",
+    "cta": "Explore Gifts for Him",
     "href": "/valentine#gifts-for-him",
     "image": "/assets/editorial/men-summer-26-hero.jpg",
     "imagePosition": "center top",
@@ -994,7 +994,7 @@ export const HOME_SLIDES: HomeSlide[] = [
   {
     "id": "rive-droite",
     "kicker": "RIVE DROITE",
-    "cta": "探索灵感",
+    "cta": "Explore Inspiration",
     "href": "/valentine#style-guide-section",
     "image": "/assets/editorial/rive-droite-gifting.jpg",
     "imagePosition": "center center",
@@ -1005,15 +1005,15 @@ export const HOME_SLIDES: HomeSlide[] = [
 export const HOME_TILES: HomeTile[] = [
   {
     "id": "handbags",
-    "kicker": "手袋",
-    "cta": "发现",
+    "kicker": "HANDBAGS",
+    "cta": "Discover",
     "href": "/valentine#gifts-for-her",
     "image": "/assets/editorial/women-fall-handbag.jpg"
   },
   {
     "id": "shoes",
-    "kicker": "鞋履",
-    "cta": "查看更多",
+    "kicker": "SHOES",
+    "cta": "View More",
     "href": "/valentine#style-guide-section",
     "image": "/assets/editorial/saint-laurent-women-fall-26-4x5-08.jpg"
   }
@@ -1024,5 +1024,5 @@ export const EDITORIAL_ASSETS = {
   "valentineCampaign": "/assets/editorial/slrd-gifting-ecom-hp-desk.jpg",
   "valentineStatement": "/assets/editorial/saint-laurent-wsummer26-lookbook-4x5-19-b.jpg",
   "qixiTeaserPoster": "/assets/editorial/slrd-gifting-ecom-hp-desk.jpg",
-  "qixiTeaserVideo": "/assets/motion/sl-ss26-15-seconds-edit.mp4"
+  "qixiTeaserVideo": "/ysl-new-access.mp4"
 };

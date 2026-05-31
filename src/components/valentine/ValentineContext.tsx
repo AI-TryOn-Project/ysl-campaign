@@ -23,6 +23,7 @@ const YSL_CHAT_API =
 
 export type Suggestion = {
   text: string;
+  icon?: string;
   style?: string;
   occasion?: string;
   category?: string;
@@ -38,40 +39,44 @@ export type SnapScene = {
   skuProductIds: readonly string[];
 };
 
-const CHATBOT_CONFIG: Record<ChatMode, { label: string; suggestions: Suggestion[] }> = {
+const CHATBOT_CONFIG: Record<ChatMode, { label: string; sublabel: string; description: string; icon: string; suggestions: Suggestion[] }> = {
   need: {
-    label: "Search by Need",
+    label: "FOR HER",
+    sublabel: "GIFTS",
+    description: "",
+    icon: "search",
     suggestions: [
-      { text: "A romantic red look" },
-      { text: "A gift under ¥10,000", budget: 10000 },
-      { text: "A statement evening bag", category: "Bags" },
-      { text: "Silk pieces for summer nights", occasion: "resort" },
-      { text: "Jewelry for a subtle love note", category: "Accessories" },
-      { text: "A complete dinner-date outfit", occasion: "dinner" },
+      { text: "QIXI GIFTS", icon: "♡", recipient: "her" },
+      { text: "JEWELRY", icon: "◇", category: "Accessories" },
+      { text: "HANDBAGS", icon: "◈", category: "Bags" },
+      { text: "LITTLE BLACK DRESS", icon: "◻", category: "Ready-to-Wear" },
+      { text: "NEW ARRIVALS", icon: "✦" },
     ],
   },
   style: {
-    label: "Browse by Style",
+    label: "DISCOVER",
+    sublabel: "STYLE",
+    description: "",
+    icon: "sparkle",
     suggestions: [
-      { text: "Classic minimal", style: "classic-minimal" },
-      { text: "Black cool", style: "black-cool" },
-      { text: "Polished elegance", style: "polished-elegance" },
-      { text: "Soft romantic", style: "classic-minimal" },
-      { text: "Parisian night", style: "polished-elegance", occasion: "city-night" },
-      { text: "Modern muse", style: "black-cool" },
+      { text: "MINIMALIST", icon: "♡", style: "classic-minimal" },
+      { text: "OFFICE", icon: "◇", style: "polished-elegance" },
+      { text: "BOLD", icon: "✦", style: "black-cool" },
+      { text: "AFTER DARK", icon: "☾", style: "black-cool", occasion: "city-night" },
+      { text: "FRENCH CHIC", icon: "◈", style: "polished-elegance" },
     ],
   },
   occasion: {
-    label: "Shop by Occasion",
+    label: "SHOP",
+    sublabel: "OCCASIONS",
+    description: "",
+    icon: "calendar",
     suggestions: [
-      { text: "Fine dining", occasion: "dinner" },
-      { text: "Rooftop drinks", occasion: "city-night" },
-      { text: "Qixi date night", occasion: "dinner" },
-      { text: "Weekend escape", occasion: "weekend" },
-      { text: "Hawaii trip", occasion: "resort" },
-      { text: "Anniversary gift", occasion: "anniversary" },
-      { text: "Meet-the-parents dinner", occasion: "dinner", style: "polished-elegance" },
-      { text: "Gift for him", recipient: "him" },
+      { text: "DINNER DATE", icon: "◈", occasion: "dinner" },
+      { text: "CITY", icon: "☀", occasion: "weekend" },
+      { text: "BUSINESS DINNER", icon: "◇", occasion: "dinner", style: "polished-elegance" },
+      { text: "TRAVEL", icon: "✦", occasion: "resort" },
+      { text: "VACATION", icon: "☾", occasion: "resort" },
     ],
   },
 };
@@ -87,19 +92,19 @@ export const SNAP_SCENES: SnapScene[] = [
   {
     id: "gift-finder",
     eyebrow: "Qixi Gifts",
-    placeholder: "What do you want to gift today?",
+    placeholder: "Find the perfect Qixi look.",
     skuProductIds: [FEATURED_PRODUCTS.her[0], FEATURED_PRODUCTS.him[0], FEATURED_PRODUCTS.her[1]].filter(Boolean),
   },
   {
     id: "concierge-reply-section",
     eyebrow: "Concierge",
-    placeholder: "Refine the mood, recipient, budget, or SKU...",
+    placeholder: "Refine the mood, recipient, or budget...",
     skuProductIds: [],
   },
   {
     id: "recommendations-section",
     eyebrow: "Function Call",
-    placeholder: "Refine by SKU, budget, category, or occasion...",
+    placeholder: "Refine by budget, category, or occasion...",
     productScene: true,
     skuProductIds: [],
   },
@@ -112,26 +117,26 @@ export const SNAP_SCENES: SnapScene[] = [
   {
     id: "campaign-section",
     eyebrow: "Campaign",
-    placeholder: "Search a Qixi dinner piece or enter a SKU...",
+    placeholder: "Search a Qixi dinner piece...",
     skuProductIds: [FEATURED_PRODUCTS.her[2], FEATURED_PRODUCTS.her[3], FEATURED_PRODUCTS.him[0]].filter(Boolean),
   },
   {
     id: "collection-intro",
     eyebrow: "Collection",
-    placeholder: "Explore the Qixi Gift Edit by SKU or style...",
+    placeholder: "Explore the Qixi Gift Edit by style...",
     skuProductIds: [...FEATURED_PRODUCTS.her.slice(0, 2), ...FEATURED_PRODUCTS.him.slice(0, 2)],
   },
   {
     id: "gifts-for-her",
     eyebrow: "For Her",
-    placeholder: "Search her edit by SKU, bag, jewelry, or silk...",
+    placeholder: "Search her edit by bag, jewelry, or silk...",
     productScene: true,
     skuProductIds: FEATURED_PRODUCTS.her,
   },
   {
     id: "gifts-for-him",
     eyebrow: "For Him",
-    placeholder: "Search his edit by SKU, leather, tailoring, or travel...",
+    placeholder: "Search his edit by leather, tailoring, or travel...",
     productScene: true,
     skuProductIds: FEATURED_PRODUCTS.him,
   },
@@ -144,13 +149,13 @@ export const SNAP_SCENES: SnapScene[] = [
   {
     id: "services-section",
     eyebrow: "Services",
-    placeholder: "Ask for wrapping, delivery, or a precise SKU...",
+    placeholder: "Ask for wrapping, delivery, or styling advice...",
     skuProductIds: [...FEATURED_PRODUCTS.her.slice(1, 3), ...FEATURED_PRODUCTS.him.slice(1, 3)],
   },
   {
     id: "membership-cta",
     eyebrow: "Concierge",
-    placeholder: "Plan a Qixi surprise with SKU-level recommendations...",
+    placeholder: "Plan a Qixi surprise with curated recommendations...",
     skuProductIds: [...FEATURED_PRODUCTS.her.slice(0, 2), ...FEATURED_PRODUCTS.him.slice(0, 2)],
   },
 ];
