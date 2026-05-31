@@ -19,7 +19,7 @@ export type DrawerKind = "wishlist" | "bag";
 export type ChatMode = "need" | "style" | "occasion";
 
 const YSL_CHAT_API =
-  process.env.NEXT_PUBLIC_YSL_CHAT_API_URL ?? "http://staging.app.faishion.ai/api/public/ysl-chat";
+  process.env.NEXT_PUBLIC_YSL_CHAT_API_URL ?? "https://dev-1.faishion.ai/api/public/ysl-chat";
 
 export type Suggestion = {
   text: string;
