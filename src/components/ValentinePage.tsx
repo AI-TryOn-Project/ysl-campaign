@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useRef, useMemo, useState, useCallback } from "react";
 import { PRODUCTS, type Product } from "@/data/campaign";
 import { openProductDetail } from "@/lib/product-link";
 import { SaintLaurentMark } from "./SaintLaurentMark";
@@ -104,11 +104,15 @@ function CampaignHeader({ onOpenCollection }: { onOpenCollection: (view: Collect
   );
 }
 
-function SeamlessLoadingVideo() {
+function LoadingOverlayImage() {
   return (
-    <video autoPlay muted playsInline preload="auto">
-      <source src="/loading-ai-stylist-new.mp4" type="video/mp4" />
-    </video>
+    <img
+      src="/loading-overlay.png"
+      alt=""
+      aria-hidden="true"
+      className="loading-overlay__img"
+      draggable={false}
+    />
   );
 }
 
@@ -123,6 +127,7 @@ function ValentineOverlays() {
     isSearchingProducts,
     isChatBusy,
     recommendationProducts,
+    overlayEnabled,
     setDrawer,
     removeItem,
     setSelectedProduct,
@@ -130,11 +135,12 @@ function ValentineOverlays() {
     addItem,
   } = useValentine();
 
-  const isLoading = (isAwaitingAssistant || isSearchingProducts) && recommendationProducts.length === 0;
+  const isLoading = overlayEnabled && (isAwaitingAssistant || isSearchingProducts) && recommendationProducts.length === 0;
 
-  // Latch: once products arrive, block the overlay from coming back
-  // (the AI SDK may briefly toggle loading states while finalising the stream).
-  // Reset the latch only when a genuinely new search starts (chat busy + no products yet).
+  // Latch: once products arrive, block the overlay from coming back.
+  // The AI SDK briefly re-toggles loading states while finalising the stream;
+  // the latch prevents a second flash after results are already on screen.
+  // Reset only when a genuinely new search starts (chat busy + no products yet).
   const [resultsLatch, setResultsLatch] = useState(false);
   useEffect(() => {
     if (recommendationProducts.length > 0) setResultsLatch(true);
@@ -145,7 +151,8 @@ function ValentineOverlays() {
 
   const shouldLoad = isLoading && !resultsLatch;
 
-  // Keep overlay mounted during fade-out so unmount doesn't cause a flash.
+  // Overlay visibility tracks shouldLoad but lingers for 500ms on close
+  // so the CSS opacity transition can complete before the element becomes inert.
   const [overlayVisible, setOverlayVisible] = useState(false);
   const [overlayFading, setOverlayFading] = useState(false);
 
@@ -163,20 +170,27 @@ function ValentineOverlays() {
     }
   }, [shouldLoad]);
 
+  const overlayClass = [
+    "loading-video-overlay",
+    !overlayVisible ? "is-hidden" : "",
+    overlayFading ? "is-fading" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <>
       <ConciergeResultsOverlay />
       <ChatDock />
 
-      {overlayVisible && (
-        <div
-          className={`loading-video-overlay${overlayFading ? " is-fading" : ""}`}
-          aria-label="AI is curating your selection"
-          aria-live="polite"
-        >
-          <SeamlessLoadingVideo />
-        </div>
-      )}
+      <div
+        className={overlayClass}
+        aria-label="AI is curating your selection"
+        aria-live="polite"
+        aria-hidden={!overlayVisible}
+      >
+        <LoadingOverlayImage />
+      </div>
 
       {toast ? <div className="toast">{toast}</div> : null}
 
@@ -207,6 +221,7 @@ function ValentineOverlays() {
           onBag={(product) => addItem("bag", product)}
         />
       ) : null}
+
     </>
   );
 }
@@ -224,7 +239,8 @@ function ValentineExperience() {
     [featuredHer, featuredHim],
   );
 
-  const onDetail = (product: Product) => openProductDetail(product);
+  const onDetail = useCallback((product: Product) => openProductDetail(product), []);
+  const closeCollection = useCallback(() => setCollection(null), []);
 
   return (
     <>
@@ -266,7 +282,7 @@ function ValentineExperience() {
           eyebrow="Saint Laurent — Qixi"
           title={T.qixiHers}
           products={womenProducts}
-          onClose={() => setCollection(null)}
+          onClose={closeCollection}
           onDetail={onDetail}
         />
       ) : null}
@@ -276,7 +292,7 @@ function ValentineExperience() {
           eyebrow="Saint Laurent — Qixi"
           title={T.qixiHis}
           products={menProducts}
-          onClose={() => setCollection(null)}
+          onClose={closeCollection}
           onDetail={onDetail}
         />
       ) : null}

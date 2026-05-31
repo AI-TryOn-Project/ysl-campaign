@@ -6,13 +6,10 @@ import { BlurRevealText } from "../ui/BlurRevealText";
 import { ProductCard } from "../ui/ProductCard";
 import { RecommendationProductCard } from "../ui/RecommendationProductCard";
 
-function LoadingVideo() {
+function LoadingPlaceholder() {
   return (
     <div className="loading-video-wrap" aria-label="Loading product recommendations">
-      <video autoPlay muted loop playsInline preload="auto">
-        <source src="/loading-ai-stylist.mp4" type="video/mp4" />
-      </video>
-      <span className="loading-video-label">Saint Laurent AI is curating your selection</span>
+      <img src="/loading-overlay.png" alt="" aria-hidden="true" className="loading-overlay__img" draggable={false} />
     </div>
   );
 }
@@ -45,7 +42,7 @@ export function RecommendationsSection({ active }: { active: boolean }) {
           <BlurRevealText as="h2" text={thinkingCopy} />
         </div>
         {isSearchingProducts ? (
-          <LoadingVideo />
+          <LoadingPlaceholder />
         ) : chatErrorText ? (
           <div className="recommendation-error" role="alert">
             {chatErrorText}

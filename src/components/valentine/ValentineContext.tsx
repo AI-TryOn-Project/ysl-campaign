@@ -2,7 +2,7 @@
 
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
-import { createContext, useContext, useState, useMemo, useCallback, useEffect, type FormEvent, type ReactNode } from "react";
+import { createContext, useContext, useState, useMemo, useCallback, useEffect, useRef, type FormEvent, type ReactNode } from "react";
 import {
   EDITORIAL_ASSETS,
   FEATURED_PRODUCTS,
@@ -212,6 +212,7 @@ interface ValentineContextValue {
   isSearchingProducts: boolean;
   isChatBusy: boolean;
   chatErrorText: string | null;
+  overlayEnabled: boolean;
   toast: string;
   activeSection: string;
 
@@ -266,6 +267,7 @@ export function ValentineProvider({ children, activeSection, onActiveSectionChan
   const [modePanelOpen, setModePanelOpen] = useState(false);
   const [results, setResults] = useState<Product[]>(initialResults);
   const [hasSearched, setHasSearched] = useState(false);
+  const [overlayEnabled, setOverlayEnabled] = useState(false);
   const [toast, setToast] = useState("");
   const chat = useChat({
     id: "ysl-campaign-concierge",
@@ -302,16 +304,24 @@ export function ValentineProvider({ children, activeSection, onActiveSectionChan
     return configured.length ? configured.slice(0, 4) : results.slice(0, 4);
   }, [activeScene, results]);
 
-  const drawerProducts = byIds(drawer === "bag" ? bag : wishlist);
+  const drawerProducts = useMemo(
+    () => byIds(drawer === "bag" ? bag : wishlist),
+    [drawer, bag, wishlist],
+  );
 
   useEffect(() => {
     if (!hasSearched || !chatSnapshot.hasSearch) return;
     onActiveSectionChange("recommendations-section");
   }, [chatSnapshot.hasSearch, hasSearched, onActiveSectionChange]);
 
+  const toastTimerRef = useRef<number | null>(null);
   const showToast = useCallback((message: string) => {
+    if (toastTimerRef.current !== null) window.clearTimeout(toastTimerRef.current);
     setToast(message);
-    window.setTimeout(() => setToast(""), 1600);
+    toastTimerRef.current = window.setTimeout(() => {
+      setToast("");
+      toastTimerRef.current = null;
+    }, 1600);
   }, []);
 
   const addItem = useCallback((kind: DrawerKind, product: Product) => {
@@ -344,21 +354,25 @@ export function ValentineProvider({ children, activeSection, onActiveSectionChan
     return hints.length ? `${text}\n\nPreference hints: ${hints.join(", ")}.` : text;
   }, []);
 
-  const runSearch = useCallback((text: string, suggestion?: Suggestion) => {
+  const chatRef = useRef(chat);
+  chatRef.current = chat;
+
+  const runSearch = useCallback((text: string, suggestion?: Suggestion, withOverlay = false) => {
     const query = text.trim() || "Qixi gift";
+    setOverlayEnabled(withOverlay);
     setModePanelOpen(false);
     setHasSearched(true);
     setResults(initialResults);
-    chat.stop();
-    chat.clearError();
-    chat.setMessages([]);
+    chatRef.current.stop();
+    chatRef.current.clearError();
+    chatRef.current.setMessages([]);
     onActiveSectionChange("concierge-reply-section");
-    void chat.sendMessage({ text: buildConciergePrompt(query, suggestion) });
-  }, [buildConciergePrompt, chat, initialResults, onActiveSectionChange]);
+    void chatRef.current.sendMessage({ text: buildConciergePrompt(query, suggestion) });
+  }, [buildConciergePrompt, initialResults, onActiveSectionChange]);
 
   const submitSearch = useCallback((event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    runSearch(inputValue);
+    runSearch(inputValue, undefined, true);
   }, [inputValue, runSearch]);
 
   const chooseSuggestion = useCallback((suggestion: Suggestion) => {
@@ -376,7 +390,7 @@ export function ValentineProvider({ children, activeSection, onActiveSectionChan
     });
   }, [runSearch]);
 
-  const value: ValentineContextValue = {
+  const value: ValentineContextValue = useMemo(() => ({
     featuredHer,
     featuredHim,
     styleGuides: STYLE_GUIDES,
@@ -402,6 +416,7 @@ export function ValentineProvider({ children, activeSection, onActiveSectionChan
     isSearchingProducts,
     isChatBusy,
     chatErrorText: chatSnapshot.errorText,
+    overlayEnabled,
     toast,
     activeSection,
     activeScene,
@@ -424,7 +439,15 @@ export function ValentineProvider({ children, activeSection, onActiveSectionChan
     money,
     labelTag,
     byIds,
-  };
+  }), [
+    featuredHer, featuredHim, wishlist, bag, drawer, selectedProduct, selectedGuide,
+    inputValue, activeMode, modePanelOpen, results, chatSnapshot, hasSearched,
+    thinkingCopy, isAwaitingAssistant, isSearchingProducts, isChatBusy, overlayEnabled, toast,
+    activeSection, activeScene, activeSceneProducts, drawerProducts,
+    setDrawer, setSelectedProduct, setSelectedGuide, setInputValue, setActiveMode,
+    setModePanelOpen, onActiveSectionChange, showToast, addItem, removeItem,
+    runSearch, submitSearch, chooseSuggestion, chooseSku,
+  ]);
 
   return <ValentineContext.Provider value={value}>{children}</ValentineContext.Provider>;
 }

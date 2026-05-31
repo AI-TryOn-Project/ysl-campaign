@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 export type Lang = "en" | "zh";
 
@@ -17,11 +17,11 @@ export function useLanguage() {
     return () => window.removeEventListener("ysl-lang-change", handler);
   }, []);
 
-  const setLang = (l: Lang) => {
+  const setLang = useCallback((l: Lang) => {
     localStorage.setItem("ysl-lang", l);
     setLangState(l);
     window.dispatchEvent(new CustomEvent<Lang>("ysl-lang-change", { detail: l }));
-  };
+  }, []);
 
   return { lang, setLang };
 }

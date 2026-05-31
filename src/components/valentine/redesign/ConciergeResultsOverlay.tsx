@@ -53,10 +53,7 @@ export function ConciergeResultsOverlay() {
 
         {isWorking ? (
           <div className="vl-ed-results-loading">
-            <video autoPlay muted loop playsInline preload="auto">
-              <source src="/loading-ai-stylist.mp4" type="video/mp4" />
-            </video>
-            <span>Saint Laurent AI is curating your selection</span>
+            <img src="/loading-overlay.png" alt="" aria-hidden="true" className="loading-overlay__img" draggable={false} />
           </div>
         ) : chatErrorText ? (
           <p className="vl-ed-results-error" role="alert">

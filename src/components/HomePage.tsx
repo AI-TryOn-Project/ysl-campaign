@@ -20,23 +20,34 @@ export function HomePage() {
   useEffect(() => {
     const video = teaserVideoRef.current;
     if (!video) return;
+    let pending = false; // guard: only one restart cycle at a time
+    let restartTimer: ReturnType<typeof setTimeout> | null = null;
+
     const onTimeUpdate = () => {
-      if (video.currentTime >= 4) {
+      if (!pending && video.currentTime >= 4) {
+        pending = true;
         video.pause();
-        setTimeout(() => {
+        restartTimer = setTimeout(() => {
           video.currentTime = 0;
-          void video.play();
+          void video.play().finally(() => { pending = false; });
         }, 1000);
       }
     };
+
     video.addEventListener("timeupdate", onTimeUpdate);
-    return () => video.removeEventListener("timeupdate", onTimeUpdate);
+    return () => {
+      video.removeEventListener("timeupdate", onTimeUpdate);
+      if (restartTimer) clearTimeout(restartTimer);
+    };
   }, []);
 
   useEffect(() => {
-    const timer = window.setInterval(() => {
-      setActiveSlide((current) => (current + 1) % HOME_SLIDES.length);
-    }, 5200);
+    const tick = () => {
+      if (!document.hidden) {
+        setActiveSlide((current) => (current + 1) % HOME_SLIDES.length);
+      }
+    };
+    const timer = window.setInterval(tick, 5200);
     return () => window.clearInterval(timer);
   }, []);
 
@@ -164,7 +175,7 @@ export function HomePage() {
 
       <footer className="site-footer site-footer--light">
         <div>
-          <h2>SAINT LAURENT</h2>
+          <SaintLaurentMark />
           <p>A Qixi Gift Edit and AI concierge demonstration.</p>
         </div>
         <div className="footer-links">

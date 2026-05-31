@@ -29,7 +29,7 @@ export function SnapPager({ children, onPageChange, pageIndex, pageIndicators }:
       <div
         ref={containerRef}
         className="snap-pager-track"
-        style={{ touchAction: "none", willChange: "transform" }}
+        style={{ touchAction: "none" }}
       >
         {pages.map((child, index) => (
           <div
